@@ -13,6 +13,10 @@ import RxSwift
 
 class VueC1: VueC2 {
     
+    let cancelButton = UIButton()
+    let valideButton = UIButton()
+    let tfSpot = UITextField()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         Spot.newSpot.reset()
@@ -29,20 +33,45 @@ class VueC1: VueC2 {
     private func displayTopScreen() {
         
         // Position
-        let tfSpot = UITextField()
         tfSpot.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(tfSpot)
         tfSpot.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         tfSpot.heightAnchor.constraint(equalToConstant: 40).isActive = true
         tfSpot.topAnchor.constraint(equalTo: self.view.topAnchor, constant:40).isActive = true
         
-        tfSpot.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant:60).isActive = true
-        tfSpot.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant:-60).isActive = true
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(cancelButton)
+        
+        cancelButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant:10).isActive = true
+        cancelButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        cancelButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        cancelButton.centerYAnchor.constraint(equalTo: tfSpot.centerYAnchor).isActive = true
+        
+        valideButton.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(valideButton)
+        
+        valideButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant:-10).isActive = true
+        valideButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        valideButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        valideButton.centerYAnchor.constraint(equalTo: tfSpot.centerYAnchor).isActive = true
+        
+        tfSpot.leadingAnchor.constraint(equalTo: cancelButton.trailingAnchor, constant:10).isActive = true
+        tfSpot.trailingAnchor.constraint(equalTo: valideButton.leadingAnchor, constant:-10).isActive = true
         
         // Attributes
+        tfSpot.placeholder = NSLocalizedString("Ou êtes vous ?", comment: "Ou êtes vous ?")
+        tfSpot.alpha = 0
+        
         tfSpot.layer.cornerRadius = 20
         tfSpot.unselectedStyle()
         tfSpot.isEnabled = false
+        
+        valideButton.setBackgroundImage(#imageLiteral(resourceName: "ok"), for: .normal)
+        valideButton.setBackgroundImage(#imageLiteral(resourceName: "ok_disabled"), for: .disabled)
+        cancelButton.setBackgroundImage(#imageLiteral(resourceName: "nook"), for: .normal)
+        
+        valideButton.alpha = 0
+        cancelButton.alpha = 0
         
         Spot.newSpot.title.asObservable()
             .subscribe(onNext: {

@@ -20,14 +20,18 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MGLMapboxAccessToken</key>
+	<string>pk.eyJ1IjoiYXJuYXVkdmVycmllcnBybyIsImEiOiJjajFkYXBib2swMDBtMnFuMngxdzR0NnkzIn0.x1Got2rl6mJ8qeSNZyIABQ</string>
+	<key>NSCameraUsageDescription</key>
+	<string>L'accès à l'appareil photo vous permettra d'envoyer des photos à vos amis</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>L'accès à votre localisation nous permettra de vous proposer des lieux autour de vous</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>L'accès à la bibliothèque permet de stoker les photos envoyés par vos amis</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Transition</string>
-	<key>NSCameraUsageDescription</key>
-	<string>L&apos;accès à l&apos;appareil photo vous permettra d&apos;envoyer des photos à vos amis</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>L&apos;accès à la bibliothèque permet de stoker les photos envoyés par vos amis</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -35,12 +39,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>MGLMapboxAccessToken</key>
-	<string>pk.eyJ1IjoiYXJuYXVkdmVycmllcnBybyIsImEiOiJjajFkYXBib2swMDBtMnFuMngxdzR0NnkzIn0.x1Got2rl6mJ8qeSNZyIABQ</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>L&apos;accès à votre localisation nous permettra de vous proposer des lieux autour de vous</string>
 </dict>
 </plist>

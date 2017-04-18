@@ -26,7 +26,7 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
     var spotName:Variable<String?> = Variable(nil)
     
     var distance:CGFloat!
-    let mapInvocation:Double = 0.2
+    let mapInvocation:Double = 0.5
     var mapSize:CGFloat!
     
     var placeLabels = [UIPlacemarkButton]()
@@ -50,10 +50,21 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
         map = MGLMapView(frame: CGRect(origin: center, size: CGSize.zero), styleURL: URL(string: "mapbox://styles/mapbox/light-v9"))
         map.delegate = self
         map.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        map.setCenter(Spot.newSpot.coordinate.value!, zoomLevel: 16, animated: false)
         map.layer.cornerRadius = 0
         map.clipsToBounds = true
+        map.showsUserLocation = true
         view.addSubview(map)
+        
+        Spot.newSpot.coordinate
+            .asObservable()
+            .subscribe(onNext: {
+                description in
+                if let coordinate = description {
+                    self.map.setCenter(coordinate, zoomLevel: 16, animated: true)
+                } else if let coordinate = Spot.getLastCoo() {
+                    self.map.setCenter(coordinate, zoomLevel: 16, animated: true)
+                }
+            }).addDisposableTo(disposeBag)
         
         placeLabels.append(UIPlacemarkButton(map: map))
         placeLabels.append(UIPlacemarkButton(map: map))
@@ -72,8 +83,6 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
     }
     
     private func animateCircleDisappear(withValidate validated:Bool) {
-        
-        disposeBag = DisposeBag()
         
         cancelButton.animDisappear(withDuration: 0.1, delay: 0.05, completionBlock: {})
         valideButton.animDisappear(withDuration: 0.1, delay: 0.05, completionBlock: {})
@@ -188,6 +197,7 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
             .asObservable()
             .subscribe(onNext: {
                 description in
+                self.disposeBag = DisposeBag()
                 Spot.newSpot.title.value = self.spotName.value!
                 Spot.newSpot.coordinate.value = self.map.selectedAnnotations.first!.coordinate
                 self.animateCircleDisappear(withValidate: true)
@@ -197,6 +207,7 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
             .asObservable()
             .subscribe(onNext: {
                 description in
+                self.disposeBag = DisposeBag()
                 self.animateCircleDisappear(withValidate: false)
             }).addDisposableTo(disposeBag)
         

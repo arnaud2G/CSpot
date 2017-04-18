@@ -55,6 +55,9 @@ class Spot {
     
     static let newSpot = Spot()
     
+    static let keyCooX = "CSpot.Spot.cooX"
+    static let keyCooY = "CSpot.Spot.cooY"
+    
     var descriptions: Variable<[TypeSpot]> = Variable([])
     var title: Variable<String> = Variable(String())
     var adress:String = String() //
@@ -72,9 +75,24 @@ class Spot {
         coordinate.asObservable()
             .filter{$0 != nil}
             .subscribe(onNext: {
-                descriptions in
-                self.searchClosestState(newCoordinate: descriptions!)
+                coo in
+                self.updateLastCoo(coo:coo!)
+                self.searchClosestState(newCoordinate: coo!)
             }).addDisposableTo(disposeBag)
+    }
+    
+    private func updateLastCoo(coo:CLLocationCoordinate2D) {
+        let defaults = UserDefaults.standard
+        defaults.set(Double(coo.latitude), forKey: Spot.keyCooX)
+        defaults.set(Double(coo.longitude), forKey: Spot.keyCooY)
+    }
+    
+    static func getLastCoo() -> CLLocationCoordinate2D? {
+        let defaults = UserDefaults.standard
+        if let latitude = defaults.value(forKey: Spot.keyCooX) as? Double, let longitude = defaults.value(forKey: Spot.keyCooY) as? Double {
+            return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        }
+        return nil
     }
     
     func reset() {
@@ -170,6 +188,55 @@ class Spot {
         })
     }
 }
+
+class Ellipse: UIButton {
+    override var collisionBoundsType: UIDynamicItemCollisionBoundsType {
+        return .ellipse
+    }
+}
+
+class SpotEllipse: Ellipse {
+    
+    var behavior:UIDynamicItemBehavior!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.layer.cornerRadius = frame.size.width / 2
+        
+        self.unselectedStyle()
+        
+        behavior = UIDynamicItemBehavior(items: [self])
+        behavior.elasticity = 0.2
+        behavior.density = 3
+        behavior.allowsRotation = false
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    var describe:Bool = false {
+        didSet {
+            if describe {
+                self.selectedStyle()
+            } else {
+                self.unselectedStyle()
+            }
+        }
+    }
+    
+    var type:TypeSpot!{
+        didSet {
+            if let pic = self.type.pic {
+                self.setImage(pic.withRenderingMode(.alwaysTemplate), for: .normal)
+            } else {
+                self.setTitle(self.type.localizedString, for: .normal)
+            }
+        }
+    }
+}
+
 extension CLPlacemark {
     var postalAddress : CNPostalAddress? {
         get {

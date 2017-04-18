@@ -11,62 +11,18 @@ import CoreMotion
 import RxCocoa
 import RxSwift
 
-class Ellipse: UIButton {
-    override var collisionBoundsType: UIDynamicItemCollisionBoundsType {
-        return .ellipse
-    }
-}
-
-class SpotEllipse: Ellipse {
-    
-    var behavior:UIDynamicItemBehavior!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        self.layer.cornerRadius = frame.size.width / 2
-        
-        self.unselectedStyle()
-        
-        behavior = UIDynamicItemBehavior(items: [self])
-        behavior.elasticity = 0.2
-        behavior.density = 3
-        behavior.allowsRotation = false
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    var describe:Bool = false {
-        didSet {
-            if describe {
-                self.selectedStyle()
-            } else {
-                self.unselectedStyle()
-            }
-        }
-    }
-    
-    var type:TypeSpot!{
-        didSet {
-            if let pic = self.type.pic {
-                self.setImage(pic.withRenderingMode(.alwaysTemplate), for: .normal)
-            } else {
-                self.setTitle(self.type.localizedString, for: .normal)
-            }
-        }
-    }
-}
-
 class VueC2: UIViewController {
+    
+    let btnSize:CGFloat = 60
+    let cancelButton = UIButton()
+    let valideButton = UIButton()
+    let tfSpot = UITextField()
     
     var animator: UIDynamicAnimator!
     var gravity:UIFieldBehavior!
     var collision:UICollisionBehavior?
     
     let disposableBag = DisposeBag()
-    
     
     let ellipseInTheGround: Variable<[SpotEllipse]> = Variable([])
     var onTheGround = [TypeSpot]() {
@@ -90,12 +46,19 @@ class VueC2: UIViewController {
                     onTheGround.remove(at: index)
                 }
             })
+            
+            if onTheSelection.count > 0 {
+                self.valideButton.isEnabled = true
+            } else {
+                self.valideButton.isEnabled = false
+            }
         }
     }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
+        Spot.newSpot.reset()
         
         animator = UIDynamicAnimator(referenceView: view)
         gravity = UIFieldBehavior.radialGravityField(position: self.view.center)
@@ -108,6 +71,67 @@ class VueC2: UIViewController {
                 description in
                 self.defineBehavior(items: description)
             }).addDisposableTo(disposableBag)
+        
+        displayTopScreen()
+    }
+    
+    private func displayTopScreen() {
+        
+        // Position
+        tfSpot.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(tfSpot)
+        tfSpot.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        tfSpot.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        tfSpot.topAnchor.constraint(equalTo: self.view.topAnchor, constant:40).isActive = true
+        tfSpot.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant:60).isActive = true
+        tfSpot.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant:-60).isActive = true
+        
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(cancelButton)
+        
+        cancelButton.trailingAnchor.constraint(equalTo: self.view.centerXAnchor, constant:-10).isActive = true
+        cancelButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant:-40).isActive = true
+        cancelButton.heightAnchor.constraint(equalToConstant: btnSize).isActive = true
+        cancelButton.widthAnchor.constraint(equalTo: cancelButton.heightAnchor).isActive = true
+        
+        valideButton.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(valideButton)
+        
+        valideButton.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant:10).isActive = true
+        valideButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant:-40).isActive = true
+        valideButton.heightAnchor.constraint(equalToConstant: btnSize).isActive = true
+        valideButton.widthAnchor.constraint(equalTo: valideButton.heightAnchor).isActive = true
+        
+        // Attributes
+        tfSpot.placeholder = NSLocalizedString("Ou êtes vous ?", comment: "Ou êtes vous ?")
+        
+        tfSpot.layer.cornerRadius = 20
+        tfSpot.unselectedStyle()
+        tfSpot.isEnabled = false
+        
+        valideButton.setBackgroundImage(#imageLiteral(resourceName: "ok"), for: .normal)
+        valideButton.setBackgroundImage(#imageLiteral(resourceName: "ok_disabled"), for: .disabled)
+        valideButton.isEnabled = false
+        cancelButton.setBackgroundImage(#imageLiteral(resourceName: "nook"), for: .normal)
+        
+        Spot.newSpot.title.asObservable()
+            .subscribe(onNext: {
+                description in
+                if description == String() {
+                    self.tfSpot.isHidden = true
+                } else {
+                    self.tfSpot.text = description
+                    self.tfSpot.isHidden = false
+                    self.onTheGround.append(contentsOf: TypeSpot.spot.nextType)
+                }
+            }).addDisposableTo(disposableBag)
+        
+        cancelButton.animAppear(withDuration: 0.5, delay: 0, completionBlock: {})
+        valideButton.animAppear(withDuration: 0.5, delay: 0.2, completionBlock: {
+            let vueC2 = SpotLocationViewController()
+            vueC2.modalPresentationStyle = .overCurrentContext
+            self.present(vueC2, animated: false, completion: nil)
+        })
     }
     
     private func defineBehavior(items:[Ellipse]) {
@@ -191,9 +215,6 @@ class VueC2: UIViewController {
                 }
         }).addDisposableTo(disposableBag)
         animator.addBehavior(sender.behavior)
-    }
-    @IBAction func btnPressed(_ sender: Any) {
-        print(onTheSelection)
     }
 }
 

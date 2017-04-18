@@ -21,7 +21,6 @@
 		A58347CF1E9E537500E16507 /* GeolocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58347CE1E9E537500E16507 /* GeolocationService.swift */; };
 		A5B0D1B71E9CD01D0014EEA3 /* MyMap.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B0D1B61E9CD01D0014EEA3 /* MyMap.storyboard */; };
 		A5B0D1BA1E9D1AE60014EEA3 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B0D1B91E9D1AE60014EEA3 /* Transition.swift */; };
-		A5B0D1BC1E9D1AF30014EEA3 /* VueC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B0D1BB1E9D1AF20014EEA3 /* VueC1.swift */; };
 		A5B0D1BE1E9D1AF90014EEA3 /* VueC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B0D1BD1E9D1AF90014EEA3 /* VueC2.swift */; };
 		A5B0D1C01E9D1B070014EEA3 /* Transition.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B0D1BF1E9D1B070014EEA3 /* Transition.storyboard */; };
 		A5CACB981E978A9A0068D5B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CACB971E978A9A0068D5B2 /* AppDelegate.swift */; };
@@ -348,7 +347,6 @@
 				A54D8EA11E9BC30B0081C0F5 /* MyStructs.swift in Sources */,
 				A58347CF1E9E537500E16507 /* GeolocationService.swift in Sources */,
 				A5CEEA501E9CCD370057CA8A /* MyMap.swift in Sources */,
-				A5B0D1BC1E9D1AF30014EEA3 /* VueC1.swift in Sources */,
 				A54D8EA31E9BCCF20081C0F5 /* NumberExtension.swift in Sources */,
 				A5B0D1BA1E9D1AE60014EEA3 /* Transition.swift in Sources */,
 				A58347CD1E9E241600E16507 /* User.swift in Sources */,
