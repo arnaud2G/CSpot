@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Apx-tv-jYx">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--VueC2-->
+        <scene sceneID="526-3d-0sH">
+            <objects>
+                <viewController id="6fs-rI-e3P" customClass="VueC2" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nkN-nt-7Z0"/>
+                        <viewControllerLayoutGuide type="bottom" id="cab-l0-AL3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YzV-9V-4M1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAW-VC-iIl">
+                                <rect key="frame" x="159" y="607" width="57" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Animate"/>
+                                <connections>
+                                    <action selector="btnPressed:" destination="6fs-rI-e3P" eventType="touchUpInside" id="CMy-jd-A7P"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94373359030000004" green="1" blue="0.89983663709999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="cab-l0-AL3" firstAttribute="top" secondItem="hAW-VC-iIl" secondAttribute="bottom" constant="30" id="Kb8-sB-k7F"/>
+                            <constraint firstItem="hAW-VC-iIl" firstAttribute="centerX" secondItem="YzV-9V-4M1" secondAttribute="centerX" id="PYH-uT-9HD"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XpB-0z-Oj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2310" y="-697"/>
+        </scene>
+        <!--VueC1-->
+        <scene sceneID="erV-RG-Gad">
+            <objects>
+                <viewController id="Apx-tv-jYx" customClass="VueC1" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mak-Ja-m1i"/>
+                        <viewControllerLayoutGuide type="bottom" id="VXR-2Z-clY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="f1g-e1-jvl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AA1-SW-yS4">
+                                <rect key="frame" x="159" y="607" width="57" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Animate"/>
+                                <connections>
+                                    <action selector="AnimatePressed:" destination="Apx-tv-jYx" eventType="touchUpInside" id="2kC-eQ-sSb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94373359030000004" green="1" blue="0.89983663709999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="AA1-SW-yS4" firstAttribute="centerX" secondItem="f1g-e1-jvl" secondAttribute="centerX" id="CEZ-53-b28"/>
+                            <constraint firstItem="VXR-2Z-clY" firstAttribute="top" secondItem="AA1-SW-yS4" secondAttribute="bottom" constant="30" id="Rc2-4e-WCw"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dBQ-F9-BcN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2311" y="-1376"/>
+        </scene>
+    </scenes>
+</document>
