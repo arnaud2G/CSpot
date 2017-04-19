@@ -64,10 +64,8 @@ class Spot {
     
     var coordinate: Variable<CLLocationCoordinate2D?> = Variable(nil)
     
-    var picture:String? = nil
+    var picture:UIImage? = nil
     var place:String? = nil //
-    var closestPlaces = [String]() //
-    var farestPlaces = [String]() //
     
     let disposeBag = DisposeBag()
     
@@ -114,42 +112,12 @@ class Spot {
                 GeolocationService.instance.stopUpdatingLocation()
             }).addDisposableTo(disposeBag)
     }
-
-    /*func addDescription(newDescription:TypeSpot) -> Bool {
-        if let index = descriptions.value.index(of: newDescription) {
-            descriptions.value.remove(at: index)
-            return false
-        } else {
-            descriptions.value.append(newDescription)
-            return true
-        }
-    }*/
     
-    var closestGeo = CLGeocoder()
-    var exactGeo = CLGeocoder()
+    let exactGeo = CLGeocoder()
     private func searchClosestState(newCoordinate:CLLocationCoordinate2D) {
         
-        let kmToDegree = 0.008
-        
-        let nTest = 16
-        let angle = 360.0/Double(nTest)
-        
         place = nil
-        closestPlaces = [String]()
-        farestPlaces = [String]()
         adress = String()
-        
-        let locations = Array(0...nTest).map({
-            (val:Int) -> CLLocation in
-            let alpha = angle/2 + Double(val)*angle
-            let rayon = 2.0*kmToDegree
-            let x1 = newCoordinate.latitude + rayon*cos(alpha)
-            let y1 = newCoordinate.longitude + rayon*sin(alpha)
-            
-            return CLLocation(latitude: x1, longitude: y1)
-        })
-        
-        nextSyncSearch(locations: locations, i: 0)
         
         let location = CLLocation(latitude: newCoordinate.latitude, longitude: newCoordinate.longitude)
         
@@ -169,8 +137,33 @@ class Spot {
         })
     }
     
-    private func nextSyncSearch(locations:[CLLocation], i:Int) {
-        
+    /*
+     //var closestPlaces = [String]() //
+     //var farestPlaces = [String]() //
+     
+     var closestGeo = CLGeocoder()
+     
+     let kmToDegree = 0.008
+     
+     let nTest = 16
+     let angle = 360.0/Double(nTest)
+     
+     //closestPlaces = [String]()
+     //farestPlaces = [String]()
+     let locations = Array(0...nTest).map({
+     (val:Int) -> CLLocation in
+     let alpha = angle/2 + Double(val)*angle
+     let rayon = 2.0*kmToDegree
+     let x1 = newCoordinate.latitude + rayon*cos(alpha)
+     let y1 = newCoordinate.longitude + rayon*sin(alpha)
+     
+     return CLLocation(latitude: x1, longitude: y1)
+     })
+     
+     nextSyncSearch(locations: locations, i: 0)*/
+    
+    /*private func nextSyncSearch(locations:[CLLocation], i:Int) {
+     
         if i == locations.count {print(self.closestPlaces) ; return}
         
         closestGeo.reverseGeocodeLocation(locations[i], completionHandler: {
@@ -186,55 +179,7 @@ class Spot {
                 self.nextSyncSearch(locations:locations, i:i+1)
             }
         })
-    }
-}
-
-class Ellipse: UIButton {
-    override var collisionBoundsType: UIDynamicItemCollisionBoundsType {
-        return .ellipse
-    }
-}
-
-class SpotEllipse: Ellipse {
-    
-    var behavior:UIDynamicItemBehavior!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        self.layer.cornerRadius = frame.size.width / 2
-        
-        self.unselectedStyle()
-        
-        behavior = UIDynamicItemBehavior(items: [self])
-        behavior.elasticity = 0.2
-        behavior.density = 3
-        behavior.allowsRotation = false
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    var describe:Bool = false {
-        didSet {
-            if describe {
-                self.selectedStyle()
-            } else {
-                self.unselectedStyle()
-            }
-        }
-    }
-    
-    var type:TypeSpot!{
-        didSet {
-            if let pic = self.type.pic {
-                self.setImage(pic.withRenderingMode(.alwaysTemplate), for: .normal)
-            } else {
-                self.setTitle(self.type.localizedString, for: .normal)
-            }
-        }
-    }
+    }*/
 }
 
 extension CLPlacemark {
