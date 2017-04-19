@@ -37,6 +37,9 @@
 		A5CEEA501E9CCD370057CA8A /* MyMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CEEA4F1E9CCD370057CA8A /* MyMap.swift */; };
 		A5D6329D1EA77900004DD6C5 /* AWSCognitoIdentityProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F638EC1EA76FF8000ACD3D /* AWSCognitoIdentityProvider.framework */; };
 		A5D6329E1EA77900004DD6C5 /* AWSCognitoIdentityProvider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5F638EC1EA76FF8000ACD3D /* AWSCognitoIdentityProvider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5DF2B551EA7803600570520 /* AWSDynamoDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DF2B521EA7803600570520 /* AWSDynamoDB.framework */; };
+		A5DF2B561EA7803600570520 /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DF2B531EA7803600570520 /* AWSS3.framework */; };
+		A5DF2B571EA7803600570520 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DF2B541EA7803600570520 /* AWSCore.framework */; };
 		A5E01EA01EA77B6F0087AEE0 /* AWSMobileHubHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F638ED1EA76FF8000ACD3D /* AWSMobileHubHelper.framework */; };
 		A5F638FC1EA7724B000ACD3D /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5F638F21EA7724B000ACD3D /* SignIn.storyboard */; };
 		A5F638FD1EA7724B000ACD3D /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F638F31EA7724B000ACD3D /* SignInViewController.swift */; };
@@ -105,6 +108,9 @@
 		A5CACBAC1E978B1C0068D5B2 /* DynamicsBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicsBall.swift; sourceTree = "<group>"; };
 		A5CACBAE1E978B3C0068D5B2 /* DynamicsBall.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DynamicsBall.storyboard; sourceTree = "<group>"; };
 		A5CEEA4F1E9CCD370057CA8A /* MyMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMap.swift; sourceTree = "<group>"; };
+		A5DF2B521EA7803600570520 /* AWSDynamoDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSDynamoDB.framework; sourceTree = "<group>"; };
+		A5DF2B531EA7803600570520 /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSS3.framework; sourceTree = "<group>"; };
+		A5DF2B541EA7803600570520 /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCore.framework; sourceTree = "<group>"; };
 		A5F638EC1EA76FF8000ACD3D /* AWSCognitoIdentityProvider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCognitoIdentityProvider.framework; sourceTree = "<group>"; };
 		A5F638ED1EA76FF8000ACD3D /* AWSMobileHubHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSMobileHubHelper.framework; sourceTree = "<group>"; };
 		A5F638F21EA7724B000ACD3D /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
@@ -133,7 +139,10 @@
 				A5F6390E1EA77504000ACD3D /* AddressBook.framework in Frameworks */,
 				A5F6390C1EA774F7000ACD3D /* MediaPlayer.framework in Frameworks */,
 				A5D6329D1EA77900004DD6C5 /* AWSCognitoIdentityProvider.framework in Frameworks */,
+				A5DF2B551EA7803600570520 /* AWSDynamoDB.framework in Frameworks */,
+				A5DF2B571EA7803600570520 /* AWSCore.framework in Frameworks */,
 				A5F6390A1EA774EF000ACD3D /* Foundation.framework in Frameworks */,
+				A5DF2B561EA7803600570520 /* AWSS3.framework in Frameworks */,
 				A5F639081EA774AF000ACD3D /* libsqlite3.tbd in Frameworks */,
 				A5F639061EA7749B000ACD3D /* libz.tbd in Frameworks */,
 				90BD816A6D276756EECE5147 /* Pods_Capitaine_spot.framework in Frameworks */,
@@ -147,6 +156,9 @@
 		67318BAE4043AD3CAD559058 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5DF2B521EA7803600570520 /* AWSDynamoDB.framework */,
+				A5DF2B531EA7803600570520 /* AWSS3.framework */,
+				A5DF2B541EA7803600570520 /* AWSCore.framework */,
 				A5F6390F1EA7750A000ACD3D /* SafariServices.framework */,
 				A5F6390D1EA77504000ACD3D /* AddressBook.framework */,
 				A5F6390B1EA774F7000ACD3D /* MediaPlayer.framework */,
