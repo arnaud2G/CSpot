@@ -15,7 +15,10 @@ class MenuViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
+    let myCamera = MyCamera()
+    
     @IBOutlet weak var btnLogout: UIButton!
+    @IBOutlet weak var vSpot: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +39,40 @@ class MenuViewController: UIViewController {
                     self.btnLogout.isHidden = true
                 }
             }).addDisposableTo(disposeBag)
+        
+        (self.navigationController as! CSpotNavigationController).cSpotShape
+        .asObservable()
+            .subscribe(onNext:{
+                description in
+                switch description {
+                case .menu :
+                    if let presented = self.presentedViewController {
+                        presented.dismiss(animated: true, completion: nil)
+                    }
+                case .takePicture :
+                    self.present(self.myCamera, animated: true, completion: nil)
+                case .describeSpot :
+                    if let presented = self.presentedViewController {
+                        presented.dismiss(animated: false, completion: {
+                            let loginStoryboard = UIStoryboard(name: "Transition", bundle: nil)
+                            let loginController = loginStoryboard.instantiateInitialViewController()
+                            self.present(loginController!, animated: false, completion: {
+                                (self.navigationController as! CSpotNavigationController).cSpotShape.value = .menu
+                            })
+                        })
+                    }
+                default :
+                    print("Ici on ne fait rien")
+                }
+                self.btnLogout.isHidden = description != .menu
+                self.vSpot.isHidden = description != .describeSpot
+            }).addDisposableTo(disposeBag)
+        
+        Spot.newSpot.picture.asObservable()
+            .subscribe(onNext: {
+                description in
+                self.vSpot.image = description
+            }).addDisposableTo(disposeBag)
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,12 +86,14 @@ class MenuViewController: UIViewController {
                 (result: Any?, error: Error?) in
                 if let error = error {
                     print("error lors de la deconexion : \(error)")
-                } else {
+                } else if let result = result {
                     print("retour de la deconnexion : \(result)")
                 }
             })
         }
     }
+    
+    
     
     /*func addPressed(_ sender: Any) {
         if User.current.connected.value {

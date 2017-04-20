@@ -61,7 +61,7 @@ class Spot {
     
     var coordinate: Variable<CLLocationCoordinate2D?> = Variable(nil)
     
-    var picture:UIImage? = nil
+    var picture:Variable<UIImage?> = Variable(nil)
     var place:String? = nil //
     
     let disposeBag = DisposeBag()
@@ -81,7 +81,7 @@ class Spot {
         self.title.value = String()
         self.adress = String()
         self.coordinate.value = nil
-        self.picture = nil
+        self.picture.value = nil
         self.place = nil
     }
     

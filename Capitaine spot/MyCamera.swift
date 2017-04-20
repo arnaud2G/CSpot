@@ -17,7 +17,28 @@ class MyCamera:UIViewController, AVCapturePhotoCaptureDelegate {
     
     let imgView = UIImageView()
     
-    override func viewDidLoad() {
+    deinit {
+        print("deinit MyCamera")
+        NotificationCenter.default.removeObserver(notifTakePic)
+    }
+    
+    var notifTakePic: AnyObject!
+    var notifValidePic: AnyObject!
+    
+    convenience init() {
+        self.init(nibName: nil, bundle: nil)
+        
+        notifTakePic = NotificationCenter.default.addObserver(forName: CSpotNotif.takePic.name, object: nil, queue: OperationQueue.main, using: {
+            (note: Notification) -> Void in
+            self.takePic()
+        })
+        
+        notifValidePic = NotificationCenter.default.addObserver(forName: CSpotNotif.validePic.name, object: nil, queue: OperationQueue.main, using: {
+            (note: Notification) -> Void in
+            self.validePic()
+        })
+        
+        self.modalPresentationStyle = .overCurrentContext
         
         session = AVCaptureSession()
         session!.sessionPreset = AVCaptureSessionPresetPhoto
@@ -51,23 +72,6 @@ class MyCamera:UIViewController, AVCapturePhotoCaptureDelegate {
         
         videoPreviewLayer!.frame = UIScreen.main.bounds
         
-        // Gestion du bouton d'envoie de photo
-        let btnAdd = UIButton()
-        btnAdd.backgroundColor = UIColor().secondary()
-        btnAdd.alpha = 1.0
-        btnAdd.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.view.addSubview(btnAdd)
-        btnAdd.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant:-20).isActive = true
-        btnAdd.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        btnAdd.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width*90/414)).isActive = true
-        btnAdd.heightAnchor.constraint(equalTo: btnAdd.widthAnchor).isActive = true
-        btnAdd.layer.cornerRadius = (UIScreen.main.bounds.width*90/414)/2
-        btnAdd.layer.borderColor = UIColor().primary().cgColor
-        btnAdd.layer.borderWidth = 5
-        
-        btnAdd.addTarget(self, action: #selector(btnAddPressed), for: .touchUpInside)
-        
         self.view.addSubview(imgView)
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.contentMode = .scaleAspectFill
@@ -78,7 +82,15 @@ class MyCamera:UIViewController, AVCapturePhotoCaptureDelegate {
         imgView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     }
     
-    func btnAddPressed() {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func takePic() {
         let settingsForMonitoring = AVCapturePhotoSettings()
         settingsForMonitoring.flashMode = .auto
         settingsForMonitoring.isAutoStillImageStabilizationEnabled = true
@@ -86,12 +98,8 @@ class MyCamera:UIViewController, AVCapturePhotoCaptureDelegate {
         stillImageOutput?.capturePhoto(with: settingsForMonitoring, delegate: self)
     }
     
-    func capture(_ captureOutput: AVCapturePhotoOutput, didCapturePhotoForResolvedSettings resolvedSettings: AVCaptureResolvedPhotoSettings) {
-        print("didCapturePhotoForResolvedSettings")
-    }
-    
-    func capture(_ captureOutput: AVCapturePhotoOutput, didFinishCaptureForResolvedSettings resolvedSettings: AVCaptureResolvedPhotoSettings, error: Error?) {
-        print("didFinishCaptureForResolvedSettings")
+    private func validePic() {
+        Spot.newSpot.picture.value = imgView.image
     }
     
     func capture(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?, previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
@@ -99,8 +107,7 @@ class MyCamera:UIViewController, AVCapturePhotoCaptureDelegate {
         if let photoSampleBuffer = photoSampleBuffer {
             let photoData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer, previewPhotoSampleBuffer: previewPhotoSampleBuffer)
             let image = UIImage(data: photoData!)
-            imgView.image = image// UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+            imgView.image = image
         }
     }
-    
 }

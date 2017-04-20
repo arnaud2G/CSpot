@@ -23,6 +23,8 @@ class VueC2: UIViewController {
     var collision:UICollisionBehavior?
     
     let disposableBag = DisposeBag()
+    @IBOutlet weak var imgPic: UIImageView!
+    @IBOutlet weak var vPic: UIView!
     
     let ellipseInTheGround: Variable<[SpotEllipse]> = Variable([])
     var onTheGround = [TypeSpot]() {
@@ -58,10 +60,6 @@ class VueC2: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(self.modalPresentationStyle)
-        
-        Spot.newSpot.reset()
-        
         animator = UIDynamicAnimator(referenceView: view)
         gravity = UIFieldBehavior.radialGravityField(position: self.view.center)
         gravity.falloff = 0.2
@@ -75,6 +73,14 @@ class VueC2: UIViewController {
             }).addDisposableTo(disposableBag)
         
         displayTopScreen()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let vueC2 = SpotLocationViewController()
+        vueC2.modalPresentationStyle = .overCurrentContext
+        self.present(vueC2, animated: false, completion: {})
     }
     
     private func displayTopScreen() {
@@ -116,6 +122,15 @@ class VueC2: UIViewController {
         valideButton.isEnabled = false
         cancelButton.setBackgroundImage(#imageLiteral(resourceName: "nook"), for: .normal)
         
+        valideButton.addTarget(self, action: #selector(self.valideDescription(sender:)), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(self.cancelDescription(sender:)), for: .touchUpInside)
+        
+        imgPic.image = Spot.newSpot.picture.value
+        self.vPic.isHidden = true
+        self.cancelButton.isHidden = true
+        self.valideButton.isHidden = true
+        self.tfSpot.isHidden = true
+        
         Spot.newSpot.title.asObservable()
             .subscribe(onNext: {
                 description in
@@ -125,15 +140,19 @@ class VueC2: UIViewController {
                     self.tfSpot.text = description
                     self.tfSpot.isHidden = false
                     self.onTheGround.append(contentsOf: TypeSpot.spot.nextType)
+                    self.vPic.isHidden = false
+                    self.cancelButton.isHidden = false
+                    self.valideButton.isHidden = false
                 }
             }).addDisposableTo(disposableBag)
-        
-        cancelButton.animAppear(withDuration: 0.5, delay: 0, completionBlock: {})
-        valideButton.animAppear(withDuration: 0.5, delay: 0.2, completionBlock: {
-            let vueC2 = SpotLocationViewController()
-            vueC2.modalPresentationStyle = .overCurrentContext
-            self.present(vueC2, animated: false, completion: nil)
-        })
+    }
+    
+    func valideDescription(sender:UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func cancelDescription(sender:UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     private func defineBehavior(items:[Ellipse]) {

@@ -59,6 +59,18 @@ extension UIView {
         }
     }
     
+    func resizeCircle(_ nextRect: CGRect,  duration: TimeInterval, delay:TimeInterval=0.0, completionHandler: (() -> ())? = nil) {
+        
+        UIView.animate(withDuration: duration, delay: delay,  options: .curveEaseInOut, animations: {
+            self.frame = nextRect
+        }) { _ in
+            if let completionHandler = completionHandler {
+                completionHandler()
+            }
+        }
+        animateChangingCornerRadius(toValue: nextRect.width/2, duration: duration, delay: delay)
+    }
+    
     func animAppear(withDuration duration:TimeInterval, delay:TimeInterval, completionBlock:@escaping ()->()) {
         
         UIView.animate(withDuration: duration, delay: delay,  options: .curveEaseInOut, animations: {

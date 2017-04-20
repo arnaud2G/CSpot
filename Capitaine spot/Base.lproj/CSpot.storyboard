@@ -48,7 +48,7 @@
         <!--Menu View Controller-->
         <scene sceneID="LqH-Zf-i8t">
             <objects>
-                <viewController storyboardIdentifier="MenuViewController" id="C3b-YP-OxN" customClass="MenuViewController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuViewController" definesPresentationContext="YES" modalPresentationStyle="overCurrentContext" id="C3b-YP-OxN" customClass="MenuViewController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LtF-Gi-4eF"/>
                         <viewControllerLayoutGuide type="bottom" id="Wyn-kG-BYG"/>
@@ -68,15 +68,23 @@
                                     <action selector="btnLogoutPressed:" destination="C3b-YP-OxN" eventType="touchUpInside" id="pes-BB-j86"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oe2-tf-1l2">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="fpp-8Q-dma" secondAttribute="trailing" constant="10" id="1AD-9b-MfY"/>
+                            <constraint firstItem="oe2-tf-1l2" firstAttribute="leading" secondItem="2RP-0d-g4x" secondAttribute="leading" id="Ac2-hA-pJJ"/>
                             <constraint firstItem="fpp-8Q-dma" firstAttribute="top" secondItem="LtF-Gi-4eF" secondAttribute="bottom" constant="10" id="QJU-bV-bic"/>
+                            <constraint firstItem="oe2-tf-1l2" firstAttribute="top" secondItem="2RP-0d-g4x" secondAttribute="top" id="cTx-Rh-H2F"/>
+                            <constraint firstAttribute="trailing" secondItem="oe2-tf-1l2" secondAttribute="trailing" id="oTH-4G-1W5"/>
+                            <constraint firstItem="Wyn-kG-BYG" firstAttribute="top" secondItem="oe2-tf-1l2" secondAttribute="bottom" id="rO3-fm-Ao5"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="btnLogout" destination="fpp-8Q-dma" id="Tzw-5x-xkT"/>
+                        <outlet property="vSpot" destination="oe2-tf-1l2" id="1vw-J8-2jA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mqZ-vu-YUo" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -12,7 +12,7 @@
         <!--Spot Location View Controller-->
         <scene sceneID="EmD-ot-TYw">
             <objects>
-                <viewController id="dfD-Pg-xUT" customClass="SpotLocationViewController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="overFullScreen" id="dfD-Pg-xUT" customClass="SpotLocationViewController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="C3j-XP-CRb"/>
                         <viewControllerLayoutGuide type="bottom" id="eWs-gN-k9P"/>

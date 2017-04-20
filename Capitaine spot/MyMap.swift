@@ -20,7 +20,6 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
     var map:MGLMapView!
     var circle:UIView!
     
-    let cancelButton = UIButton()
     let valideButton = UIButton()
     let tfSpot = UITextField()
     var spotName:Variable<String?> = Variable(nil)
@@ -55,7 +54,7 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
         map.showsUserLocation = true
         view.addSubview(map)
         
-        Spot.newSpot.coordinate
+        User.current.location
             .asObservable()
             .subscribe(onNext: {
                 description in
@@ -84,7 +83,6 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
     
     private func animateCircleDisappear(withValidate validated:Bool) {
         
-        cancelButton.animDisappear(withDuration: 0.1, delay: 0.05, completionBlock: {})
         valideButton.animDisappear(withDuration: 0.1, delay: 0.05, completionBlock: {})
         
         if !validated {
@@ -96,7 +94,6 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
             self.map.resizeCircleWithPulseAinmation(0, duration: self.mapInvocation, delay: circleInvocation - self.mapInvocation)
             self.circle.resizeCircleWithPulseAinmation(0, duration: circleInvocation, completionHandler: {
                 self.tfSpot.isHidden = true
-                self.cancelButton.isHidden = true
                 self.valideButton.isHidden = true
                 self.dismiss(animated: false, completion: nil)
             })
@@ -139,14 +136,7 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
         tfSpot.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         tfSpot.heightAnchor.constraint(equalToConstant: 40).isActive = true
         tfSpot.topAnchor.constraint(equalTo: self.view.topAnchor, constant:40).isActive = true
-        
-        cancelButton.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(cancelButton)
-        
-        cancelButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant:10).isActive = true
-        cancelButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        cancelButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        cancelButton.centerYAnchor.constraint(equalTo: tfSpot.centerYAnchor).isActive = true
+        tfSpot.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant:60).isActive = true
         
         valideButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(valideButton)
@@ -155,8 +145,6 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
         valideButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         valideButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         valideButton.centerYAnchor.constraint(equalTo: tfSpot.centerYAnchor).isActive = true
-        
-        tfSpot.leadingAnchor.constraint(equalTo: cancelButton.trailingAnchor, constant:10).isActive = true
         tfSpot.trailingAnchor.constraint(equalTo: valideButton.leadingAnchor, constant:-10).isActive = true
         
         // Attributes
@@ -169,10 +157,8 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
         
         valideButton.setBackgroundImage(#imageLiteral(resourceName: "ok"), for: .normal)
         valideButton.setBackgroundImage(#imageLiteral(resourceName: "ok_disabled"), for: .disabled)
-        cancelButton.setBackgroundImage(#imageLiteral(resourceName: "nook"), for: .normal)
         
         valideButton.alpha = 0
-        cancelButton.alpha = 0
         
         // Observables
         tfSpot.rx.text
@@ -203,18 +189,9 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
                 self.animateCircleDisappear(withValidate: true)
             }).addDisposableTo(disposeBag)
         
-        cancelButton.rx.tap
-            .asObservable()
-            .subscribe(onNext: {
-                description in
-                self.disposeBag = DisposeBag()
-                self.animateCircleDisappear(withValidate: false)
-            }).addDisposableTo(disposeBag)
-        
         // Animation
         self.tfSpot.animAppear(withDuration: 0.3, delay: 0.0, completionBlock: {
             self.valideButton.animAppear(withDuration: 0.3, delay: 0.0, completionBlock:{})
-            self.cancelButton.animAppear(withDuration: 0.3, delay: 0.0, completionBlock:{})
         })
     }
     

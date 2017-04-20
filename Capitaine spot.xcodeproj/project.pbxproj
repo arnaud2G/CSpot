@@ -18,7 +18,7 @@
 		A54984811EA767810074755B /* AWSDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54984801EA767810074755B /* AWSDescription.swift */; };
 		A54984831EA767FB0074755B /* AWSConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54984821EA767FB0074755B /* AWSConfig.swift */; };
 		A54D8E9E1E9BB7110081C0F5 /* DynamicsFall.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A54D8E9D1E9BB7110081C0F5 /* DynamicsFall.storyboard */; };
-		A54D8EA11E9BC30B0081C0F5 /* MyStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D8EA01E9BC30B0081C0F5 /* MyStructs.swift */; };
+		A54D8EA11E9BC30B0081C0F5 /* ToolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D8EA01E9BC30B0081C0F5 /* ToolExtension.swift */; };
 		A54D8EA31E9BCCF20081C0F5 /* NumberExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D8EA21E9BCCF20081C0F5 /* NumberExtension.swift */; };
 		A5595A541EA0BEFF00F4AFE5 /* RxMapBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5595A531EA0BEFF00F4AFE5 /* RxMapBox.swift */; };
 		A57480421EA8B4E70045AC03 /* CSpotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57480411EA8B4E70045AC03 /* CSpotController.swift */; };
@@ -28,6 +28,7 @@
 		A5B0D1BA1E9D1AE60014EEA3 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B0D1B91E9D1AE60014EEA3 /* Transition.swift */; };
 		A5B0D1BE1E9D1AF90014EEA3 /* VueC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B0D1BD1E9D1AF90014EEA3 /* VueC2.swift */; };
 		A5B0D1C01E9D1B070014EEA3 /* Transition.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B0D1BF1E9D1B070014EEA3 /* Transition.storyboard */; };
+		A5B62C171EA8FB2E00694441 /* Description.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B62C161EA8FB2E00694441 /* Description.storyboard */; };
 		A5CACB981E978A9A0068D5B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CACB971E978A9A0068D5B2 /* AppDelegate.swift */; };
 		A5CACB9A1E978A9A0068D5B2 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CACB991E978A9A0068D5B2 /* MenuViewController.swift */; };
 		A5CACB9D1E978A9A0068D5B2 /* CSpot.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5CACB9B1E978A9A0068D5B2 /* CSpot.storyboard */; };
@@ -70,7 +71,7 @@
 		A54984821EA767FB0074755B /* AWSConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSConfig.swift; sourceTree = "<group>"; };
 		A54D8E9B1E9BB6F90081C0F5 /* DynamicsFall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicsFall.swift; sourceTree = "<group>"; };
 		A54D8E9D1E9BB7110081C0F5 /* DynamicsFall.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DynamicsFall.storyboard; sourceTree = "<group>"; };
-		A54D8EA01E9BC30B0081C0F5 /* MyStructs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStructs.swift; sourceTree = "<group>"; };
+		A54D8EA01E9BC30B0081C0F5 /* ToolExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolExtension.swift; sourceTree = "<group>"; };
 		A54D8EA21E9BCCF20081C0F5 /* NumberExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberExtension.swift; sourceTree = "<group>"; };
 		A5595A531EA0BEFF00F4AFE5 /* RxMapBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxMapBox.swift; sourceTree = "<group>"; };
 		A57480411EA8B4E70045AC03 /* CSpotController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSpotController.swift; sourceTree = "<group>"; };
@@ -81,6 +82,7 @@
 		A5B0D1BB1E9D1AF20014EEA3 /* VueC1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VueC1.swift; sourceTree = "<group>"; };
 		A5B0D1BD1E9D1AF90014EEA3 /* VueC2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VueC2.swift; sourceTree = "<group>"; };
 		A5B0D1BF1E9D1B070014EEA3 /* Transition.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Transition.storyboard; sourceTree = "<group>"; };
+		A5B62C161EA8FB2E00694441 /* Description.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Description.storyboard; sourceTree = "<group>"; };
 		A5CACB941E978A9A0068D5B2 /* Capitaine spot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Capitaine spot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5CACB971E978A9A0068D5B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5CACB991E978A9A0068D5B2 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -155,9 +157,8 @@
 		A54512D11E9BDFED000FDA2F /* BoiteAComposant */ = {
 			isa = PBXGroup;
 			children = (
+				A5B62C151EA8FABA00694441 /* EcranDescription */,
 				A556EEB21EA79C2E00391E06 /* EcranPrincipal */,
-				A5CEEA4E1E9CCD220057CA8A /* MaMap */,
-				A54512D21E9BE004000FDA2F /* AppareilPhoto */,
 			);
 			name = BoiteAComposant;
 			sourceTree = "<group>";
@@ -223,11 +224,21 @@
 			isa = PBXGroup;
 			children = (
 				A5B0D1B91E9D1AE60014EEA3 /* Transition.swift */,
-				A5B0D1BB1E9D1AF20014EEA3 /* VueC1.swift */,
-				A5B0D1BD1E9D1AF90014EEA3 /* VueC2.swift */,
 				A5B0D1BF1E9D1B070014EEA3 /* Transition.storyboard */,
 			);
 			name = Transition;
+			sourceTree = "<group>";
+		};
+		A5B62C151EA8FABA00694441 /* EcranDescription */ = {
+			isa = PBXGroup;
+			children = (
+				A5B62C161EA8FB2E00694441 /* Description.storyboard */,
+				A5B0D1BB1E9D1AF20014EEA3 /* VueC1.swift */,
+				A5B0D1BD1E9D1AF90014EEA3 /* VueC2.swift */,
+				A54512D21E9BE004000FDA2F /* AppareilPhoto */,
+				A5CEEA4E1E9CCD220057CA8A /* MaMap */,
+			);
+			name = EcranDescription;
 			sourceTree = "<group>";
 		};
 		A5CACB8B1E978A990068D5B2 = {
@@ -267,7 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				A5F638F01EA771A3000ACD3D /* AWS */,
-				A54D8EA01E9BC30B0081C0F5 /* MyStructs.swift */,
+				A54D8EA01E9BC30B0081C0F5 /* ToolExtension.swift */,
 				A54512D51E9BE0B6000FDA2F /* MyStyles.swift */,
 				A54D8EA21E9BCCF20081C0F5 /* NumberExtension.swift */,
 				A53B30661EA65617008AE7B8 /* AnimateExtension.swift */,
@@ -410,6 +421,7 @@
 				A54512D81E9BE0FF000FDA2F /* MyCamera.storyboard in Resources */,
 				A5CACB9F1E978A9A0068D5B2 /* Assets.xcassets in Resources */,
 				A5CACB9D1E978A9A0068D5B2 /* CSpot.storyboard in Resources */,
+				A5B62C171EA8FB2E00694441 /* Description.storyboard in Resources */,
 				A5B0D1C01E9D1B070014EEA3 /* Transition.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -476,7 +488,7 @@
 				A5F639001EA7724B000ACD3D /* UserPoolMFAViewController.swift in Sources */,
 				A54512D61E9BE0B6000FDA2F /* MyStyles.swift in Sources */,
 				A5F638FE1EA7724B000ACD3D /* SignInViewControllerExtensions.swift in Sources */,
-				A54D8EA11E9BC30B0081C0F5 /* MyStructs.swift in Sources */,
+				A54D8EA11E9BC30B0081C0F5 /* ToolExtension.swift in Sources */,
 				A58347CF1E9E537500E16507 /* GeolocationService.swift in Sources */,
 				A54984831EA767FB0074755B /* AWSConfig.swift in Sources */,
 				A5CEEA501E9CCD370057CA8A /* MyMap.swift in Sources */,

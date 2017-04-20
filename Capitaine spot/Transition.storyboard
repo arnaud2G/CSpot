@@ -12,7 +12,7 @@
         <!--VueC2-->
         <scene sceneID="526-3d-0sH">
             <objects>
-                <viewController id="6fs-rI-e3P" customClass="VueC2" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="6fs-rI-e3P" customClass="VueC2" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nkN-nt-7Z0"/>
                         <viewControllerLayoutGuide type="bottom" id="cab-l0-AL3"/>
@@ -20,8 +20,31 @@
                     <view key="view" contentMode="scaleToFill" id="YzV-9V-4M1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aIq-Cp-R9b">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9hj-5j-nad">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="0.94373359030000004" green="1" blue="0.89983663709999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="aIq-Cp-R9b" firstAttribute="leading" secondItem="YzV-9V-4M1" secondAttribute="leading" id="3kY-o1-ZTz"/>
+                            <constraint firstAttribute="trailing" secondItem="9hj-5j-nad" secondAttribute="trailing" id="74I-Qe-0r6"/>
+                            <constraint firstAttribute="trailing" secondItem="aIq-Cp-R9b" secondAttribute="trailing" id="9yX-O0-oHh"/>
+                            <constraint firstItem="9hj-5j-nad" firstAttribute="top" secondItem="YzV-9V-4M1" secondAttribute="top" id="EcU-LF-1Bz"/>
+                            <constraint firstItem="cab-l0-AL3" firstAttribute="top" secondItem="9hj-5j-nad" secondAttribute="bottom" id="Pds-n8-xZr"/>
+                            <constraint firstItem="9hj-5j-nad" firstAttribute="leading" secondItem="YzV-9V-4M1" secondAttribute="leading" id="WZH-BP-azU"/>
+                            <constraint firstItem="aIq-Cp-R9b" firstAttribute="top" secondItem="YzV-9V-4M1" secondAttribute="top" id="Wg9-Ib-7Yv"/>
+                            <constraint firstItem="cab-l0-AL3" firstAttribute="top" secondItem="aIq-Cp-R9b" secondAttribute="bottom" id="egO-Jm-ulg"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imgPic" destination="aIq-Cp-R9b" id="OX7-ja-xDh"/>
+                        <outlet property="vPic" destination="9hj-5j-nad" id="ywl-k4-uFq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XpB-0z-Oj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

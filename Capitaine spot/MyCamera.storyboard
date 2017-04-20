@@ -12,7 +12,7 @@
         <!--My Camera-->
         <scene sceneID="kVC-qF-TK8">
             <objects>
-                <viewController id="WQn-ts-TkY" customClass="MyCamera" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="overCurrentContext" id="WQn-ts-TkY" customClass="MyCamera" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="E3p-Xf-gvj"/>
                         <viewControllerLayoutGuide type="bottom" id="c17-vQ-eMA"/>
