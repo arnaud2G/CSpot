@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CBV-v6-Ub6">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Spot Navigation Controller-->
+        <scene sceneID="8Hn-ob-nOV">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="CBV-v6-Ub6" customClass="CSpotNavigationController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mFE-uH-Erd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="uw1-HB-FqS" kind="relationship" relationship="rootViewController" id="nCw-Ll-agM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6WN-tB-jtK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-646" y="130"/>
+        </scene>
+        <!--Spot View Controller-->
+        <scene sceneID="OIp-Vz-66k">
+            <objects>
+                <viewController id="uw1-HB-FqS" customClass="CSpotViewController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="p77-Sp-0JS"/>
+                        <viewControllerLayoutGuide type="bottom" id="xao-AZ-N69"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0ip-dL-Zxg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="AQ0-Mg-Bxc"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aCD-Lu-GGH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="130"/>
+        </scene>
+        <!--Menu View Controller-->
+        <scene sceneID="LqH-Zf-i8t">
+            <objects>
+                <viewController storyboardIdentifier="MenuViewController" id="C3b-YP-OxN" customClass="MenuViewController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LtF-Gi-4eF"/>
+                        <viewControllerLayoutGuide type="bottom" id="Wyn-kG-BYG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2RP-0d-g4x">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fpp-8Q-dma">
+                                <rect key="frame" x="319" y="30" width="30" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="BQR-RS-j8f"/>
+                                    <constraint firstAttribute="width" constant="30" id="H2J-hu-1Dz"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="btnLogoutPressed:" destination="C3b-YP-OxN" eventType="touchUpInside" id="pes-BB-j86"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="fpp-8Q-dma" secondAttribute="trailing" constant="10" id="1AD-9b-MfY"/>
+                            <constraint firstItem="fpp-8Q-dma" firstAttribute="top" secondItem="LtF-Gi-4eF" secondAttribute="bottom" constant="10" id="QJU-bV-bic"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnLogout" destination="fpp-8Q-dma" id="Tzw-5x-xkT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mqZ-vu-YUo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="135" y="802"/>
+        </scene>
+    </scenes>
+</document>

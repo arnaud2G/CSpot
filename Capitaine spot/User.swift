@@ -11,19 +11,35 @@ import RxCocoa
 import RxSwift
 import MapKit
 import Mapbox
+import AWSMobileHubHelper
 
 class User {
-
     
     static let current = User()
     
-    var location: Variable<CLLocationCoordinate2D>?
+    static let keyCooX = "CSpot.Spot.cooX"
+    static let keyCooY = "CSpot.Spot.cooY"
+    
+    var location: Variable<CLLocationCoordinate2D?> = Variable(nil)
     private let locationManager = CLLocationManager()
+    
+    var connected:Variable<Bool> = Variable(false)
     
     let disposeBag = DisposeBag()
     
     init() {
-        //locationIsEnabled = CLLocationManager.locationServicesEnabled()
+        
+        self.connected.value = AWSIdentityManager.default().isLoggedIn
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.AWSIdentityManagerDidSignIn, object: nil, queue: OperationQueue.main, using: {
+            (note: Notification) -> Void in
+            self.connected.value = true
+        })
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.AWSIdentityManagerDidSignOut, object: nil, queue: OperationQueue.main, using: {
+            (note: Notification) -> Void in
+            self.connected.value = false
+        })
     }
     
     func updateLocationEnabled() {
@@ -32,15 +48,33 @@ class User {
         locationManager.requestWhenInUseAuthorization()
     }
     
+    private func updateLastCoo(coo:CLLocationCoordinate2D) {
+        let defaults = UserDefaults.standard
+        defaults.set(Double(coo.latitude), forKey: User.keyCooX)
+        defaults.set(Double(coo.longitude), forKey: User.keyCooY)
+    }
+    
+    static func getLastCoo() -> CLLocationCoordinate2D? {
+        let defaults = UserDefaults.standard
+        if let latitude = defaults.value(forKey: User.keyCooX) as? Double, let longitude = defaults.value(forKey: User.keyCooY) as? Double {
+            return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        }
+        return nil
+    }
+    
     func localize() -> Bool {
         
         if CLLocationManager.locationServicesEnabled() {
             
+            GeolocationService.instance.startUpdatingLocation()
             GeolocationService.instance.location
-            .asObservable()
+                .asObservable()
+                .debounce(0.5, scheduler: MainScheduler.instance)
                 .subscribe(onNext: {
                     descriptions in
-                    print(descriptions)
+                    self.location.value = descriptions
+                    self.updateLastCoo(coo:descriptions)
+                    GeolocationService.instance.stopUpdatingLocation()
                 }).addDisposableTo(disposeBag)
         }
         

@@ -61,7 +61,7 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
                 description in
                 if let coordinate = description {
                     self.map.setCenter(coordinate, zoomLevel: 16, animated: true)
-                } else if let coordinate = Spot.getLastCoo() {
+                } else if let coordinate = User.getLastCoo() {
                     self.map.setCenter(coordinate, zoomLevel: 16, animated: true)
                 }
             }).addDisposableTo(disposeBag)

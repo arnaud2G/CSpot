@@ -97,7 +97,8 @@ class AWSMobileClient: NSObject {
         
         if (!isInitialized) {
             AWSIdentityManager.default().resumeSession(completionHandler: { (result: Any?, error: Error?) in
-                //print("Result: \(result) AuthState: \(authState) \n Error:\(error)")
+                print("Connect user \(AWSIdentityManager.default().userName)")
+                //print("Result: \(result) Error:\(error)")
             }) // If you get an EXC_BAD_ACCESS here in iOS Simulator, then do Simulator -> "Reset Content and Settings..."
             // This will clear bad auth tokens stored by other apps with the same bundle ID.
             isInitialized = true
@@ -107,11 +108,8 @@ class AWSMobileClient: NSObject {
     }
     
     func setupUserPool() {
-        // register your user pool configuration
         AWSCognitoUserPoolsSignInProvider.setupUserPool(withId: AWSCognitoUserPoolId, cognitoIdentityUserPoolAppClientId: AWSCognitoUserPoolAppClientId, cognitoIdentityUserPoolAppClientSecret: AWSCognitoUserPoolClientSecret, region: AWSCognitoUserPoolRegion)
         
         AWSSignInProviderFactory.sharedInstance().register(signInProvider: AWSCognitoUserPoolsSignInProvider.sharedInstance(), forKey:AWSCognitoUserPoolsSignInProviderKey)
     }
-    
-    
 }

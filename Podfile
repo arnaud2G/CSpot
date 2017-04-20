@@ -19,9 +19,10 @@ target 'Capitaine spot' do
   pod 'FacebookShare'
   
   #AWS
-  #pod 'AWSCore', '~> 2.5.0'
-  #pod 'AWSDynamoDB', '~> 2.5.0'
-  #pod 'AWSS3', '~> 2.5.0'
-  #pod 'AWSCognito', '~> 2.5.0'
+  pod 'AWSCore'
+  pod 'AWSDynamoDB'
+  pod 'AWSS3'
+  pod 'AWSCognito'
+  pod 'AWSCognitoIdentityProvider'
 
 end

@@ -31,8 +31,6 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var rightHorizontalBar: UIView!
     @IBOutlet weak var orSignInWithLabel: UIView!
     
-    var didSignInObserver: AnyObject!
-    
     var passwordAuthenticationCompletion: AWSTaskCompletionSource<AnyObject>?
     
     // MARK: - View lifecycle
@@ -40,11 +38,6 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Sign In Loading.")
-        
-        didSignInObserver =  NotificationCenter.default.addObserver(forName: NSNotification.Name.AWSIdentityManagerDidSignIn, object: AWSIdentityManager.default(), queue: OperationQueue.main, using: {(note: Notification) -> Void in
-            // On sauvegarde l'utilisateur dans la base de donné
-            
-        })
         
         // Facebook UI Setup
         facebookButton.addTarget(self, action: #selector(SignInViewController.handleFacebookLogin), for: .touchUpInside)
@@ -65,10 +58,6 @@ class SignInViewController: UIViewController {
         customProviderButton.setTitle(NSLocalizedString("Sign-in", comment: "Sign-in"), for: UIControlState())
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(didSignInObserver)
-    }
-    
     func dimissController() {
         self.dismiss(animated: true, completion: nil)
     }
@@ -77,13 +66,7 @@ class SignInViewController: UIViewController {
     
     func handleLoginWithSignInProvider(_ signInProvider: AWSSignInProvider) {
         AWSIdentityManager.default().login(signInProvider: signInProvider, completionHandler: {(result: Any?, error: Error?) in
-            // If no error reported by SignInProvider, discard the sign-in view controller.
-        })
-    }
-    
-    private func goToPrevious() {
-        DispatchQueue.main.async(execute: {
-            _ = self.navigationController?.popToRootViewController(animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
         })
     }
     

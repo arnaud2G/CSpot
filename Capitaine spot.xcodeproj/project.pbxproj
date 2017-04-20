@@ -21,6 +21,7 @@
 		A54D8EA11E9BC30B0081C0F5 /* MyStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D8EA01E9BC30B0081C0F5 /* MyStructs.swift */; };
 		A54D8EA31E9BCCF20081C0F5 /* NumberExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D8EA21E9BCCF20081C0F5 /* NumberExtension.swift */; };
 		A5595A541EA0BEFF00F4AFE5 /* RxMapBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5595A531EA0BEFF00F4AFE5 /* RxMapBox.swift */; };
+		A57480421EA8B4E70045AC03 /* CSpotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57480411EA8B4E70045AC03 /* CSpotController.swift */; };
 		A58347CD1E9E241600E16507 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58347CC1E9E241600E16507 /* User.swift */; };
 		A58347CF1E9E537500E16507 /* GeolocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58347CE1E9E537500E16507 /* GeolocationService.swift */; };
 		A5B0D1B71E9CD01D0014EEA3 /* MyMap.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B0D1B61E9CD01D0014EEA3 /* MyMap.storyboard */; };
@@ -28,18 +29,13 @@
 		A5B0D1BE1E9D1AF90014EEA3 /* VueC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B0D1BD1E9D1AF90014EEA3 /* VueC2.swift */; };
 		A5B0D1C01E9D1B070014EEA3 /* Transition.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B0D1BF1E9D1B070014EEA3 /* Transition.storyboard */; };
 		A5CACB981E978A9A0068D5B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CACB971E978A9A0068D5B2 /* AppDelegate.swift */; };
-		A5CACB9A1E978A9A0068D5B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CACB991E978A9A0068D5B2 /* ViewController.swift */; };
-		A5CACB9D1E978A9A0068D5B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5CACB9B1E978A9A0068D5B2 /* Main.storyboard */; };
+		A5CACB9A1E978A9A0068D5B2 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CACB991E978A9A0068D5B2 /* MenuViewController.swift */; };
+		A5CACB9D1E978A9A0068D5B2 /* CSpot.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5CACB9B1E978A9A0068D5B2 /* CSpot.storyboard */; };
 		A5CACB9F1E978A9A0068D5B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5CACB9E1E978A9A0068D5B2 /* Assets.xcassets */; };
 		A5CACBA21E978A9A0068D5B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5CACBA01E978A9A0068D5B2 /* LaunchScreen.storyboard */; };
 		A5CACBAD1E978B1C0068D5B2 /* DynamicsBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CACBAC1E978B1C0068D5B2 /* DynamicsBall.swift */; };
 		A5CACBAF1E978B3C0068D5B2 /* DynamicsBall.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5CACBAE1E978B3C0068D5B2 /* DynamicsBall.storyboard */; };
 		A5CEEA501E9CCD370057CA8A /* MyMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CEEA4F1E9CCD370057CA8A /* MyMap.swift */; };
-		A5D6329D1EA77900004DD6C5 /* AWSCognitoIdentityProvider.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F638EC1EA76FF8000ACD3D /* AWSCognitoIdentityProvider.framework */; };
-		A5D6329E1EA77900004DD6C5 /* AWSCognitoIdentityProvider.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A5F638EC1EA76FF8000ACD3D /* AWSCognitoIdentityProvider.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A5DF2B551EA7803600570520 /* AWSDynamoDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DF2B521EA7803600570520 /* AWSDynamoDB.framework */; };
-		A5DF2B561EA7803600570520 /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DF2B531EA7803600570520 /* AWSS3.framework */; };
-		A5DF2B571EA7803600570520 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5DF2B541EA7803600570520 /* AWSCore.framework */; };
 		A5E01EA01EA77B6F0087AEE0 /* AWSMobileHubHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F638ED1EA76FF8000ACD3D /* AWSMobileHubHelper.framework */; };
 		A5F638FC1EA7724B000ACD3D /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5F638F21EA7724B000ACD3D /* SignIn.storyboard */; };
 		A5F638FD1EA7724B000ACD3D /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F638F31EA7724B000ACD3D /* SignInViewController.swift */; };
@@ -57,20 +53,6 @@
 		A5F6390E1EA77504000ACD3D /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F6390D1EA77504000ACD3D /* AddressBook.framework */; };
 		A5F639101EA7750A000ACD3D /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F6390F1EA7750A000ACD3D /* SafariServices.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		A5D632A11EA77900004DD6C5 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				A5D6329E1EA77900004DD6C5 /* AWSCognitoIdentityProvider.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0C7DF1EE9E0485446262E3CE /* Pods-Capitaine spot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitaine spot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Capitaine spot/Pods-Capitaine spot.debug.xcconfig"; sourceTree = "<group>"; };
@@ -91,6 +73,7 @@
 		A54D8EA01E9BC30B0081C0F5 /* MyStructs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStructs.swift; sourceTree = "<group>"; };
 		A54D8EA21E9BCCF20081C0F5 /* NumberExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberExtension.swift; sourceTree = "<group>"; };
 		A5595A531EA0BEFF00F4AFE5 /* RxMapBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxMapBox.swift; sourceTree = "<group>"; };
+		A57480411EA8B4E70045AC03 /* CSpotController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSpotController.swift; sourceTree = "<group>"; };
 		A58347CC1E9E241600E16507 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A58347CE1E9E537500E16507 /* GeolocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeolocationService.swift; sourceTree = "<group>"; };
 		A5B0D1B61E9CD01D0014EEA3 /* MyMap.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyMap.storyboard; sourceTree = "<group>"; };
@@ -100,18 +83,14 @@
 		A5B0D1BF1E9D1B070014EEA3 /* Transition.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Transition.storyboard; sourceTree = "<group>"; };
 		A5CACB941E978A9A0068D5B2 /* Capitaine spot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Capitaine spot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5CACB971E978A9A0068D5B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A5CACB991E978A9A0068D5B2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A5CACB9C1E978A9A0068D5B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A5CACB991E978A9A0068D5B2 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		A5CACB9C1E978A9A0068D5B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CSpot.storyboard; sourceTree = "<group>"; };
 		A5CACB9E1E978A9A0068D5B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5CACBA11E978A9A0068D5B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A5CACBA31E978A9A0068D5B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5CACBAC1E978B1C0068D5B2 /* DynamicsBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicsBall.swift; sourceTree = "<group>"; };
 		A5CACBAE1E978B3C0068D5B2 /* DynamicsBall.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DynamicsBall.storyboard; sourceTree = "<group>"; };
 		A5CEEA4F1E9CCD370057CA8A /* MyMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMap.swift; sourceTree = "<group>"; };
-		A5DF2B521EA7803600570520 /* AWSDynamoDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSDynamoDB.framework; sourceTree = "<group>"; };
-		A5DF2B531EA7803600570520 /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSS3.framework; sourceTree = "<group>"; };
-		A5DF2B541EA7803600570520 /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCore.framework; sourceTree = "<group>"; };
-		A5F638EC1EA76FF8000ACD3D /* AWSCognitoIdentityProvider.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCognitoIdentityProvider.framework; sourceTree = "<group>"; };
 		A5F638ED1EA76FF8000ACD3D /* AWSMobileHubHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSMobileHubHelper.framework; sourceTree = "<group>"; };
 		A5F638F21EA7724B000ACD3D /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		A5F638F31EA7724B000ACD3D /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -138,11 +117,7 @@
 				A5F639101EA7750A000ACD3D /* SafariServices.framework in Frameworks */,
 				A5F6390E1EA77504000ACD3D /* AddressBook.framework in Frameworks */,
 				A5F6390C1EA774F7000ACD3D /* MediaPlayer.framework in Frameworks */,
-				A5D6329D1EA77900004DD6C5 /* AWSCognitoIdentityProvider.framework in Frameworks */,
-				A5DF2B551EA7803600570520 /* AWSDynamoDB.framework in Frameworks */,
-				A5DF2B571EA7803600570520 /* AWSCore.framework in Frameworks */,
 				A5F6390A1EA774EF000ACD3D /* Foundation.framework in Frameworks */,
-				A5DF2B561EA7803600570520 /* AWSS3.framework in Frameworks */,
 				A5F639081EA774AF000ACD3D /* libsqlite3.tbd in Frameworks */,
 				A5F639061EA7749B000ACD3D /* libz.tbd in Frameworks */,
 				90BD816A6D276756EECE5147 /* Pods_Capitaine_spot.framework in Frameworks */,
@@ -156,16 +131,12 @@
 		67318BAE4043AD3CAD559058 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A5DF2B521EA7803600570520 /* AWSDynamoDB.framework */,
-				A5DF2B531EA7803600570520 /* AWSS3.framework */,
-				A5DF2B541EA7803600570520 /* AWSCore.framework */,
 				A5F6390F1EA7750A000ACD3D /* SafariServices.framework */,
 				A5F6390D1EA77504000ACD3D /* AddressBook.framework */,
 				A5F6390B1EA774F7000ACD3D /* MediaPlayer.framework */,
 				A5F639091EA774EF000ACD3D /* Foundation.framework */,
 				A5F639071EA774AF000ACD3D /* libsqlite3.tbd */,
 				A5F639051EA7749B000ACD3D /* libz.tbd */,
-				A5F638EC1EA76FF8000ACD3D /* AWSCognitoIdentityProvider.framework */,
 				A5F638ED1EA76FF8000ACD3D /* AWSMobileHubHelper.framework */,
 				21F2D51E9692729CDE7757C6 /* Pods_Capitaine_spot.framework */,
 			);
@@ -184,6 +155,7 @@
 		A54512D11E9BDFED000FDA2F /* BoiteAComposant */ = {
 			isa = PBXGroup;
 			children = (
+				A556EEB21EA79C2E00391E06 /* EcranPrincipal */,
 				A5CEEA4E1E9CCD220057CA8A /* MaMap */,
 				A54512D21E9BE004000FDA2F /* AppareilPhoto */,
 			);
@@ -237,6 +209,16 @@
 			name = DynamicsFall;
 			sourceTree = "<group>";
 		};
+		A556EEB21EA79C2E00391E06 /* EcranPrincipal */ = {
+			isa = PBXGroup;
+			children = (
+				A5CACB9B1E978A9A0068D5B2 /* CSpot.storyboard */,
+				A57480411EA8B4E70045AC03 /* CSpotController.swift */,
+				A5CACB991E978A9A0068D5B2 /* MenuViewController.swift */,
+			);
+			name = EcranPrincipal;
+			sourceTree = "<group>";
+		};
 		A5B0D1B81E9D1AD30014EEA3 /* Transition */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,8 +256,6 @@
 				A5CACBAA1E978ACA0068D5B2 /* BoiteATests */,
 				A5CACBA91E978AB40068D5B2 /* BoiteAOutils */,
 				A5CACB971E978A9A0068D5B2 /* AppDelegate.swift */,
-				A5CACB991E978A9A0068D5B2 /* ViewController.swift */,
-				A5CACB9B1E978A9A0068D5B2 /* Main.storyboard */,
 				A5CACB9E1E978A9A0068D5B2 /* Assets.xcassets */,
 				A5CACBA01E978A9A0068D5B2 /* LaunchScreen.storyboard */,
 				A5CACBA31E978A9A0068D5B2 /* Info.plist */,
@@ -371,7 +351,6 @@
 				A5CACB921E978A9A0068D5B2 /* Resources */,
 				800EC78C52FC55F172D1DF76 /* [CP] Embed Pods Frameworks */,
 				B7CE577F3502AB774582FAFE /* [CP] Copy Pods Resources */,
-				A5D632A11EA77900004DD6C5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -430,7 +409,7 @@
 				A5F638FC1EA7724B000ACD3D /* SignIn.storyboard in Resources */,
 				A54512D81E9BE0FF000FDA2F /* MyCamera.storyboard in Resources */,
 				A5CACB9F1E978A9A0068D5B2 /* Assets.xcassets in Resources */,
-				A5CACB9D1E978A9A0068D5B2 /* Main.storyboard in Resources */,
+				A5CACB9D1E978A9A0068D5B2 /* CSpot.storyboard in Resources */,
 				A5B0D1C01E9D1B070014EEA3 /* Transition.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A54984811EA767810074755B /* AWSDescription.swift in Sources */,
+				A57480421EA8B4E70045AC03 /* CSpotController.swift in Sources */,
 				A5595A541EA0BEFF00F4AFE5 /* RxMapBox.swift in Sources */,
 				A54512D41E9BE017000FDA2F /* MyCamera.swift in Sources */,
 				A5F639001EA7724B000ACD3D /* UserPoolMFAViewController.swift in Sources */,
@@ -506,7 +486,7 @@
 				A5B0D1BA1E9D1AE60014EEA3 /* Transition.swift in Sources */,
 				A58347CD1E9E241600E16507 /* User.swift in Sources */,
 				A5CACBAD1E978B1C0068D5B2 /* DynamicsBall.swift in Sources */,
-				A5CACB9A1E978A9A0068D5B2 /* ViewController.swift in Sources */,
+				A5CACB9A1E978A9A0068D5B2 /* MenuViewController.swift in Sources */,
 				A549847D1EA766B40074755B /* UISpot.swift in Sources */,
 				A54512D01E9BD45F000FDA2F /* Spot.swift in Sources */,
 				A5F639041EA7724B000ACD3D /* UserPoolSignUpViewController.swift in Sources */,
@@ -522,12 +502,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A5CACB9B1E978A9A0068D5B2 /* Main.storyboard */ = {
+		A5CACB9B1E978A9A0068D5B2 /* CSpot.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				A5CACB9C1E978A9A0068D5B2 /* Base */,
 			);
-			name = Main.storyboard;
+			name = CSpot.storyboard;
 			sourceTree = "<group>";
 		};
 		A5CACBA01E978A9A0068D5B2 /* LaunchScreen.storyboard */ = {

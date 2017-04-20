@@ -58,6 +58,8 @@ class VueC2: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(self.modalPresentationStyle)
+        
         Spot.newSpot.reset()
         
         animator = UIDynamicAnimator(referenceView: view)

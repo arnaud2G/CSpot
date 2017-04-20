@@ -55,9 +55,6 @@ class Spot {
     
     static let newSpot = Spot()
     
-    static let keyCooX = "CSpot.Spot.cooX"
-    static let keyCooY = "CSpot.Spot.cooY"
-    
     var descriptions: Variable<[TypeSpot]> = Variable([])
     var title: Variable<String> = Variable(String())
     var adress:String = String() //
@@ -74,23 +71,8 @@ class Spot {
             .filter{$0 != nil}
             .subscribe(onNext: {
                 coo in
-                self.updateLastCoo(coo:coo!)
                 self.searchClosestState(newCoordinate: coo!)
             }).addDisposableTo(disposeBag)
-    }
-    
-    private func updateLastCoo(coo:CLLocationCoordinate2D) {
-        let defaults = UserDefaults.standard
-        defaults.set(Double(coo.latitude), forKey: Spot.keyCooX)
-        defaults.set(Double(coo.longitude), forKey: Spot.keyCooY)
-    }
-    
-    static func getLastCoo() -> CLLocationCoordinate2D? {
-        let defaults = UserDefaults.standard
-        if let latitude = defaults.value(forKey: Spot.keyCooX) as? Double, let longitude = defaults.value(forKey: Spot.keyCooY) as? Double {
-            return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        }
-        return nil
     }
     
     func reset() {
@@ -100,17 +82,7 @@ class Spot {
         self.adress = String()
         self.coordinate.value = nil
         self.picture = nil
-        
-        GeolocationService.instance.startUpdatingLocation()
-        GeolocationService.instance.location
-            .asObservable()
-            .debounce(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: {
-                descriptions in
-                print("reset : \(descriptions)")
-                self.coordinate.value = descriptions
-                GeolocationService.instance.stopUpdatingLocation()
-            }).addDisposableTo(disposeBag)
+        self.place = nil
     }
     
     let exactGeo = CLGeocoder()
