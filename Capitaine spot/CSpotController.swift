@@ -100,6 +100,12 @@ class CSpotNavigationController: UINavigationController {
         self.view.addSubview(btnCancel)
         
         observeCSpotShape()
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        btnTop.startTuto()
     }
     
     func cancel(sender:UIButton) {
@@ -123,6 +129,7 @@ class CSpotNavigationController: UINavigationController {
                 switch self.cSpotShape.value {
                 case .menu:
                     self.cSpotShape.value = .takePicture
+                    Spot.newSpot.reset()
                 case .takePicture:
                     self.cSpotShape.value = .validePicture
                     NotificationCenter.default.post(name: CSpotNotif.takePic.name, object: nil)
@@ -167,6 +174,23 @@ class CSpotViewController: UIViewController {
         if !User.current.localize() {
             User.current.updateLocationEnabled()
         }
+    }
+}
+
+extension UIButton {
+    
+    func startTuto() {
+        Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(returnMedal), userInfo: nil, repeats: false)
+    }
+    
+    func returnMedal() {
+        let btnTopBack = UIButton(frame: self.frame)
+        btnTopBack.layer.cornerRadius = self.frame.size.width/2
+        btnTopBack.clipsToBounds = true
+        btnTopBack.selectedStyle()
+        btnTopBack.setImage(#imageLiteral(resourceName: "treasure-map").withRenderingMode(.alwaysTemplate), for: .normal)
+        
+        UIView.transition(from: self, to: btnTopBack, duration: 0.5, options: .transitionFlipFromRight)
     }
 }
 

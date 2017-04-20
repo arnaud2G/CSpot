@@ -55,37 +55,37 @@ class Spot {
     
     static let newSpot = Spot()
     
-    var descriptions: Variable<[TypeSpot]> = Variable([])
-    var title: Variable<String> = Variable(String())
-    var adress:String = String() //
+    var descriptions = [TypeSpot]() // 3 - VuC2
+    var title:Variable<String> = Variable(String()) // 2 - MyMap
+    var adress:String = String() // 2 - MyMap
     
-    var coordinate: Variable<CLLocationCoordinate2D?> = Variable(nil)
+    var coordinate:CLLocationCoordinate2D? = nil // 2 - MyMap
     
-    var picture:Variable<UIImage?> = Variable(nil)
-    var place:String? = nil //
+    var picture:Variable<UIImage?> = Variable(nil) // 1 - MyCamera
+    var place:String = String() // 2 - MyMap
     
     let disposeBag = DisposeBag()
     
-    init() {
+    /*init() {
         coordinate.asObservable()
             .filter{$0 != nil}
             .subscribe(onNext: {
                 coo in
                 self.searchClosestState(newCoordinate: coo!)
             }).addDisposableTo(disposeBag)
-    }
+    }*/
     
     func reset() {
         
-        self.descriptions = Variable([])
+        self.descriptions = [TypeSpot]()
         self.title.value = String()
         self.adress = String()
-        self.coordinate.value = nil
+        self.coordinate = nil
         self.picture.value = nil
-        self.place = nil
+        self.place = String()
     }
     
-    let exactGeo = CLGeocoder()
+    /*let exactGeo = CLGeocoder()
     private func searchClosestState(newCoordinate:CLLocationCoordinate2D) {
         
         place = nil
@@ -107,7 +107,7 @@ class Spot {
                 }
             }
         })
-    }
+    }*/
     
     /*
      //var closestPlaces = [String]() //

@@ -148,6 +148,13 @@ class VueC2: UIViewController {
     }
     
     func valideDescription(sender:UIButton) {
+        Spot.newSpot.descriptions = onTheSelection
+        print(Spot.newSpot.picture.value)
+        print(Spot.newSpot.coordinate)
+        print(Spot.newSpot.adress)
+        print(Spot.newSpot.title.value)
+        print(Spot.newSpot.place)
+        print(Spot.newSpot.descriptions)
         self.dismiss(animated: true, completion: nil)
     }
     

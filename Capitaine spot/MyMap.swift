@@ -22,7 +22,8 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
     
     let valideButton = UIButton()
     let tfSpot = UITextField()
-    var spotName:Variable<String?> = Variable(nil)
+    
+    var spot:Variable<GeocodedPlacemark?> = Variable(nil)
     
     var distance:CGFloat!
     let mapInvocation:Double = 0.5
@@ -125,6 +126,15 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
             lbl.alpha = 0
             
             lastView = lbl
+            
+            lbl.rx.tap
+                .asObservable()
+                .subscribe(onNext: {
+                    description in
+                    self.map.selectAnnotation(lbl.annotation, animated: true)
+                    lbl.animSelect(withDuration: 0.3)
+                    self.spot.value = lbl.placemark
+                }).addDisposableTo(disposeBag)
         }
     }
     
@@ -161,22 +171,17 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
         valideButton.alpha = 0
         
         // Observables
-        tfSpot.rx.text
-            .asObservable()
-            .subscribe(onNext: {
-                description in
-                self.spotName.value = description
-            }).addDisposableTo(disposeBag)
         
-        spotName.asObservable()
+        spot.asObservable()
             .subscribe(onNext: {
                 description in
-                self.tfSpot.text = description
-                if let description = description, description != String() {
-                    self.valideButton.isEnabled = true
-                } else {
+                guard let description = description else {
+                    self.tfSpot.text = String()
                     self.valideButton.isEnabled = false
+                    return
                 }
+                self.tfSpot.text = description.name
+                self.valideButton.isEnabled = true
             }).addDisposableTo(disposeBag)
         
         valideButton.rx.tap
@@ -184,8 +189,10 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
             .subscribe(onNext: {
                 description in
                 self.disposeBag = DisposeBag()
-                Spot.newSpot.title.value = self.spotName.value!
-                Spot.newSpot.coordinate.value = self.map.selectedAnnotations.first!.coordinate
+                Spot.newSpot.title.value = self.spot.value!.name
+                Spot.newSpot.coordinate = self.spot.value!.location.coordinate
+                Spot.newSpot.adress = self.spot.value!.stringAddress
+                Spot.newSpot.place = self.spot.value!.addressDictionary!["city"] as! String
                 self.animateCircleDisappear(withValidate: true)
             }).addDisposableTo(disposeBag)
         
@@ -251,7 +258,7 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
                         (a:MGLAnnotation) in
                         self.map.deselectAnnotation(a, animated: false)
                     })
-                    self.spotName.value = String()
+                    self.spot.value = nil
                     self.animateLabelsDisappears(completionBlock: {})
                 }
             }
@@ -279,10 +286,6 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         return true
     }
-    
-    func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {
-        self.spotName.value = annotation.title!
-    }
 }
 
 class UIPlacemarkButton:UIButton {
@@ -295,13 +298,6 @@ class UIPlacemarkButton:UIButton {
     convenience init(map:MGLMapView) {
         self.init(frame:CGRect.zero)
         map.addAnnotation(annotation)
-        self.rx.tap
-            .asObservable()
-            .subscribe(onNext: {
-                description in
-                map.selectAnnotation(self.annotation, animated: true)
-                self.animSelect(withDuration: 0.3)
-            }).addDisposableTo(disposeBag)
     }
     
     override init(frame: CGRect) {
@@ -320,5 +316,24 @@ class UIPlacemarkButton:UIButton {
     }
     
     
+}
+
+extension GeocodedPlacemark {
+    
+    var stringAddress : String {
+        get {
+            var address = String()
+            guard let addressdictionary = self.addressDictionary else {
+                return address
+            }
+            address = address + (addressdictionary["street"] as? String ?? "") + " "
+            address = address + (addressdictionary["postalCode"] as? String ?? "") + " "
+            address = address + (addressdictionary["city"] as? String ?? "") + " "
+            address = address + (addressdictionary["state"] as? String ?? "") + " "
+            address = address + (addressdictionary["country"] as? String ?? "") + " "
+            
+            return address
+        }
+    }
 }
 

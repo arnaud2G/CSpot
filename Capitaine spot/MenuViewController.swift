@@ -50,6 +50,7 @@ class MenuViewController: UIViewController {
                         presented.dismiss(animated: true, completion: nil)
                     }
                 case .takePicture :
+                    self.myCamera.imgView.image = nil
                     self.present(self.myCamera, animated: true, completion: nil)
                 case .describeSpot :
                     if let presented = self.presentedViewController {
@@ -92,19 +93,5 @@ class MenuViewController: UIViewController {
             })
         }
     }
-    
-    
-    
-    /*func addPressed(_ sender: Any) {
-        if User.current.connected.value {
-            let loginStoryboard = UIStoryboard(name: "Transition", bundle: nil)
-            let loginController = loginStoryboard.instantiateInitialViewController()
-            self.present(loginController!, animated: true, completion: nil)
-        } else {
-            let loginStoryboard = UIStoryboard(name: "SignIn", bundle: nil)
-            let loginController = loginStoryboard.instantiateViewController(withIdentifier: "SignIn")
-            self.navigationController?.pushViewController(loginController, animated: true)
-        }
-    }*/
 }
 
