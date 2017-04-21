@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct LocalizedString: ExpressibleByStringLiteral, Equatable {
     
@@ -47,6 +48,43 @@ extension RawRepresentable where RawValue == String, Self: NotificationName {
 
 enum CSpotNotif: String, NotificationName {
     case takePic, retakePic, validePic
+}
+
+
+func randomOutsidePosition() -> CGPoint {
+    
+    var randomX:Double!
+    if Double.random(min: -1.0, max: 1.0) > 0 {
+        randomX = Double.random(min: -75.0, max: 0.0)
+    } else {
+        randomX = Double.random(min: Double(UIScreen.main.bounds.size.width), max: Double(UIScreen.main.bounds.size.width) + 75.0)
+    }
+    
+    var randomY:Double!
+    if Double.random(min: -1.0, max: 1.0) > 0 {
+        randomY = Double.random(min: -75.0, max: 0.0)
+    } else {
+        randomY = Double.random(min: Double(UIScreen.main.bounds.size.height), max: Double(UIScreen.main.bounds.size.height) + 75.0)
+    }
+    
+    return CGPoint(x: randomX, y: randomY)
+}
+
+extension UIImage {
+    func resized(withPercentage percentage: CGFloat) -> UIImage? {
+        let canvasSize = CGSize(width: size.width * percentage, height: size.height * percentage)
+        UIGraphicsBeginImageContextWithOptions(canvasSize, false, scale)
+        defer { UIGraphicsEndImageContext() }
+        draw(in: CGRect(origin: .zero, size: canvasSize))
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
+    func resized(toWidth width: CGFloat) -> UIImage? {
+        let canvasSize = CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))
+        UIGraphicsBeginImageContextWithOptions(canvasSize, false, scale)
+        defer { UIGraphicsEndImageContext() }
+        draw(in: CGRect(origin: .zero, size: canvasSize))
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
 }
 
 

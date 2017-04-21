@@ -149,13 +149,14 @@ class VueC2: UIViewController {
     
     func valideDescription(sender:UIButton) {
         Spot.newSpot.descriptions = onTheSelection
-        print(Spot.newSpot.picture.value)
-        print(Spot.newSpot.coordinate)
-        print(Spot.newSpot.adress)
-        print(Spot.newSpot.title.value)
-        print(Spot.newSpot.place)
-        print(Spot.newSpot.descriptions)
-        self.dismiss(animated: true, completion: nil)
+        let popWait = WaitingViewController()
+        self.navigationController?.pushViewController(popWait, animated: true)
+        AWSS3.uploadDataWithCompletion({_ in
+            AWSTableDescription.insertNewSpotWithCompletionHandler(){_ in
+                Spot.newSpot.reset()
+                popWait.circleDismiss()
+            }
+        })
     }
     
     func cancelDescription(sender:UIButton) {
@@ -192,25 +193,6 @@ class VueC2: UIViewController {
         })
         
         ellipseInTheGround.value.append(contentsOf: newViews)
-    }
-    
-    private func randomOutsidePosition() -> CGPoint {
-        
-        var randomX:Double!
-        if Double.random(min: -1.0, max: 1.0) > 0 {
-            randomX = Double.random(min: -75.0, max: 0.0)
-        } else {
-            randomX = Double.random(min: Double(UIScreen.main.bounds.size.width), max: Double(UIScreen.main.bounds.size.width) + 75.0)
-        }
-        
-        var randomY:Double!
-        if Double.random(min: -1.0, max: 1.0) > 0 {
-            randomY = Double.random(min: -75.0, max: 0.0)
-        } else {
-            randomY = Double.random(min: Double(UIScreen.main.bounds.size.height), max: Double(UIScreen.main.bounds.size.height) + 75.0)
-        }
-        
-        return CGPoint(x: randomX, y: randomY)
     }
     
     private func setupDelValue(newVals:[TypeSpot]) {

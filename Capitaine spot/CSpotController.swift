@@ -124,6 +124,9 @@ class CSpotNavigationController: UINavigationController {
     private func tutoDescription() {
         Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: {
             timer in
+            
+            if self.cSpotShape.value != .menu {return}
+            
             UIView.transition(with: self.btnBottom, duration: 0.5, options: .transitionFlipFromLeft, animations: {
                 
                 self.btnBottom.imageEdgeInsets = UIEdgeInsets(top: 0, left: self.btnBottom.frame.size.width/2 - UIImage(named: "pirate")!.size.width/2, bottom: self.btnBottom.frame.size.height/2, right: 0)
@@ -142,6 +145,9 @@ class CSpotNavigationController: UINavigationController {
                 ret in
                 Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: {
                     timer in
+                    
+                    if self.cSpotShape.value != .menu {return}
+                    
                     UIView.transition(with: self.btnBottom, duration: 0.5, options: .transitionFlipFromLeft, animations: {
                         
                         self.btnBottom.imageEdgeInsets = UIEdgeInsets.zero
@@ -160,6 +166,9 @@ class CSpotNavigationController: UINavigationController {
     private func tutoRecherche() {
         Timer.scheduledTimer(withTimeInterval: 6, repeats: false, block: {
             timer in
+            
+            if self.cSpotShape.value != .menu {return}
+            
             UIView.transition(with: self.btnTop, duration: 0.5, options: .transitionFlipFromLeft, animations: {
                 
                 self.btnTop.imageEdgeInsets = UIEdgeInsets(top: 0, left: self.btnTop.frame.size.width/2 - UIImage(named: "pirate")!.size.width/2, bottom: self.btnTop.frame.size.height/2, right: 0)
@@ -178,6 +187,9 @@ class CSpotNavigationController: UINavigationController {
                 ret in
                 Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: {
                     timer in
+                    
+                    if self.cSpotShape.value != .menu {return}
+                    
                     UIView.transition(with: self.btnTop, duration: 0.5, options: .transitionFlipFromLeft, animations: {
                         
                         self.btnTop.imageEdgeInsets = UIEdgeInsets.zero

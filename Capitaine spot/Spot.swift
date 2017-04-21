@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 import MapKit
 import MapboxGeocoder
+import AWSMobileHubHelper
 
 enum TypeSpot: String {
     
@@ -62,18 +63,21 @@ class Spot {
     var coordinate:CLLocationCoordinate2D? = nil // 2 - MyMap
     
     var picture:Variable<UIImage?> = Variable(nil) // 1 - MyCamera
+    var pictureId:String? // 1 - MyCamera
     var place:String = String() // 2 - MyMap
     
     let disposeBag = DisposeBag()
     
-    /*init() {
-        coordinate.asObservable()
-            .filter{$0 != nil}
-            .subscribe(onNext: {
-                coo in
-                self.searchClosestState(newCoordinate: coo!)
-            }).addDisposableTo(disposeBag)
-    }*/
+    init() {
+        picture.asObservable().subscribe(onNext:{
+            description in
+            if description == nil {
+                self.pictureId = nil
+            } else {
+                self.pictureId = "\(AWSIdentityManager.default().identityId!):\(String(Int(NSDate().timeIntervalSince1970))).png"
+            }
+        }).addDisposableTo(disposeBag)
+    }
     
     func reset() {
         
@@ -82,6 +86,7 @@ class Spot {
         self.adress = String()
         self.coordinate = nil
         self.picture.value = nil
+        self.pictureId = nil
         self.place = String()
     }
     

@@ -28,6 +28,14 @@ extension UIColor {
         return colorFromHex(rgbValue: 0x0D2D3D5)
     }
     
+    func primaryPopUp()->UIColor {
+        return colorFromHex(rgbValue: 0x01A79D, alpha: 0.8)
+    }
+    
+    func secondaryPopUp()->UIColor {
+        return colorFromHex(rgbValue: 0x0D2D3D5, alpha: 0.8)
+    }
+    
     func popUp()->UIColor {
         return colorFromHex(rgbValue: 0xD2D3D5, alpha: 0.8)
     }

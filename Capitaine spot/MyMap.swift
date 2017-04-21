@@ -312,6 +312,7 @@ class UIPlacemarkButton:UIButton {
         self.placemark = placemark
         annotation.coordinate = placemark.location.coordinate
         annotation.title = placemark.name
+        
         self.setTitle(placemark.name, for: .normal)
     }
     
