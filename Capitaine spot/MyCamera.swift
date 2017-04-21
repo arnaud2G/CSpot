@@ -20,6 +20,7 @@ class MyCamera:UIViewController, AVCapturePhotoCaptureDelegate {
     deinit {
         print("deinit MyCamera")
         NotificationCenter.default.removeObserver(notifTakePic)
+        NotificationCenter.default.removeObserver(notifValidePic)
     }
     
     var notifTakePic: AnyObject!

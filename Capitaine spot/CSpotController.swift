@@ -19,7 +19,7 @@ class CSpotNavigationController: UINavigationController {
     var btnBottom:UIButton!
     
     var btnCancel:UIButton!
-    var btnRetry:UIButton!
+    var btnSend:UIButton!
     
     let largeBtnSize = UIScreen.main.bounds.width*0.5
     let smallBtnSize = UIScreen.main.bounds.width*0.2
@@ -55,18 +55,23 @@ class CSpotNavigationController: UINavigationController {
                 let xCenter = (UIScreen.main.bounds.width - largeBtnSize)/2
                 let yCenterTop = UIScreen.main.bounds.height/2 + 20
                 return CGRect(x: xCenter, y: yCenterTop, width: largeBtnSize, height: largeBtnSize)
-            case .takePicture:
-                let xCenter = (UIScreen.main.bounds.width - smallBtnSize)/2
-                let yCenterTop:CGFloat = UIScreen.main.bounds.height - smallBtnSize - 30.0
-                return CGRect(x: xCenter, y: yCenterTop, width: smallBtnSize, height: smallBtnSize)
+            default:
+                let xCenter = (UIScreen.main.bounds.width - smallBtnSize*1.2)/2
+                let yCenterTop:CGFloat = UIScreen.main.bounds.height - smallBtnSize*1.2 - 30.0
+                return CGRect(x: xCenter, y: yCenterTop, width: smallBtnSize*1.2, height: smallBtnSize*1.2)
+            }
+        }
+        
+        func mySendRect(smallBtnSize:CGFloat) -> CGRect {
+            switch self {
             case .validePicture:
-                let xCenter = UIScreen.main.bounds.width - smallBtnSize - 30.0
-                let yCenterTop:CGFloat = UIScreen.main.bounds.height - smallBtnSize - 30.0
+                let xCenter = UIScreen.main.bounds.width - 30 - smallBtnSize
+                let yCenterTop = UIScreen.main.bounds.height - 30 - smallBtnSize
                 return CGRect(x: xCenter, y: yCenterTop, width: smallBtnSize, height: smallBtnSize)
-            case .describeSpot:
-                let xCenter = UIScreen.main.bounds.width - smallBtnSize - 30.0
-                let yCenterTop:CGFloat = UIScreen.main.bounds.height - smallBtnSize - 30.0
-                return CGRect(x: xCenter, y: yCenterTop, width: smallBtnSize, height: smallBtnSize)
+            default:
+                let xCenter = UIScreen.main.bounds.width - 30 - smallBtnSize/2
+                let yCenterTop = UIScreen.main.bounds.height - 30 - smallBtnSize/2
+                return CGRect(x: xCenter, y: yCenterTop, width: 0, height: 0)
             }
         }
     }
@@ -76,8 +81,16 @@ class CSpotNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        btnSend = UIButton(frame: cSpotShape.value.mySendRect(smallBtnSize: 0))
+        btnSend.layer.cornerRadius = btnSend.frame.size.width/2
+        btnSend.clipsToBounds = true
+        btnSend.selectedStyle()
+        btnSend.setImage(#imageLiteral(resourceName: "ship").withRenderingMode(.alwaysTemplate), for: .normal)
+        btnSend.addTarget(self, action: #selector(self.validePic(sender:)), for: .touchUpInside)
+        self.view.addSubview(btnSend)
+        
         btnTop = UIButton(frame: cSpotShape.value.myTopRect(largeBtnSize: 0, smallBtnSize: 0))
-        btnTop.layer.cornerRadius = largeBtnSize/2
+        btnTop.layer.cornerRadius = btnTop.frame.size.width/2
         btnTop.clipsToBounds = true
         btnTop.unselectedStyle()
         btnTop.setImage(#imageLiteral(resourceName: "treasure-map").withRenderingMode(.alwaysTemplate), for: .normal)
@@ -85,7 +98,7 @@ class CSpotNavigationController: UINavigationController {
         observeBtnTop(btnTop: btnTop)
         
         btnBottom = UIButton(frame: cSpotShape.value.myBottomRect(largeBtnSize: 0, smallBtnSize: 0))
-        btnBottom.layer.cornerRadius = largeBtnSize/2
+        btnBottom.layer.cornerRadius = btnTop.frame.size.width/2
         btnBottom.clipsToBounds = true
         btnBottom.unselectedStyle()
         btnBottom.setImage(#imageLiteral(resourceName: "spyglass").withRenderingMode(.alwaysTemplate), for: .normal)
@@ -93,19 +106,91 @@ class CSpotNavigationController: UINavigationController {
         observeBtnBottom(btnBottom: btnBottom)
         
         btnCancel = UIButton(frame: CGRect(x: 26, y: 26, width: 30, height: 30))
-        btnCancel.layer.cornerRadius = 15
+        btnCancel.layer.cornerRadius = btnTop.frame.size.width
         btnCancel.tintColor = UIColor().primary()
         btnCancel.setImage(#imageLiteral(resourceName: "delete").withRenderingMode(.alwaysTemplate), for: .normal)
         btnCancel.addTarget(self, action: #selector(self.cancel(sender:)), for: .touchUpInside)
         self.view.addSubview(btnCancel)
         
         observeCSpotShape()
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        btnTop.startTuto()
+        tutoDescription()
+        tutoRecherche()
+    }
+    
+    private func tutoDescription() {
+        Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: {
+            timer in
+            UIView.transition(with: self.btnBottom, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+                
+                self.btnBottom.imageEdgeInsets = UIEdgeInsets(top: 0, left: self.btnBottom.frame.size.width/2 - UIImage(named: "pirate")!.size.width/2, bottom: self.btnBottom.frame.size.height/2, right: 0)
+                
+                self.btnBottom.titleEdgeInsets = UIEdgeInsets(top: 0, left: -UIImage(named: "pirate")!.size.width/2, bottom: -10, right: UIImage(named: "pirate")!.size.width/2)
+                
+                self.btnBottom.titleLabel?.textAlignment = .center
+                self.btnBottom.titleLabel?.font = self.btnBottom.titleLabel?.font.withSize(20)
+                
+                self.btnBottom.isEnabled = false
+                
+                self.btnBottom.setImage(#imageLiteral(resourceName: "pirate").withRenderingMode(.alwaysTemplate), for: .normal)
+                self.btnBottom.setTitle("Utilise la longue vue pour décrire le spot !", for: .normal)
+                self.btnBottom.titleLabel?.numberOfLines = 0
+            }) {
+                ret in
+                Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: {
+                    timer in
+                    UIView.transition(with: self.btnBottom, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+                        
+                        self.btnBottom.imageEdgeInsets = UIEdgeInsets.zero
+                        self.btnBottom.titleEdgeInsets = UIEdgeInsets.zero
+                        
+                        self.btnBottom.isEnabled = true
+                        
+                        self.btnBottom.setImage(#imageLiteral(resourceName: "spyglass").withRenderingMode(.alwaysTemplate), for: .normal)
+                        self.btnBottom.setTitle(nil, for: .normal)
+                    })
+                })
+            }
+        })
+    }
+    
+    private func tutoRecherche() {
+        Timer.scheduledTimer(withTimeInterval: 6, repeats: false, block: {
+            timer in
+            UIView.transition(with: self.btnTop, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+                
+                self.btnTop.imageEdgeInsets = UIEdgeInsets(top: 0, left: self.btnTop.frame.size.width/2 - UIImage(named: "pirate")!.size.width/2, bottom: self.btnTop.frame.size.height/2, right: 0)
+                
+                self.btnTop.titleEdgeInsets = UIEdgeInsets(top: 0, left: -UIImage(named: "pirate")!.size.width/2, bottom: -10, right: UIImage(named: "pirate")!.size.width/2)
+                
+                self.btnTop.titleLabel?.textAlignment = .center
+                self.btnTop.titleLabel?.font = self.btnTop.titleLabel?.font.withSize(20)
+                
+                self.btnTop.isEnabled = false
+                
+                self.btnTop.setImage(#imageLiteral(resourceName: "pirate").withRenderingMode(.alwaysTemplate), for: .normal)
+                self.btnTop.setTitle("Utilise la map pour trouver un bon spot !", for: .normal)
+                self.btnTop.titleLabel?.numberOfLines = 0
+            }) {
+                ret in
+                Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: {
+                    timer in
+                    UIView.transition(with: self.btnTop, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+                        
+                        self.btnTop.imageEdgeInsets = UIEdgeInsets.zero
+                        self.btnTop.titleEdgeInsets = UIEdgeInsets.zero
+                        
+                        self.btnTop.isEnabled = true
+                        
+                        self.btnTop.setImage(#imageLiteral(resourceName: "treasure-map").withRenderingMode(.alwaysTemplate), for: .normal)
+                        self.btnTop.setTitle(nil, for: .normal)
+                    })
+                })
+            }
+        })
     }
     
     func cancel(sender:UIButton) {
@@ -118,6 +203,7 @@ class CSpotNavigationController: UINavigationController {
                 description in
                 self.btnBottom.resizeCircle(self.cSpotShape.value.myBottomRect(largeBtnSize: self.largeBtnSize, smallBtnSize: self.smallBtnSize), duration: 0.3)
                 self.btnTop.resizeCircle(self.cSpotShape.value.myTopRect(largeBtnSize: self.largeBtnSize, smallBtnSize: self.smallBtnSize), duration: 0.3)
+                self.btnSend.resizeCircle(self.cSpotShape.value.mySendRect(smallBtnSize: self.smallBtnSize), duration: 0.3)
                 self.btnCancel.isHidden = description == .menu
             }).addDisposableTo(disposeBag)
     }
@@ -134,12 +220,17 @@ class CSpotNavigationController: UINavigationController {
                     self.cSpotShape.value = .validePicture
                     NotificationCenter.default.post(name: CSpotNotif.takePic.name, object: nil)
                 case .validePicture:
-                    self.cSpotShape.value = .describeSpot
-                    NotificationCenter.default.post(name: CSpotNotif.validePic.name, object: nil)
+                    self.cSpotShape.value = .takePicture
+                    NotificationCenter.default.post(name: CSpotNotif.retakePic.name, object: nil)
                 case .describeSpot:
                     print("Time to describe")
                 }
             }).addDisposableTo(disposeBag)
+    }
+    
+    func validePic(sender:UIButton) {
+        NotificationCenter.default.post(name: CSpotNotif.validePic.name, object: nil)
+        self.cSpotShape.value = .describeSpot
     }
     
     private func observeBtnTop(btnTop:UIButton) {
@@ -176,22 +267,4 @@ class CSpotViewController: UIViewController {
         }
     }
 }
-
-extension UIButton {
-    
-    func startTuto() {
-        Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(returnMedal), userInfo: nil, repeats: false)
-    }
-    
-    func returnMedal() {
-        let btnTopBack = UIButton(frame: self.frame)
-        btnTopBack.layer.cornerRadius = self.frame.size.width/2
-        btnTopBack.clipsToBounds = true
-        btnTopBack.selectedStyle()
-        btnTopBack.setImage(#imageLiteral(resourceName: "treasure-map").withRenderingMode(.alwaysTemplate), for: .normal)
-        
-        UIView.transition(from: self, to: btnTopBack, duration: 0.5, options: .transitionFlipFromRight)
-    }
-}
-
 

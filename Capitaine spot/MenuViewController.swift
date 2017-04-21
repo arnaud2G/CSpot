@@ -50,8 +50,12 @@ class MenuViewController: UIViewController {
                         presented.dismiss(animated: true, completion: nil)
                     }
                 case .takePicture :
-                    self.myCamera.imgView.image = nil
-                    self.present(self.myCamera, animated: true, completion: nil)
+                    if let presented = self.presentedViewController as? MyCamera {
+                        presented.imgView.image = nil
+                    } else {
+                        self.myCamera.imgView.image = nil
+                        self.present(self.myCamera, animated: true, completion: nil)
+                    }
                 case .describeSpot :
                     if let presented = self.presentedViewController {
                         presented.dismiss(animated: false, completion: {
@@ -82,6 +86,7 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction func btnLogoutPressed(_ sender: Any) {
+        
         if (AWSIdentityManager.default().isLoggedIn) {
             AWSIdentityManager.default().logout(completionHandler: {
                 (result: Any?, error: Error?) in
