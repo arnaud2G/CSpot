@@ -34,17 +34,9 @@ class CSpotNavigationController: UINavigationController {
                 let xCenter = (UIScreen.main.bounds.width - largeBtnSize)/2
                 let yCenterTop = UIScreen.main.bounds.height/2 - largeBtnSize - 20
                 return CGRect(x: xCenter, y: yCenterTop, width: largeBtnSize, height: largeBtnSize)
-            case .takePicture:
+            default:
                 let xCenter = (UIScreen.main.bounds.width - largeBtnSize)/2
-                let yCenterTop:CGFloat = -largeBtnSize
-                return CGRect(x: xCenter, y: yCenterTop, width: largeBtnSize, height: largeBtnSize)
-            case .validePicture:
-                let xCenter = (UIScreen.main.bounds.width - largeBtnSize)/2
-                let yCenterTop:CGFloat = -largeBtnSize
-                return CGRect(x: xCenter, y: yCenterTop, width: largeBtnSize, height: largeBtnSize)
-            case .describeSpot:
-                let xCenter = (UIScreen.main.bounds.width - largeBtnSize)/2
-                let yCenterTop:CGFloat = -largeBtnSize
+                let yCenterTop = -largeBtnSize
                 return CGRect(x: xCenter, y: yCenterTop, width: largeBtnSize, height: largeBtnSize)
             }
         }
@@ -55,9 +47,13 @@ class CSpotNavigationController: UINavigationController {
                 let xCenter = (UIScreen.main.bounds.width - largeBtnSize)/2
                 let yCenterTop = UIScreen.main.bounds.height/2 + 20
                 return CGRect(x: xCenter, y: yCenterTop, width: largeBtnSize, height: largeBtnSize)
+            case .describeSpot:
+                let xCenter = (UIScreen.main.bounds.width)/2
+                let yCenterTop = UIScreen.main.bounds.height - (smallBtnSize*1.2/2) - 30.0
+                return CGRect(x: xCenter, y: yCenterTop, width: 0, height: 0)
             default:
                 let xCenter = (UIScreen.main.bounds.width - smallBtnSize*1.2)/2
-                let yCenterTop:CGFloat = UIScreen.main.bounds.height - smallBtnSize*1.2 - 30.0
+                let yCenterTop = UIScreen.main.bounds.height - smallBtnSize*1.2 - 30.0
                 return CGRect(x: xCenter, y: yCenterTop, width: smallBtnSize*1.2, height: smallBtnSize*1.2)
             }
         }

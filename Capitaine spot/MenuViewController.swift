@@ -61,8 +61,10 @@ class MenuViewController: UIViewController {
                         presented.dismiss(animated: false, completion: {
                             let loginStoryboard = UIStoryboard(name: "Transition", bundle: nil)
                             let loginController = loginStoryboard.instantiateInitialViewController()
-                            self.present(loginController!, animated: false, completion: {
-                                (self.navigationController as! CSpotNavigationController).cSpotShape.value = .menu
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                                self.present(loginController!, animated: false, completion: {
+                                    (self.navigationController as! CSpotNavigationController).cSpotShape.value = .menu
+                                })
                             })
                         })
                     }
