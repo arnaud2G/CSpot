@@ -160,7 +160,7 @@ class VueC2: UIViewController {
     }
     
     func cancelDescription(sender:UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
     private func defineBehavior(items:[Ellipse]) {
