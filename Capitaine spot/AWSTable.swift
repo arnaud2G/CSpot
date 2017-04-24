@@ -51,3 +51,17 @@ class AWSTableDescription {
         })
     }
 }
+
+class AWSTableSpot {
+    
+    static func getSpotWithCompletionHandler(name:String, place:String, _ completionHandler: @escaping (_ response: AWSDynamoDBObjectModel?, _ error: Error?) -> Void) {
+        
+        let objectMapper = AWSDynamoDBObjectMapper.default()
+        objectMapper.load(AWSSpots.self, hashKey: name, rangeKey: place) {
+            (response: AWSDynamoDBObjectModel?, error: Error?) in
+            DispatchQueue.main.async(execute: {
+                completionHandler(response, error)
+            })
+        }
+    }
+}

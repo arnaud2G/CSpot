@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// Enum
 struct LocalizedString: ExpressibleByStringLiteral, Equatable {
     
     let v: String
@@ -34,6 +35,17 @@ func ==(lhs:LocalizedString, rhs:LocalizedString) -> Bool {
     return lhs.v == rhs.v
 }
 
+func iterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T> {
+    var i = 0
+    return AnyIterator {
+        let next = withUnsafeBytes(of: &i) { $0.load(as: T.self) }
+        if next.hashValue != i { return nil }
+        i += 1
+        return next
+    }
+}
+
+// Notification
 protocol NotificationName {
     var name: Notification.Name { get }
 }

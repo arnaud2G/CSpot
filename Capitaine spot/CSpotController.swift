@@ -109,6 +109,15 @@ class CSpotNavigationController: UINavigationController {
         self.view.addSubview(btnCancel)
         
         observeCSpotShape()
+        
+        // TODO: REMOVE
+        AWSTableSpot.getSpotWithCompletionHandler(name: "L'Amitie Malakoff", place: "Malakoff", {
+            spot, error in
+            if let spot = spot as? AWSSpots, let dico = spot._dico {
+                _ = (iterateEnum(TypeSpot.self).filter{dico[$0.rawValue] != nil}).map{spot.userDescription[$0] = dico[$0.rawValue] as? Int}
+            }
+        })
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
