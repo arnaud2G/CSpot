@@ -20,7 +20,7 @@ class AWSSpots: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var _pictureId: [String]?
     var _userId: [String]!
     var _dico: NSDictionary?
-    var userDescription = [TypeSpot:Int]()
+    var userDescription = [DescriptionSpot]()
     
     class func dynamoDBTableName() -> String {
         

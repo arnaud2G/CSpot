@@ -11,6 +11,14 @@ import AWSMobileHubHelper
 
 class AWSS3 {
     
+    static let publicURL = "https://s3.amazonaws.com/capitainespots-userfiles-mobilehub-1128628836/public/"
+    static let doubleDot = "%3A"
+    
+    static func convertToPublicURLRepository(url:String) -> URL? {
+        let convertUrl = "\(publicURL)\(url.replacingOccurrences(of: ":", with: AWSS3.doubleDot))"
+        return URL(string: convertUrl)
+    }
+    
     static func uploadDataWithCompletion(_ completionHandler: @escaping (_ error: Error?) -> Void) {
         
         guard let picture = Spot.newSpot.picture.value, let id = Spot.newSpot.pictureId else {completionHandler(nil) ; return}

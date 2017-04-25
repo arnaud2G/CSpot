@@ -68,6 +68,13 @@ class MenuViewController: UIViewController {
                             })
                         })
                     }
+                case .searchSpot :
+                    let loginStoryboard = UIStoryboard(name: "Search", bundle: nil)
+                    let loginController = loginStoryboard.instantiateInitialViewController()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                        self.present(loginController!, animated: false, completion: {
+                        })
+                    })
                 default :
                     print("Ici on ne fait rien")
                 }

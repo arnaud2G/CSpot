@@ -13,6 +13,11 @@ import MapKit
 import MapboxGeocoder
 import AWSMobileHubHelper
 
+struct DescriptionSpot {
+    var rVote:Int
+    var typeSpot:TypeSpot
+}
+
 enum TypeSpot: String {
     
     case spot,

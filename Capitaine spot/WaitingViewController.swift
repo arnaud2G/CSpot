@@ -98,9 +98,6 @@ class WaitingViewController:UIViewController, CAAnimationDelegate {
         var yA = xA*a + b
         var yB = xB*a + b
         
-        //yA = Double.random(min: yA - 100.0, max: yA + 100.0)
-        //yB = Double.random(min: yB - 100.0, max: yB + 100.0)
-        
         let offSet = Double.random(min: -200.0, max: 200.0)
         yA = yA + offSet
         yB = yB - offSet

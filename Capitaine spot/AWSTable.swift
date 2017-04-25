@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import AWSDynamoDB
 import AWSMobileHubHelper
+import RxCocoa
+import RxSwift
 
 class AWSTableDescription {
     
@@ -54,6 +56,10 @@ class AWSTableDescription {
 
 class AWSTableSpot {
     
+    static let main = AWSTableSpot()
+    
+    var results:Variable<[AWSSpots]> = Variable([])
+    
     static func getSpotWithCompletionHandler(name:String, place:String, _ completionHandler: @escaping (_ response: AWSDynamoDBObjectModel?, _ error: Error?) -> Void) {
         
         let objectMapper = AWSDynamoDBObjectMapper.default()
@@ -61,6 +67,41 @@ class AWSTableSpot {
             (response: AWSDynamoDBObjectModel?, error: Error?) in
             DispatchQueue.main.async(execute: {
                 completionHandler(response, error)
+            })
+        }
+    }
+    
+    func getClosestSpot(place:String) {
+        
+        AWSTableSpot.querySpotWithCompletionHandler(byPlace:place, {
+            (response: AWSDynamoDBPaginatedOutput?, error: Error?) in
+            guard let response = response, let spots = response.items as? [AWSSpots] else {return}
+            self.results.value = spots.map({
+                (spot:AWSSpots) in
+                let dico = spot._dico!
+                _ = (iterateEnum(TypeSpot.self).filter{dico[$0.rawValue] != nil}).map{spot.userDescription.append(DescriptionSpot(rVote: dico[$0.rawValue] as! Int, typeSpot: $0))}
+                return spot
+            })
+            /*if let spot = spot as? AWSSpots, let dico = spot._dico {
+                _ = (iterateEnum(TypeSpot.self).filter{dico[$0.rawValue] != nil}).map{spot.userDescription[$0] = dico[$0.rawValue] as? Int}
+            }*/
+        })
+    }
+    
+    
+    static func querySpotWithCompletionHandler(byPlace place:String, _ completionHandler: @escaping (_ response: AWSDynamoDBPaginatedOutput?, _ error: NSError?) -> Void) {
+        let objectMapper = AWSDynamoDBObjectMapper.default()
+        let queryExpression = AWSDynamoDBQueryExpression()
+        
+        
+        queryExpression.indexName = "ByPlace"
+        queryExpression.keyConditionExpression = "#place = :place"
+        queryExpression.expressionAttributeNames = ["#place": "place",]
+        queryExpression.expressionAttributeValues = [":place": place,]
+        
+        objectMapper.query(AWSSpots.self, expression: queryExpression) { (response: AWSDynamoDBPaginatedOutput?, error: Error?) in
+            DispatchQueue.main.async(execute: {
+                completionHandler(response, error as? NSError)
             })
         }
     }

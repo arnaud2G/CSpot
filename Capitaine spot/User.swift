@@ -23,6 +23,9 @@ class User {
     var location: Variable<CLLocationCoordinate2D?> = Variable(nil)
     private let locationManager = CLLocationManager()
     
+    var place: Variable<String?> = Variable(nil)
+    let placeCoder = CLGeocoder()
+    
     var connected:Variable<Bool> = Variable(false)
     
     let disposeBag = DisposeBag()
@@ -40,6 +43,26 @@ class User {
             (note: Notification) -> Void in
             self.connected.value = false
         })
+        
+        location.asObservable()
+            .subscribe(onNext:{
+                coordinate in
+                
+                guard let coordinate = coordinate else {return}
+                
+                self.placeCoder.reverseGeocodeLocation(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude), completionHandler: {
+                    (placemarks, error) -> Void in
+                    
+                    if let placemarks = placemarks, let placemark = placemarks.first, let locality = placemark.locality {
+                        
+                        if let subLocality = placemark.subLocality {
+                            self.place.value = "\(locality) \(subLocality)"
+                        } else {
+                            self.place.value = locality
+                        }
+                    }
+                })
+            }).addDisposableTo(disposeBag)
     }
     
     func updateLocationEnabled() {
@@ -69,12 +92,12 @@ class User {
             GeolocationService.instance.startUpdatingLocation()
             GeolocationService.instance.location
                 .asObservable()
-                .debounce(0.5, scheduler: MainScheduler.instance)
+                .debounce(2.0, scheduler: MainScheduler.instance)
                 .subscribe(onNext: {
                     descriptions in
+                    print(descriptions)
                     self.location.value = descriptions
                     self.updateLastCoo(coo:descriptions)
-                    GeolocationService.instance.stopUpdatingLocation()
                 }).addDisposableTo(disposeBag)
         }
         

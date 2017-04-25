@@ -26,7 +26,7 @@ class CSpotNavigationController: UINavigationController {
     
     enum CSpotShape {
         
-        case menu, takePicture, validePicture, describeSpot
+        case menu, takePicture, validePicture, describeSpot, searchSpot
         
         func myTopRect(largeBtnSize:CGFloat, smallBtnSize:CGFloat) -> CGRect {
             switch self {
@@ -34,6 +34,10 @@ class CSpotNavigationController: UINavigationController {
                 let xCenter = (UIScreen.main.bounds.width - largeBtnSize)/2
                 let yCenterTop = UIScreen.main.bounds.height/2 - largeBtnSize - 20
                 return CGRect(x: xCenter, y: yCenterTop, width: largeBtnSize, height: largeBtnSize)
+            case .searchSpot:
+                let xCenter = (UIScreen.main.bounds.width)/2
+                let yCenterTop = UIScreen.main.bounds.height/2 - 20
+                return CGRect(x: xCenter, y: yCenterTop, width: 0, height: 0)
             default:
                 let xCenter = (UIScreen.main.bounds.width - largeBtnSize)/2
                 let yCenterTop = -largeBtnSize
@@ -50,6 +54,10 @@ class CSpotNavigationController: UINavigationController {
             case .describeSpot:
                 let xCenter = (UIScreen.main.bounds.width)/2
                 let yCenterTop = UIScreen.main.bounds.height - (smallBtnSize*1.2/2) - 30.0
+                return CGRect(x: xCenter, y: yCenterTop, width: 0, height: 0)
+            case .searchSpot:
+                let xCenter = (UIScreen.main.bounds.width)/2
+                let yCenterTop = UIScreen.main.bounds.height/2 + 20
                 return CGRect(x: xCenter, y: yCenterTop, width: 0, height: 0)
             default:
                 let xCenter = (UIScreen.main.bounds.width - smallBtnSize*1.2)/2
@@ -109,15 +117,6 @@ class CSpotNavigationController: UINavigationController {
         self.view.addSubview(btnCancel)
         
         observeCSpotShape()
-        
-        // TODO: REMOVE
-        AWSTableSpot.getSpotWithCompletionHandler(name: "L'Amitie Malakoff", place: "Malakoff", {
-            spot, error in
-            if let spot = spot as? AWSSpots, let dico = spot._dico {
-                _ = (iterateEnum(TypeSpot.self).filter{dico[$0.rawValue] != nil}).map{spot.userDescription[$0] = dico[$0.rawValue] as? Int}
-            }
-        })
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -222,6 +221,7 @@ class CSpotNavigationController: UINavigationController {
                 self.btnTop.resizeCircle(self.cSpotShape.value.myTopRect(largeBtnSize: self.largeBtnSize, smallBtnSize: self.smallBtnSize), duration: 0.3)
                 self.btnSend.resizeCircle(self.cSpotShape.value.mySendRect(smallBtnSize: self.smallBtnSize), duration: 0.3)
                 self.btnCancel.isHidden = description == .menu
+                //User.current.enabledLocalize(enabled: description != .menu)
             }).addDisposableTo(disposeBag)
     }
     
@@ -239,8 +239,8 @@ class CSpotNavigationController: UINavigationController {
                 case .validePicture:
                     self.cSpotShape.value = .takePicture
                     NotificationCenter.default.post(name: CSpotNotif.retakePic.name, object: nil)
-                case .describeSpot:
-                    print("Time to describe")
+                default:
+                    print("Time to rest")
                 }
             }).addDisposableTo(disposeBag)
     }
@@ -251,7 +251,16 @@ class CSpotNavigationController: UINavigationController {
     }
     
     private func observeBtnTop(btnTop:UIButton) {
-        
+        btnTop.rx.tap
+            .subscribe(onNext:{
+                description in
+                switch self.cSpotShape.value {
+                case .menu:
+                    self.cSpotShape.value = .searchSpot
+                default:
+                    print("Time to rest")
+                }
+            }).addDisposableTo(disposeBag)
     }
 }
 
