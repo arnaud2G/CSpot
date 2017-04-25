@@ -37,6 +37,7 @@ class AWSMobileClient: NSObject {
     static let remoteNotificationKey = "RemoteNotification"
     fileprivate override init() {
         isInitialized = false
+        AWSLogger.default().logLevel = AWSLogLevel.none
         super.init()
     }
     

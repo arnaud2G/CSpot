@@ -60,6 +60,7 @@ class User {
                         } else {
                             self.place.value = locality
                         }
+                        print(self.place.value)
                     }
                 })
             }).addDisposableTo(disposeBag)
@@ -92,7 +93,11 @@ class User {
             GeolocationService.instance.startUpdatingLocation()
             GeolocationService.instance.location
                 .asObservable()
-                .debounce(2.0, scheduler: MainScheduler.instance)
+                .distinctUntilChanged({
+                    val1, val2 -> Bool in
+                    return val1.latitude.roundTo(places: 3) == val2.latitude.roundTo(places: 3) && val1.longitude.roundTo(places: 3) == val2.longitude.roundTo(places: 3)
+                })
+                .debounce(0.3, scheduler: MainScheduler.instance)
                 .subscribe(onNext: {
                     descriptions in
                     print(descriptions)
@@ -102,6 +107,14 @@ class User {
         }
         
         return CLLocationManager.locationServicesEnabled()
+    }
+}
+
+extension Double {
+    /// Rounds the double to decimal places value
+    func roundTo(places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
     }
 }
 

@@ -107,10 +107,8 @@ func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response:
 }
 
 func getImageFromUrl(url: URL, completion: @escaping (_  image: UIImage?) -> Void) {
-    print("Download Started : \(url)")
     getDataFromUrl(url: url) {
         (data, response, error)  in
-        print("Download finished : \(error)")
         guard let data = data, error == nil else { completion(nil) ; return }
         completion(UIImage(data: data))
     }

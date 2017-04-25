@@ -10,16 +10,36 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
+import CoreLocation
+import MapboxGeocoder
+import MapKit
 
-class SearchViewController:UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SearchViewController:UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+    
+    @IBOutlet weak var btnBack: UIButton!
+    @IBOutlet weak var tvAdress: UITextField!
+    @IBOutlet weak var btnMap: UIButton!
     
     @IBOutlet weak var tvResult: UITableView!
     var result = [AWSSpots]()
+    
+    var place:Variable<String?> = Variable(nil)
+    var placeCoo:CLLocationCoordinate2D?
+    
+    var reverse:Variable<[MKPlacemark]> = Variable([])
     
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        btnBack.tintColor = UIColor().primary()
+        btnBack.setImage(#imageLiteral(resourceName: "delete").withRenderingMode(.alwaysTemplate), for: .normal)
+        btnMap.tintColor = UIColor().primary()
+        btnMap.setImage(#imageLiteral(resourceName: "beach").withRenderingMode(.alwaysTemplate), for: .normal)
+        tvAdress.unselectedStyle()
+        tvAdress.layer.cornerRadius = 20
+        tvAdress.delegate = self
         
         tvResult.delegate = self
         tvResult.dataSource = self
@@ -27,23 +47,104 @@ class SearchViewController:UIViewController, UITableViewDelegate, UITableViewDat
         tvResult.estimatedRowHeight = 100
         tvResult.rowHeight = UITableViewAutomaticDimension
         
-        AWSTableSpot.main.getClosestSpot(place: User.current.place.value!)
+        self.place.asObservable()
+            .subscribe(onNext: {
+                description in
+                if let description = description {
+                    AWSTableSpot.main.getClosestSpot(place: description)
+                }
+            }).addDisposableTo(disposeBag)
+        
+        
         AWSTableSpot.main.results.asObservable()
             .subscribe(onNext:{
                 description in
                 self.result = description
-                self.tvResult.reloadData()
+                self.tvResult.reloadSections([1], with: .fade)
             }).addDisposableTo(disposeBag)
+        
+        self.place.value = User.current.place.value
+        self.placeCoo = User.current.location.value
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return result.count
+        if section == 0 {
+            return reverse.value.count
+        } else {
+            return result.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SpotCell") as! SpotCell
-        cell.spot = result[indexPath.row]
-        return cell
+        
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell") as! SearchCell
+            cell.place = reverse.value[indexPath.row]
+            return cell
+        }
+        
+        if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SpotCell") as! SpotCell
+            cell.spot = result[indexPath.row]
+            return cell
+        }
+        
+        fatalError()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            self.place.value = reverse.value[indexPath.row].addressDictionary!["City"] as? String
+            self.placeCoo = reverse.value[indexPath.row].coordinate
+            tvAdress.endEditing(true)
+        }
+    }
+    
+    func forwardGeocoding(address: String) {
+        
+        let localSearchRequest = MKLocalSearchRequest()
+        localSearchRequest.naturalLanguageQuery = address
+        localSearchRequest.region = MKCoordinateRegion(center: User.current.location.value!, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        
+        let localSearch = MKLocalSearch(request: localSearchRequest)
+        localSearch.start {
+            (localSearchResponse, error) -> Void in
+            
+            if let localSearchResponse = localSearchResponse, localSearchResponse.mapItems.count > 0 {
+                self.reverse.value = localSearchResponse.mapItems.map{$0.placemark}
+            } else {
+                self.reverse.value = [MKPlacemark]()
+            }
+            
+            self.tvResult.beginUpdates()
+            self.tvResult.reloadSections([0], with: .fade)
+            self.tvResult.endUpdates()
+        }
+    }
+    
+    var textFieldDisposable:Disposable!
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textFieldDisposable = textField.rx.text
+            .debounce(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: {
+                adress in
+                if let adress = adress {
+                    self.forwardGeocoding(address: adress)
+                }
+            })
+        textFieldDisposable.addDisposableTo(disposeBag)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textFieldDisposable.dispose()
+        reverse.value = [MKPlacemark]()
+        tvResult.beginUpdates()
+        tvResult.reloadSections([0], with: .fade)
+        tvResult.endUpdates()
     }
 }
 
@@ -131,6 +232,32 @@ class SpotCell:UITableViewCell {
                     })
                 })
             }
+        }
+    }
+}
+
+class SearchCell:UITableViewCell {
+    
+    @IBOutlet weak var lblName: UILabel!
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        lblName.setContentHuggingPriority(.infinity, for: .vertical)
+    }
+    
+    var place:MKPlacemark!{
+        didSet {
+            lblName.text = self.place.stringAddress2
+            layoutIfNeeded()
         }
     }
 }

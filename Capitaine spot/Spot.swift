@@ -195,6 +195,22 @@ extension CLPlacemark {
             return address
         }
     }
+    
+    var stringAddress2 : String {
+        get {
+            var address = String()
+            guard let addressdictionary = self.addressDictionary else {
+                return address
+            }
+            address = address + (addressdictionary["Street"] as? String ?? "") + "\n"
+            address = address + (addressdictionary["ZIP"] as? String ?? "") + " "
+            address = address + (addressdictionary["City"] as? String ?? "") + " "
+            address = address + (addressdictionary["State"] as? String ?? "") + " "
+            address = address + (addressdictionary["Country"] as? String ?? "") + " "
+            
+            return address
+        }
+    }
 }
 
 
