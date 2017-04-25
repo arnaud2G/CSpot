@@ -46,7 +46,7 @@ class MenuViewController: UIViewController {
                 description in
                 switch description {
                 case .menu :
-                    if let presented = self.presentedViewController {
+                    if let presented = self.presentedViewController as? MyCamera {
                         presented.dismiss(animated: true, completion: nil)
                     }
                 case .takePicture :
@@ -73,6 +73,7 @@ class MenuViewController: UIViewController {
                     let loginController = loginStoryboard.instantiateInitialViewController()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
                         self.present(loginController!, animated: false, completion: {
+                            (self.navigationController as! CSpotNavigationController).cSpotShape.value = .menu
                         })
                     })
                 default :

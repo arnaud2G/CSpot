@@ -21,6 +21,7 @@ class AWSSpots: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var _userId: [String]!
     var _dico: NSDictionary?
     var userDescription = [DescriptionSpot]()
+    var userDistance:Int!
     
     class func dynamoDBTableName() -> String {
         
