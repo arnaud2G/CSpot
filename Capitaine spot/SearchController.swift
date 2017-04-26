@@ -23,19 +23,14 @@ class SearchViewController:UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet weak var tvResult: UITableView!
     
-    let spotSearcher = AWSTableSpot()
-    var result = [AWSSpots]()
-    var reverse = [MKPlacemark]()
-    
-    var searchResult:Bool = true
-    
-    var place:Variable<String?> = Variable(nil)
-    var placeCoo:CLLocationCoordinate2D?
-    
     let disposeBag = DisposeBag()
     
     deinit {
         print("deinit SearchViewController")
+    }
+    
+    func searchNC() -> SearchNavigationController {
+        return self.navigationController as! SearchNavigationController
     }
     
     override func viewDidLoad() {
@@ -54,31 +49,32 @@ class SearchViewController:UIViewController, UITableViewDelegate, UITableViewDat
         
         tvResult.estimatedRowHeight = 100
         tvResult.rowHeight = UITableViewAutomaticDimension
+    }
+    
+    var isAppear = false
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        place.asObservable()
-            .subscribe(onNext: {
-                description in
-                if let description = description {
-                    self.searchResult = true
-                    self.spotSearcher.getClosestSpot(place: description)
-                }
-            }).addDisposableTo(disposeBag)
-        
-        
-        spotSearcher.results.asObservable()
-            .subscribe(onNext:{
-                description in
-                self.searchResult = false
-                self.result = description.map({
-                    spot in
-                    spot.userDistance = Int(CLLocation(latitude: self.placeCoo!.latitude, longitude: self.placeCoo!.longitude).distance(from: CLLocation(latitude: spot._latitude as! CLLocationDegrees, longitude: spot._longitude as! CLLocationDegrees)))
-                    return spot
-                }).sorted{$0.userDistance < $1.userDistance}
-                self.tvResult.reloadSections([0,2], with: .fade)
-            }).addDisposableTo(disposeBag)
-        
-        self.place.value = User.current.place.value
-        self.placeCoo = User.current.location.value
+        if !isAppear {
+            isAppear = true
+            searchNC().searchResult.asObservable()
+                .subscribe(onNext:{
+                    spots in
+                    self.tvResult.reloadSections([0], with: .fade)
+                }).addDisposableTo(disposeBag)
+            
+            searchNC().reverse.asObservable()
+                .subscribe(onNext:{
+                    tReverse in
+                    self.tvResult.reloadSections([1], with: .fade)
+                }).addDisposableTo(disposeBag)
+            
+            searchNC().result.asObservable()
+                .subscribe(onNext:{
+                    spots in
+                    self.tvResult.reloadSections([2], with: .fade)
+                }).addDisposableTo(disposeBag)
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -87,15 +83,15 @@ class SearchViewController:UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            if searchResult {
+            if let searching = searchNC().searchResult.value, searching {
                 return 1
             } else {
                 return 0
             }
         } else if section == 1 {
-            return reverse.count
+            return searchNC().reverse.value.count
         } else {
-            return result.count
+            return searchNC().result.value.count
         }
     }
     
@@ -103,13 +99,13 @@ class SearchViewController:UIViewController, UITableViewDelegate, UITableViewDat
         
         if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell") as! SearchCell
-            cell.place = reverse[indexPath.row]
+            cell.place = searchNC().reverse.value[indexPath.row]
             return cell
         }
         
         if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SpotCell") as! SpotCell
-            cell.spot = result[indexPath.row]
+            cell.spot = searchNC().result.value[indexPath.row]
             return cell
         }
         
@@ -119,9 +115,10 @@ class SearchViewController:UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            self.place.value = reverse[indexPath.row].addressDictionary!["City"] as? String
-            self.placeCoo = reverse[indexPath.row].coordinate
+            searchNC().place.value = searchNC().reverse.value[indexPath.row].addressDictionary!["City"] as? String
+            searchNC().placeCoo.value = searchNC().reverse.value[indexPath.row].coordinate
             tvAdress.endEditing(true)
+            self.searchNC().reverse.value = [MKPlacemark]()
         }
     }
     
@@ -136,13 +133,10 @@ class SearchViewController:UIViewController, UITableViewDelegate, UITableViewDat
             (localSearchResponse, error) -> Void in
             
             if let localSearchResponse = localSearchResponse, localSearchResponse.mapItems.count > 0 {
-                self.reverse = localSearchResponse.mapItems.map{$0.placemark}
+                self.searchNC().reverse.value = localSearchResponse.mapItems.map{$0.placemark}
             } else {
-                self.reverse = [MKPlacemark]()
+                self.searchNC().reverse.value = [MKPlacemark]()
             }
-            
-            self.searchResult = false
-            self.tvResult.reloadSections([0,1], with: .fade)
         }
     }
     
@@ -153,9 +147,7 @@ class SearchViewController:UIViewController, UITableViewDelegate, UITableViewDat
             .subscribe(onNext: {
                 adress in
                 if let adress = adress {
-                    self.searchResult = adress != String()
-                    self.tvResult.reloadSections([0], with: .fade)
-                    self.forwardGeocoding(address: adress)
+                    self.searchNC().forwardGeocoding(address: adress)
                 }
             })
         textFieldDisposable.addDisposableTo(disposeBag)
@@ -163,22 +155,26 @@ class SearchViewController:UIViewController, UITableViewDelegate, UITableViewDat
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         textFieldDisposable.dispose()
-        reverse = [MKPlacemark]()
-        tvResult.beginUpdates()
-        tvResult.reloadSections([0,1], with: .fade)
-        tvResult.endUpdates()
     }
     
     @IBAction func btnBackPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: {})
+        searchNC().dismiss(animated: true, completion: {})
     }
+    
     @IBAction func btnRecentrePressed(_ sender: Any) {
-        tvAdress.endEditing(true)
-        tvAdress.text = String()
-        self.place.value = User.current.place.value
-        self.placeCoo = User.current.location.value
-        self.searchResult = true
-        self.tvResult.reloadSections([0], with: .fade)
+        if searchNC().reverse.value.count > 0 {
+            textFieldDisposable.dispose()
+            searchNC().reverse.value = [MKPlacemark]()
+        } else {
+            tvAdress.endEditing(true)
+            tvAdress.text = String()
+            searchNC().place.value = User.current.place.value
+            searchNC().placeCoo.value = User.current.location.value
+        }
+    }
+    
+    @IBAction func btnChangePressed(_ sender: Any) {
+        self.performSegue(withIdentifier: SearchNavigationController.SegueToChangeDisplay, sender: nil)
     }
 }
 

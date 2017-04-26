@@ -36,6 +36,7 @@ class MapSearchController:UIViewController {
     
     @IBOutlet weak var vIndicator: UIView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var hIndicator: NSLayoutConstraint!
     
     // Vue selectionnée
     @IBOutlet weak var imgBack: UIImageView!
@@ -47,19 +48,14 @@ class MapSearchController:UIViewController {
     @IBOutlet weak var hSize1: NSLayoutConstraint!
     @IBOutlet weak var hSize2: NSLayoutConstraint!
     
-    let spotSearcher = AWSTableSpot()
-    var result:Variable<[AWSSpots]> = Variable([])
-    
-    var reverse:Variable<[MKPlacemark]> = Variable([])
-    var searchResult:Variable<Bool> = Variable(false)
-    
-    var place:Variable<String?> = Variable(nil)
-    var placeCoo:Variable<CLLocationCoordinate2D?> = Variable(nil)
-    
     let disposeBag = DisposeBag()
     
     deinit {
-        print("deinit SearchViewController")
+        print("deinit MapSearchController")
+    }
+    
+    func searchNC() -> SearchNavigationController {
+        return self.navigationController as! SearchNavigationController
     }
     
     override func viewDidLoad() {
@@ -68,7 +64,7 @@ class MapSearchController:UIViewController {
         btnBack.tintColor = UIColor().primary()
         btnBack.setImage(#imageLiteral(resourceName: "delete").withRenderingMode(.alwaysTemplate), for: .normal)
         btnMap.tintColor = UIColor().primary()
-        btnMap.setImage(#imageLiteral(resourceName: "beach").withRenderingMode(.alwaysTemplate), for: .normal)
+        btnMap.setImage(#imageLiteral(resourceName: "treasure").withRenderingMode(.alwaysTemplate), for: .normal)
         btnRecentre.tintColor = UIColor().primary()
         btnRecentre.setImage(#imageLiteral(resourceName: "pirate").withRenderingMode(.alwaysTemplate), for: .normal)
         
@@ -84,104 +80,73 @@ class MapSearchController:UIViewController {
         userAnnotation.title = MapSearchController.userTitle
         vMap.addAnnotation(userAnnotation)
         
-        place.asObservable()
+        searchNC().placeCoo.asObservable()
             .subscribe(onNext: {
-                description in
-                if let description = description {
-                    self.spotSearcher.getClosestSpot(place: description)
-                }
-            }).addDisposableTo(disposeBag)
-        
-        placeCoo.asObservable()
-            .subscribe(onNext: {
-                coordonne in
+                [weak self] coordonne in
                 if let coordonne = coordonne {
-                    self.vMap.setCenter(coordonne, zoomLevel: 16, animated: self.isAppear)
-                    self.userAnnotation.coordinate = coordonne
+                    self?.vMap.setCenter(coordonne, zoomLevel: 16, animated: self!.isAppear)
+                    self?.userAnnotation.coordinate = coordonne
                 }
             }).addDisposableTo(disposeBag)
         
-        spotSearcher.results.asObservable()
+        searchNC().result.asObservable()
             .subscribe(onNext:{
-                description in
-                self.result.value = description.map({
-                    spot in
-                    spot.userDistance = Int(CLLocation(latitude: self.placeCoo.value!.latitude, longitude: self.placeCoo.value!.longitude).distance(from: CLLocation(latitude: spot._latitude as! CLLocationDegrees, longitude: spot._longitude as! CLLocationDegrees)))
-                    return spot
-                }).sorted{$0.userDistance < $1.userDistance}
-            }).addDisposableTo(disposeBag)
-        
-        result.asObservable()
-            .subscribe(onNext:{
-                spots in
+                [weak self] spots in
                 if spots.count == 0 {return}
                 let annotations = spots.map({
                     (spot:AWSSpots) -> MGLPointAnnotation in
                     let annotation = SpotAnnotation(spot: spot)
                     return annotation
                 })
-                self.completeCell(spot:spots.first!)
-                self.vMap.addAnnotations(annotations)
+                self!.completeCell(spot:spots.first!)
+                self?.vMap.addAnnotations(annotations)
             }).addDisposableTo(disposeBag)
         
-        place.value = User.current.place.value
-        placeCoo.value = User.current.location.value
         displayCell()
     }
     
     var isAppear = false
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         if !isAppear {
             isAppear = true
-            searchResult.asObservable()
+            searchNC().searchResult.asObservable()
                 .subscribe(onNext:{
-                    searching in
-                    self.indicator.isHidden = !searching
-                    self.vIndicator.isHidden = !searching
-                    UIView.animate(withDuration: 0.5) {
-                        self.vStack.layoutIfNeeded()
-                    }
-                }).addDisposableTo(disposeBag)
-            
-            reverse.asObservable()
-                .subscribe(onNext:{
-                    tReverse in
-                    if tReverse.count == 0 {
-                        self.htResult.priority = 750
-                        self.hMap.priority = 250
+                    [weak self] searching in
+                    guard let searching = searching else {return}
+                    if searching {
+                        self?.hIndicator.constant = 40
                     } else {
-                        self.htResult.priority = 250
-                        self.hMap.priority = 750
+                        self?.hIndicator.constant = 0
+                    }
+                    UIView.animate(withDuration: 0.5) { self!.vStack.layoutIfNeeded() }
+                }).addDisposableTo(disposeBag)
+            
+            searchNC().reverse.asObservable()
+                .subscribe(onNext:{
+                    [weak self] tReverse in
+                    if tReverse.count == 0 {
+                        self?.htResult.priority = 750
+                        self?.hMap.priority = 250
+                    } else {
+                        self?.htResult.priority = 250
+                        self?.hMap.priority = 750
                     }
                     UIView.animate(withDuration: 0.5) {
-                        self.vStack.layoutIfNeeded()
+                        self!.vStack.layoutIfNeeded()
                     }
+                    self!.tvResult.reloadSections([0], with: .fade)
                 }).addDisposableTo(disposeBag)
-        }
-    }
-    
-    func forwardGeocoding(address: String) {
-        
-        let localSearchRequest = MKLocalSearchRequest()
-        localSearchRequest.naturalLanguageQuery = address
-        localSearchRequest.region = MKCoordinateRegion(center: User.current.location.value!, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        
-        let localSearch = MKLocalSearch(request: localSearchRequest)
-        localSearch.start {
-            (localSearchResponse, error) -> Void in
-            
-            if let localSearchResponse = localSearchResponse, localSearchResponse.mapItems.count > 0 {
-                self.reverse.value = localSearchResponse.mapItems.map{$0.placemark}
-            } else {
-                self.reverse.value = [MKPlacemark]()
-            }
-            self.tvResult.reloadSections([0], with: .fade)
         }
     }
     
     @IBAction func btnBackPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: {})
+        searchNC().dismiss(animated: true, completion: {})
+    }
+    
+    @IBAction func btnChangePressed(_ sender: Any) {
+        searchNC().popViewController(animated: true)
     }
 }
 
@@ -295,21 +260,21 @@ extension MapSearchController: UITextFieldDelegate {
             .subscribe(onNext: {
                 adress in
                 if let adress = adress {
-                    self.forwardGeocoding(address: adress)
+                    self.searchNC().forwardGeocoding(address: adress)
                 }
             })
         textFieldDisposable.addDisposableTo(disposeBag)
     }
     
     @IBAction func btnRecentrePressed(_ sender: Any) {
-        if reverse.value.count > 0 {
+        if searchNC().reverse.value.count > 0 {
             textFieldDisposable.dispose()
-            reverse.value = [MKPlacemark]()
+            searchNC().reverse.value = [MKPlacemark]()
         } else {
             tvAdress.endEditing(true)
             tvAdress.text = String()
-            self.place.value = User.current.place.value
-            self.placeCoo.value = User.current.location.value
+            searchNC().place.value = User.current.place.value
+            searchNC().placeCoo.value = User.current.location.value
         }
     }
 }
@@ -318,28 +283,25 @@ extension MapSearchController: UITextFieldDelegate {
 extension MapSearchController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return reverse.value.count
+        return searchNC().reverse.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell") as! SearchCell
-        cell.place = reverse.value[indexPath.row]
+        cell.place = searchNC().reverse.value[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.place.value = reverse.value[indexPath.row].addressDictionary!["City"] as? String
-        self.placeCoo.value = reverse.value[indexPath.row].coordinate
+        searchNC().place.value = searchNC().reverse.value[indexPath.row].addressDictionary!["City"] as? String
+        searchNC().placeCoo.value = searchNC().reverse.value[indexPath.row].coordinate
         tvAdress.endEditing(true)
         textFieldDisposable.dispose()
-        reverse.value = [MKPlacemark]()
+        searchNC().reverse.value = [MKPlacemark]()
     }
 }
 
 // MARK: - SubClass
-
-
-//
 // MGLAnnotationView subclass
 class SpotAnnotationView: MGLAnnotationView {
     
@@ -407,6 +369,7 @@ class SpotAnnotationView: MGLAnnotationView {
     }
 }
 
+// MGLPointAnnotation subclass
 class SpotAnnotation: MGLPointAnnotation {
     var spot:AWSSpots?
     

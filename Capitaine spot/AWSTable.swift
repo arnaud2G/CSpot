@@ -86,7 +86,7 @@ class AWSTableSpot {
     }
     
     
-    static func querySpotWithCompletionHandler(byPlace place:String, _ completionHandler: @escaping (_ response: AWSDynamoDBPaginatedOutput?, _ error: NSError?) -> Void) {
+    static func querySpotWithCompletionHandler(byPlace place:String, _ completionHandler: @escaping (_ response: AWSDynamoDBPaginatedOutput?, _ error: Error?) -> Void) {
         let objectMapper = AWSDynamoDBObjectMapper.default()
         let queryExpression = AWSDynamoDBQueryExpression()
         
@@ -98,7 +98,7 @@ class AWSTableSpot {
         
         objectMapper.query(AWSSpots.self, expression: queryExpression) { (response: AWSDynamoDBPaginatedOutput?, error: Error?) in
             DispatchQueue.main.async(execute: {
-                completionHandler(response, error as? NSError)
+                completionHandler(response, error)
             })
         }
     }

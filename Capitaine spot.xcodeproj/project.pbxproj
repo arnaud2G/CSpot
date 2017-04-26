@@ -40,6 +40,8 @@
 		A5CACBAD1E978B1C0068D5B2 /* DynamicsBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CACBAC1E978B1C0068D5B2 /* DynamicsBall.swift */; };
 		A5CACBAF1E978B3C0068D5B2 /* DynamicsBall.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5CACBAE1E978B3C0068D5B2 /* DynamicsBall.storyboard */; };
 		A5CEEA501E9CCD370057CA8A /* MyMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CEEA4F1E9CCD370057CA8A /* MyMap.swift */; };
+		A5D47FCA1EB0D8C6006C132B /* SearchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D47FC91EB0D8C6006C132B /* SearchNavigationController.swift */; };
+		A5D47FCC1EB0E942006C132B /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D47FCB1EB0E942006C132B /* TestViewController.swift */; };
 		A5E01EA01EA77B6F0087AEE0 /* AWSMobileHubHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F638ED1EA76FF8000ACD3D /* AWSMobileHubHelper.framework */; };
 		A5F638FC1EA7724B000ACD3D /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5F638F21EA7724B000ACD3D /* SignIn.storyboard */; };
 		A5F638FD1EA7724B000ACD3D /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F638F31EA7724B000ACD3D /* SignInViewController.swift */; };
@@ -101,6 +103,8 @@
 		A5CACBAC1E978B1C0068D5B2 /* DynamicsBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicsBall.swift; sourceTree = "<group>"; };
 		A5CACBAE1E978B3C0068D5B2 /* DynamicsBall.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DynamicsBall.storyboard; sourceTree = "<group>"; };
 		A5CEEA4F1E9CCD370057CA8A /* MyMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMap.swift; sourceTree = "<group>"; };
+		A5D47FC91EB0D8C6006C132B /* SearchNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNavigationController.swift; sourceTree = "<group>"; };
+		A5D47FCB1EB0E942006C132B /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		A5F638ED1EA76FF8000ACD3D /* AWSMobileHubHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSMobileHubHelper.framework; sourceTree = "<group>"; };
 		A5F638F21EA7724B000ACD3D /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		A5F638F31EA7724B000ACD3D /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -365,8 +369,10 @@
 		A5FC40701EAE60CA00886246 /* EcranRecherche */ = {
 			isa = PBXGroup;
 			children = (
+				A5D47FC91EB0D8C6006C132B /* SearchNavigationController.swift */,
 				A5FC40711EAE615F00886246 /* SearchController.swift */,
 				A571DCA71EB09AA7003DBC2A /* MapSearchController.swift */,
+				A5D47FCB1EB0E942006C132B /* TestViewController.swift */,
 				A5FC40731EAE617A00886246 /* Search.storyboard */,
 			);
 			name = EcranRecherche;
@@ -506,6 +512,7 @@
 			files = (
 				A54984811EA767810074755B /* AWSDescription.swift in Sources */,
 				A57480421EA8B4E70045AC03 /* CSpotController.swift in Sources */,
+				A5D47FCC1EB0E942006C132B /* TestViewController.swift in Sources */,
 				A5595A541EA0BEFF00F4AFE5 /* RxMapBox.swift in Sources */,
 				A54512D41E9BE017000FDA2F /* MyCamera.swift in Sources */,
 				A59832731EAA4B9B00B88033 /* AWSTable.swift in Sources */,
@@ -536,6 +543,7 @@
 				A549847F1EA766D50074755B /* AWSSpot.swift in Sources */,
 				A5B0D1BE1E9D1AF90014EEA3 /* VueC2.swift in Sources */,
 				A5F639011EA7724B000ACD3D /* UserPoolNewPasswordViewController.swift in Sources */,
+				A5D47FCA1EB0D8C6006C132B /* SearchNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

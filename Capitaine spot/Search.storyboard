@@ -11,16 +11,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Search Navigation Controller-->
         <scene sceneID="sZn-Vo-hrc">
             <objects>
-                <navigationController navigationBarHidden="YES" id="SWr-fF-OEM" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="SWr-fF-OEM" customClass="SearchNavigationController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="su9-Tm-y91">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="wj4-qw-AXC" kind="relationship" relationship="rootViewController" id="8M7-90-I4H"/>
+                        <segue destination="vNd-2i-hux" kind="relationship" relationship="rootViewController" id="UQq-NJ-UIe"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vP3-ed-wrP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -53,6 +53,9 @@
                                     <constraint firstAttribute="height" constant="40" id="tcE-U5-Y7l"/>
                                 </constraints>
                                 <state key="normal" image="beach"/>
+                                <connections>
+                                    <action selector="btnChangePressed:" destination="vNd-2i-hux" eventType="touchUpInside" id="2h9-Cg-4vQ"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="117" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Dwn-kl-Vso">
                                 <rect key="frame" x="16" y="80" width="343" height="587"/>
@@ -266,11 +269,31 @@
                         <outlet property="btnRecentre" destination="eiV-Mx-6Kh" id="VOQ-qn-jgL"/>
                         <outlet property="tvAdress" destination="sZG-Tz-zyh" id="ovb-pg-fbD"/>
                         <outlet property="tvResult" destination="Dwn-kl-Vso" id="YpE-Mw-taM"/>
+                        <segue destination="wj4-qw-AXC" kind="show" identifier="SegueToChangeDisplay" id="m3J-LJ-JpV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aSe-Ta-FPh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="496.80000000000001" y="228.93553223388307"/>
+        </scene>
+        <!--Test View Controller-->
+        <scene sceneID="705-xR-PwJ">
+            <objects>
+                <viewController id="78Z-hN-Qxx" customClass="TestViewController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FSj-1N-v6A"/>
+                        <viewControllerLayoutGuide type="bottom" id="wEj-db-0jw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xci-Nh-MEI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="jDX-We-prl"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nRC-HQ-yKu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="297" y="949"/>
         </scene>
         <!--Map Search Controller-->
         <scene sceneID="Rtz-rP-unt">
@@ -298,26 +321,29 @@
                                     <constraint firstAttribute="width" constant="40" id="bvc-UZ-Ix4"/>
                                 </constraints>
                                 <state key="normal" image="treasure-map"/>
+                                <connections>
+                                    <action selector="btnChangePressed:" destination="wj4-qw-AXC" eventType="touchUpInside" id="LwX-Qu-dAH"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Edn-G4-lNc">
                                 <rect key="frame" x="0.0" y="80" width="375" height="587"/>
                                 <subviews>
-                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="THS-16-itv">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="41"/>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="THS-16-itv">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                         <subviews>
-                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="NJn-B1-S2l">
-                                                <rect key="frame" x="177" y="10.5" width="20" height="20"/>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="NJn-B1-S2l">
+                                                <rect key="frame" x="177" y="-10" width="20" height="20"/>
                                             </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" id="I6V-ws-nvv"/>
                                             <constraint firstItem="NJn-B1-S2l" firstAttribute="centerX" secondItem="THS-16-itv" secondAttribute="centerX" priority="750" id="Vel-Y5-B2v"/>
-                                            <constraint firstItem="NJn-B1-S2l" firstAttribute="top" secondItem="THS-16-itv" secondAttribute="top" priority="750" constant="10" id="aHo-yR-3gA"/>
                                             <constraint firstItem="NJn-B1-S2l" firstAttribute="centerY" secondItem="THS-16-itv" secondAttribute="centerY" id="sSp-b2-oCX"/>
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KBD-Lb-Aj9">
-                                        <rect key="frame" x="0.0" y="46" width="375" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="5" width="375" height="41"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" priority="750" id="KkE-0x-1RY"/>
@@ -330,7 +356,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9zQ-7t-wE1">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9zQ-7t-wE1">
                                                             <rect key="frame" x="8" y="8" width="359" height="73.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
@@ -499,6 +525,7 @@
                         <outlet property="btnBack" destination="pOr-AT-i4R" id="bhA-aR-Seu"/>
                         <outlet property="btnMap" destination="8uN-aX-sZc" id="SeL-Xb-thX"/>
                         <outlet property="btnRecentre" destination="aEK-t8-oLH" id="har-mc-9QY"/>
+                        <outlet property="hIndicator" destination="I6V-ws-nvv" id="aCV-Wj-cS5"/>
                         <outlet property="hMap" destination="Zau-KW-Ifx" id="dX6-NI-tDB"/>
                         <outlet property="hSize1" destination="d3l-s0-pXp" id="IOg-Aw-B17"/>
                         <outlet property="hSize2" destination="avd-Xg-Tut" id="fS7-cL-WSU"/>
