@@ -23,6 +23,7 @@
 		A54D8EA11E9BC30B0081C0F5 /* ToolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D8EA01E9BC30B0081C0F5 /* ToolExtension.swift */; };
 		A54D8EA31E9BCCF20081C0F5 /* NumberExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D8EA21E9BCCF20081C0F5 /* NumberExtension.swift */; };
 		A5595A541EA0BEFF00F4AFE5 /* RxMapBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5595A531EA0BEFF00F4AFE5 /* RxMapBox.swift */; };
+		A571DCA81EB09AA7003DBC2A /* MapSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A571DCA71EB09AA7003DBC2A /* MapSearchController.swift */; };
 		A57480421EA8B4E70045AC03 /* CSpotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57480411EA8B4E70045AC03 /* CSpotController.swift */; };
 		A58347CD1E9E241600E16507 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58347CC1E9E241600E16507 /* User.swift */; };
 		A58347CF1E9E537500E16507 /* GeolocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58347CE1E9E537500E16507 /* GeolocationService.swift */; };
@@ -80,6 +81,7 @@
 		A54D8EA01E9BC30B0081C0F5 /* ToolExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolExtension.swift; sourceTree = "<group>"; };
 		A54D8EA21E9BCCF20081C0F5 /* NumberExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberExtension.swift; sourceTree = "<group>"; };
 		A5595A531EA0BEFF00F4AFE5 /* RxMapBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxMapBox.swift; sourceTree = "<group>"; };
+		A571DCA71EB09AA7003DBC2A /* MapSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSearchController.swift; sourceTree = "<group>"; };
 		A57480411EA8B4E70045AC03 /* CSpotController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSpotController.swift; sourceTree = "<group>"; };
 		A58347CC1E9E241600E16507 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A58347CE1E9E537500E16507 /* GeolocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeolocationService.swift; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 			isa = PBXGroup;
 			children = (
 				A5FC40711EAE615F00886246 /* SearchController.swift */,
+				A571DCA71EB09AA7003DBC2A /* MapSearchController.swift */,
 				A5FC40731EAE617A00886246 /* Search.storyboard */,
 			);
 			name = EcranRecherche;
@@ -513,6 +516,7 @@
 				A537B3321EAA312D001A912A /* DescriptionNavigationController.swift in Sources */,
 				A58347CF1E9E537500E16507 /* GeolocationService.swift in Sources */,
 				A54984831EA767FB0074755B /* AWSConfig.swift in Sources */,
+				A571DCA81EB09AA7003DBC2A /* MapSearchController.swift in Sources */,
 				A5CEEA501E9CCD370057CA8A /* MyMap.swift in Sources */,
 				A59832751EAA58FC00B88033 /* AWSS3.swift in Sources */,
 				A5F638FF1EA7724B000ACD3D /* UserPoolForgotPasswordViewController.swift in Sources */,
