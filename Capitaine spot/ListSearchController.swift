@@ -14,7 +14,7 @@ import CoreLocation
 import MapboxGeocoder
 import MapKit
 
-class SearchViewController:UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class ListSearchController:SearchViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var tvAdress: UITextField!
@@ -49,6 +49,9 @@ class SearchViewController:UIViewController, UITableViewDelegate, UITableViewDat
         
         tvResult.estimatedRowHeight = 100
         tvResult.rowHeight = UITableViewAutomaticDimension
+        
+        transRect = btnMap.frame
+        transBtn = btnMap
     }
     
     var isAppear = false
@@ -59,8 +62,10 @@ class SearchViewController:UIViewController, UITableViewDelegate, UITableViewDat
             isAppear = true
             searchNC().searchResult.asObservable()
                 .subscribe(onNext:{
-                    spots in
+                    searching in
+                    guard let searching = searching else {return}
                     self.tvResult.reloadSections([0], with: .fade)
+                    self.btnMap.isEnabled = !searching
                 }).addDisposableTo(disposeBag)
             
             searchNC().reverse.asObservable()
@@ -174,7 +179,9 @@ class SearchViewController:UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @IBAction func btnChangePressed(_ sender: Any) {
-        self.performSegue(withIdentifier: SearchNavigationController.SegueToChangeDisplay, sender: nil)
+        let searchStoryboard = UIStoryboard(name: "Search", bundle: nil)
+        let mapSearchController = searchStoryboard.instantiateViewController(withIdentifier: "MapSearchController")
+        (self.navigationController as! SearchNavigationController).pushViewController(mapSearchController, animated: true)
     }
 }
 

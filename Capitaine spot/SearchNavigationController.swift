@@ -15,10 +15,19 @@ import RxSwift
 import CoreLocation
 import MapKit
 
-class SearchNavigationController:UINavigationController {
+class SearchViewController:UIViewController {
+    var transRect:CGRect!
+    var transBtn:UIButton!
+}
+
+class SearchNavigationController:UINavigationController, UINavigationControllerDelegate {
     
     deinit {
         print("deinit SearchNavigationController")
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return SearchTransitionAnimator()
     }
     
     static let SegueToChangeDisplay = "SegueToChangeDisplay"
@@ -37,6 +46,8 @@ class SearchNavigationController:UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.delegate = self
         
         place.asObservable()
             .subscribe(onNext: {
@@ -82,5 +93,54 @@ class SearchNavigationController:UINavigationController {
                 self.reverse.value = [MKPlacemark]()
             }
         }
+    }
+}
+
+class SearchTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning, CAAnimationDelegate {
+    
+    weak var transitionContext: UIViewControllerContextTransitioning!
+    
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        
+        //1
+        self.transitionContext = transitionContext
+        
+        //2
+        let containerView = transitionContext.containerView
+        let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as! SearchViewController
+        let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as! SearchViewController
+        
+        //3
+        containerView.addSubview(toViewController.view)
+        
+        //4
+        let circleMaskPathInitial = UIBezierPath(ovalIn: CGRect(origin: fromViewController.transBtn.center, size: CGSize(width: 0, height: 0)))
+        
+        let extremePoint = CGPoint(x: fromViewController.transBtn.center.x, y: fromViewController.transBtn.center.y - toViewController.view.bounds.height)
+        
+        let radius = sqrt((extremePoint.x*extremePoint.x) + (extremePoint.y*extremePoint.y))
+        let circleMaskPathFinal = UIBezierPath(ovalIn: CGRect(x: 150 - radius, y: 150 - radius, width: 2*radius, height: 2*radius))
+        
+        //5
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = circleMaskPathFinal.cgPath
+        toViewController.view.layer.mask = maskLayer
+        
+        //6
+        let maskLayerAnimation = CABasicAnimation(keyPath: "path")
+        maskLayerAnimation.fromValue = circleMaskPathInitial.cgPath
+        maskLayerAnimation.toValue = circleMaskPathFinal.cgPath
+        maskLayerAnimation.duration = self.transitionDuration(using: transitionContext)
+        maskLayerAnimation.delegate = self
+        maskLayer.add(maskLayerAnimation, forKey: "path")
+    }
+    
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return 0.5
+    }
+    
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        print("Stop")
+        self.transitionContext.completeTransition(true)
     }
 }

@@ -27,10 +27,10 @@
             </objects>
             <point key="canvasLocation" x="-316" y="229"/>
         </scene>
-        <!--Search View Controller-->
+        <!--List Search Controller-->
         <scene sceneID="i8s-Xa-bkI">
             <objects>
-                <viewController id="vNd-2i-hux" customClass="SearchViewController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vNd-2i-hux" customClass="ListSearchController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r1Q-55-7xw"/>
                         <viewControllerLayoutGuide type="bottom" id="bkE-aj-KvU"/>
@@ -269,7 +269,6 @@
                         <outlet property="btnRecentre" destination="eiV-Mx-6Kh" id="VOQ-qn-jgL"/>
                         <outlet property="tvAdress" destination="sZG-Tz-zyh" id="ovb-pg-fbD"/>
                         <outlet property="tvResult" destination="Dwn-kl-Vso" id="YpE-Mw-taM"/>
-                        <segue destination="wj4-qw-AXC" kind="show" identifier="SegueToChangeDisplay" id="m3J-LJ-JpV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aSe-Ta-FPh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -298,7 +297,7 @@
         <!--Map Search Controller-->
         <scene sceneID="Rtz-rP-unt">
             <objects>
-                <viewController id="wj4-qw-AXC" customClass="MapSearchController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapSearchController" id="wj4-qw-AXC" customClass="MapSearchController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ng5-cz-SnC"/>
                         <viewControllerLayoutGuide type="bottom" id="3r3-FG-u8a"/>

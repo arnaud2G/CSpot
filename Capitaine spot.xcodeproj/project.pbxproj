@@ -58,7 +58,7 @@
 		A5F6390C1EA774F7000ACD3D /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F6390B1EA774F7000ACD3D /* MediaPlayer.framework */; };
 		A5F6390E1EA77504000ACD3D /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F6390D1EA77504000ACD3D /* AddressBook.framework */; };
 		A5F639101EA7750A000ACD3D /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F6390F1EA7750A000ACD3D /* SafariServices.framework */; };
-		A5FC40721EAE615F00886246 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC40711EAE615F00886246 /* SearchController.swift */; };
+		A5FC40721EAE615F00886246 /* ListSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC40711EAE615F00886246 /* ListSearchController.swift */; };
 		A5FC40741EAE617A00886246 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5FC40731EAE617A00886246 /* Search.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -121,7 +121,7 @@
 		A5F6390B1EA774F7000ACD3D /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		A5F6390D1EA77504000ACD3D /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		A5F6390F1EA7750A000ACD3D /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
-		A5FC40711EAE615F00886246 /* SearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		A5FC40711EAE615F00886246 /* ListSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListSearchController.swift; sourceTree = "<group>"; };
 		A5FC40731EAE617A00886246 /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -370,7 +370,7 @@
 			isa = PBXGroup;
 			children = (
 				A5D47FC91EB0D8C6006C132B /* SearchNavigationController.swift */,
-				A5FC40711EAE615F00886246 /* SearchController.swift */,
+				A5FC40711EAE615F00886246 /* ListSearchController.swift */,
 				A571DCA71EB09AA7003DBC2A /* MapSearchController.swift */,
 				A5D47FCB1EB0E942006C132B /* TestViewController.swift */,
 				A5FC40731EAE617A00886246 /* Search.storyboard */,
@@ -532,7 +532,7 @@
 				A58347CD1E9E241600E16507 /* User.swift in Sources */,
 				A5CACBAD1E978B1C0068D5B2 /* DynamicsBall.swift in Sources */,
 				A5CACB9A1E978A9A0068D5B2 /* MenuViewController.swift in Sources */,
-				A5FC40721EAE615F00886246 /* SearchController.swift in Sources */,
+				A5FC40721EAE615F00886246 /* ListSearchController.swift in Sources */,
 				A549847D1EA766B40074755B /* UISpot.swift in Sources */,
 				A54512D01E9BD45F000FDA2F /* Spot.swift in Sources */,
 				A5F639041EA7724B000ACD3D /* UserPoolSignUpViewController.swift in Sources */,

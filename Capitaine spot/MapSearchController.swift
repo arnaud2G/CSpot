@@ -15,7 +15,7 @@ import MapboxGeocoder
 import MapKit
 import Mapbox
 
-class MapSearchController:UIViewController {
+class MapSearchController:SearchViewController {
     
     static let userTitle = "CSPot-user"
     
@@ -103,6 +103,9 @@ class MapSearchController:UIViewController {
             }).addDisposableTo(disposeBag)
         
         displayCell()
+        
+        transRect = btnMap.frame
+        transBtn = btnMap
     }
     
     var isAppear = false
@@ -115,6 +118,7 @@ class MapSearchController:UIViewController {
                 .subscribe(onNext:{
                     [weak self] searching in
                     guard let searching = searching else {return}
+                    self!.btnMap.isEnabled = !searching
                     if searching {
                         self?.hIndicator.constant = 40
                     } else {
@@ -266,6 +270,10 @@ extension MapSearchController: UITextFieldDelegate {
         textFieldDisposable.addDisposableTo(disposeBag)
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textFieldDisposable.dispose()
+    }
+    
     @IBAction func btnRecentrePressed(_ sender: Any) {
         if searchNC().reverse.value.count > 0 {
             textFieldDisposable.dispose()
@@ -296,7 +304,6 @@ extension MapSearchController: UITableViewDelegate, UITableViewDataSource {
         searchNC().place.value = searchNC().reverse.value[indexPath.row].addressDictionary!["City"] as? String
         searchNC().placeCoo.value = searchNC().reverse.value[indexPath.row].coordinate
         tvAdress.endEditing(true)
-        textFieldDisposable.dispose()
         searchNC().reverse.value = [MKPlacemark]()
     }
 }
