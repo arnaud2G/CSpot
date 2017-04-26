@@ -17,6 +17,8 @@ import Mapbox
 
 class MapSearchController:UIViewController {
     
+    static let userTitle = "CSPot-user"
+    
     @IBOutlet weak var vStack: UIStackView!
     
     @IBOutlet weak var btnBack: UIButton!
@@ -30,13 +32,23 @@ class MapSearchController:UIViewController {
     
     @IBOutlet weak var vMap: MGLMapView!
     @IBOutlet weak var hMap: NSLayoutConstraint!
-    var userAnnotation = MGLPointAnnotation()
+    var userAnnotation = SpotAnnotation()
     
     @IBOutlet weak var vIndicator: UIView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
+    // Vue selectionnée
+    @IBOutlet weak var imgBack: UIImageView!
+    @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var imgMedal1: UIImageView!
+    @IBOutlet weak var imgMedal2: UIImageView!
+    @IBOutlet weak var imgMedal3: UIImageView!
+    @IBOutlet weak var imgMedal4: UIImageView!
+    @IBOutlet weak var hSize1: NSLayoutConstraint!
+    @IBOutlet weak var hSize2: NSLayoutConstraint!
+    
     let spotSearcher = AWSTableSpot()
-    var result = [AWSSpots]()
+    var result:Variable<[AWSSpots]> = Variable([])
     
     var reverse:Variable<[MKPlacemark]> = Variable([])
     var searchResult:Variable<Bool> = Variable(false)
@@ -68,9 +80,8 @@ class MapSearchController:UIViewController {
         tvResult.estimatedRowHeight = 60
         tvResult.rowHeight = UITableViewAutomaticDimension
         
-        //vMap.showsUserLocation = true
-        //vMap.setCenter(User.current.location.value!, zoomLevel: 16, animated: false)
         vMap.delegate = self
+        userAnnotation.title = MapSearchController.userTitle
         vMap.addAnnotation(userAnnotation)
         
         place.asObservable()
@@ -93,15 +104,29 @@ class MapSearchController:UIViewController {
         spotSearcher.results.asObservable()
             .subscribe(onNext:{
                 description in
-                self.result = description.map({
+                self.result.value = description.map({
                     spot in
                     spot.userDistance = Int(CLLocation(latitude: self.placeCoo.value!.latitude, longitude: self.placeCoo.value!.longitude).distance(from: CLLocation(latitude: spot._latitude as! CLLocationDegrees, longitude: spot._longitude as! CLLocationDegrees)))
                     return spot
                 }).sorted{$0.userDistance < $1.userDistance}
             }).addDisposableTo(disposeBag)
         
+        result.asObservable()
+            .subscribe(onNext:{
+                spots in
+                if spots.count == 0 {return}
+                let annotations = spots.map({
+                    (spot:AWSSpots) -> MGLPointAnnotation in
+                    let annotation = SpotAnnotation(spot: spot)
+                    return annotation
+                })
+                self.completeCell(spot:spots.first!)
+                self.vMap.addAnnotations(annotations)
+            }).addDisposableTo(disposeBag)
+        
         place.value = User.current.place.value
         placeCoo.value = User.current.location.value
+        displayCell()
     }
     
     var isAppear = false
@@ -160,49 +185,26 @@ class MapSearchController:UIViewController {
     }
 }
 
-//
-// MGLAnnotationView subclass
-class CustomAnnotationView: MGLAnnotationView {
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        // Force the annotation view to maintain a constant size when the map is tilted.
-        scalesWithViewingDistance = false
-        
-        // Use CALayer’s corner radius to turn this view into a circle.
-        layer.cornerRadius = frame.width / 2
-        layer.borderWidth = 2
-        layer.borderColor = UIColor.white.cgColor
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Animate the border width in/out, creating an iris effect.
-        let animation = CABasicAnimation(keyPath: "borderWidth")
-        animation.duration = 0.1
-        layer.borderWidth = selected ? frame.width / 4 : 2
-        layer.add(animation, forKey: "borderWidth")
-    }
-}
-
 // MARK: - MapBox
 extension MapSearchController: MGLMapViewDelegate {
     func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
         // This example is only concerned with point annotations.
-        guard annotation is MGLPointAnnotation else {
-            return nil
-        }
+        guard let annotation = annotation as? SpotAnnotation else { return nil }
         
         // Use the point annotation’s longitude value (as a string) as the reuse identifier for its view.
-        let reuseIdentifier = "\(annotation.coordinate.longitude)"
+        var reuseIdentifier:String!
+        if annotation.title! == MapSearchController.userTitle {
+            reuseIdentifier = annotation.title!
+        } else {
+            reuseIdentifier = "\(annotation.coordinate.longitude)"
+        }
         
         // For better performance, always try to reuse existing annotations.
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
         
         // If there’s no reusable annotation view available, initialize a new one.
         if annotationView == nil {
-            annotationView = CustomAnnotationView(reuseIdentifier: reuseIdentifier)
+            annotationView = SpotAnnotationView(spot:annotation.spot ,reuseIdentifier: reuseIdentifier)
             annotationView!.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
             
             // Set the annotation view’s background color to a value determined by its longitude.
@@ -214,7 +216,73 @@ extension MapSearchController: MGLMapViewDelegate {
     }
     
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
-        return true
+        return annotation.title! != MapSearchController.userTitle
+    }
+    
+    func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {
+        guard let annotation = annotation as? SpotAnnotation, let spot = annotation.spot else { return }
+        initCell()
+        completeCell(spot:spot)
+    }
+    
+    func initCell() {
+        imgBack.image = nil
+        imgMedal1.image = nil
+        imgMedal2.image = nil
+        imgMedal3.image = nil
+        imgMedal4.image = nil
+    }
+    
+    func completeCell(spot:AWSSpots) {
+        
+        if let userDistance = spot.userDistance, userDistance > 1000 {
+            let distanceInKMeters = userDistance/1000
+            lblTitle.text = "(\(distanceInKMeters)km) \(spot._name!)"
+        } else {
+            lblTitle.text = "(\(spot.userDistance!)m) \(spot._name!)"
+        }
+        
+        let descriptions = spot.userDescription.filter{$0.typeSpot.pic != nil}.sorted{$0.rVote > $1.rVote}
+        
+        imgMedal1.image = descriptions.first!.typeSpot.pic!.withRenderingMode(.alwaysTemplate)
+        
+        if descriptions.count > 1 {
+            imgMedal2.image = descriptions[1].typeSpot.pic!.withRenderingMode(.alwaysTemplate)
+        }
+        
+        if descriptions.count > 2 {
+            imgMedal3.image = descriptions[2].typeSpot.pic!.withRenderingMode(.alwaysTemplate)
+        }
+        
+        if descriptions.count > 3 {
+            imgMedal4.image = descriptions[3].typeSpot.pic!.withRenderingMode(.alwaysTemplate)
+        }
+        
+        if let pictures = spot._pictureId, pictures.count > 0 {
+            guard let url = AWSS3.convertToPublicURLRepository(url: pictures[Int.random(lower: 0, upper: pictures.count - 1)]) else {return}
+            getImageFromUrl(url:url, completion: {
+                image in
+                DispatchQueue.main.async(execute: {
+                    () -> Void in
+                    if let image = image {
+                        self.imgBack.image = image
+                    }
+                })
+            })
+        }
+    }
+    
+    func displayCell() {
+        
+        imgMedal1.unselectedStyle()
+        imgMedal2.unselectedStyle()
+        imgMedal3.unselectedStyle()
+        imgMedal4.unselectedStyle()
+        
+        imgMedal1.layer.cornerRadius = hSize1.constant/2
+        imgMedal2.layer.cornerRadius = hSize2.constant/2
+        imgMedal3.layer.cornerRadius = hSize2.constant/2
+        imgMedal4.layer.cornerRadius = hSize2.constant/2
     }
 }
 
@@ -233,13 +301,6 @@ extension MapSearchController: UITextFieldDelegate {
         textFieldDisposable.addDisposableTo(disposeBag)
     }
     
-    /*func textFieldDidEndEditing(_ textField: UITextField) {
-     textFieldDisposable.dispose()
-     reverse.value = [MKPlacemark]()
-     tvResult.beginUpdates()
-     tvResult.reloadSections([0], with: .fade)
-     tvResult.endUpdates()
-     }*/
     @IBAction func btnRecentrePressed(_ sender: Any) {
         if reverse.value.count > 0 {
             textFieldDisposable.dispose()
@@ -272,6 +333,97 @@ extension MapSearchController: UITableViewDelegate, UITableViewDataSource {
         tvAdress.endEditing(true)
         textFieldDisposable.dispose()
         reverse.value = [MKPlacemark]()
+    }
+}
+
+// MARK: - SubClass
+
+
+//
+// MGLAnnotationView subclass
+class SpotAnnotationView: MGLAnnotationView {
+    
+    var spot:AWSSpots?
+    
+    convenience init(spot:AWSSpots?, reuseIdentifier: String?) {
+        self.init(reuseIdentifier: reuseIdentifier)
+        
+        let imgPic = UIImageView()
+        self.addSubview(imgPic)
+        imgPic.translatesAutoresizingMaskIntoConstraints = false
+        
+        imgPic.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        imgPic.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        imgPic.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        imgPic.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        
+        imgPic.contentMode = .center
+        
+        if let spot = spot {
+            self.spot = spot
+            imgPic.image = spot.userDescription.first!.typeSpot.pic!.withRenderingMode(.alwaysTemplate)
+        } else {
+            imgPic.image = #imageLiteral(resourceName: "pirate").withRenderingMode(.alwaysTemplate)
+        }
+    }
+    
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        scalesWithViewingDistance = false
+        layer.cornerRadius = frame.width / 2
+        
+        if isSelected {
+            self.selectedStyle()
+        } else {
+            self.unselectedStyle()
+        }
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        
+        if spot == nil {
+            super.setSelected(false, animated: false)
+            return
+        }
+        
+        super.setSelected(selected, animated: animated)
+        if selected {
+            self.selectedStyle()
+        } else {
+            self.unselectedStyle()
+        }
+    }
+}
+
+class SpotAnnotation: MGLPointAnnotation {
+    var spot:AWSSpots?
+    
+    convenience init(spot:AWSSpots?) {
+        self.init()
+        guard let spot = spot else {return}
+        self.spot = spot
+        self.coordinate = CLLocationCoordinate2D(latitude: spot._latitude as! CLLocationDegrees, longitude: spot._longitude as! CLLocationDegrees)
+        self.title = spot._name
+    }
+    
+    override init() {
+        super.init()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
