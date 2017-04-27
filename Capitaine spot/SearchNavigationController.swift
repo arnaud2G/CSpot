@@ -80,7 +80,7 @@ class SearchNavigationController:UINavigationController, UINavigationControllerD
         self.searchResult.value = true
         let localSearchRequest = MKLocalSearchRequest()
         localSearchRequest.naturalLanguageQuery = address
-        localSearchRequest.region = MKCoordinateRegion(center: User.current.location.value!, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        localSearchRequest.region = MKCoordinateRegion(center: placeCoo.value!, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         
         let localSearch = MKLocalSearch(request: localSearchRequest)
         localSearch.start {
@@ -93,6 +93,27 @@ class SearchNavigationController:UINavigationController, UINavigationControllerD
                 self.reverse.value = [MKPlacemark]()
             }
         }
+    }
+    
+    func forwardGeocoding(location: CLLocationCoordinate2D) {
+        
+        self.searchResult.value = true
+        
+        let geoCoder = CLGeocoder()
+        geoCoder.reverseGeocodeLocation(CLLocation(latitude: location.latitude, longitude: location.longitude), completionHandler: {
+            [weak self] (placemarks, error) -> Void in
+            
+            self?.searchResult.value = false
+            
+            guard let placemarks = placemarks, let placemark = placemarks.first, let dico = placemark.addressDictionary, let city = dico["City"] as? String else {
+                // TODO ERREUR 
+                print("On ne trouve pas de ville pour ces coordonnées")
+                return
+            }
+            
+            self?.placeCoo.value = location
+            self?.place.value = city
+        })
     }
 }
 

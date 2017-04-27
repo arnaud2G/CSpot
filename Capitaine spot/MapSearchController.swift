@@ -32,7 +32,8 @@ class MapSearchController:SearchViewController {
     
     @IBOutlet weak var vMap: MGLMapView!
     @IBOutlet weak var hMap: NSLayoutConstraint!
-    var userAnnotation = SpotAnnotation()
+    let userAnnotation = UIImageView()
+    var mapCenter:Variable<CLLocationCoordinate2D?> = Variable(nil)
     
     @IBOutlet weak var vIndicator: UIView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
@@ -77,15 +78,22 @@ class MapSearchController:SearchViewController {
         tvResult.rowHeight = UITableViewAutomaticDimension
         
         vMap.delegate = self
-        userAnnotation.title = MapSearchController.userTitle
-        vMap.addAnnotation(userAnnotation)
+        userAnnotation.translatesAutoresizingMaskIntoConstraints = false
+        vMap.addSubview(userAnnotation)
+        vMap.centerXAnchor.constraint(equalTo: userAnnotation.centerXAnchor).isActive = true
+        vMap.centerYAnchor.constraint(equalTo: userAnnotation.centerYAnchor).isActive = true
+        userAnnotation.selectedStyle()
+        userAnnotation.widthAnchor.constraint(equalToConstant: 26).isActive = true
+        userAnnotation.heightAnchor.constraint(equalToConstant: 26).isActive = true
+        userAnnotation.layer.cornerRadius = 13
         
         searchNC().placeCoo.asObservable()
             .subscribe(onNext: {
                 [weak self] coordonne in
                 if let coordonne = coordonne {
                     self?.vMap.setCenter(coordonne, zoomLevel: 16, animated: self!.isAppear)
-                    self?.userAnnotation.coordinate = coordonne
+                    self?.userAnnotation.image = #imageLiteral(resourceName: "pirate").withRenderingMode(.alwaysTemplate)
+                    //self?.userAnnotation.coordinate = coordonne
                 }
             }).addDisposableTo(disposeBag)
         
@@ -142,6 +150,15 @@ class MapSearchController:SearchViewController {
                     }
                     self!.tvResult.reloadSections([0], with: .fade)
                 }).addDisposableTo(disposeBag)
+            
+            mapCenter.asObservable()
+                .debounce(1.0, scheduler: MainScheduler.instance)
+                .subscribe(onNext:{
+                    [weak self] center in
+                    if let center = center {
+                        self?.searchNC().forwardGeocoding(location: center)
+                    }
+                }).addDisposableTo(disposeBag)
         }
     }
     
@@ -186,6 +203,11 @@ extension MapSearchController: MGLMapViewDelegate {
     
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         return annotation.title! != MapSearchController.userTitle
+    }
+    
+    func mapViewRegionIsChanging(_ mapView: MGLMapView) {
+        mapCenter.value = mapView.centerCoordinate
+        userAnnotation.image = #imageLiteral(resourceName: "ship").withRenderingMode(.alwaysTemplate)
     }
     
     func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {

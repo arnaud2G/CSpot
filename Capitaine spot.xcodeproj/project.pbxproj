@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		90BD816A6D276756EECE5147 /* Pods_Capitaine_spot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21F2D51E9692729CDE7757C6 /* Pods_Capitaine_spot.framework */; };
+		A52E2BA81EB1DC22004F1682 /* ProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52E2BA71EB1DC22004F1682 /* ProfilViewController.swift */; };
 		A537B3301EAA0E91001A912A /* WaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537B32F1EAA0E91001A912A /* WaitingViewController.swift */; };
 		A537B3321EAA312D001A912A /* DescriptionNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537B3311EAA312D001A912A /* DescriptionNavigationController.swift */; };
 		A53B30671EA65617008AE7B8 /* AnimateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53B30661EA65617008AE7B8 /* AnimateExtension.swift */; };
@@ -66,6 +67,7 @@
 		0C7DF1EE9E0485446262E3CE /* Pods-Capitaine spot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitaine spot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Capitaine spot/Pods-Capitaine spot.debug.xcconfig"; sourceTree = "<group>"; };
 		21F2D51E9692729CDE7757C6 /* Pods_Capitaine_spot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Capitaine_spot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26D74DEE36D04B6E49815A16 /* Pods-Capitaine spot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitaine spot.release.xcconfig"; path = "Pods/Target Support Files/Pods-Capitaine spot/Pods-Capitaine spot.release.xcconfig"; sourceTree = "<group>"; };
+		A52E2BA71EB1DC22004F1682 /* ProfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilViewController.swift; sourceTree = "<group>"; };
 		A537B32F1EAA0E91001A912A /* WaitingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingViewController.swift; sourceTree = "<group>"; };
 		A537B3311EAA312D001A912A /* DescriptionNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionNavigationController.swift; sourceTree = "<group>"; };
 		A53B30661EA65617008AE7B8 /* AnimateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimateExtension.swift; sourceTree = "<group>"; };
@@ -168,6 +170,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A52E2BA61EB1DC0F004F1682 /* EcranProfil */ = {
+			isa = PBXGroup;
+			children = (
+				A52E2BA71EB1DC22004F1682 /* ProfilViewController.swift */,
+			);
+			name = EcranProfil;
+			sourceTree = "<group>";
+		};
 		A537B32E1EAA0E6D001A912A /* EcranChargement */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +189,7 @@
 		A54512D11E9BDFED000FDA2F /* BoiteAComposant */ = {
 			isa = PBXGroup;
 			children = (
+				A52E2BA61EB1DC0F004F1682 /* EcranProfil */,
 				A5FC40701EAE60CA00886246 /* EcranRecherche */,
 				A537B32E1EAA0E6D001A912A /* EcranChargement */,
 				A5B62C151EA8FABA00694441 /* EcranDescription */,
@@ -526,6 +537,7 @@
 				A571DCA81EB09AA7003DBC2A /* MapSearchController.swift in Sources */,
 				A5CEEA501E9CCD370057CA8A /* MyMap.swift in Sources */,
 				A59832751EAA58FC00B88033 /* AWSS3.swift in Sources */,
+				A52E2BA81EB1DC22004F1682 /* ProfilViewController.swift in Sources */,
 				A5F638FF1EA7724B000ACD3D /* UserPoolForgotPasswordViewController.swift in Sources */,
 				A5F638FD1EA7724B000ACD3D /* SignInViewController.swift in Sources */,
 				A54D8EA31E9BCCF20081C0F5 /* NumberExtension.swift in Sources */,
