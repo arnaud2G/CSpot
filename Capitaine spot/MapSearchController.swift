@@ -85,6 +85,7 @@ class MapSearchController:SearchViewController {
         vMap.addSubview(userAnnotation)
         vMap.centerXAnchor.constraint(equalTo: userAnnotation.centerXAnchor).isActive = true
         vMap.centerYAnchor.constraint(equalTo: userAnnotation.centerYAnchor).isActive = true
+        vMap.zoomLevel = 16
         userAnnotation.selectedStyle()
         userAnnotation.widthAnchor.constraint(equalToConstant: 26).isActive = true
         userAnnotation.heightAnchor.constraint(equalToConstant: 26).isActive = true
@@ -94,9 +95,8 @@ class MapSearchController:SearchViewController {
             .subscribe(onNext: {
                 [weak self] coordonne in
                 if let coordonne = coordonne {
-                    self?.vMap.setCenter(coordonne, zoomLevel: 16, animated: self!.isAppear)
+                    self?.vMap.setCenter(coordonne, zoomLevel: self!.vMap.zoomLevel, animated: self!.isAppear)
                     self?.userAnnotation.image = #imageLiteral(resourceName: "pirate").withRenderingMode(.alwaysTemplate)
-                    //self?.userAnnotation.coordinate = coordonne
                 }
             }).addDisposableTo(disposeBag)
         
@@ -150,7 +150,7 @@ class MapSearchController:SearchViewController {
                 }).addDisposableTo(disposeBag)
             
             mapCenter.asObservable()
-                .debounce(1.0, scheduler: MainScheduler.instance)
+                .debounce(0.5, scheduler: MainScheduler.instance)
                 .subscribe(onNext:{
                     [weak self] center in
                     if let center = center {

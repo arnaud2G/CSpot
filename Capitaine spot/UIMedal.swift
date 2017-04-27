@@ -126,6 +126,9 @@ class UIMedal:UIView {
     var imgFace = UIImageView()
     var image:UIImage? {
         didSet{
+            if imgFace.image != nil {
+                startRotate()
+            }
             imgFace.image = image
         }
     }
