@@ -122,6 +122,14 @@ class ListSearchController:SearchViewController, UITableViewDelegate, UITableVie
             tvAdress.endEditing(true)
             self.searchNC().reverse.value = [MKPlacemark]()
         }
+        if indexPath.section == 2 {
+            let cell = tableView.cellForRow(at: indexPath) as! SpotCell
+            let spotStoryboard = UIStoryboard(name: "Spot", bundle: nil)
+            let spotController = spotStoryboard.instantiateInitialViewController() as! SpotViewController
+            spotController.spot = cell.spot
+            spotController.image = cell.imgBack.image
+            (self.navigationController as! SearchNavigationController).pushViewController(spotController, animated: true)
+        }
     }
     
     func forwardGeocoding(address: String) {

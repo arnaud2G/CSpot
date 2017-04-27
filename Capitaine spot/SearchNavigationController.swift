@@ -27,7 +27,11 @@ class SearchNavigationController:UINavigationController, UINavigationControllerD
     }
     
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return SearchTransitionAnimator()
+        if fromVC.isKind(of: SearchViewController.self) && toVC.isKind(of: SearchViewController.self) {
+            return SearchTransitionAnimator()
+        } else {
+            return nil
+        }
     }
     
     static let SegueToChangeDisplay = "SegueToChangeDisplay"

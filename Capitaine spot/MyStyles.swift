@@ -33,7 +33,7 @@ extension UIColor {
     }
     
     func secondaryPopUp()->UIColor {
-        return colorFromHex(rgbValue: 0x0D2D3D5, alpha: 0.8)
+        return colorFromHex(rgbValue: 0x0D2D3D5, alpha: 0.6)
     }
     
     func popUp()->UIColor {
@@ -56,6 +56,8 @@ extension UIView {
         
         self.tintColor = UIColor().primary()
         
+        self.clipsToBounds = true
+        
         if let tfView = (self as? UITextField) {
             tfView.textColor = UIColor().primary()
             tfView.textAlignment = .center
@@ -71,6 +73,8 @@ extension UIView {
         self.layer.borderColor = UIColor().secondary().cgColor
         
         self.tintColor = UIColor().secondary()
+        
+        self.clipsToBounds = true
         
         if let tfView = (self as? UITextField) {
             tfView.textColor = UIColor().secondary()

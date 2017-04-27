@@ -315,8 +315,6 @@ class UIPlacemarkButton:UIButton {
         
         self.setTitle(placemark.name, for: .normal)
     }
-    
-    
 }
 
 extension GeocodedPlacemark {
@@ -327,11 +325,11 @@ extension GeocodedPlacemark {
             guard let addressdictionary = self.addressDictionary else {
                 return address
             }
-            address = address + (addressdictionary["street"] as? String ?? "") + " "
+            address = address + (addressdictionary["street"] as? String ?? "") + ","
             address = address + (addressdictionary["postalCode"] as? String ?? "") + " "
-            address = address + (addressdictionary["city"] as? String ?? "") + " "
+            address = address + (addressdictionary["city"] as? String ?? "")/* + " "
             address = address + (addressdictionary["state"] as? String ?? "") + " "
-            address = address + (addressdictionary["country"] as? String ?? "") + " "
+            address = address + (addressdictionary["country"] as? String ?? "") + " "*/
             
             return address
         }

@@ -76,6 +76,26 @@ class MenuViewController: UIViewController {
                             (self.navigationController as! CSpotNavigationController).cSpotShape.value = .menu
                         })
                     })
+                    /*let loginStoryboard = UIStoryboard(name: "Spot", bundle: nil)
+                    let loginController = loginStoryboard.instantiateInitialViewController() as! SpotViewController
+                    let spot = AWSSpots()!
+                    spot._adress = "38 rue Etienne Dolet, 92240 Malakoff"
+                    spot._name = "C'est chez moi :)"
+                    spot._userId = ["Jean", "Jean", "Jean", "Jean", "Jean"]
+                    var descriptions = [DescriptionSpot(rVote: 3, typeSpot: .bar)]
+                    descriptions.append(DescriptionSpot(rVote: 3, typeSpot: .resto))
+                    descriptions.append(DescriptionSpot(rVote: 3, typeSpot: .viande))
+                    descriptions.append(DescriptionSpot(rVote: 3, typeSpot: .poisson))
+                    descriptions.append(DescriptionSpot(rVote: 3, typeSpot: .vin))
+                    descriptions.append(DescriptionSpot(rVote: 3, typeSpot: .entreAmis))
+                    spot.userDescription = descriptions
+                    loginController.spot = spot
+                    loginController.image = #imageLiteral(resourceName: "back_test")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                        self.present(loginController, animated: false, completion: {
+                            (self.navigationController as! CSpotNavigationController).cSpotShape.value = .menu
+                        })
+                    })*/
                 default :
                     print("Ici on ne fait rien")
                 }
