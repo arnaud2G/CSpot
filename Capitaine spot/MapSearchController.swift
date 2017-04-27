@@ -35,9 +35,7 @@ class MapSearchController:SearchViewController {
     let userAnnotation = UIImageView()
     var mapCenter:Variable<CLLocationCoordinate2D?> = Variable(nil)
     
-    @IBOutlet weak var vIndicator: UIView!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
-    @IBOutlet weak var hIndicator: NSLayoutConstraint!
+    @IBOutlet weak var vIndicator: UIActivityIndicatorView!
     
     // Vue selectionnée
     @IBOutlet weak var imgBack: UIImageView!
@@ -126,13 +124,8 @@ class MapSearchController:SearchViewController {
                 .subscribe(onNext:{
                     [weak self] searching in
                     guard let searching = searching else {return}
-                    self!.btnMap.isEnabled = !searching
-                    if searching {
-                        self?.hIndicator.constant = 40
-                    } else {
-                        self?.hIndicator.constant = 0
-                    }
-                    UIView.animate(withDuration: 0.5) { self!.vStack.layoutIfNeeded() }
+                    self!.btnMap.isHidden = searching
+                    self!.vIndicator.isHidden = !searching
                 }).addDisposableTo(disposeBag)
             
             searchNC().reverse.asObservable()

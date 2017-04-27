@@ -39,6 +39,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ohh-S4-wqs">
+                                <rect key="frame" x="329" y="40" width="20" height="20"/>
+                            </activityIndicatorView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ou cherchez vous ?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sZG-Tz-zyh">
                                 <rect key="frame" x="66" y="30" width="243" height="40"/>
                                 <nil key="textColor"/>
@@ -197,24 +200,6 @@
                                             <outlet property="lblName" destination="QRS-ru-X9l" id="mJw-v2-Efd"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchingCell" id="b9w-lO-KKl">
-                                        <rect key="frame" x="0.0" y="262" width="343" height="117"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b9w-lO-KKl" id="YQB-c7-a29">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="117"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="zAW-A7-2K4">
-                                                    <rect key="frame" x="161" y="28" width="20" height="60"/>
-                                                </activityIndicatorView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="zAW-A7-2K4" firstAttribute="centerY" secondItem="YQB-c7-a29" secondAttribute="centerY" id="6Xo-do-BOY"/>
-                                                <constraint firstItem="zAW-A7-2K4" firstAttribute="centerX" secondItem="YQB-c7-a29" secondAttribute="centerX" id="pqo-L5-n9n"/>
-                                                <constraint firstItem="zAW-A7-2K4" firstAttribute="top" secondItem="YQB-c7-a29" secondAttribute="topMargin" constant="20" id="yet-wO-fvb"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="vNd-2i-hux" id="Jll-DO-UHc"/>
@@ -252,12 +237,14 @@
                             <constraint firstItem="sZG-Tz-zyh" firstAttribute="leading" secondItem="ieN-Nq-ObK" secondAttribute="trailing" constant="10" id="Fe7-dp-Qwy"/>
                             <constraint firstItem="Q6A-3X-Xay" firstAttribute="centerY" secondItem="ieN-Nq-ObK" secondAttribute="centerY" id="K1n-Vi-ZJZ"/>
                             <constraint firstItem="eiV-Mx-6Kh" firstAttribute="top" secondItem="sZG-Tz-zyh" secondAttribute="top" constant="5" id="Mlq-nk-Fe1"/>
+                            <constraint firstItem="Ohh-S4-wqs" firstAttribute="centerY" secondItem="Q6A-3X-Xay" secondAttribute="centerY" id="QsY-sL-RbY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Q6A-3X-Xay" secondAttribute="trailing" id="SZ4-jB-fhg"/>
                             <constraint firstItem="Q6A-3X-Xay" firstAttribute="centerY" secondItem="sZG-Tz-zyh" secondAttribute="centerY" id="WAx-ab-Q1I"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Dwn-kl-Vso" secondAttribute="trailing" id="WIM-1j-Mur"/>
                             <constraint firstItem="eiV-Mx-6Kh" firstAttribute="centerY" secondItem="sZG-Tz-zyh" secondAttribute="centerY" id="abV-O3-YOc"/>
                             <constraint firstItem="bkE-aj-KvU" firstAttribute="top" secondItem="Dwn-kl-Vso" secondAttribute="bottom" id="fxI-5l-3Cb"/>
                             <constraint firstItem="Dwn-kl-Vso" firstAttribute="leading" secondItem="k6Q-ib-89u" secondAttribute="leadingMargin" id="lqm-qS-JX3"/>
+                            <constraint firstItem="Ohh-S4-wqs" firstAttribute="centerX" secondItem="Q6A-3X-Xay" secondAttribute="centerX" id="rzw-RE-KBH"/>
                             <constraint firstItem="Q6A-3X-Xay" firstAttribute="top" secondItem="r1Q-55-7xw" secondAttribute="bottom" constant="10" id="xIy-aC-UlO"/>
                             <constraint firstItem="ieN-Nq-ObK" firstAttribute="leading" secondItem="k6Q-ib-89u" secondAttribute="leadingMargin" constant="10" id="zrn-Hg-j9Z"/>
                         </constraints>
@@ -269,6 +256,7 @@
                         <outlet property="btnRecentre" destination="eiV-Mx-6Kh" id="VOQ-qn-jgL"/>
                         <outlet property="tvAdress" destination="sZG-Tz-zyh" id="ovb-pg-fbD"/>
                         <outlet property="tvResult" destination="Dwn-kl-Vso" id="YpE-Mw-taM"/>
+                        <outlet property="vIndicator" destination="Ohh-S4-wqs" id="TvR-Oz-kkv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aSe-Ta-FPh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -306,6 +294,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ua7-iN-IJM">
+                                <rect key="frame" x="329" y="40" width="20" height="20"/>
+                            </activityIndicatorView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ou cherchez vous ?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PZG-hI-Ar7">
                                 <rect key="frame" x="66" y="30" width="243" height="40"/>
                                 <nil key="textColor"/>
@@ -327,22 +318,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Edn-G4-lNc">
                                 <rect key="frame" x="0.0" y="80" width="375" height="587"/>
                                 <subviews>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="THS-16-itv">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
-                                        <subviews>
-                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="NJn-B1-S2l">
-                                                <rect key="frame" x="177" y="-10" width="20" height="20"/>
-                                            </activityIndicatorView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" id="I6V-ws-nvv"/>
-                                            <constraint firstItem="NJn-B1-S2l" firstAttribute="centerX" secondItem="THS-16-itv" secondAttribute="centerX" priority="750" id="Vel-Y5-B2v"/>
-                                            <constraint firstItem="NJn-B1-S2l" firstAttribute="centerY" secondItem="THS-16-itv" secondAttribute="centerY" id="sSp-b2-oCX"/>
-                                        </constraints>
-                                    </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KBD-Lb-Aj9">
-                                        <rect key="frame" x="0.0" y="5" width="375" height="41"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" priority="750" id="KkE-0x-1RY"/>
@@ -502,7 +479,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ua7-iN-IJM" firstAttribute="centerX" secondItem="8uN-aX-sZc" secondAttribute="centerX" id="1LA-9n-eRG"/>
                             <constraint firstItem="8uN-aX-sZc" firstAttribute="centerY" secondItem="PZG-hI-Ar7" secondAttribute="centerY" id="1ve-zc-MpQ"/>
+                            <constraint firstItem="ua7-iN-IJM" firstAttribute="centerY" secondItem="8uN-aX-sZc" secondAttribute="centerY" id="Hsa-lo-fQk"/>
                             <constraint firstItem="Edn-G4-lNc" firstAttribute="top" secondItem="8uN-aX-sZc" secondAttribute="bottom" constant="10" id="KgG-7r-hMG"/>
                             <constraint firstItem="pOr-AT-i4R" firstAttribute="leading" secondItem="Bmd-eR-gfw" secondAttribute="leadingMargin" constant="10" id="LOu-L0-B1B"/>
                             <constraint firstItem="aEK-t8-oLH" firstAttribute="centerY" secondItem="PZG-hI-Ar7" secondAttribute="centerY" id="LbF-1x-dVb"/>
@@ -524,7 +503,6 @@
                         <outlet property="btnBack" destination="pOr-AT-i4R" id="bhA-aR-Seu"/>
                         <outlet property="btnMap" destination="8uN-aX-sZc" id="SeL-Xb-thX"/>
                         <outlet property="btnRecentre" destination="aEK-t8-oLH" id="har-mc-9QY"/>
-                        <outlet property="hIndicator" destination="I6V-ws-nvv" id="aCV-Wj-cS5"/>
                         <outlet property="hMap" destination="Zau-KW-Ifx" id="dX6-NI-tDB"/>
                         <outlet property="hSize1" destination="d3l-s0-pXp" id="IOg-Aw-B17"/>
                         <outlet property="hSize2" destination="avd-Xg-Tut" id="fS7-cL-WSU"/>
@@ -534,11 +512,10 @@
                         <outlet property="imgMedal2" destination="qCd-cJ-KGt" id="Cis-Wp-f6I"/>
                         <outlet property="imgMedal3" destination="qBx-tJ-paK" id="Aaa-na-7O2"/>
                         <outlet property="imgMedal4" destination="3lg-mS-Wpq" id="3wD-J2-85T"/>
-                        <outlet property="indicator" destination="NJn-B1-S2l" id="0Zx-m8-9Ep"/>
                         <outlet property="lblTitle" destination="07m-sA-1L5" id="DjR-5m-uAG"/>
                         <outlet property="tvAdress" destination="PZG-hI-Ar7" id="dga-1c-uHw"/>
                         <outlet property="tvResult" destination="KBD-Lb-Aj9" id="SIy-Kb-nBj"/>
-                        <outlet property="vIndicator" destination="THS-16-itv" id="JNh-YM-izk"/>
+                        <outlet property="vIndicator" destination="ua7-iN-IJM" id="Rnr-YI-uu6"/>
                         <outlet property="vMap" destination="RWg-Pi-Mn4" id="DOh-AP-SE0"/>
                         <outlet property="vStack" destination="Edn-G4-lNc" id="wmp-Yi-Knh"/>
                     </connections>

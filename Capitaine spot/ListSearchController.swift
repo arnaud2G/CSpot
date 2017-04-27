@@ -22,6 +22,7 @@ class ListSearchController:SearchViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var btnRecentre: UIButton!
     
     @IBOutlet weak var tvResult: UITableView!
+    @IBOutlet weak var vIndicator: UIActivityIndicatorView!
     
     let disposeBag = DisposeBag()
     
@@ -64,8 +65,8 @@ class ListSearchController:SearchViewController, UITableViewDelegate, UITableVie
                 .subscribe(onNext:{
                     searching in
                     guard let searching = searching else {return}
-                    self.tvResult.reloadSections([0], with: .fade)
-                    self.btnMap.isEnabled = !searching
+                    self.btnMap.isHidden = searching
+                    self.vIndicator.isHidden = !searching
                 }).addDisposableTo(disposeBag)
             
             searchNC().reverse.asObservable()
@@ -88,11 +89,7 @@ class ListSearchController:SearchViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            if let searching = searchNC().searchResult.value, searching {
-                return 1
-            } else {
-                return 0
-            }
+            return 0
         } else if section == 1 {
             return searchNC().reverse.value.count
         } else {
