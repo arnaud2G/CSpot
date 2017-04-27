@@ -66,7 +66,7 @@ class SignInViewController: UIViewController {
     
     func handleLoginWithSignInProvider(_ signInProvider: AWSSignInProvider) {
         AWSIdentityManager.default().login(signInProvider: signInProvider, completionHandler: {(result: Any?, error: Error?) in
-            self.navigationController?.popToRootViewController(animated: true)
+            self.dimissController()
         })
     }
     

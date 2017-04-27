@@ -17,6 +17,7 @@ class CSpotNavigationController: UINavigationController {
     
     var btnTop:BtnMedal!
     var btnBottom:BtnMedal!
+    var btnConnection:BtnMedal!
     
     var btnCancel:UIButton!
     var btnSend:UIButton!
@@ -109,6 +110,14 @@ class CSpotNavigationController: UINavigationController {
         self.view.addSubview(btnBottom)
         observeBtnBottom(btnBottom: btnBottom)
         
+        btnConnection = BtnMedal(frame: cSpotShape.value.myBottomRect(largeBtnSize: 0, smallBtnSize: 0))
+        btnConnection.layer.cornerRadius = btnTop.frame.size.width/2
+        btnConnection.clipsToBounds = true
+        btnConnection.unselectedStyle()
+        btnConnection.setImage(#imageLiteral(resourceName: "login").withRenderingMode(.alwaysTemplate), for: .normal)
+        btnConnection.addTarget(self, action: #selector(self.connection(sender:)), for: .touchUpInside)
+        self.view.addSubview(btnConnection)
+        
         btnCancel = UIButton(frame: CGRect(x: 26, y: 26, width: 30, height: 30))
         btnCancel.layer.cornerRadius = btnTop.frame.size.width
         btnCancel.tintColor = UIColor().primary()
@@ -122,6 +131,7 @@ class CSpotNavigationController: UINavigationController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         btnBottom.medalStyle(image: #imageLiteral(resourceName: "pirate"), text: "Utilise la longue vue pour décrire le spot !", delay: 3)
+        btnConnection.medalStyle(image: #imageLiteral(resourceName: "pirate"), text: "Connecte toi pour utiliser la longue vue !", delay: 3)
         btnTop.medalStyle(image: #imageLiteral(resourceName: "pirate"), text: "Utilise la map pour trouver un bon spot !", delay: 6)
     }
     
@@ -129,11 +139,32 @@ class CSpotNavigationController: UINavigationController {
         self.cSpotShape.value = .menu
     }
     
+    func connection(sender:UIButton) {
+        let loginStoryboard = UIStoryboard(name: "SignIn", bundle: nil)
+        let loginController = loginStoryboard.instantiateViewController(withIdentifier: "SignIn")
+        self.present(loginController, animated: true, completion: nil)
+    }
+    
     private func observeCSpotShape() {
+        
+        User.current.connected
+            .asObservable()
+            .subscribe(onNext:{
+                description in
+                if description {
+                    self.btnBottom.isHidden = false
+                    self.btnConnection.isHidden = true
+                } else {
+                    self.btnBottom.isHidden = true
+                    self.btnConnection.isHidden = false
+                }
+            }).addDisposableTo(disposeBag)
+        
         cSpotShape.asObservable()
             .subscribe(onNext:{
                 description in
                 self.btnBottom.resizeCircle(self.cSpotShape.value.myBottomRect(largeBtnSize: self.largeBtnSize, smallBtnSize: self.smallBtnSize), duration: 0.3)
+                self.btnConnection.resizeCircle(self.cSpotShape.value.myBottomRect(largeBtnSize: self.largeBtnSize, smallBtnSize: self.smallBtnSize), duration: 0.3)
                 self.btnTop.resizeCircle(self.cSpotShape.value.myTopRect(largeBtnSize: self.largeBtnSize, smallBtnSize: self.smallBtnSize), duration: 0.3)
                 self.btnSend.resizeCircle(self.cSpotShape.value.mySendRect(smallBtnSize: self.smallBtnSize), duration: 0.3)
                 self.btnCancel.isHidden = description == .menu

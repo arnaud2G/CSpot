@@ -93,13 +93,13 @@ class AWSMobileClient: NSObject {
         // set up cognito user pool
         setupUserPool()
         
-        
         let didFinishLaunching: Bool = AWSIdentityManager.default().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
         
         if (!isInitialized) {
-            AWSIdentityManager.default().resumeSession(completionHandler: { (result: Any?, error: Error?) in
+            AWSIdentityManager.default().resumeSession(completionHandler: {
+                (result: Any?, error: Error?) in
                 print("Connect user \(AWSIdentityManager.default().userName)")
-                //print("Result: \(result) Error:\(error)")
+                print("Result: \(result) Error:\(error)")
             }) // If you get an EXC_BAD_ACCESS here in iOS Simulator, then do Simulator -> "Reset Content and Settings..."
             // This will clear bad auth tokens stored by other apps with the same bundle ID.
             isInitialized = true

@@ -60,7 +60,6 @@ class User {
                         } else {
                             self.place.value = locality
                         }
-                        print(self.place.value)
                     }
                 })
             }).addDisposableTo(disposeBag)
