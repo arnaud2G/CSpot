@@ -114,4 +114,69 @@ func getImageFromUrl(url: URL, completion: @escaping (_  image: UIImage?) -> Voi
     }
 }
 
+extension UIButton {
+    
+    func medalStyle(image:UIImage?, text:String?) {
+        
+        let initImg = self.image(for: .normal)
+        let initText = self.title(for: .normal)
+        
+        let initEdgeImg = self.imageEdgeInsets
+        let initEdgeText = self.titleEdgeInsets
+        
+        let initAligmentText = self.titleLabel?.textAlignment
+        let initFontText = self.titleLabel?.font
+        
+        var nextEdgeImg:UIEdgeInsets
+        var nextEdgeText:UIEdgeInsets
+        if image == nil || text == nil {
+            nextEdgeImg = UIEdgeInsets.zero
+            nextEdgeText = UIEdgeInsets.zero
+        } else {
+            nextEdgeImg = UIEdgeInsets(top: 0, left: self.frame.size.width/2 - image!.size.width/2, bottom: self.frame.size.height/2, right: 0)
+            nextEdgeText = UIEdgeInsets(top: 0, left: -image!.size.width/2, bottom: -10, right: image!.size.width/2)
+        }
+        
+        UIView.transition(with: self, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+            
+            self.imageEdgeInsets = nextEdgeImg
+            self.titleEdgeInsets = nextEdgeText
+            
+            self.titleLabel?.textAlignment = .center
+            self.titleLabel?.font = self.titleLabel?.font.withSize(20)
+            
+            if let image = image {
+                self.setImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
+            } else {
+                self.setImage(nil, for: .normal)
+            }
+            self.setTitle(text, for: .normal)
+            self.titleLabel?.numberOfLines = 0
+        }) {
+            ret in
+            Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: {
+                timer in
+                
+                UIView.transition(with: self, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+                    
+                    self.imageEdgeInsets = initEdgeImg
+                    self.titleEdgeInsets = initEdgeText
+                    
+                    if let initImg = initImg {
+                        self.setImage(initImg.withRenderingMode(.alwaysTemplate), for: .normal)
+                    } else {
+                        self.setImage(nil, for: .normal)
+                    }
+                    self.setTitle(initText, for: .normal)
+                    
+                    if initText != nil {
+                        self.titleLabel?.textAlignment = initAligmentText!
+                        self.titleLabel?.font = initFontText!
+                    }
+                })
+            })
+        }
+    }
+}
+
 

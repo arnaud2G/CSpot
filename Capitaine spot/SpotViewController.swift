@@ -67,12 +67,12 @@ import MapKit
         let ellipses = spot.userDescription.map({
             (description:DescriptionSpot) -> SpotEllipse in
             
-            let rVote = Double(description.rVote) / Double(spot._userId.count)
+            let rVote = Double(description.rVote)/100.0
             let offsetX:CGFloat = CGFloat(Double.random(min: -1/(rVote*rVote), max: 1/(rVote*rVote)))
             let offsetY:CGFloat = CGFloat(Double.random(min: -1/(rVote*rVote), max: 1/(rVote*rVote)))
             
-            var size = CGFloat(150 * rVote)
-            size = max(size, 30.0)
+            var size = CGFloat(130 * rVote)
+            size = max(size, 40.0)
             let center = CGPoint(x: (self.vDescription.frame.width - size)/2 + offsetX, y: (self.vDescription.frame.height - size)/2 + offsetY)
             
             let newView = SpotEllipse(frame: CGRect(origin: center, size: CGSize(width: size, height: size)))

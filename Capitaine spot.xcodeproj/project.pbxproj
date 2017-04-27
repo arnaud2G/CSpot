@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		90BD816A6D276756EECE5147 /* Pods_Capitaine_spot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21F2D51E9692729CDE7757C6 /* Pods_Capitaine_spot.framework */; };
+		A52C4D551EB22AA0007550D5 /* UIMedal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52C4D541EB22AA0007550D5 /* UIMedal.swift */; };
 		A52E2BA81EB1DC22004F1682 /* SpotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52E2BA71EB1DC22004F1682 /* SpotViewController.swift */; };
 		A52E2BAA1EB1E6EB004F1682 /* Spot.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A52E2BA91EB1E6EA004F1682 /* Spot.storyboard */; };
 		A537B3301EAA0E91001A912A /* WaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537B32F1EAA0E91001A912A /* WaitingViewController.swift */; };
@@ -68,6 +69,7 @@
 		0C7DF1EE9E0485446262E3CE /* Pods-Capitaine spot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitaine spot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Capitaine spot/Pods-Capitaine spot.debug.xcconfig"; sourceTree = "<group>"; };
 		21F2D51E9692729CDE7757C6 /* Pods_Capitaine_spot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Capitaine_spot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26D74DEE36D04B6E49815A16 /* Pods-Capitaine spot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitaine spot.release.xcconfig"; path = "Pods/Target Support Files/Pods-Capitaine spot/Pods-Capitaine spot.release.xcconfig"; sourceTree = "<group>"; };
+		A52C4D541EB22AA0007550D5 /* UIMedal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIMedal.swift; sourceTree = "<group>"; };
 		A52E2BA71EB1DC22004F1682 /* SpotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotViewController.swift; sourceTree = "<group>"; };
 		A52E2BA91EB1E6EA004F1682 /* Spot.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Spot.storyboard; sourceTree = "<group>"; };
 		A537B32F1EAA0E91001A912A /* WaitingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +174,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A52C4D531EB22A72007550D5 /* Graphique */ = {
+			isa = PBXGroup;
+			children = (
+				A52C4D541EB22AA0007550D5 /* UIMedal.swift */,
+			);
+			name = Graphique;
+			sourceTree = "<group>";
+		};
 		A52E2BA61EB1DC0F004F1682 /* EcranProfil */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +223,7 @@
 		A54984791EA766820074755B /* BoiteAObject */ = {
 			isa = PBXGroup;
 			children = (
+				A52C4D531EB22A72007550D5 /* Graphique */,
 				A549847B1EA7669F0074755B /* User */,
 				A549847A1EA766990074755B /* Spot */,
 			);
@@ -557,6 +568,7 @@
 				A5CACB981E978A9A0068D5B2 /* AppDelegate.swift in Sources */,
 				A537B3301EAA0E91001A912A /* WaitingViewController.swift in Sources */,
 				A549847F1EA766D50074755B /* AWSSpot.swift in Sources */,
+				A52C4D551EB22AA0007550D5 /* UIMedal.swift in Sources */,
 				A5B0D1BE1E9D1AF90014EEA3 /* VueC2.swift in Sources */,
 				A5F639011EA7724B000ACD3D /* UserPoolNewPasswordViewController.swift in Sources */,
 				A5D47FCA1EB0D8C6006C132B /* SearchNavigationController.swift in Sources */,

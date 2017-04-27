@@ -58,6 +58,10 @@ extension UIView {
         
         self.clipsToBounds = true
         
+        if let medal = (self as? UIMedal) {
+            medal.text.textColor = UIColor().primary()
+        }
+        
         if let tfView = (self as? UITextField) {
             tfView.textColor = UIColor().primary()
             tfView.textAlignment = .center
@@ -75,6 +79,10 @@ extension UIView {
         self.tintColor = UIColor().secondary()
         
         self.clipsToBounds = true
+        
+        if let medal = (self as? UIMedal) {
+            medal.text.textColor = UIColor().secondary()
+        }
         
         if let tfView = (self as? UITextField) {
             tfView.textColor = UIColor().secondary()

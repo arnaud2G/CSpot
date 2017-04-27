@@ -79,7 +79,7 @@ class AWSTableSpot {
             self.results.value = spots.map({
                 (spot:AWSSpots) in
                 let dico = spot._dico!
-                _ = (iterateEnum(TypeSpot.self).filter{dico[$0.rawValue] != nil}).map{spot.userDescription.append(DescriptionSpot(rVote: dico[$0.rawValue] as! Int, typeSpot: $0))}
+                _ = (iterateEnum(TypeSpot.self).filter{dico[$0.rawValue] != nil}).map{spot.userDescription.append(DescriptionSpot(rVote: (dico[$0.rawValue] as! Int)*100/spot._userId.count, typeSpot: $0))}
                 return spot
             })
         })

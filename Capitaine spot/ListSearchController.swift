@@ -198,10 +198,10 @@ class SpotCell:UITableViewCell {
     @IBOutlet weak var imgBack: UIImageView!
     @IBOutlet weak var lblTitle: UILabel!
     
-    @IBOutlet weak var imgMedal1: UIImageView!
-    @IBOutlet weak var imgMedal2: UIImageView!
-    @IBOutlet weak var imgMedal3: UIImageView!
-    @IBOutlet weak var imgMedal4: UIImageView!
+    @IBOutlet weak var medal1: UIMedal!
+    @IBOutlet weak var medal2: UIMedal!
+    @IBOutlet weak var medal3: UIMedal!
+    @IBOutlet weak var medal4: UIMedal!
     
     @IBOutlet weak var hMedal1: NSLayoutConstraint!
     @IBOutlet weak var hMedal2: NSLayoutConstraint!
@@ -220,23 +220,18 @@ class SpotCell:UITableViewCell {
         hMedal1.constant = size1
         hMedal2.constant = size2
         
-        imgMedal1.unselectedStyle()
-        imgMedal2.unselectedStyle()
-        imgMedal3.unselectedStyle()
-        imgMedal4.unselectedStyle()
-        
-        imgMedal1.layer.cornerRadius = size1/2
-        imgMedal2.layer.cornerRadius = size2/2
-        imgMedal3.layer.cornerRadius = size2/2
-        imgMedal4.layer.cornerRadius = size2/2
+        medal1.unselectedStyle()
+        medal2.unselectedStyle()
+        medal3.unselectedStyle()
+        medal4.unselectedStyle()
     }
     
     private func initCell() {
         imgBack.image = nil
-        imgMedal1.image = nil
-        imgMedal2.image = nil
-        imgMedal3.image = nil
-        imgMedal4.image = nil
+        medal1.image = nil
+        medal2.image = nil
+        medal3.image = nil
+        medal4.image = nil
     }
     
     var spot:AWSSpots!{
@@ -253,18 +248,22 @@ class SpotCell:UITableViewCell {
             
             let descriptions = self.spot.userDescription.filter{$0.typeSpot.pic != nil}.sorted{$0.rVote > $1.rVote}
             
-            imgMedal1.image = descriptions.first!.typeSpot.pic!.withRenderingMode(.alwaysTemplate)
+            medal1.image = descriptions.first!.typeSpot.pic!.withRenderingMode(.alwaysTemplate)
+            medal1.num = descriptions.first!.rVote
             
             if descriptions.count > 1 {
-                imgMedal2.image = descriptions[1].typeSpot.pic!.withRenderingMode(.alwaysTemplate)
+                medal2.image = descriptions[1].typeSpot.pic!.withRenderingMode(.alwaysTemplate)
+                medal2.num = descriptions[1].rVote
             }
             
             if descriptions.count > 2 {
-                imgMedal3.image = descriptions[2].typeSpot.pic!.withRenderingMode(.alwaysTemplate)
+                medal3.image = descriptions[2].typeSpot.pic!.withRenderingMode(.alwaysTemplate)
+                medal3.num = descriptions[2].rVote
             }
             
             if descriptions.count > 3 {
-                imgMedal4.image = descriptions[3].typeSpot.pic!.withRenderingMode(.alwaysTemplate)
+                medal4.image = descriptions[3].typeSpot.pic!.withRenderingMode(.alwaysTemplate)
+                medal4.num = descriptions[3].rVote
             }
             
             if let pictures = self.spot._pictureId, pictures.count > 0 {
