@@ -22,6 +22,7 @@ class SignInViewController: UIViewController {
 // Support code for Facebook provider UI.
     @IBOutlet weak var facebookButton: UIButton!
 
+    @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var customProviderButton: UIButton!
     @IBOutlet weak var customCreateAccountButton: UIButton!
     @IBOutlet weak var customForgotPasswordButton: UIButton!
@@ -39,6 +40,12 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         print("Sign In Loading.")
         
+        btnBack.setImage(#imageLiteral(resourceName: "delete").withRenderingMode(.alwaysTemplate), for: .normal)
+        btnBack.tintColor = UIColor().primary()
+        
+        customProviderButton.unselectedStyle()
+        customProviderButton.layer.cornerRadius = 15
+        
         // Facebook UI Setup
         facebookButton.addTarget(self, action: #selector(SignInViewController.handleFacebookLogin), for: .touchUpInside)
         let facebookButtonImage: UIImage? = UIImage(named: "FacebookButton")
@@ -54,10 +61,12 @@ class SignInViewController: UIViewController {
         customProviderButton.addTarget(self, action: #selector(self.handleCustomSignIn), for: .touchUpInside)
         customCreateAccountButton.addTarget(self, action: #selector(self.handleUserPoolSignUp), for: .touchUpInside)
         customForgotPasswordButton.addTarget(self, action: #selector(self.handleUserPoolForgotPassword), for: .touchUpInside)
-        customProviderButton.unselectedStyle()
         customProviderButton.setTitle(NSLocalizedString("Sign-in", comment: "Sign-in"), for: UIControlState())
     }
     
+    @IBAction func btnBackPressed(_ sender: Any) {
+        dimissController()
+    }
     func dimissController() {
         self.dismiss(animated: true, completion: nil)
     }
