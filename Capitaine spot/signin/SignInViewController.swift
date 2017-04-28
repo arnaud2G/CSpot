@@ -44,7 +44,11 @@ class SignInViewController: UIViewController {
         btnBack.tintColor = UIColor().primary()
         
         customProviderButton.unselectedStyle()
-        customProviderButton.layer.cornerRadius = 15
+        customProviderButton.setImage(#imageLiteral(resourceName: "pirate").withRenderingMode(.alwaysTemplate), for: .normal)
+        customProviderButton.layer.cornerRadius = customProviderButton.frame.size.height/2
+        
+        customCreateAccountButton.setTitleColor(UIColor().primary(), for: .normal)
+        customForgotPasswordButton.setTitleColor(UIColor().primary(), for: .normal)
         
         // Facebook UI Setup
         facebookButton.addTarget(self, action: #selector(SignInViewController.handleFacebookLogin), for: .touchUpInside)
@@ -61,7 +65,6 @@ class SignInViewController: UIViewController {
         customProviderButton.addTarget(self, action: #selector(self.handleCustomSignIn), for: .touchUpInside)
         customCreateAccountButton.addTarget(self, action: #selector(self.handleUserPoolSignUp), for: .touchUpInside)
         customForgotPasswordButton.addTarget(self, action: #selector(self.handleUserPoolForgotPassword), for: .touchUpInside)
-        customProviderButton.setTitle(NSLocalizedString("Sign-in", comment: "Sign-in"), for: UIControlState())
     }
     
     @IBAction func btnBackPressed(_ sender: Any) {
@@ -72,10 +75,12 @@ class SignInViewController: UIViewController {
     }
     
     // MARK: - Utility Methods
-    
+    var popWait:WaitingViewController?
     func handleLoginWithSignInProvider(_ signInProvider: AWSSignInProvider) {
+        popWait = WaitingViewController()
+        self.navigationController?.pushViewController(popWait!, animated: true)
         AWSIdentityManager.default().login(signInProvider: signInProvider, completionHandler: {(result: Any?, error: Error?) in
-            self.dimissController()
+            self.popWait!.circleDismiss()
         })
     }
     

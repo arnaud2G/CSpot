@@ -141,8 +141,8 @@ class CSpotNavigationController: UINavigationController {
     
     func connection(sender:UIButton) {
         let loginStoryboard = UIStoryboard(name: "SignIn", bundle: nil)
-        let loginController = loginStoryboard.instantiateViewController(withIdentifier: "SignIn")
-        self.present(loginController, animated: true, completion: nil)
+        let loginController = loginStoryboard.instantiateInitialViewController()
+        self.present(loginController!, animated: true, completion: nil)
     }
     
     private func observeCSpotShape() {

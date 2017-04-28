@@ -26,9 +26,22 @@ class UserPoolSignUpConfirmationViewController : UIViewController {
     @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var confirmationCode: UITextField!
     
+    @IBOutlet weak var btnResend: UIButton!
+    @IBOutlet weak var btnBack: UIButton!
+    @IBOutlet weak var btnConfirm: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.userName.text = self.user!.username;
+        
+        btnBack.setImage(#imageLiteral(resourceName: "delete").withRenderingMode(.alwaysTemplate), for: .normal)
+        btnBack.tintColor = UIColor().primary()
+        
+        btnConfirm.unselectedStyle()
+        btnConfirm.setImage(#imageLiteral(resourceName: "pirate").withRenderingMode(.alwaysTemplate), for: .normal)
+        btnConfirm.layer.cornerRadius = btnConfirm.frame.size.height/2
+        
+        btnResend.setTitleColor(UIColor().primary(), for: .normal)
     }
     
     @IBAction func onConfirm(_ sender: AnyObject) {

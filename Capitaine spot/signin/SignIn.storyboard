@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zFR-uy-L27">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bFd-mI-e5Y">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,10 +11,26 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Description Navigation Controller-->
+        <scene sceneID="mb0-3C-7g0">
+            <objects>
+                <navigationController modalPresentationStyle="overFullScreen" navigationBarHidden="YES" id="bFd-mI-e5Y" customClass="DescriptionNavigationController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uRD-ah-HsQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="zFR-uy-L27" kind="relationship" relationship="rootViewController" id="llD-ll-aAh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NO4-7d-eEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="130" y="455"/>
+        </scene>
         <!--Sign-In View Controller-->
         <scene sceneID="Pcg-oB-wor">
             <objects>
-                <viewController storyboardIdentifier="SignIn" title="Sign-In View Controller" id="zFR-uy-L27" customClass="SignInViewController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignIn" title="Sign-In View Controller" modalPresentationStyle="overFullScreen" id="zFR-uy-L27" customClass="SignInViewController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Izq-ir-PWZ"/>
                         <viewControllerLayoutGuide type="bottom" id="9Ts-qe-o9Z"/>
@@ -24,14 +40,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ut2-wf-oqq">
-                                <rect key="frame" x="131" y="139" width="113" height="42"/>
+                                <rect key="frame" x="115" y="139" width="146" height="53"/>
                                 <color key="backgroundColor" red="0.990596382" green="1" blue="0.64801960240000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="JJO-XK-Vtl"/>
                                     <constraint firstAttribute="width" constant="240" id="WoT-pp-foU"/>
                                 </constraints>
                                 <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                <state key="normal" title="Connection">
+                                <state key="normal" title="Connection" image="pirate">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -48,39 +64,39 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgZ-Wa-Fth">
-                                <rect key="frame" x="16" y="189" width="167.5" height="27"/>
+                                <rect key="frame" x="16" y="200" width="167.5" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="Nouveau compte"/>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T6t-nK-GpM" userLabel="Left Horizontal Bar">
-                                <rect key="frame" x="16" y="238" width="103.5" height="1"/>
+                                <rect key="frame" x="16" y="249" width="103.5" height="1"/>
                                 <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="ezJ-al-MBc"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mou-mq-q0x" userLabel="Right Horizontal Bar">
-                                <rect key="frame" x="255.5" y="238" width="103.5" height="1"/>
+                                <rect key="frame" x="255.5" y="249" width="103.5" height="1"/>
                                 <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="P7W-bE-NtM"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ou connecte toi avec" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i6t-Ik-XAc">
-                                <rect key="frame" x="127.5" y="227" width="120" height="15"/>
+                                <rect key="frame" x="127.5" y="238" width="120" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zuh-aP-yxj">
-                                <rect key="frame" x="191.5" y="189" width="167.5" height="27"/>
+                                <rect key="frame" x="191.5" y="200" width="167.5" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="Mot de passe oublié">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ER-3W-z3p">
-                                <rect key="frame" x="172.5" y="250" width="30" height="34"/>
+                                <rect key="frame" x="172.5" y="261" width="30" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="Ro7-TT-Lbs"/>
                                     <constraint firstAttribute="height" constant="40" id="vcy-E3-NaH"/>
@@ -176,5 +192,6 @@
     </scenes>
     <resources>
         <image name="delete" width="33" height="33"/>
+        <image name="pirate" width="33" height="33"/>
     </resources>
 </document>

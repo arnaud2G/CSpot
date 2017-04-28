@@ -13,10 +13,6 @@ import RxSwift
 
 class VueC1: VueC2 {
     
-    let cancelButton = UIButton()
-    let valideButton = UIButton()
-    let tfSpot = UITextField()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         Spot.newSpot.reset()
@@ -75,13 +71,13 @@ class VueC1: VueC2 {
         
         Spot.newSpot.title.asObservable()
             .subscribe(onNext: {
-                description in
+                [weak self] description in
                 if description == String() {
-                    tfSpot.isHidden = true
+                    self?.tfSpot.isHidden = true
                 } else {
-                    tfSpot.text = description
-                    tfSpot.isHidden = false
-                    self.onTheGround.append(contentsOf: TypeSpot.spot.nextType)
+                    self?.tfSpot.text = description
+                    self?.tfSpot.isHidden = false
+                    self?.onTheGround.append(contentsOf: TypeSpot.spot.nextType)
                 }
             }).addDisposableTo(disposableBag)
     }

@@ -26,10 +26,19 @@ class UserPoolSignUpViewController: UIViewController {
     @IBOutlet weak var password: UITextField!
     
     @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var btnBack: UIButton!
+    @IBOutlet weak var btnCreate: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.pool = AWSCognitoIdentityUserPool.init(forKey: AWSCognitoUserPoolsSignInProviderKey)
+        
+        btnBack.setImage(#imageLiteral(resourceName: "delete").withRenderingMode(.alwaysTemplate), for: .normal)
+        btnBack.tintColor = UIColor().primary()
+        
+        btnCreate.unselectedStyle()
+        btnCreate.setImage(#imageLiteral(resourceName: "pirate").withRenderingMode(.alwaysTemplate), for: .normal)
+        btnCreate.layer.cornerRadius = btnCreate.frame.size.height/2
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -47,6 +47,7 @@ class AWSSpots: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
             "_longitude" : "longitude",
             "_pictureId" : "pictureId",
             "_userId" : "userId",
+            "_dico" : "dico",
         ]
     }
 }

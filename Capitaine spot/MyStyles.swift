@@ -62,6 +62,10 @@ extension UIView {
             medal.text.textColor = UIColor().primary()
         }
         
+        if let button = (self as? UIButton) {
+            button.setTitleColor(UIColor().primary(), for: .normal)
+        }
+        
         if let tfView = (self as? UITextField) {
             tfView.textColor = UIColor().primary()
             tfView.textAlignment = .center
@@ -82,6 +86,10 @@ extension UIView {
         
         if let medal = (self as? UIMedal) {
             medal.text.textColor = UIColor().secondary()
+        }
+        
+        if let button = (self as? UIButton) {
+            button.setTitleColor(UIColor().secondary(), for: .normal)
         }
         
         if let tfView = (self as? UITextField) {

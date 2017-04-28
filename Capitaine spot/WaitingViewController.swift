@@ -47,9 +47,8 @@ class WaitingViewController:UIViewController, CAAnimationDelegate {
     
     let maskLayerAnimation = CABasicAnimation(keyPath: "path")
     func circleDismiss() {
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
-    
+            
             //DispatchQueue.main.async {
             //}
             

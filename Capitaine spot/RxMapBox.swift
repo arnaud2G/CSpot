@@ -7,9 +7,9 @@
 //
 
 import Foundation
+import Mapbox
 import RxSwift
 import RxCocoa
-import MapBox
 
 extension Reactive where Base: MGLMapView {
     
