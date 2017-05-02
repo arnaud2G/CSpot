@@ -118,7 +118,7 @@
                                     <constraint firstAttribute="height" id="NSg-L9-oXS"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Utilisateur" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CTo-gR-rA6">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Surnom" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CTo-gR-rA6">
                                 <rect key="frame" x="16" y="63" width="343" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>

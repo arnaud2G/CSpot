@@ -55,9 +55,18 @@ class UserPoolForgotPasswordViewController: UIViewController {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
+    @IBOutlet weak var btnBack: UIButton!
+    @IBOutlet weak var btnForgot: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.pool = AWSCognitoIdentityUserPool.init(forKey: AWSCognitoUserPoolsSignInProviderKey)
+        
+        btnBack.setImage(#imageLiteral(resourceName: "delete").withRenderingMode(.alwaysTemplate), for: .normal)
+        btnBack.tintColor = UIColor().primary()
+        
+        btnForgot.unselectedStyle()
+        btnForgot.setImage(#imageLiteral(resourceName: "pirate").withRenderingMode(.alwaysTemplate), for: .normal)
+        btnForgot.layer.cornerRadius = btnForgot.frame.size.height/2
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

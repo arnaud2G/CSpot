@@ -23,8 +23,17 @@ class UserPoolNewPasswordViewController: UIViewController {
     @IBOutlet weak var confirmationCode: UITextField!
     @IBOutlet weak var updatedPassword: UITextField!
     
+    @IBOutlet weak var btnUpdate: UIButton!
+    @IBOutlet weak var btnBack: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        btnBack.setImage(#imageLiteral(resourceName: "delete").withRenderingMode(.alwaysTemplate), for: .normal)
+        btnBack.tintColor = UIColor().primary()
+        
+        btnUpdate.unselectedStyle()
+        btnUpdate.setImage(#imageLiteral(resourceName: "pirate").withRenderingMode(.alwaysTemplate), for: .normal)
+        btnUpdate.layer.cornerRadius = btnUpdate.frame.size.height/2
     }
     
     

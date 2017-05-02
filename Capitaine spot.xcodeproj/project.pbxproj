@@ -112,7 +112,6 @@
 		A5CEEA4F1E9CCD370057CA8A /* MyMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMap.swift; sourceTree = "<group>"; };
 		A5D47FC91EB0D8C6006C132B /* SearchNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNavigationController.swift; sourceTree = "<group>"; };
 		A5D47FCB1EB0E942006C132B /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
-		A5E23AD31EB39CDA00E1176A /* AWSDynamoDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AWSDynamoDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5F638ED1EA76FF8000ACD3D /* AWSMobileHubHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSMobileHubHelper.framework; sourceTree = "<group>"; };
 		A5F638F21EA7724B000ACD3D /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		A5F638F31EA7724B000ACD3D /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -288,7 +287,6 @@
 		A5CACB8B1E978A990068D5B2 = {
 			isa = PBXGroup;
 			children = (
-				A5E23AD31EB39CDA00E1176A /* AWSDynamoDB.framework */,
 				A5CACB961E978A9A0068D5B2 /* Capitaine spot */,
 				A5CACB951E978A9A0068D5B2 /* Products */,
 				8AB950C02094189C79911CEC /* Pods */,
