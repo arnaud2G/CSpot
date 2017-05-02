@@ -44,28 +44,24 @@ class UserPoolSignUpConfirmationViewController : UIViewController {
         btnResend.setTitleColor(UIColor().primary(), for: .normal)
     }
     
+    
+    var popWait:WaitingViewController?
     @IBAction func onConfirm(_ sender: AnyObject) {
+        popWait = WaitingViewController()
+        self.navigationController?.pushViewController(popWait!, animated: true)
         guard let confirmationCodeValue = self.confirmationCode.text, !confirmationCodeValue.isEmpty else {
-            UIAlertView(title: "Confirmation code missing.",
-                        message: "Please enter a valid confirmation code.",
-                        delegate: nil,
-                        cancelButtonTitle: "Ok").show()
+            DispatchQueue.main.async(execute: {
+                self.popWait?.setMessageError(error: "Il manque le code de confirmation")
+            })
             return
         }
         self.user?.confirmSignUp(self.confirmationCode.text!, forceAliasCreation: true).continueWith(block: {[weak self] (task: AWSTask) -> AnyObject? in
             guard let strongSelf = self else { return nil }
             DispatchQueue.main.async(execute: { 
-                if let error = task.error as? NSError {
-                    UIAlertView(title: error.userInfo["__type"] as? String,
-                        message: error.userInfo["message"] as? String,
-                        delegate: nil,
-                        cancelButtonTitle: "Ok").show()
+                if let error = task.error as NSError? {
+                    strongSelf.popWait?.setError(error: error)
                 } else {
-                    UIAlertView(title: "Registration Complete",
-                        message: "Registration was successful.",
-                        delegate: nil,
-                        cancelButtonTitle: "Ok").show()
-                    _ = strongSelf.navigationController?.popToRootViewController(animated: true)
+                    strongSelf.popWait?.setMessageError(error: "Votre compte a été bien été créé", toRoot:true)
                 }
             })
             return nil
@@ -73,19 +69,15 @@ class UserPoolSignUpConfirmationViewController : UIViewController {
     }
     
     @IBAction func onResendConfirmationCode(_ sender: AnyObject) {
+        popWait = WaitingViewController()
+        self.navigationController?.pushViewController(popWait!, animated: true)
         self.user?.resendConfirmationCode().continueWith(block: {[weak self] (task: AWSTask<AWSCognitoIdentityUserResendConfirmationCodeResponse>) -> AnyObject? in
-            guard let _ = self else { return nil }
-            DispatchQueue.main.async(execute: { 
-                if let error = task.error as? NSError {
-                    UIAlertView(title: error.userInfo["__type"] as? String,
-                        message: error.userInfo["message"] as? String,
-                        delegate: nil,
-                        cancelButtonTitle: "Ok").show()
-                } else if let result = task.result as AWSCognitoIdentityUserResendConfirmationCodeResponse! {
-                    UIAlertView(title: "Code Resent",
-                        message: "Code resent to \(result.codeDeliveryDetails?.destination!)",
-                        delegate: nil,
-                        cancelButtonTitle: "Ok").show()
+            guard let strongSelf = self else { return nil }
+            DispatchQueue.main.async(execute: {
+                if let error = task.error as NSError? {
+                    strongSelf.popWait?.setError(error: error)
+                } else if let result = task.result as AWSCognitoIdentityUserResendConfirmationCodeResponse!, let codeDeliveryDetails = result.codeDeliveryDetails, let destination = codeDeliveryDetails.destination {
+                    strongSelf.popWait?.setMessageError(error: "Le code a été renvoyé à \(destination)")
                 }
             })
             return nil

@@ -79,8 +79,15 @@ class SignInViewController: UIViewController {
     func handleLoginWithSignInProvider(_ signInProvider: AWSSignInProvider) {
         popWait = WaitingViewController()
         self.navigationController?.pushViewController(popWait!, animated: true)
-        AWSIdentityManager.default().login(signInProvider: signInProvider, completionHandler: {(result: Any?, error: Error?) in
-            self.popWait!.circleDismiss()
+        AWSIdentityManager.default().login(signInProvider: signInProvider, completionHandler: {
+            (result: Any?, error: Error?) in
+            DispatchQueue.main.async(execute: {
+                if let error = error as NSError? {
+                    self.popWait?.setError(error: error)
+                } else {
+                    self.popWait?.circleDismiss()
+                }
+            })
         })
     }
     

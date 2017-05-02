@@ -7,10 +7,10 @@
 //
 
 import Foundation
+import Mapbox
 import RxCocoa
 import RxSwift
 import MapKit
-import Mapbox
 import AWSMobileHubHelper
 
 class User {

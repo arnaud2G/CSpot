@@ -37,29 +37,26 @@ class UserPoolNewPasswordViewController: UIViewController {
     }
     
     
+    var popWait:WaitingViewController?
     @IBAction func onUpdatePassword(_ sender: AnyObject) {
+        
+        popWait = WaitingViewController()
+        self.navigationController?.pushViewController(popWait!, animated: true)
+        
         guard let confirmationCodeValue = self.confirmationCode.text, !confirmationCodeValue.isEmpty else {
-            UIAlertView(title: "Password Field Empty",
-                        message: "Please enter a password of your choice.",
-                        delegate: nil,
-                        cancelButtonTitle: "Ok").show()
+            DispatchQueue.main.async(execute: {
+                self.popWait?.setMessageError(error: "Vous devez saisir un mot de passe")
+            })
             return
         }
         //confirm forgot password with input from ui.
         _ = self.user?.confirmForgotPassword(confirmationCodeValue, password: self.updatedPassword.text!).continueWith(block: {[weak self] (task: AWSTask) -> AnyObject? in
             guard let strongSelf = self else { return nil }
-            DispatchQueue.main.async(execute: { 
-                if let error = task.error as? NSError {
-                    UIAlertView(title: error.userInfo["__type"] as? String,
-                        message: error.userInfo["message"] as? String,
-                        delegate: nil,
-                        cancelButtonTitle: "Ok").show()
+            DispatchQueue.main.async(execute: {
+                if let error = task.error as NSError? {
+                    strongSelf.popWait?.setError(error: error)
                 } else {
-                    UIAlertView(title: "Password Reset Complete",
-                        message: "Password Reset was completed successfully.",
-                        delegate: nil,
-                        cancelButtonTitle: "Ok").show()
-                    _ = strongSelf.navigationController?.popToRootViewController(animated: true)
+                    strongSelf.popWait?.setMessageError(error: "Le mot de passe a été correctement modifié", toRoot:true)
                 }
             })
             return nil

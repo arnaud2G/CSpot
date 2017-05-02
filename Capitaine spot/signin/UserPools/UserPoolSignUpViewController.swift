@@ -48,14 +48,17 @@ class UserPoolSignUpViewController: UIViewController {
         }
     }
     
+    var popWait:WaitingViewController?
     @IBAction func onSignUp(_ sender: AnyObject) {
-
+        
+        popWait = WaitingViewController()
+        self.navigationController?.pushViewController(popWait!, animated: true)
+        
         guard let userNameValue = self.userName.text, !userNameValue.isEmpty,
             let passwordValue = self.password.text, !passwordValue.isEmpty else {
-            UIAlertView(title: "Missing Required Fields",
-                        message: "Username / Password are required for registration.",
-                        delegate: nil,
-                        cancelButtonTitle: "Ok").show()
+                DispatchQueue.main.async(execute: {
+                    self.popWait?.setMessageError(error: "Vous devez rentrer un surnom et un mot de passe pour créer un compte")
+                })
             return
         }
         
@@ -72,24 +75,30 @@ class UserPoolSignUpViewController: UIViewController {
         self.pool?.signUp(userNameValue, password: passwordValue, userAttributes: attributes, validationData: nil).continueWith {[weak self] (task: AWSTask<AWSCognitoIdentityUserPoolSignUpResponse>) -> AnyObject? in
             guard let strongSelf = self else { return nil }
             DispatchQueue.main.async(execute: { 
-                if let error = task.error as? NSError {
-                    UIAlertView(title: error.userInfo["__type"] as? String,
-                        message: error.userInfo["message"] as? String,
-                        delegate: nil,
-                        cancelButtonTitle: "Ok").show()
+                if let error = task.error as NSError? {
+                    DispatchQueue.main.async(execute: {
+                        strongSelf.popWait?.setError(error: error)
+                    })
                     return
                 }
                 
                 if let result = task.result as AWSCognitoIdentityUserPoolSignUpResponse! {
                     // handle the case where user has to confirm his identity via email / SMS
                     if (result.user.confirmedStatus != AWSCognitoIdentityUserStatus.confirmed) {
-                        strongSelf.sentTo = result.codeDeliveryDetails?.destination
-                        strongSelf.performSegue(withIdentifier: "SignUpConfirmSegue", sender:sender)
+                        
+                        let userPoolsStoryboard = UIStoryboard(name: "UserPools", bundle: nil)
+                        let signUpConfirmation = userPoolsStoryboard.instantiateViewController(withIdentifier: "SignUpConfirmation") as! UserPoolSignUpConfirmationViewController
+                        
+                        signUpConfirmation.sentTo = strongSelf.sentTo
+                        signUpConfirmation.user = strongSelf.pool?.getUser(strongSelf.userName.text!)
+                        
+                        strongSelf.navigationController?.pushViewController(signUpConfirmation, animated: true)
+                        
                     } else {
-                        UIAlertView(title: "Registration Complete",
+                        /*UIAlertView(title: "Registration Complete",
                             message: "Registration was successful.",
                             delegate: nil,
-                            cancelButtonTitle: "Ok").show()
+                            cancelButtonTitle: "Ok").show()*/
                         _ = strongSelf.navigationController?.popToRootViewController(animated: true)
                     }
                 }

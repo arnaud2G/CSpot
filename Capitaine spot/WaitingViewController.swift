@@ -49,9 +49,6 @@ class WaitingViewController:UIViewController, CAAnimationDelegate {
     func circleDismiss() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
             
-            //DispatchQueue.main.async {
-            //}
-            
             let circleMaskPathInitial = UIBezierPath(ovalIn: CGRect(x: 150 - 500, y: 150 - 500, width: 1000, height: 1000))
             let circleMaskPathFinal = UIBezierPath(ovalIn: CGRect(x: 100, y: 100, width: 0, height: 0))
             
@@ -136,5 +133,39 @@ class WaitingViewController:UIViewController, CAAnimationDelegate {
         square.layer.add(anim, forKey: "animate position along path")
     }
     
+    func setMessageError(error:String, toRoot:Bool=false) {
+        displayError(message:error, toRoot:toRoot)
+    }
     
+    func setError(error:NSError, toRoot:Bool=false) {
+        
+        var message:String = "Erreur de connection"
+        if let mess = error.userInfo["NSLocalizedDescription"] as? String {
+            message = mess
+        } else if let mess = error.userInfo["message"] as? String {
+            message = mess
+        }
+        
+        displayError(message:message, toRoot:toRoot)
+    }
+    
+    private func displayError(message:String, toRoot:Bool) {
+        
+        let vError = ErrorView(message: message) {
+            DispatchQueue.main.async(execute: {
+                if toRoot {
+                    self.navigationController?.popToRootViewController(animated: true)
+                } else {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            })
+        }
+        vError.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.addSubview(vError)
+        vError.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        vError.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        
+        vError.leadingAnchor.constraint(greaterThanOrEqualTo: self.view.leadingAnchor, constant:20).isActive = true
+    }
 }

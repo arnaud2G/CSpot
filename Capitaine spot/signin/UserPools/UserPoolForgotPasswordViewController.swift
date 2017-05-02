@@ -24,12 +24,16 @@ class UserPoolForgotPasswordViewController: UIViewController {
     
     @IBOutlet weak var userName: UITextField!
     
+    var popWait:WaitingViewController?
     @IBAction func onForgotPassword(_ sender: AnyObject) {
+        
+        popWait = WaitingViewController()
+        self.navigationController?.pushViewController(popWait!, animated: true)
+        
         guard let username = self.userName.text, !username.isEmpty else {
-            UIAlertView(title: "Missing UserName",
-                        message: "Please enter a valid user name.",
-                        delegate: nil,
-                        cancelButtonTitle: "Ok").show()
+            DispatchQueue.main.async(execute: {
+                self.popWait?.setMessageError(error: "Vous devez saisir un surnom")
+            })
             return
         }
         
@@ -37,18 +41,20 @@ class UserPoolForgotPasswordViewController: UIViewController {
         self.user?.forgotPassword().continueWith(block: {[weak self] (task: AWSTask) -> AnyObject? in
             guard let strongSelf = self else {return nil}
             DispatchQueue.main.async(execute: {
-                if let error = task.error as? NSError {
-                    UIAlertView(title: error.userInfo["__type"] as? String,
-                        message: error.userInfo["message"] as? String,
-                        delegate: nil,
-                        cancelButtonTitle: "Ok").show()
+                if let error = task.error as NSError? {
+                    strongSelf.popWait?.setError(error: error)
                 } else {
-                    strongSelf.performSegue(withIdentifier: "NewPasswordSegue", sender: sender)
+                    
+                    let userPoolsStoryboard = UIStoryboard(name: "UserPools", bundle: nil)
+                    let newPasswordController = userPoolsStoryboard.instantiateViewController(withIdentifier: "NewPassword") as! UserPoolNewPasswordViewController
+                    
+                    newPasswordController.user = strongSelf.user
+                    
+                    strongSelf.navigationController?.pushViewController(newPasswordController, animated: true)
                 }
             })
             return nil
         })
-        
     }
     
     @IBAction func onCancel(_ sender: AnyObject) {
@@ -67,11 +73,5 @@ class UserPoolForgotPasswordViewController: UIViewController {
         btnForgot.unselectedStyle()
         btnForgot.setImage(#imageLiteral(resourceName: "pirate").withRenderingMode(.alwaysTemplate), for: .normal)
         btnForgot.layer.cornerRadius = btnForgot.frame.size.height/2
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let newPasswordViewController = segue.destination as? UserPoolNewPasswordViewController {
-            newPasswordViewController.user = self.user
-        }
     }
 }

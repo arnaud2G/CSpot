@@ -25,6 +25,7 @@
 		A54D8EA11E9BC30B0081C0F5 /* ToolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D8EA01E9BC30B0081C0F5 /* ToolExtension.swift */; };
 		A54D8EA31E9BCCF20081C0F5 /* NumberExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D8EA21E9BCCF20081C0F5 /* NumberExtension.swift */; };
 		A57480421EA8B4E70045AC03 /* CSpotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57480411EA8B4E70045AC03 /* CSpotController.swift */; };
+		A579C8551EB8913100397D04 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A579C8541EB8913100397D04 /* ErrorView.swift */; };
 		A58347CD1E9E241600E16507 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58347CC1E9E241600E16507 /* User.swift */; };
 		A59580521EB3452600FDED6D /* GeolocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58347CE1E9E537500E16507 /* GeolocationService.swift */; };
 		A59580531EB34C1500FDED6D /* DescriptionNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537B3311EAA312D001A912A /* DescriptionNavigationController.swift */; };
@@ -92,6 +93,7 @@
 		A5595A531EA0BEFF00F4AFE5 /* RxMapBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxMapBox.swift; sourceTree = "<group>"; };
 		A571DCA71EB09AA7003DBC2A /* MapSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSearchController.swift; sourceTree = "<group>"; };
 		A57480411EA8B4E70045AC03 /* CSpotController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSpotController.swift; sourceTree = "<group>"; };
+		A579C8541EB8913100397D04 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		A58347CC1E9E241600E16507 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A58347CE1E9E537500E16507 /* GeolocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeolocationService.swift; sourceTree = "<group>"; };
 		A59832721EAA4B9B00B88033 /* AWSTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSTable.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				A537B32F1EAA0E91001A912A /* WaitingViewController.swift */,
+				A579C8541EB8913100397D04 /* ErrorView.swift */,
 			);
 			name = EcranChargement;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 				A58347CD1E9E241600E16507 /* User.swift in Sources */,
 				A5CACBAD1E978B1C0068D5B2 /* DynamicsBall.swift in Sources */,
 				A5CACB9A1E978A9A0068D5B2 /* MenuViewController.swift in Sources */,
+				A579C8551EB8913100397D04 /* ErrorView.swift in Sources */,
 				A549847D1EA766B40074755B /* UISpot.swift in Sources */,
 				A54512D01E9BD45F000FDA2F /* Spot.swift in Sources */,
 				A5E23ACE1EB3919F00E1176A /* SearchNavigationController.swift in Sources */,
