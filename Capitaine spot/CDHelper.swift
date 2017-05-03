@@ -12,8 +12,7 @@ class CDHelper {
     
     static let sharedInstance = CDHelper()
     let UserDefaultShareKey: String = "group.avpro.CSpot"
-    
-    let modelName = "CSpot"
+    let modelName = "CDCSpot"
     
     // Définition de l'URL de l'emplacement de sauvegarde
     lazy var storeDirectory: URL = {
@@ -92,6 +91,10 @@ class CDContext:NSManagedObjectContext {
             self.delete(result)
         })
         try self.save()
+    }
+    
+    func initType() {
+        
     }
 }
 
