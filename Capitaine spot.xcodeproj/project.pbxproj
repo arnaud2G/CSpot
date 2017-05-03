@@ -16,6 +16,8 @@
 		A52E2BAA1EB1E6EB004F1682 /* Spot.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A52E2BA91EB1E6EA004F1682 /* Spot.storyboard */; };
 		A537B3301EAA0E91001A912A /* WaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537B32F1EAA0E91001A912A /* WaitingViewController.swift */; };
 		A53B30671EA65617008AE7B8 /* AnimateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53B30661EA65617008AE7B8 /* AnimateExtension.swift */; };
+		A53C3E5B1EBA29B300E68529 /* CDDescribe+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C3E591EBA29B200E68529 /* CDDescribe+CoreDataProperties.swift */; };
+		A53C3E5C1EBA29B300E68529 /* CDType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C3E5A1EBA29B200E68529 /* CDType+CoreDataProperties.swift */; };
 		A54512D01E9BD45F000FDA2F /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54512CF1E9BD45F000FDA2F /* Spot.swift */; };
 		A54512D41E9BE017000FDA2F /* MyCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54512D31E9BE017000FDA2F /* MyCamera.swift */; };
 		A54512D61E9BE0B6000FDA2F /* MyStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54512D51E9BE0B6000FDA2F /* MyStyles.swift */; };
@@ -88,6 +90,8 @@
 		A537B32F1EAA0E91001A912A /* WaitingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingViewController.swift; sourceTree = "<group>"; };
 		A537B3311EAA312D001A912A /* DescriptionNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionNavigationController.swift; sourceTree = "<group>"; };
 		A53B30661EA65617008AE7B8 /* AnimateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimateExtension.swift; sourceTree = "<group>"; };
+		A53C3E591EBA29B200E68529 /* CDDescribe+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDDescribe+CoreDataProperties.swift"; path = "../CDDescribe+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A53C3E5A1EBA29B200E68529 /* CDType+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDType+CoreDataProperties.swift"; path = "../CDType+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A54512CF1E9BD45F000FDA2F /* Spot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
 		A54512D31E9BE017000FDA2F /* MyCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCamera.swift; sourceTree = "<group>"; };
 		A54512D51E9BE0B6000FDA2F /* MyStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStyles.swift; sourceTree = "<group>"; };
@@ -302,6 +306,17 @@
 			name = Fastlane;
 			sourceTree = "<group>";
 		};
+		A59F8CF01EBA24BD0083289B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				A53C3E591EBA29B200E68529 /* CDDescribe+CoreDataProperties.swift */,
+				A53C3E5A1EBA29B200E68529 /* CDType+CoreDataProperties.swift */,
+				A523C8021EB9D2E7006D2919 /* CDHelper.swift */,
+				A59F8CE51EBA20F70083289B /* CDCSpot.xcdatamodeld */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		A5B62C151EA8FABA00694441 /* EcranDescription */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,13 +368,12 @@
 		A5CACBA91E978AB40068D5B2 /* BoiteAOutils */ = {
 			isa = PBXGroup;
 			children = (
+				A59F8CF01EBA24BD0083289B /* CoreData */,
 				A5F638F01EA771A3000ACD3D /* AWS */,
 				A54D8EA01E9BC30B0081C0F5 /* ToolExtension.swift */,
 				A54512D51E9BE0B6000FDA2F /* MyStyles.swift */,
 				A54D8EA21E9BCCF20081C0F5 /* NumberExtension.swift */,
 				A53B30661EA65617008AE7B8 /* AnimateExtension.swift */,
-				A523C8021EB9D2E7006D2919 /* CDHelper.swift */,
-				A59F8CE51EBA20F70083289B /* CDCSpot.xcdatamodeld */,
 			);
 			name = BoiteAOutils;
 			sourceTree = "<group>";
@@ -608,6 +622,7 @@
 				A54512D61E9BE0B6000FDA2F /* MyStyles.swift in Sources */,
 				A5F638FE1EA7724B000ACD3D /* SignInViewControllerExtensions.swift in Sources */,
 				A59580531EB34C1500FDED6D /* DescriptionNavigationController.swift in Sources */,
+				A53C3E5B1EBA29B300E68529 /* CDDescribe+CoreDataProperties.swift in Sources */,
 				A54D8EA11E9BC30B0081C0F5 /* ToolExtension.swift in Sources */,
 				A54984831EA767FB0074755B /* AWSConfig.swift in Sources */,
 				A59832751EAA58FC00B88033 /* AWSS3.swift in Sources */,
@@ -637,6 +652,7 @@
 				A549847F1EA766D50074755B /* AWSSpot.swift in Sources */,
 				A52C4D551EB22AA0007550D5 /* UIMedal.swift in Sources */,
 				A5F639011EA7724B000ACD3D /* UserPoolNewPasswordViewController.swift in Sources */,
+				A53C3E5C1EBA29B300E68529 /* CDType+CoreDataProperties.swift in Sources */,
 				A5E23ACF1EB3919F00E1176A /* ListSearchController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

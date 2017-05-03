@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="CDDescribe" representedClassName="CDDescribe" syncable="YES" codeGenerationType="class">
+    <entity name="CDDescribe" representedClassName=".CDDescribe" syncable="YES">
         <attribute name="adress" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="creationDate" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -9,15 +9,15 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="spotId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="type1" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDType" inverseName="describe1" inverseEntity="CDType" syncable="YES"/>
-        <relationship name="type2" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDType" inverseName="describe2" inverseEntity="CDType" syncable="YES"/>
-        <relationship name="type3" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDType" inverseName="describe3" inverseEntity="CDType" syncable="YES"/>
+        <relationship name="type1" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDType" inverseName="describe1" inverseEntity="CDType" syncable="YES"/>
+        <relationship name="type2" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDType" inverseName="describe2" inverseEntity="CDType" syncable="YES"/>
+        <relationship name="type3" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDType" inverseName="describe3" inverseEntity="CDType" syncable="YES"/>
     </entity>
-    <entity name="CDType" representedClassName="CDType" syncable="YES" codeGenerationType="class">
+    <entity name="CDType" representedClassName=".CDType" syncable="YES">
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="describe1" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDDescribe" inverseName="type1" inverseEntity="CDDescribe" syncable="YES"/>
-        <relationship name="describe2" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDDescribe" inverseName="type2" inverseEntity="CDDescribe" syncable="YES"/>
-        <relationship name="describe3" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDDescribe" inverseName="type3" inverseEntity="CDDescribe" syncable="YES"/>
+        <relationship name="describe1" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDDescribe" inverseName="type1" inverseEntity="CDDescribe" syncable="YES"/>
+        <relationship name="describe2" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDDescribe" inverseName="type2" inverseEntity="CDDescribe" syncable="YES"/>
+        <relationship name="describe3" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDDescribe" inverseName="type3" inverseEntity="CDDescribe" syncable="YES"/>
     </entity>
     <elements>
         <element name="CDDescribe" positionX="-63" positionY="-18" width="128" height="210"/>

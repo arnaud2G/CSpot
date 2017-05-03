@@ -94,7 +94,6 @@ class CDContext:NSManagedObjectContext {
     }
     
     func initType() {
-        
     }
 }
 
