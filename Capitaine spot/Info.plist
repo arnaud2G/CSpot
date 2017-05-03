@@ -80,7 +80,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -153,11 +153,11 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>L'accès à l'appareil photo vous permettra d'envoyer des photos à vos amis</string>
+	<string>L&#39;accès à l&#39;appareil photo vous permettra d&#39;envoyer des photos à vos amis</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>L'accès à votre localisation nous permettra de vous proposer des lieux autour de vous</string>
+	<string>L&#39;accès à votre localisation nous permettra de vous proposer des lieux autour de vous</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>L'accès à la bibliothèque permet de stoker les photos envoyés par vos amis</string>
+	<string>L&#39;accès à la bibliothèque permet de stoker les photos envoyés par vos amis</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
