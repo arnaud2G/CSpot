@@ -11,11 +11,56 @@ import CoreData
 
 public class CDDescribe: NSManagedObject {
     
+    static func getDescribe(spotId:String) -> CDDescribe? {
+        
+        let request = CDDescribe.fetchDescribe()
+        request.predicate = NSPredicate(format: "spotId == %@", spotId)
+        let ret = try! CDContext.sharedInstance.fetch(request)
+        if ret.count > 0 {
+            return ret.first!
+        } else {
+            return nil
+        }
+    }
+    
+    static func addDescribe(descriptions:[TypeSpot], describe:AWSDescribes) {
+        
+        let cdTypes = descriptions.map({
+            (type:TypeSpot) -> CDType in
+            let typeRequest = CDType.fetchType()
+            typeRequest.predicate = NSPredicate(format: "title == %@", type.rawValue)
+            let cdTypes = try! CDContext.sharedInstance.fetch(typeRequest)
+            return cdTypes.first!
+        })
+        
+        let request = CDDescribe.fetchDescribe()
+        request.predicate = NSPredicate(format: "spotId == %@", describe._spotId)
+        let cdDescribes = try! CDContext.sharedInstance.fetch(request)
+        if let cdDescribe = cdDescribes.first {
+            cdDescribe.type1 = Set(cdTypes)
+        } else {
+            
+            let newDescribe = CDDescribe(context: CDContext.sharedInstance)
+            
+            newDescribe.adress = describe._adress
+            newDescribe.city = describe._city
+            newDescribe.creationDate = Double(describe._creationDate)
+            newDescribe.latitude = Double(describe._latitude)
+            newDescribe.longitude = Double(describe._longitude)
+            newDescribe.name = describe._name
+            newDescribe.spotId = describe._spotId
+            newDescribe.userId = describe._userId
+            
+            newDescribe.type1 = Set(cdTypes)
+        }
+        
+        try! CDContext.sharedInstance.save()
+    }
 }
 
 extension CDDescribe {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<CDDescribe> {
+    @nonobjc public class func fetchDescribe() -> NSFetchRequest<CDDescribe> {
         return NSFetchRequest<CDDescribe>(entityName: "CDDescribe")
     }
 
@@ -27,9 +72,9 @@ extension CDDescribe {
     @NSManaged public var name: String?
     @NSManaged public var spotId: String?
     @NSManaged public var userId: String?
-    @NSManaged public var type1: NSSet?
-    @NSManaged public var type2: NSSet?
-    @NSManaged public var type3: NSSet?
+    @NSManaged public var type1: Set<CDType>!
+    @NSManaged public var type2: Set<CDType>?
+    @NSManaged public var type3: Set<CDType>?
 
 }
 

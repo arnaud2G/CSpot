@@ -147,6 +147,7 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
         tfSpot.heightAnchor.constraint(equalToConstant: 40).isActive = true
         tfSpot.topAnchor.constraint(equalTo: self.view.topAnchor, constant:40).isActive = true
         tfSpot.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant:60).isActive = true
+        tfSpot.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant:-60).isActive = true
         
         valideButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(valideButton)
@@ -155,7 +156,7 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
         valideButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         valideButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         valideButton.centerYAnchor.constraint(equalTo: tfSpot.centerYAnchor).isActive = true
-        tfSpot.trailingAnchor.constraint(equalTo: valideButton.leadingAnchor, constant:-10).isActive = true
+        //tfSpot.trailingAnchor.constraint(equalTo: valideButton.leadingAnchor, constant:-10).isActive = true
         
         // Attributes
         tfSpot.placeholder = NSLocalizedString("Ou êtes vous ?", comment: "Ou êtes vous ?")
@@ -178,10 +179,12 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
                 guard let description = description else {
                     self.tfSpot.text = String()
                     self.valideButton.isEnabled = false
+                    self.valideButton.animDisappear(withDuration: 0.3, delay: 0.0, completionBlock:{})
                     return
                 }
                 self.tfSpot.text = description.name
                 self.valideButton.isEnabled = true
+                self.valideButton.animAppear(withDuration: 0.3, delay: 0.0, completionBlock:{})
             }).addDisposableTo(disposeBag)
         
         valideButton.rx.tap
@@ -193,13 +196,12 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
                 Spot.newSpot.coordinate = self.spot.value!.location.coordinate
                 Spot.newSpot.adress = self.spot.value!.stringAddress
                 Spot.newSpot.place = self.spot.value!.addressDictionary!["city"] as! String
+                Spot.newSpot.spotId.value = "\(self.spot.value!.name):\(Spot.newSpot.place)"
                 self.animateCircleDisappear(withValidate: true)
             }).addDisposableTo(disposeBag)
         
         // Animation
-        self.tfSpot.animAppear(withDuration: 0.3, delay: 0.0, completionBlock: {
-            self.valideButton.animAppear(withDuration: 0.3, delay: 0.0, completionBlock:{})
-        })
+        self.tfSpot.animAppear(withDuration: 0.3, delay: 0.0, completionBlock: { })
     }
     
     func animateLabelsAppears(withDuration duration:TimeInterval=0.3, delay:TimeInterval=0.1, completionBlock:@escaping ()->()) {

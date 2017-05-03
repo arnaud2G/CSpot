@@ -24,17 +24,17 @@ class AWSTableDescription {
         itemForGet._userId = AWSIdentityManager.default().identityId!
         itemForGet._creationDate = NSNumber(value: Int(NSDate().timeIntervalSince1970*1000))
         
-        itemForGet._type1 = Spot.newSpot.descriptions.filter{TypeSpot.spot.nextType.contains($0)}.map{$0.localizedString}
+        itemForGet._type1 = Spot.newSpot.descriptions.value.filter{TypeSpot.spot.nextType.contains($0)}.map{$0.localizedString}
         
         var type2 = [String]()
         for type in TypeSpot.spot.nextType {
-            type2.append(contentsOf: Spot.newSpot.descriptions.filter{type.nextType.contains($0)}.map{$0.localizedString})
+            type2.append(contentsOf: Spot.newSpot.descriptions.value.filter{type.nextType.contains($0)}.map{$0.localizedString})
         }
         if type2.count > 0 {
             itemForGet._type2 = type2
         }
         
-        let type3 = ((Spot.newSpot.descriptions.map{$0.localizedString}).filter{!itemForGet._type1.contains($0)}).filter{!type2.contains($0)}
+        let type3 = ((Spot.newSpot.descriptions.value.map{$0.localizedString}).filter{!itemForGet._type1.contains($0)}).filter{!type2.contains($0)}
         if type3.count > 0 {
             itemForGet._type3 = type3
         }
@@ -56,28 +56,28 @@ class AWSTableDescription {
 
 class AWSTableDescribe {
     
-    static func insertNewSpotWithCompletionHandler(_ completionHandler: @escaping (_ error: Error?) -> Void) {
+    static func insertNewSpotWithCompletionHandler(_ completionHandler: @escaping (_ error: Error?,_ itemForGet: AWSDescribes) -> Void) {
         
         let objectMapper = AWSDynamoDBObjectMapper.default()
         
         let itemForGet: AWSDescribes! = AWSDescribes()
         
         itemForGet._userId = AWSIdentityManager.default().identityId!
-        itemForGet._spotId = "\(Spot.newSpot.title.value):\(Spot.newSpot.place)"
+        itemForGet._spotId = Spot.newSpot.spotId.value
         
         itemForGet._creationDate = NSNumber(value: Int(NSDate().timeIntervalSince1970*1000))
         
-        itemForGet._type1 = Spot.newSpot.descriptions.filter{TypeSpot.spot.nextType.contains($0)}.map{$0.localizedString}
+        itemForGet._type1 = Spot.newSpot.descriptions.value.filter{TypeSpot.spot.nextType.contains($0)}.map{$0.localizedString}
         
         var type2 = [String]()
         for type in TypeSpot.spot.nextType {
-            type2.append(contentsOf: Spot.newSpot.descriptions.filter{type.nextType.contains($0)}.map{$0.localizedString})
+            type2.append(contentsOf: Spot.newSpot.descriptions.value.filter{type.nextType.contains($0)}.map{$0.localizedString})
         }
         if type2.count > 0 {
             itemForGet._type2 = type2
         }
         
-        let type3 = ((Spot.newSpot.descriptions.map{$0.localizedString}).filter{!itemForGet._type1.contains($0)}).filter{!type2.contains($0)}
+        let type3 = ((Spot.newSpot.descriptions.value.map{$0.localizedString}).filter{!itemForGet._type1.contains($0)}).filter{!type2.contains($0)}
         if type3.count > 0 {
             itemForGet._type3 = type3
         }
@@ -92,7 +92,7 @@ class AWSTableDescribe {
         }
         
         objectMapper.save(itemForGet, completionHandler: {(error: Error?) -> Void in
-            completionHandler(error)
+            completionHandler(error, itemForGet)
         })
     }
 }

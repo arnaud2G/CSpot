@@ -71,8 +71,9 @@ class Spot {
     
     static let newSpot = Spot()
     
-    var descriptions = [TypeSpot]() // 3 - VuC2
+    var descriptions:Variable<[TypeSpot]> = Variable([]) // 3 - VuC2
     var title:Variable<String> = Variable(String()) // 2 - MyMap
+    var spotId:Variable<String> = Variable(String()) // 2 - MyMap
     var adress:String = String() // 2 - MyMap
     
     var coordinate:CLLocationCoordinate2D? = nil // 2 - MyMap
@@ -92,11 +93,19 @@ class Spot {
                 self.pictureId = "\(AWSIdentityManager.default().identityId!):\(String(Int(NSDate().timeIntervalSince1970))).png"
             }
         }).addDisposableTo(disposeBag)
+        
+        spotId.asObservable().subscribe(onNext:{
+            spotId in
+            if let describe = CDDescribe.getDescribe(spotId: spotId), let type = describe.type1, type.count > 0 {
+                let titles = type.map{$0.title!}
+                self.descriptions.value = iterateEnum(TypeSpot.self).filter{titles.contains($0.rawValue)}
+            }
+        }).addDisposableTo(disposeBag)
     }
     
     func reset() {
         
-        self.descriptions = [TypeSpot]()
+        self.descriptions = Variable([])
         self.title.value = String()
         self.adress = String()
         self.coordinate = nil

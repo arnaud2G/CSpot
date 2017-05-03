@@ -40,9 +40,9 @@ extension CDType {
     }
 
     @NSManaged public var title: String?
-    @NSManaged public var describe1: NSSet?
-    @NSManaged public var describe2: NSSet?
-    @NSManaged public var describe3: NSSet?
+    @NSManaged public var describe1: Set<CDDescribe>!
+    @NSManaged public var describe2: Set<CDDescribe>?
+    @NSManaged public var describe3: Set<CDDescribe>?
 
 }
 

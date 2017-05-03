@@ -48,7 +48,7 @@ class WaitingViewController:UIViewController, CAAnimationDelegate {
     
     let maskLayerAnimation = CABasicAnimation(keyPath: "path")
     func circleDismiss() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+        DispatchQueue.main.async(execute: {
             
             let circleMaskPathInitial = UIBezierPath(ovalIn: CGRect(x: 150 - 500, y: 150 - 500, width: 1000, height: 1000))
             let circleMaskPathFinal = UIBezierPath(ovalIn: CGRect(x: 100, y: 100, width: 0, height: 0))

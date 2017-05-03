@@ -84,6 +84,16 @@ class VueC2: UIViewController {
                 self?.defineBehavior(items: description)
             }).addDisposableTo(disposableBag)
         
+        Spot.newSpot.descriptions.asObservable()
+            .subscribe(onNext: {
+                [weak self] (description:[TypeSpot]) in
+                self?.onTheSelection = description
+                _ = self?.ellipseInTheGround.value.filter{description.contains($0.type)}.map({
+                    ellipse in
+                    ellipse.describe = true
+                })
+            }).addDisposableTo(disposableBag)
+        
         displayTopScreen()
     }
     
@@ -162,7 +172,7 @@ class VueC2: UIViewController {
     }
     
     func valideDescription(sender:UIButton) {
-        Spot.newSpot.descriptions = onTheSelection
+        Spot.newSpot.descriptions.value = onTheSelection
         let popWait = WaitingViewController()
         self.navigationController?.pushViewController(popWait, animated: true)
         AWSS3.uploadDataWithCompletion({
@@ -172,11 +182,12 @@ class VueC2: UIViewController {
                 return
             }
             AWSTableDescribe.insertNewSpotWithCompletionHandler(){
-                error in
+                error, awsDescribe in
                 if let error = error as NSError? {
                     popWait.setError(error: error)
                     return
                 }
+                CDDescribe.addDescribe(descriptions: self.onTheSelection, describe: awsDescribe)
                 Spot.newSpot.reset()
                 popWait.circleDismiss()
             }
@@ -211,6 +222,8 @@ class VueC2: UIViewController {
             
             let newView = SpotEllipse(frame: CGRect(x: randomP.x, y: randomP.y, width: 75, height: 75))
             self.view.addSubview(newView)
+            
+            newView.describe = onTheSelection.contains(type)
             
             setupButton(sender: newView, type:type)
             
