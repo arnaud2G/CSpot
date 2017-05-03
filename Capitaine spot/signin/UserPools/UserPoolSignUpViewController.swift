@@ -76,9 +76,7 @@ class UserPoolSignUpViewController: UIViewController {
             guard let strongSelf = self else { return nil }
             DispatchQueue.main.async(execute: { 
                 if let error = task.error as NSError? {
-                    DispatchQueue.main.async(execute: {
-                        strongSelf.popWait?.setError(error: error)
-                    })
+                    strongSelf.popWait?.setError(error: error)
                     return
                 }
                 

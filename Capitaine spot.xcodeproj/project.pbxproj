@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		90BD816A6D276756EECE5147 /* Pods_Capitaine_spot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21F2D51E9692729CDE7757C6 /* Pods_Capitaine_spot.framework */; };
+		A516F04C1EB9EAC7001E10C6 /* AWSDescribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516F04B1EB9EAC7001E10C6 /* AWSDescribe.swift */; };
+		A523C8031EB9D2E7006D2919 /* CDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A523C8021EB9D2E7006D2919 /* CDHelper.swift */; };
 		A527CE4D1EB8E6E8002C7556 /* Waiting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A527CE4C1EB8E6E8002C7556 /* Waiting.storyboard */; };
 		A52C4D551EB22AA0007550D5 /* UIMedal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52C4D541EB22AA0007550D5 /* UIMedal.swift */; };
 		A52E2BA81EB1DC22004F1682 /* SpotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52E2BA71EB1DC22004F1682 /* SpotViewController.swift */; };
@@ -72,6 +74,8 @@
 		0C7DF1EE9E0485446262E3CE /* Pods-Capitaine spot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitaine spot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Capitaine spot/Pods-Capitaine spot.debug.xcconfig"; sourceTree = "<group>"; };
 		21F2D51E9692729CDE7757C6 /* Pods_Capitaine_spot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Capitaine_spot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26D74DEE36D04B6E49815A16 /* Pods-Capitaine spot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitaine spot.release.xcconfig"; path = "Pods/Target Support Files/Pods-Capitaine spot/Pods-Capitaine spot.release.xcconfig"; sourceTree = "<group>"; };
+		A516F04B1EB9EAC7001E10C6 /* AWSDescribe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSDescribe.swift; sourceTree = "<group>"; };
+		A523C8021EB9D2E7006D2919 /* CDHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDHelper.swift; sourceTree = "<group>"; };
 		A527CE4C1EB8E6E8002C7556 /* Waiting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Waiting.storyboard; sourceTree = "<group>"; };
 		A527CE4E1EB8F017002C7556 /* SignInManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInManager.swift; sourceTree = "<group>"; };
 		A52C4D541EB22AA0007550D5 /* UIMedal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIMedal.swift; sourceTree = "<group>"; };
@@ -246,6 +250,7 @@
 				A549847C1EA766B40074755B /* UISpot.swift */,
 				A549847E1EA766D50074755B /* AWSSpot.swift */,
 				A54984801EA767810074755B /* AWSDescription.swift */,
+				A516F04B1EB9EAC7001E10C6 /* AWSDescribe.swift */,
 			);
 			name = Spot;
 			sourceTree = "<group>";
@@ -332,6 +337,7 @@
 				A54512D51E9BE0B6000FDA2F /* MyStyles.swift */,
 				A54D8EA21E9BCCF20081C0F5 /* NumberExtension.swift */,
 				A53B30661EA65617008AE7B8 /* AnimateExtension.swift */,
+				A523C8021EB9D2E7006D2919 /* CDHelper.swift */,
 			);
 			name = BoiteAOutils;
 			sourceTree = "<group>";
@@ -552,6 +558,7 @@
 				A57480421EA8B4E70045AC03 /* CSpotController.swift in Sources */,
 				A54512D41E9BE017000FDA2F /* MyCamera.swift in Sources */,
 				A59832731EAA4B9B00B88033 /* AWSTable.swift in Sources */,
+				A523C8031EB9D2E7006D2919 /* CDHelper.swift in Sources */,
 				A5F639001EA7724B000ACD3D /* UserPoolMFAViewController.swift in Sources */,
 				A5E23AD11EB3919F00E1176A /* TestViewController.swift in Sources */,
 				A54512D61E9BE0B6000FDA2F /* MyStyles.swift in Sources */,
@@ -562,6 +569,7 @@
 				A59832751EAA58FC00B88033 /* AWSS3.swift in Sources */,
 				A52E2BA81EB1DC22004F1682 /* SpotViewController.swift in Sources */,
 				A5F638FF1EA7724B000ACD3D /* UserPoolForgotPasswordViewController.swift in Sources */,
+				A516F04C1EB9EAC7001E10C6 /* AWSDescribe.swift in Sources */,
 				A5F638FD1EA7724B000ACD3D /* SignInViewController.swift in Sources */,
 				A5E23ACB1EB3918300E1176A /* VueC2.swift in Sources */,
 				A54D8EA31E9BCCF20081C0F5 /* NumberExtension.swift in Sources */,

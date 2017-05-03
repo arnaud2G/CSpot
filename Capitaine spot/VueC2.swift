@@ -67,11 +67,13 @@ class VueC2: UIViewController {
         
         animator = UIDynamicAnimator(referenceView: view)
         gravity = UIFieldBehavior.radialGravityField(position: self.view.center)
-        gravity.falloff = 0.2
+        gravity.falloff = 0.1
+        //gravity.animationSpeed = 1
+        gravity.strength = 1.7
         self.animator.addBehavior(gravity)
         
-        behavior.elasticity = 0.2
-        behavior.density = 3
+        behavior.elasticity = 0.1
+        behavior.density = 1
         behavior.allowsRotation = false
         animator.addBehavior(behavior)
         
@@ -169,7 +171,7 @@ class VueC2: UIViewController {
                 popWait.setError(error: error)
                 return
             }
-            AWSTableDescription.insertNewSpotWithCompletionHandler(){
+            AWSTableDescribe.insertNewSpotWithCompletionHandler(){
                 error in
                 if let error = error as NSError? {
                     popWait.setError(error: error)
