@@ -11,11 +11,31 @@ import CoreData
 
 public class CDType: NSManagedObject {
     
+    static func initType() {
+        
+        _ = iterateEnum(TypeSpot.self).filter({
+            (type:TypeSpot) -> Bool in
+            
+            let request = CDType.fetchType()
+            request.predicate = NSPredicate(format: "title == %@", type.rawValue)
+            if (try! CDContext.sharedInstance.fetch(request)).count > 0 {
+                return false
+            } else {
+                return true
+            }
+        }).map({
+            (type:TypeSpot) in
+            
+            let newType = CDType(context: CDContext.sharedInstance)
+            newType.title = type.rawValue
+        })
+        try! CDContext.sharedInstance.save()
+    }
 }
 
 extension CDType {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<CDType> {
+    @nonobjc public class func fetchType() -> NSFetchRequest<CDType> {
         return NSFetchRequest<CDType>(entityName: "CDType")
     }
 

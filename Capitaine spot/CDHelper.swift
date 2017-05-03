@@ -92,8 +92,5 @@ class CDContext:NSManagedObjectContext {
         })
         try self.save()
     }
-    
-    func initType() {
-    }
 }
 

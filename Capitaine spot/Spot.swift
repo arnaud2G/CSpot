@@ -39,6 +39,16 @@ enum TypeSpot: String {
         }
     }
     
+    static func testEnum(title:String) -> TypeSpot? {
+        
+        for type in iterateEnum(TypeSpot.self) {
+            if type.rawValue == title {
+                return type
+            }
+        }
+        return nil
+    }
+    
     var nextType:[TypeSpot] {
         switch self {
         case .spot:
