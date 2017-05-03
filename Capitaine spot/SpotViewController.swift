@@ -64,6 +64,12 @@ import MapKit
         gravity.falloff = 0.2
         animator.addBehavior(gravity)
         
+        let behavior = UIDynamicItemBehavior()
+        behavior.elasticity = 0.2
+        behavior.density = 3
+        behavior.allowsRotation = false
+        animator.addBehavior(behavior)
+        
         let ellipses = spot.userDescription.map({
             (description:DescriptionSpot) -> SpotEllipse in
             
@@ -79,7 +85,8 @@ import MapKit
             newView.type = description.typeSpot
             self.vDescription.addSubview(newView)
             gravity.addItem(newView)
-            animator.addBehavior(newView.behavior)
+            behavior.addItem(newView)
+            
             return newView
         })
         

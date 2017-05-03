@@ -132,7 +132,7 @@ class CSpotNavigationController: UINavigationController {
         super.viewDidAppear(animated)
         btnBottom.medalStyle(image: #imageLiteral(resourceName: "pirate"), text: "Utilise la longue vue pour décrire le spot !", delay: 1.5)
         btnConnection.medalStyle(image: #imageLiteral(resourceName: "pirate"), text: "Connecte toi pour utiliser la longue vue !", delay: 1.5)
-        btnTop.medalStyle(image: #imageLiteral(resourceName: "pirate"), text: "Utilise la map pour trouver un bon spot !", delay:3)
+        btnTop.medalStyle(image: #imageLiteral(resourceName: "pirate"), text: "Utilise la map pour trouver un bon spot !", delay:3.5)
     }
     
     func cancel(sender:UIButton) {

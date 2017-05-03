@@ -11,11 +11,11 @@ import UIKit
 
 class ErrorView:UIView {
     
-    var completionHandler:(() -> Void)?
+    //var completionHandler:(() -> Void)?
     convenience init(message:String, frame:CGRect=CGRect.zero, completionHandler:(() -> Void)?=nil)  {
         self.init(frame: frame)
         
-        self.completionHandler = completionHandler
+        //self.completionHandler = completionHandler
         
         self.unselectedStyle()
         self.layer.cornerRadius = 10
@@ -55,7 +55,6 @@ class ErrorView:UIView {
         vSep.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
         // Bouton
-        let btnOk = UIButton()
         btnOk.setTitleColor(UIColor().primary(), for: .normal)
         btnOk.setTitle("OK", for: .normal)
         btnOk.translatesAutoresizingMaskIntoConstraints = false
@@ -64,14 +63,14 @@ class ErrorView:UIView {
         btnOk.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         btnOk.topAnchor.constraint(equalTo: vSep.bottomAnchor, constant:10).isActive = true
         btnOk.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant:-10).isActive = true
-        btnOk.addTarget(self, action: #selector(self.btnOkPressed(sender:)), for: .touchUpInside)
     }
     
-    func btnOkPressed(sender:UIButton) {
+    let btnOk = UIButton()
+    /*func btnOkPressed(sender:UIButton) {
         if let completionHandler = completionHandler {
             completionHandler()
         }
-    }
+    }*/
     
     override init(frame: CGRect) {
         super.init(frame: frame)

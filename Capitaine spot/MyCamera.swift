@@ -94,7 +94,7 @@ class MyCamera:UIViewController, AVCapturePhotoCaptureDelegate {
     private func takePic() {
         let settingsForMonitoring = AVCapturePhotoSettings()
         settingsForMonitoring.flashMode = .auto
-        settingsForMonitoring.isAutoStillImageStabilizationEnabled = true
+        //settingsForMonitoring.isAutoStillImageStabilizationEnabled = true
         settingsForMonitoring.isHighResolutionPhotoEnabled = false
         stillImageOutput?.capturePhoto(with: settingsForMonitoring, delegate: self)
     }

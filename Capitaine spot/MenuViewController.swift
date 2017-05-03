@@ -22,6 +22,8 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "woodtexture"))
+        
         btnLogout.setImage(#imageLiteral(resourceName: "logout").withRenderingMode(.alwaysTemplate), for: .normal)
         btnLogout.backgroundColor = UIColor().notification()
         btnLogout.tintColor = .white

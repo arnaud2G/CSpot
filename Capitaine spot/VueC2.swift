@@ -25,6 +25,7 @@ class VueC2: UIViewController {
     var animator: UIDynamicAnimator!
     var gravity:UIFieldBehavior!
     var collision:UICollisionBehavior?
+    let behavior = UIDynamicItemBehavior()
     
     let disposableBag = DisposeBag()
     @IBOutlet weak var imgPic: UIImageView!
@@ -87,9 +88,11 @@ class VueC2: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let vueC2 = SpotLocationViewController()
-        vueC2.modalPresentationStyle = .overCurrentContext
-        self.present(vueC2, animated: false, completion: {})
+        if Spot.newSpot.title.value == String() {
+            let vueC2 = SpotLocationViewController()
+            vueC2.modalPresentationStyle = .overCurrentContext
+            self.present(vueC2, animated: false, completion: {})
+        }
     }
     
     private func displayTopScreen() {
@@ -160,8 +163,18 @@ class VueC2: UIViewController {
         Spot.newSpot.descriptions = onTheSelection
         let popWait = WaitingViewController()
         self.navigationController?.pushViewController(popWait, animated: true)
-        AWSS3.uploadDataWithCompletion({_ in
-            AWSTableDescription.insertNewSpotWithCompletionHandler(){_ in
+        AWSS3.uploadDataWithCompletion({
+            error in
+            if let error = error as NSError? {
+                popWait.setError(error: error)
+                return
+            }
+            AWSTableDescription.insertNewSpotWithCompletionHandler(){
+                error in
+                if let error = error as NSError? {
+                    popWait.setError(error: error)
+                    return
+                }
                 Spot.newSpot.reset()
                 popWait.circleDismiss()
             }
@@ -188,7 +201,6 @@ class VueC2: UIViewController {
         })
     }
     
-    let behavior = UIDynamicItemBehavior()
     private func setupNewValue(newVals:[TypeSpot]) {
         let newViews = newVals.map({
             (type:TypeSpot) -> SpotEllipse in

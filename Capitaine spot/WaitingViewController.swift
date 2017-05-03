@@ -23,6 +23,7 @@ class WaitingViewController:UIViewController, CAAnimationDelegate {
         self.init(message: NSLocalizedString("Chargement...", comment: "Chargement..."))
     }
     
+    var timer:Timer?
     convenience init(message:String = NSLocalizedString("Chargement...", comment: "Chargement...")) {
         self.init(nibName: nil, bundle: nil)
         
@@ -42,7 +43,7 @@ class WaitingViewController:UIViewController, CAAnimationDelegate {
         lblWait.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         
         sendShip()
-        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(self.sendShip), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(self.sendShip), userInfo: nil, repeats: true)
     }
     
     let maskLayerAnimation = CABasicAnimation(keyPath: "path")
@@ -66,7 +67,12 @@ class WaitingViewController:UIViewController, CAAnimationDelegate {
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         maskLayerAnimation.delegate = nil
-        self.navigationController?.dismiss(animated: false, completion: nil)
+        if let timer = timer {
+            timer.invalidate()
+        }
+        DispatchQueue.main.async(execute: {
+            self.navigationController?.dismiss(animated: false, completion: nil)
+        })
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -151,21 +157,29 @@ class WaitingViewController:UIViewController, CAAnimationDelegate {
     
     private func displayError(message:String, toRoot:Bool) {
         
-        let vError = ErrorView(message: message) {
-            DispatchQueue.main.async(execute: {
-                if toRoot {
-                    self.navigationController?.popToRootViewController(animated: true)
-                } else {
-                    self.navigationController?.popViewController(animated: true)
-                }
-            })
-        }
+        self.toRoot = toRoot
+        
+        let vError = ErrorView(message: message)
         vError.translatesAutoresizingMaskIntoConstraints = false
+        vError.btnOk.addTarget(self, action: #selector(self.btnOkPressed(sender:)), for: .touchUpInside)
         
         self.view.addSubview(vError)
         vError.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         vError.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         
         vError.leadingAnchor.constraint(greaterThanOrEqualTo: self.view.leadingAnchor, constant:20).isActive = true
+    }
+    
+    var toRoot = false
+    func btnOkPressed(sender:UIButton) {
+        self.maskLayerAnimation.delegate = nil
+        if let timer = self.timer {
+            timer.invalidate()
+        }
+        if toRoot {
+            self.navigationController?.popToRootViewController(animated: true)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
