@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		90BD816A6D276756EECE5147 /* Pods_Capitaine_spot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21F2D51E9692729CDE7757C6 /* Pods_Capitaine_spot.framework */; };
+		A527CE4D1EB8E6E8002C7556 /* Waiting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A527CE4C1EB8E6E8002C7556 /* Waiting.storyboard */; };
 		A52C4D551EB22AA0007550D5 /* UIMedal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52C4D541EB22AA0007550D5 /* UIMedal.swift */; };
 		A52E2BA81EB1DC22004F1682 /* SpotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52E2BA71EB1DC22004F1682 /* SpotViewController.swift */; };
 		A52E2BAA1EB1E6EB004F1682 /* Spot.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A52E2BA91EB1E6EA004F1682 /* Spot.storyboard */; };
@@ -71,6 +72,8 @@
 		0C7DF1EE9E0485446262E3CE /* Pods-Capitaine spot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitaine spot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Capitaine spot/Pods-Capitaine spot.debug.xcconfig"; sourceTree = "<group>"; };
 		21F2D51E9692729CDE7757C6 /* Pods_Capitaine_spot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Capitaine_spot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26D74DEE36D04B6E49815A16 /* Pods-Capitaine spot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitaine spot.release.xcconfig"; path = "Pods/Target Support Files/Pods-Capitaine spot/Pods-Capitaine spot.release.xcconfig"; sourceTree = "<group>"; };
+		A527CE4C1EB8E6E8002C7556 /* Waiting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Waiting.storyboard; sourceTree = "<group>"; };
+		A527CE4E1EB8F017002C7556 /* SignInManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInManager.swift; sourceTree = "<group>"; };
 		A52C4D541EB22AA0007550D5 /* UIMedal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIMedal.swift; sourceTree = "<group>"; };
 		A52E2BA71EB1DC22004F1682 /* SpotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotViewController.swift; sourceTree = "<group>"; };
 		A52E2BA91EB1E6EA004F1682 /* Spot.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Spot.storyboard; sourceTree = "<group>"; };
@@ -197,6 +200,7 @@
 		A537B32E1EAA0E6D001A912A /* EcranChargement */ = {
 			isa = PBXGroup;
 			children = (
+				A527CE4C1EB8E6E8002C7556 /* Waiting.storyboard */,
 				A537B32F1EAA0E91001A912A /* WaitingViewController.swift */,
 				A579C8541EB8913100397D04 /* ErrorView.swift */,
 			);
@@ -375,6 +379,7 @@
 			isa = PBXGroup;
 			children = (
 				A5F638F21EA7724B000ACD3D /* SignIn.storyboard */,
+				A527CE4E1EB8F017002C7556 /* SignInManager.swift */,
 				A5F638F31EA7724B000ACD3D /* SignInViewController.swift */,
 				A5F638F41EA7724B000ACD3D /* UserPools */,
 			);
@@ -475,6 +480,7 @@
 				A5F639021EA7724B000ACD3D /* UserPools.storyboard in Resources */,
 				A5CACBA21E978A9A0068D5B2 /* LaunchScreen.storyboard in Resources */,
 				A5CACBAF1E978B3C0068D5B2 /* DynamicsBall.storyboard in Resources */,
+				A527CE4D1EB8E6E8002C7556 /* Waiting.storyboard in Resources */,
 				A52E2BAA1EB1E6EB004F1682 /* Spot.storyboard in Resources */,
 				A5B0D1B71E9CD01D0014EEA3 /* MyMap.storyboard in Resources */,
 				A5F638FC1EA7724B000ACD3D /* SignIn.storyboard in Resources */,

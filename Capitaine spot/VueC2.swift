@@ -13,6 +13,10 @@ import RxSwift
 
 class VueC2: UIViewController {
     
+    deinit {
+        print("deinit VueC2")
+    }
+    
     let btnSize:CGFloat = 60
     let cancelButton = UIButton()
     let valideButton = UIButton()
@@ -65,11 +69,16 @@ class VueC2: UIViewController {
         gravity.falloff = 0.2
         self.animator.addBehavior(gravity)
         
+        behavior.elasticity = 0.2
+        behavior.density = 3
+        behavior.allowsRotation = false
+        animator.addBehavior(behavior)
+        
         ellipseInTheGround
             .asObservable()
             .subscribe(onNext:{
-                description in
-                self.defineBehavior(items: description)
+                [weak self] description in
+                self?.defineBehavior(items: description)
             }).addDisposableTo(disposableBag)
         
         displayTopScreen()
@@ -133,16 +142,16 @@ class VueC2: UIViewController {
         
         Spot.newSpot.title.asObservable()
             .subscribe(onNext: {
-                description in
+                [weak self] description in
                 if description == String() {
-                    self.tfSpot.isHidden = true
+                    self?.tfSpot.isHidden = true
                 } else {
-                    self.tfSpot.text = description
-                    self.tfSpot.isHidden = false
-                    self.onTheGround.append(contentsOf: TypeSpot.spot.nextType)
-                    self.vPic.isHidden = false
-                    self.cancelButton.isHidden = false
-                    self.valideButton.isHidden = false
+                    self?.tfSpot.text = description
+                    self?.tfSpot.isHidden = false
+                    self?.onTheGround.append(contentsOf: TypeSpot.spot.nextType)
+                    self?.vPic.isHidden = false
+                    self?.cancelButton.isHidden = false
+                    self?.valideButton.isHidden = false
                 }
             }).addDisposableTo(disposableBag)
     }
@@ -175,9 +184,11 @@ class VueC2: UIViewController {
         _ = items.map({
             view in
             gravity.addItem(view)
+            behavior.addItem(view)
         })
     }
     
+    let behavior = UIDynamicItemBehavior()
     private func setupNewValue(newVals:[TypeSpot]) {
         let newViews = newVals.map({
             (type:TypeSpot) -> SpotEllipse in
@@ -206,7 +217,7 @@ class VueC2: UIViewController {
             }
             delView.leaveAndRemove(withDuration: 0.3, toPoint: randomOutsidePosition())
             gravity.removeItem(delView)
-            animator.removeBehavior(delView.behavior)
+            behavior.removeItem(delView)
         })
     }
     
@@ -215,16 +226,15 @@ class VueC2: UIViewController {
         sender.rx.tap
             .asObservable()
             .subscribe(onNext: {
-                description in
-                if let index = self.onTheSelection.index(of: type) {
-                    self.onTheSelection.remove(at: index)
+                [weak self] description in
+                if let index = self!.onTheSelection.index(of: type) {
+                    self?.onTheSelection.remove(at: index)
                     sender.describe = false
                 } else {
-                    self.onTheSelection.append(type)
+                    self?.onTheSelection.append(type)
                     sender.describe = true
                 }
         }).addDisposableTo(disposableBag)
-        animator.addBehavior(sender.behavior)
     }
 }
 

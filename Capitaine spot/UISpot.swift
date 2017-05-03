@@ -17,7 +17,7 @@ class Ellipse: UIButton {
 
 class SpotEllipse: Ellipse {
     
-    var behavior:UIDynamicItemBehavior!
+    //var behavior:UIDynamicItemBehavior?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,10 +26,10 @@ class SpotEllipse: Ellipse {
         
         self.unselectedStyle()
         
-        behavior = UIDynamicItemBehavior(items: [self])
-        behavior.elasticity = 0.2
-        behavior.density = 3
-        behavior.allowsRotation = false
+        /*behavior = UIDynamicItemBehavior(items: [self])
+        behavior!.elasticity = 0.2
+        behavior!.density = 3
+        behavior!.allowsRotation = false*/
     }
     
     required init?(coder aDecoder: NSCoder) {

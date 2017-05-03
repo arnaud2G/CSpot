@@ -20,6 +20,16 @@ class ErrorView:UIView {
         self.unselectedStyle()
         self.layer.cornerRadius = 10
         
+        // Tete du capitain
+        let imgCaptain = UIImageView()
+        imgCaptain.image = #imageLiteral(resourceName: "pirate").withRenderingMode(.alwaysTemplate)
+        imgCaptain.tintColor = UIColor().primary()
+        imgCaptain.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(imgCaptain)
+        
+        imgCaptain.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        imgCaptain.topAnchor.constraint(equalTo: self.topAnchor, constant:10).isActive = true
+        
         // Message d'erreur
         let vMessage = UILabel()
         vMessage.text = message
@@ -30,7 +40,7 @@ class ErrorView:UIView {
         self.addSubview(vMessage)
         
         vMessage.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        vMessage.topAnchor.constraint(equalTo: self.topAnchor, constant:10).isActive = true
+        vMessage.topAnchor.constraint(equalTo: imgCaptain.bottomAnchor, constant:10).isActive = true
         vMessage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant:10).isActive = true
         
         // Separation
