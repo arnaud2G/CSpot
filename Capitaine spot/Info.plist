@@ -4,6 +4,14 @@
 <dict>
 	<key>AWS</key>
 	<dict>
+		<key>Cognito</key>
+		<dict>
+			<key>Default</key>
+			<dict>
+				<key>Region</key>
+				<string>us-east-1</string>
+			</dict>
+		</dict>
 		<key>CredentialsProvider</key>
 		<dict>
 			<key>CognitoIdentity</key>
@@ -17,6 +25,14 @@
 				</dict>
 			</dict>
 		</dict>
+		<key>DynamoDBObjectMapper</key>
+		<dict>
+			<key>Default</key>
+			<dict>
+				<key>Region</key>
+				<string>us-east-1</string>
+			</dict>
+		</dict>
 		<key>IdentityManager</key>
 		<dict>
 			<key>Default</key>
@@ -26,36 +42,22 @@
 		<dict>
 			<key>ProjectClientId</key>
 			<string>MobileHub 3aa6fa27-2ea3-42cb-9383-636ecd76241a aws-my-sample-app-ios-swift-v0.13</string>
-        </dict>
-        <key>DynamoDBObjectMapper</key>
-        <dict>
-            <key>Default</key>
-            <dict>
-                <key>Region</key>
-                <string>us-east-1</string>
-            </dict>
-        </dict>
-        <key>UserFileManager</key>
-        <dict>
-            <key>Default</key>
-            <dict>
-                <key>S3Bucket</key>
-                <string>capitainespots-userfiles-mobilehub-1128628836</string>
-                <key>Region</key>
-                <string>us-east-1</string>
-            </dict>
-        </dict>
-        <key>Cognito</key>
-        <dict>
-            <key>Default</key>
-            <dict>
-                <key>Region</key>
-                <string>us-east-1</string>
-            </dict>
-        </dict>
+		</dict>
+		<key>UserFileManager</key>
+		<dict>
+			<key>Default</key>
+			<dict>
+				<key>Region</key>
+				<string>us-east-1</string>
+				<key>S3Bucket</key>
+				<string>capitainespots-userfiles-mobilehub-1128628836</string>
+			</dict>
+		</dict>
 	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Capitaine Spot</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -77,12 +79,12 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleVersion</key>
+	<string>2</string>
 	<key>FacebookAppID</key>
 	<string>1324994644258693</string>
 	<key>FacebookDisplayName</key>
 	<string>Capitaine Spots</string>
-	<key>CFBundleVersion</key>
-	<string>1</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -126,11 +128,11 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>L&apos;accès à l&apos;appareil photo vous permettra d&apos;envoyer des photos à vos amis</string>
+	<string>L&#39;accès à l&#39;appareil photo vous permettra d&#39;envoyer des photos à vos amis</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>L&apos;accès à votre localisation nous permettra de vous proposer des lieux autour de vous</string>
+	<string>L&#39;accès à votre localisation nous permettra de vous proposer des lieux autour de vous</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>L&apos;accès à la bibliothèque permet de stoker les photos envoyés par vos amis</string>
+	<string>L&#39;accès à la bibliothèque permet de stoker les photos envoyés par vos amis</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
