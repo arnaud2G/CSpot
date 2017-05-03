@@ -55,7 +55,9 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
         map.showsUserLocation = true
         view.addSubview(map)
         
-        User.current.location
+        self.map.setCenter(User.current.location.value!, zoomLevel: 16, animated: true)
+        
+        /*User.current.location
             .asObservable()
             .subscribe(onNext: {
                 description in
@@ -64,7 +66,7 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
                 } else if let coordinate = User.getLastCoo() {
                     self.map.setCenter(coordinate, zoomLevel: 16, animated: true)
                 }
-            }).addDisposableTo(disposeBag)
+            }).addDisposableTo(disposeBag)*/
         
         placeLabels.append(UIPlacemarkButton(map: map))
         placeLabels.append(UIPlacemarkButton(map: map))

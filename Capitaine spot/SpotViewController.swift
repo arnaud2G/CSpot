@@ -70,6 +70,10 @@ import MapKit
         behavior.allowsRotation = false
         animator.addBehavior(behavior)
         
+        let sum = CGFloat(spot.userDescription.map{$0.rVote/100}.reduce(0, +))
+        let totSize = 0.8*self.vDescription.frame.width*self.vDescription.frame.height
+        let sizeByVote = sqrt(totSize/sum)
+        
         let ellipses = spot.userDescription.map({
             (description:DescriptionSpot) -> SpotEllipse in
             
@@ -77,7 +81,7 @@ import MapKit
             let offsetX:CGFloat = CGFloat(Double.random(min: -1/(rVote*rVote), max: 1/(rVote*rVote)))
             let offsetY:CGFloat = CGFloat(Double.random(min: -1/(rVote*rVote), max: 1/(rVote*rVote)))
             
-            var size = CGFloat(130 * rVote)
+            var size = sizeByVote * CGFloat(rVote)
             size = max(size, 40.0)
             let center = CGPoint(x: (self.vDescription.frame.width - size)/2 + offsetX, y: (self.vDescription.frame.height - size)/2 + offsetY)
             

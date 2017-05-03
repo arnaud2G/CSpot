@@ -43,10 +43,12 @@ class VueC2: UIViewController {
     }
     var onTheSelection = [TypeSpot]() {
         didSet {
-            let newVals = onTheSelection.filter{!oldValue.contains($0)}.map{$0.nextType}.flatMap{$0}.filter{!onTheGround.contains($0)}
+            var newVals = onTheSelection.filter{!oldValue.contains($0)}.map{$0.nextType}.flatMap{$0}.filter{!onTheGround.contains($0)}
+            newVals = Array(Set(newVals))
             onTheGround.append(contentsOf: newVals)
             
-            let delVals = onTheGround.filter{!(onTheSelection.map{$0.nextType}.flatMap{$0}).contains($0)}.filter{!TypeSpot.spot.nextType.contains($0)}
+            var delVals = onTheGround.filter{!(onTheSelection.map{$0.nextType}.flatMap{$0}).contains($0)}.filter{!TypeSpot.spot.nextType.contains($0)}
+            delVals = Array(Set(delVals))
             _ = delVals.map({
                 type in
                 if let index = onTheGround.index(of: type) {
