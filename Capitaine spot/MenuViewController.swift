@@ -17,19 +17,24 @@ class MenuViewController: UIViewController {
     
     let myCamera = MyCamera()
     
+    @IBOutlet weak var lblT1: UILabel!
+    @IBOutlet weak var lblT2: UILabel!
+    @IBOutlet weak var lblT3: UILabel!
+    
     @IBOutlet weak var btnLogout: UIButton!
     @IBOutlet weak var vSpot: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "woodtexture"))
+        self.view.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "woodtexture"))
         
-        btnLogout.setImage(#imageLiteral(resourceName: "logout").withRenderingMode(.alwaysTemplate), for: .normal)
-        btnLogout.backgroundColor = UIColor().notification()
-        btnLogout.tintColor = .white
+        btnLogout.setImage(#imageLiteral(resourceName: "skull").withRenderingMode(.alwaysTemplate), for: .normal)
+        btnLogout.selectedStyle()
         btnLogout.layer.cornerRadius = 15
-        btnLogout.clipsToBounds = true
-        btnLogout.imageEdgeInsets = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
+        
+        lblT1.textColor = UIColor().secondary()
+        lblT2.textColor = UIColor().secondary()
+        lblT3.textColor = UIColor().secondary()
         
         User.current.connected
             .asObservable()

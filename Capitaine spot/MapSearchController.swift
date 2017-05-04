@@ -86,6 +86,14 @@ class MapSearchController:SearchViewController {
         vMap.centerXAnchor.constraint(equalTo: userAnnotation.centerXAnchor).isActive = true
         vMap.centerYAnchor.constraint(equalTo: userAnnotation.centerYAnchor).isActive = true
         vMap.zoomLevel = 16
+        
+        let imgView3 = UIImageView()
+        imgView3.frame = CGRect(origin: CGPoint.zero, size: vMap.frame.size)
+        imgView3.contentMode = .scaleToFill
+        imgView3.image = #imageLiteral(resourceName: "script3")
+        
+        vMap.mask = imgView3
+        
         userAnnotation.selectedStyle()
         userAnnotation.widthAnchor.constraint(equalToConstant: 26).isActive = true
         userAnnotation.heightAnchor.constraint(equalToConstant: 26).isActive = true

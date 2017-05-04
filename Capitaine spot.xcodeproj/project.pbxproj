@@ -53,6 +53,7 @@
 		A54984831EA767FB0074755B /* AWSConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54984821EA767FB0074755B /* AWSConfig.swift */; };
 		A54D8EA11E9BC30B0081C0F5 /* ToolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D8EA01E9BC30B0081C0F5 /* ToolExtension.swift */; };
 		A54D8EA31E9BCCF20081C0F5 /* NumberExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D8EA21E9BCCF20081C0F5 /* NumberExtension.swift */; };
+		A57140601EBB5A3B007F079E /* MaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A571405F1EBB5A3B007F079E /* MaskViewController.swift */; };
 		A57480421EA8B4E70045AC03 /* CSpotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57480411EA8B4E70045AC03 /* CSpotController.swift */; };
 		A579C8551EB8913100397D04 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A579C8541EB8913100397D04 /* ErrorView.swift */; };
 		A58347CD1E9E241600E16507 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58347CC1E9E241600E16507 /* User.swift */; };
@@ -150,6 +151,7 @@
 		A54D8EA01E9BC30B0081C0F5 /* ToolExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolExtension.swift; sourceTree = "<group>"; };
 		A54D8EA21E9BCCF20081C0F5 /* NumberExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberExtension.swift; sourceTree = "<group>"; };
 		A5595A531EA0BEFF00F4AFE5 /* RxMapBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxMapBox.swift; sourceTree = "<group>"; };
+		A571405F1EBB5A3B007F079E /* MaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskViewController.swift; sourceTree = "<group>"; };
 		A571DCA71EB09AA7003DBC2A /* MapSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSearchController.swift; sourceTree = "<group>"; };
 		A57480411EA8B4E70045AC03 /* CSpotController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSpotController.swift; sourceTree = "<group>"; };
 		A579C8541EB8913100397D04 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 		A5CACBAA1E978ACA0068D5B2 /* BoiteATests */ = {
 			isa = PBXGroup;
 			children = (
+				A571405F1EBB5A3B007F079E /* MaskViewController.swift */,
 				A54D8E9A1E9BB5CE0081C0F5 /* DynamicsFall */,
 				A5CACBAB1E978B040068D5B2 /* DynamicsBall */,
 			);
@@ -756,6 +759,7 @@
 				A5E23ACE1EB3919F00E1176A /* SearchNavigationController.swift in Sources */,
 				A5F639041EA7724B000ACD3D /* UserPoolSignUpViewController.swift in Sources */,
 				A5F639031EA7724B000ACD3D /* UserPoolSignUpConfirmationViewController.swift in Sources */,
+				A57140601EBB5A3B007F079E /* MaskViewController.swift in Sources */,
 				A53B30671EA65617008AE7B8 /* AnimateExtension.swift in Sources */,
 				A5E23ACA1EB3918300E1176A /* VueC1.swift in Sources */,
 				A5E23ACD1EB3919300E1176A /* MyMap.swift in Sources */,

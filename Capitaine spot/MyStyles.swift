@@ -21,11 +21,11 @@ extension UIColor {
     }
     
     func primary()->UIColor {
-        return colorFromHex(rgbValue: 0x01A79D)
+        return colorFromHex(rgbValue: 0xCA611A)
     }
     
     func secondary()->UIColor {
-        return colorFromHex(rgbValue: 0x0D2D3D5)
+        return colorFromHex(rgbValue: 0xFFCA73)
     }
     
     func primaryPopUp()->UIColor {
@@ -51,7 +51,7 @@ extension UIView {
         
         self.backgroundColor = UIColor().secondary()
         
-        self.layer.borderWidth = 2
+        self.layer.borderWidth = 4
         self.layer.borderColor = UIColor().primary().cgColor
         
         self.tintColor = UIColor().primary()

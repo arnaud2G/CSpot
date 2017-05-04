@@ -22,7 +22,7 @@ class CSpotNavigationController: UINavigationController {
     var btnCancel:UIButton!
     var btnSend:UIButton!
     
-    let largeBtnSize = UIScreen.main.bounds.width*0.5
+    let largeBtnSize:CGFloat = 180 //UIScreen.main.bounds.width*0.47
     let smallBtnSize = UIScreen.main.bounds.width*0.2
     
     enum CSpotShape {
@@ -33,7 +33,7 @@ class CSpotNavigationController: UINavigationController {
             switch self {
             case .menu:
                 let xCenter = (UIScreen.main.bounds.width - largeBtnSize)/2
-                let yCenterTop = UIScreen.main.bounds.height/2 - largeBtnSize - 20
+                let yCenterTop = UIScreen.main.bounds.height/2 - largeBtnSize
                 return CGRect(x: xCenter, y: yCenterTop, width: largeBtnSize, height: largeBtnSize)
             case .searchSpot:
                 let xCenter = (UIScreen.main.bounds.width)/2
@@ -50,7 +50,7 @@ class CSpotNavigationController: UINavigationController {
             switch self {
             case .menu:
                 let xCenter = (UIScreen.main.bounds.width - largeBtnSize)/2
-                let yCenterTop = UIScreen.main.bounds.height/2 + 20
+                let yCenterTop = UIScreen.main.bounds.height/2 + 40
                 return CGRect(x: xCenter, y: yCenterTop, width: largeBtnSize, height: largeBtnSize)
             case .describeSpot:
                 let xCenter = (UIScreen.main.bounds.width)/2
@@ -114,14 +114,14 @@ class CSpotNavigationController: UINavigationController {
         btnConnection.layer.cornerRadius = btnTop.frame.size.width/2
         btnConnection.clipsToBounds = true
         btnConnection.unselectedStyle()
-        btnConnection.setImage(#imageLiteral(resourceName: "login").withRenderingMode(.alwaysTemplate), for: .normal)
+        btnConnection.setImage(#imageLiteral(resourceName: "pirate").withRenderingMode(.alwaysTemplate), for: .normal)
         btnConnection.addTarget(self, action: #selector(self.connection(sender:)), for: .touchUpInside)
         self.view.addSubview(btnConnection)
         
         btnCancel = UIButton(frame: CGRect(x: 26, y: 26, width: 30, height: 30))
         btnCancel.layer.cornerRadius = btnTop.frame.size.width
         btnCancel.tintColor = UIColor().primary()
-        btnCancel.setImage(#imageLiteral(resourceName: "delete").withRenderingMode(.alwaysTemplate), for: .normal)
+        btnCancel.setImage(#imageLiteral(resourceName: "skull-filled").withRenderingMode(.alwaysTemplate), for: .normal)
         btnCancel.addTarget(self, action: #selector(self.cancel(sender:)), for: .touchUpInside)
         self.view.addSubview(btnCancel)
         
