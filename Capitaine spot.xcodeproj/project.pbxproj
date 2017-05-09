@@ -46,7 +46,6 @@
 		A54512D01E9BD45F000FDA2F /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54512CF1E9BD45F000FDA2F /* Spot.swift */; };
 		A54512D41E9BE017000FDA2F /* MyCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54512D31E9BE017000FDA2F /* MyCamera.swift */; };
 		A54512D61E9BE0B6000FDA2F /* MyStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54512D51E9BE0B6000FDA2F /* MyStyles.swift */; };
-		A54512D81E9BE0FF000FDA2F /* MyCamera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A54512D71E9BE0FF000FDA2F /* MyCamera.storyboard */; };
 		A549847D1EA766B40074755B /* UISpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A549847C1EA766B40074755B /* UISpot.swift */; };
 		A549847F1EA766D50074755B /* AWSSpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A549847E1EA766D50074755B /* AWSSpot.swift */; };
 		A54984811EA767810074755B /* AWSDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54984801EA767810074755B /* AWSDescription.swift */; };
@@ -140,7 +139,6 @@
 		A54512CF1E9BD45F000FDA2F /* Spot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
 		A54512D31E9BE017000FDA2F /* MyCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCamera.swift; sourceTree = "<group>"; };
 		A54512D51E9BE0B6000FDA2F /* MyStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStyles.swift; sourceTree = "<group>"; };
-		A54512D71E9BE0FF000FDA2F /* MyCamera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyCamera.storyboard; sourceTree = "<group>"; };
 		A54512D91E9BE31B000FDA2F /* DescriptionFall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionFall.swift; sourceTree = "<group>"; };
 		A549847C1EA766B40074755B /* UISpot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISpot.swift; sourceTree = "<group>"; };
 		A549847E1EA766D50074755B /* AWSSpot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSSpot.swift; sourceTree = "<group>"; };
@@ -348,7 +346,6 @@
 			isa = PBXGroup;
 			children = (
 				A54512D31E9BE017000FDA2F /* MyCamera.swift */,
-				A54512D71E9BE0FF000FDA2F /* MyCamera.storyboard */,
 			);
 			name = AppareilPhoto;
 			sourceTree = "<group>";
@@ -642,7 +639,6 @@
 				A53C3E8B1EBA4BCC00E68529 /* email_address.txt in Resources */,
 				A53C3E7D1EBA4BCC00E68529 /* Fastfile in Resources */,
 				A53C3E921EBA4BCC00E68529 /* secondary_second_sub_category.txt in Resources */,
-				A54512D81E9BE0FF000FDA2F /* MyCamera.storyboard in Resources */,
 				A53C3E881EBA4BCC00E68529 /* primary_second_sub_category.txt in Resources */,
 				A53C3E891EBA4BCC00E68529 /* demo_password.txt in Resources */,
 				A53C3E871EBA4BCC00E68529 /* primary_first_sub_category.txt in Resources */,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CBV-v6-Ub6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="C3b-YP-OxN">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,7 +15,7 @@
         <scene sceneID="8Hn-ob-nOV">
             <objects>
                 <navigationController navigationBarHidden="YES" id="CBV-v6-Ub6" customClass="CSpotNavigationController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mFE-uH-Erd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="mFE-uH-Erd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -111,6 +111,7 @@
         <!--Menu View Controller-->
         <scene sceneID="LqH-Zf-i8t">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mqZ-vu-YUo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="MenuViewController" definesPresentationContext="YES" modalPresentationStyle="overCurrentContext" id="C3b-YP-OxN" customClass="MenuViewController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LtF-Gi-4eF"/>
@@ -154,32 +155,86 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6PX-XF-h7p">
+                                <rect key="frame" x="68" y="124" width="240" height="61"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="Y3Q-fw-4ih"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZj-6O-Q4l">
+                                <rect key="frame" x="68" y="365" width="240" height="61"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="3a9-hx-a9e"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YX3-hc-Ptk">
+                                <rect key="frame" x="67.5" y="606" width="240" height="61"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="lli-1E-IBS"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IpM-eX-siZ" customClass="BtnMedal" customModule="Capitaine_spot" customModuleProvider="target">
+                                <rect key="frame" x="97" y="426" width="180" height="180"/>
+                                <color key="backgroundColor" red="0.990596382" green="1" blue="0.64801960240000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="IpM-eX-siZ" secondAttribute="height" multiplier="1:1" id="I0t-Vq-Eg7"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="btnBottomPressed:" destination="C3b-YP-OxN" eventType="touchUpInside" id="RsF-tJ-aCJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0lH-Nu-pkK" customClass="BtnMedal" customModule="Capitaine_spot" customModuleProvider="target">
+                                <rect key="frame" x="97" y="185" width="180" height="180"/>
+                                <color key="backgroundColor" red="0.94373359030000004" green="1" blue="0.89983663709999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="0lH-Nu-pkK" secondAttribute="height" multiplier="1:1" id="Wwf-1S-LgB"/>
+                                    <constraint firstAttribute="height" constant="180" id="bqz-5s-iwj"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="btnTopPressed:" destination="C3b-YP-OxN" eventType="touchUpInside" id="b4D-Fk-NB0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="fpp-8Q-dma" secondAttribute="trailing" constant="10" id="1AD-9b-MfY"/>
                             <constraint firstItem="oe2-tf-1l2" firstAttribute="leading" secondItem="2RP-0d-g4x" secondAttribute="leading" id="Ac2-hA-pJJ"/>
+                            <constraint firstItem="0lH-Nu-pkK" firstAttribute="top" secondItem="6PX-XF-h7p" secondAttribute="bottom" id="Ckf-tX-0OC"/>
+                            <constraint firstItem="tZj-6O-Q4l" firstAttribute="height" secondItem="6PX-XF-h7p" secondAttribute="height" id="Dap-bf-prP"/>
+                            <constraint firstItem="tZj-6O-Q4l" firstAttribute="top" secondItem="0lH-Nu-pkK" secondAttribute="bottom" id="Ktp-qE-LCc"/>
+                            <constraint firstItem="0lH-Nu-pkK" firstAttribute="centerX" secondItem="2RP-0d-g4x" secondAttribute="centerX" id="KvB-1l-1QG"/>
                             <constraint firstItem="CRf-qJ-WYt" firstAttribute="centerY" secondItem="a0e-aN-pRP" secondAttribute="centerY" id="KvO-if-2bR"/>
                             <constraint firstItem="CRf-qJ-WYt" firstAttribute="leading" secondItem="a0e-aN-pRP" secondAttribute="trailing" constant="10" id="LnL-IC-0xE"/>
                             <constraint firstItem="plT-Zv-1GJ" firstAttribute="centerY" secondItem="a0e-aN-pRP" secondAttribute="centerY" id="NwP-CK-JtN"/>
                             <constraint firstItem="CRf-qJ-WYt" firstAttribute="centerX" secondItem="2RP-0d-g4x" secondAttribute="centerX" id="PDq-Ja-RCh"/>
                             <constraint firstItem="fpp-8Q-dma" firstAttribute="top" secondItem="LtF-Gi-4eF" secondAttribute="bottom" constant="10" id="QJU-bV-bic"/>
+                            <constraint firstItem="tZj-6O-Q4l" firstAttribute="centerX" secondItem="2RP-0d-g4x" secondAttribute="centerX" id="RmP-Ih-oMU"/>
+                            <constraint firstItem="IpM-eX-siZ" firstAttribute="centerX" secondItem="2RP-0d-g4x" secondAttribute="centerX" id="Ttg-Oq-5nn"/>
+                            <constraint firstItem="YX3-hc-Ptk" firstAttribute="centerX" secondItem="2RP-0d-g4x" secondAttribute="centerX" id="be7-N2-HoU"/>
                             <constraint firstItem="oe2-tf-1l2" firstAttribute="top" secondItem="2RP-0d-g4x" secondAttribute="top" id="cTx-Rh-H2F"/>
+                            <constraint firstItem="Wyn-kG-BYG" firstAttribute="top" secondItem="YX3-hc-Ptk" secondAttribute="bottom" id="fqT-cd-MFI"/>
+                            <constraint firstItem="IpM-eX-siZ" firstAttribute="top" secondItem="tZj-6O-Q4l" secondAttribute="bottom" id="gLu-OM-YWf"/>
+                            <constraint firstItem="YX3-hc-Ptk" firstAttribute="top" secondItem="IpM-eX-siZ" secondAttribute="bottom" id="iK7-Dh-bf0"/>
                             <constraint firstItem="CRf-qJ-WYt" firstAttribute="top" secondItem="LtF-Gi-4eF" secondAttribute="bottom" constant="50" id="kDv-vu-t3Y"/>
+                            <constraint firstItem="IpM-eX-siZ" firstAttribute="height" secondItem="0lH-Nu-pkK" secondAttribute="height" id="l2V-Jl-svw"/>
                             <constraint firstAttribute="trailing" secondItem="oe2-tf-1l2" secondAttribute="trailing" id="oTH-4G-1W5"/>
+                            <constraint firstItem="6PX-XF-h7p" firstAttribute="centerX" secondItem="2RP-0d-g4x" secondAttribute="centerX" id="qKa-X2-Lqb"/>
                             <constraint firstItem="Wyn-kG-BYG" firstAttribute="top" secondItem="oe2-tf-1l2" secondAttribute="bottom" id="rO3-fm-Ao5"/>
+                            <constraint firstItem="6PX-XF-h7p" firstAttribute="top" secondItem="CRf-qJ-WYt" secondAttribute="bottom" id="sNj-OH-uW5"/>
                             <constraint firstItem="plT-Zv-1GJ" firstAttribute="leading" secondItem="CRf-qJ-WYt" secondAttribute="trailing" constant="10" id="uNr-LK-ofY"/>
+                            <constraint firstItem="YX3-hc-Ptk" firstAttribute="height" secondItem="6PX-XF-h7p" secondAttribute="height" id="yCh-Dq-Z0y"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnBottom" destination="IpM-eX-siZ" id="zgi-ly-8Eu"/>
                         <outlet property="btnLogout" destination="fpp-8Q-dma" id="Tzw-5x-xkT"/>
+                        <outlet property="btnTop" destination="0lH-Nu-pkK" id="Ei6-Mj-Ioq"/>
                         <outlet property="lblT1" destination="a0e-aN-pRP" id="kaW-zm-bqf"/>
                         <outlet property="lblT2" destination="CRf-qJ-WYt" id="Bij-PG-g6W"/>
                         <outlet property="lblT3" destination="plT-Zv-1GJ" id="C5P-uG-cg8"/>
                         <outlet property="vSpot" destination="oe2-tf-1l2" id="1vw-J8-2jA"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mqZ-vu-YUo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="133.59999999999999" y="801.94902548725645"/>
         </scene>

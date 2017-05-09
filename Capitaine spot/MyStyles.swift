@@ -29,11 +29,11 @@ extension UIColor {
     }
     
     func primaryPopUp()->UIColor {
-        return colorFromHex(rgbValue: 0x01A79D, alpha: 0.8)
+        return colorFromHex(rgbValue: 0xCA611A, alpha: 0.8)
     }
     
     func secondaryPopUp()->UIColor {
-        return colorFromHex(rgbValue: 0x0D2D3D5, alpha: 0.6)
+        return colorFromHex(rgbValue: 0xFFCA73, alpha: 0.6)
     }
     
     func popUp()->UIColor {

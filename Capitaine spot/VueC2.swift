@@ -70,7 +70,6 @@ class VueC2: UIViewController {
         animator = UIDynamicAnimator(referenceView: view)
         gravity = UIFieldBehavior.radialGravityField(position: self.view.center)
         gravity.falloff = 0.1
-        //gravity.animationSpeed = 1
         gravity.strength = 1.7
         self.animator.addBehavior(gravity)
         

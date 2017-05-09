@@ -15,7 +15,7 @@
         <scene sceneID="sZn-Vo-hrc">
             <objects>
                 <navigationController navigationBarHidden="YES" id="SWr-fF-OEM" customClass="SearchNavigationController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="su9-Tm-y91">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="su9-Tm-y91">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

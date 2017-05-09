@@ -11,11 +11,10 @@ import AWSMobileHubHelper
 import RxSwift
 import RxCocoa
 
-class MenuViewController: UIViewController {
+class MenuViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     let disposeBag = DisposeBag()
     
-    let myCamera = MyCamera()
     
     @IBOutlet weak var lblT1: UILabel!
     @IBOutlet weak var lblT2: UILabel!
@@ -23,6 +22,10 @@ class MenuViewController: UIViewController {
     
     @IBOutlet weak var btnLogout: UIButton!
     @IBOutlet weak var vSpot: UIImageView!
+    
+    @IBOutlet weak var btnTop: BtnMedal!
+    @IBOutlet weak var btnBottom: BtnMedal!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,54 +50,59 @@ class MenuViewController: UIViewController {
                 }
             }).addDisposableTo(disposeBag)
         
-        (self.navigationController as! CSpotNavigationController).cSpotShape
-        .asObservable()
-            .subscribe(onNext:{
-                description in
-                switch description {
-                case .menu :
-                    if let presented = self.presentedViewController as? MyCamera {
-                        presented.dismiss(animated: true, completion: nil)
-                    }
-                case .takePicture :
-                    if let presented = self.presentedViewController as? MyCamera {
-                        presented.imgView.image = nil
-                    } else {
-                        self.myCamera.imgView.image = nil
-                        self.present(self.myCamera, animated: true, completion: nil)
-                    }
-                case .describeSpot :
-                    if let presented = self.presentedViewController {
-                        presented.dismiss(animated: false, completion: {
-                            let loginStoryboard = UIStoryboard(name: "Transition", bundle: nil)
-                            let loginController = loginStoryboard.instantiateInitialViewController()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                                self.present(loginController!, animated: false, completion: {
-                                    (self.navigationController as! CSpotNavigationController).cSpotShape.value = .menu
-                                })
-                            })
-                        })
-                    }
-                case .searchSpot :
-                    let loginStoryboard = UIStoryboard(name: "Search", bundle: nil)
-                    let loginController = loginStoryboard.instantiateInitialViewController()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                        self.present(loginController!, animated: false, completion: {
-                            (self.navigationController as! CSpotNavigationController).cSpotShape.value = .menu
-                        })
-                    })
-                default :
-                    print("Ici on ne fait rien")
-                }
-                self.btnLogout.isHidden = (description != .menu || !User.current.connected.value)
-                self.vSpot.isHidden = description != .describeSpot
-            }).addDisposableTo(disposeBag)
-        
         Spot.newSpot.picture.asObservable()
             .subscribe(onNext: {
                 description in
                 self.vSpot.image = description
             }).addDisposableTo(disposeBag)
+        
+        btnTop.layer.cornerRadius = btnTop.frame.height/2
+        btnTop.clipsToBounds = true
+        btnTop.unselectedStyle()
+        btnTop.setImage(#imageLiteral(resourceName: "treasure-map").withRenderingMode(.alwaysTemplate), for: .normal)
+        
+        btnBottom.layer.cornerRadius = btnBottom.frame.height/2
+        btnBottom.clipsToBounds = true
+        btnBottom.unselectedStyle()
+        
+        User.current.connected
+            .asObservable()
+            .subscribe(onNext:{
+                description in
+                if description {
+                    self.btnBottom.setImage(#imageLiteral(resourceName: "spyglass").withRenderingMode(.alwaysTemplate), for: .normal)
+                } else {
+                    self.btnBottom.setImage(#imageLiteral(resourceName: "pirate").withRenderingMode(.alwaysTemplate), for: .normal)
+                }
+            }).addDisposableTo(disposeBag)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if User.current.connected.value {
+            btnBottom.medalStyle(image: #imageLiteral(resourceName: "pirate"), text: "Utilise la longue vue pour décrire le spot !", delay: 1.5)
+        } else {
+            btnBottom.medalStyle(image: #imageLiteral(resourceName: "pirate"), text: "Connecte toi pour utiliser la longue vue !", delay: 1.5)
+        }
+        btnTop.medalStyle(image: #imageLiteral(resourceName: "pirate"), text: "Utilise la map pour trouver un bon spot !", delay:3.5)
+    }
+    
+    @IBAction func btnTopPressed(_ sender: Any) {
+        let loginStoryboard = UIStoryboard(name: "Search", bundle: nil)
+        let loginController = loginStoryboard.instantiateInitialViewController()
+        present(loginController!, animated: false)
+    }
+    
+    @IBAction func btnBottomPressed(_ sender: Any) {
+        if User.current.connected.value {
+            let myCamera = MyCamera()
+            myCamera.transitioningDelegate = self
+            present(myCamera, animated: true, completion: nil)
+        } else {
+            let loginStoryboard = UIStoryboard(name: "SignIn", bundle: nil)
+            let loginController = loginStoryboard.instantiateInitialViewController()
+            present(loginController!, animated: true, completion: nil)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -114,6 +122,113 @@ class MenuViewController: UIViewController {
                 }
             })
         }
+    }
+    
+    let transition = PopAnimator()
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.presenting = true
+        return transition
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.presenting = false
+        return transition
+    }
+}
+
+
+class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning, CAAnimationDelegate {
+    
+    let duration = 1.0
+    var presenting = true
+    var originFrame = CGRect.zero
+    
+    var dismissCompletion: (()->Void)?
+    
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return duration
+    }
+    
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        self.transitionContext = transitionContext
+        if presenting {
+            animatePresent(using: transitionContext)
+        } else {
+            animateDismiss(using: transitionContext)
+        }
+    }
+    
+    weak var transitionContext: UIViewControllerContextTransitioning!
+    
+    private func animatePresent(using transitionContext: UIViewControllerContextTransitioning) {
+        
+        //2
+        let containerView = transitionContext.containerView
+        let menuViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as! MenuViewController
+        let presentedViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
+        
+        //3
+        containerView.addSubview(presentedViewController!.view)
+        
+        // Size
+        let lWidth = UIScreen.main.bounds.size.width/2
+        let lHeight = UIScreen.main.bounds.size.height/2
+        
+        let rayon = sqrt((lWidth*lWidth)+(lHeight*lHeight))
+        
+        //4
+        let circleMaskPathInitial = UIBezierPath(ovalIn: menuViewController.btnBottom.frame)
+        let circleMaskPathFinal = UIBezierPath(ovalIn: CGRect(x: lWidth - rayon, y: lHeight - rayon, width: 2*rayon, height: 2*rayon))
+        //5
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = circleMaskPathFinal.cgPath
+        presentedViewController!.view.layer.mask = maskLayer
+        
+        //6
+        let maskLayerAnimation = CASpringAnimation(keyPath: "path")
+        maskLayerAnimation.damping = 6
+        maskLayerAnimation.initialVelocity = 1
+        maskLayerAnimation.fromValue = circleMaskPathInitial.cgPath
+        maskLayerAnimation.toValue = circleMaskPathFinal.cgPath
+        maskLayerAnimation.duration = self.transitionDuration(using: transitionContext)
+        maskLayerAnimation.delegate = self
+        maskLayer.add(maskLayerAnimation, forKey: "path")
+    }
+    
+    private func animateDismiss(using transitionContext: UIViewControllerContextTransitioning) {
+        
+        //2
+        let presentedViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)
+        let menuViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as! MenuViewController
+        
+        //3
+        //
+        
+        // Size
+        let lWidth = UIScreen.main.bounds.size.width/2
+        let lHeight = UIScreen.main.bounds.size.height/2
+        
+        let rayon = sqrt((lWidth*lWidth)+(lHeight*lHeight))
+        
+        //4
+        let circleMaskPathFinal = UIBezierPath(ovalIn: CGRect(origin: menuViewController.btnBottom.center, size: CGSize.zero))
+        let circleMaskPathInitial = UIBezierPath(ovalIn: CGRect(x: lWidth - rayon, y: lHeight - rayon, width: 2*rayon, height: 2*rayon))
+        //5
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = circleMaskPathFinal.cgPath
+        presentedViewController!.view.layer.mask = maskLayer
+        
+        //6
+        let maskLayerAnimation = CABasicAnimation(keyPath: "path")
+        maskLayerAnimation.fromValue = circleMaskPathInitial.cgPath
+        maskLayerAnimation.toValue = circleMaskPathFinal.cgPath
+        maskLayerAnimation.duration = 0.2
+        maskLayerAnimation.delegate = self
+        maskLayer.add(maskLayerAnimation, forKey: "path")
+    }
+    
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        self.transitionContext.completeTransition(true)
     }
 }
 
