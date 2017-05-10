@@ -118,9 +118,7 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
             
             lastView = lbl
             
-            lbl.rx.tap
-                .asObservable()
-                .subscribe(onNext: {
+            lbl.rx.tap.asObservable().subscribe(onNext: {
                     description in
                     self.map.selectAnnotation(lbl.annotation, animated: true)
                     lbl.animSelect(withDuration: 0.3)
@@ -163,7 +161,6 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
         valideButton.alpha = 0
         
         // Observables
-        
         spot.asObservable()
             .subscribe(onNext: {
                 description in
@@ -229,9 +226,7 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
         
         _ = Geocoder.shared.geocode(options) {
             (placemarks, attribution, error) in
-            guard let placemarks = placemarks else {
-                return
-            }
+            guard let placemarks = placemarks else { return }
             
             var i = 0
             for placemark in placemarks {
@@ -280,52 +275,3 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
         return true
     }
 }
-
-class UIPlacemarkButton:UIButton {
-    
-    var placemark:GeocodedPlacemark?
-    var annotation = MGLPointAnnotation()
-    
-    let disposeBag = DisposeBag()
-    
-    convenience init(map:MGLMapView) {
-        self.init(frame:CGRect.zero)
-        map.addAnnotation(annotation)
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func addPlacemark(placemark:GeocodedPlacemark) {
-        self.placemark = placemark
-        annotation.coordinate = placemark.location.coordinate
-        annotation.title = placemark.name
-        
-        self.setTitle(placemark.name, for: .normal)
-    }
-}
-
-extension GeocodedPlacemark {
-    
-    var stringAddress : String {
-        get {
-            var address = String()
-            guard let addressdictionary = self.addressDictionary else {
-                return address
-            }
-            address = address + (addressdictionary["street"] as? String ?? "") + ","
-            address = address + (addressdictionary["postalCode"] as? String ?? "") + " "
-            address = address + (addressdictionary["city"] as? String ?? "")/* + " "
-            address = address + (addressdictionary["state"] as? String ?? "") + " "
-            address = address + (addressdictionary["country"] as? String ?? "") + " "*/
-            
-            return address
-        }
-    }
-}
-

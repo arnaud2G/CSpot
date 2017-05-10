@@ -21,9 +21,9 @@ class VueC1: VueC2 {
     
     @IBAction func AnimatePressed(_ sender: Any) {
         
-        let vueC2 = SpotLocationViewController()
+        /*let vueC2 = SpotLocationViewController()
         vueC2.modalPresentationStyle = .overCurrentContext
-        self.present(vueC2, animated: false, completion: nil)
+        self.present(vueC2, animated: false, completion: nil)*/
     }
     
     private func displayTopScreen() {

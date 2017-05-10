@@ -101,11 +101,11 @@ class VueC2: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if Spot.newSpot.title.value == String() {
+        /*if Spot.newSpot.title.value == String() {
             let vueC2 = SpotLocationViewController()
             vueC2.modalPresentationStyle = .overCurrentContext
             self.present(vueC2, animated: false, completion: {})
-        }
+        }*/
     }
     
     private func displayTopScreen() {

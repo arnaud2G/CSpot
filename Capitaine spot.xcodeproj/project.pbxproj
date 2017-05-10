@@ -72,7 +72,6 @@
 		A5E23ACA1EB3918300E1176A /* VueC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B0D1BB1E9D1AF20014EEA3 /* VueC1.swift */; };
 		A5E23ACB1EB3918300E1176A /* VueC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B0D1BD1E9D1AF90014EEA3 /* VueC2.swift */; };
 		A5E23ACC1EB3919300E1176A /* RxMapBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5595A531EA0BEFF00F4AFE5 /* RxMapBox.swift */; };
-		A5E23ACD1EB3919300E1176A /* MyMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CEEA4F1E9CCD370057CA8A /* MyMap.swift */; };
 		A5E23ACE1EB3919F00E1176A /* SearchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D47FC91EB0D8C6006C132B /* SearchNavigationController.swift */; };
 		A5E23ACF1EB3919F00E1176A /* ListSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC40711EAE615F00886246 /* ListSearchController.swift */; };
 		A5E23AD01EB3919F00E1176A /* MapSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A571DCA71EB09AA7003DBC2A /* MapSearchController.swift */; };
@@ -780,7 +779,6 @@
 				A57140601EBB5A3B007F079E /* MaskViewController.swift in Sources */,
 				A53B30671EA65617008AE7B8 /* AnimateExtension.swift in Sources */,
 				A5E23ACA1EB3918300E1176A /* VueC1.swift in Sources */,
-				A5E23ACD1EB3919300E1176A /* MyMap.swift in Sources */,
 				A5E23AD01EB3919F00E1176A /* MapSearchController.swift in Sources */,
 				A5E23ACC1EB3919300E1176A /* RxMapBox.swift in Sources */,
 				A5CACB981E978A9A0068D5B2 /* AppDelegate.swift in Sources */,
