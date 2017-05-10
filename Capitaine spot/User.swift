@@ -28,6 +28,8 @@ class User {
     
     var connected:Variable<Bool> = Variable(false)
     
+    var cSpotScreen:Variable<CSpotScreen> = Variable(.menu)
+    
     let disposeBag = DisposeBag()
     
     init() {

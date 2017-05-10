@@ -53,7 +53,7 @@
 		A54D8EA11E9BC30B0081C0F5 /* ToolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D8EA01E9BC30B0081C0F5 /* ToolExtension.swift */; };
 		A54D8EA31E9BCCF20081C0F5 /* NumberExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D8EA21E9BCCF20081C0F5 /* NumberExtension.swift */; };
 		A57140601EBB5A3B007F079E /* MaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A571405F1EBB5A3B007F079E /* MaskViewController.swift */; };
-		A57480421EA8B4E70045AC03 /* CSpotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57480411EA8B4E70045AC03 /* CSpotController.swift */; };
+		A57352E91EC37D9300AAA648 /* DescribeMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57352E81EC37D9300AAA648 /* DescribeMapViewController.swift */; };
 		A579C8551EB8913100397D04 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A579C8541EB8913100397D04 /* ErrorView.swift */; };
 		A58347CD1E9E241600E16507 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58347CC1E9E241600E16507 /* User.swift */; };
 		A59580521EB3452600FDED6D /* GeolocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58347CE1E9E537500E16507 /* GeolocationService.swift */; };
@@ -62,7 +62,7 @@
 		A59832751EAA58FC00B88033 /* AWSS3.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59832741EAA58FC00B88033 /* AWSS3.swift */; };
 		A59F8CE71EBA20F70083289B /* CDCSpot.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A59F8CE51EBA20F70083289B /* CDCSpot.xcdatamodeld */; };
 		A5B0D1B71E9CD01D0014EEA3 /* MyMap.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B0D1B61E9CD01D0014EEA3 /* MyMap.storyboard */; };
-		A5B0D1C01E9D1B070014EEA3 /* Transition.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B0D1BF1E9D1B070014EEA3 /* Transition.storyboard */; };
+		A5B0D1C01E9D1B070014EEA3 /* Description.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B0D1BF1E9D1B070014EEA3 /* Description.storyboard */; };
 		A5CACB981E978A9A0068D5B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CACB971E978A9A0068D5B2 /* AppDelegate.swift */; };
 		A5CACB9A1E978A9A0068D5B2 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CACB991E978A9A0068D5B2 /* MenuViewController.swift */; };
 		A5CACB9D1E978A9A0068D5B2 /* CSpot.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5CACB9B1E978A9A0068D5B2 /* CSpot.storyboard */; };
@@ -77,6 +77,7 @@
 		A5E23ACF1EB3919F00E1176A /* ListSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC40711EAE615F00886246 /* ListSearchController.swift */; };
 		A5E23AD01EB3919F00E1176A /* MapSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A571DCA71EB09AA7003DBC2A /* MapSearchController.swift */; };
 		A5E23AD11EB3919F00E1176A /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D47FCB1EB0E942006C132B /* TestViewController.swift */; };
+		A5F62A021EC2FBE700A8E057 /* CSpotNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F62A011EC2FBE700A8E057 /* CSpotNavigationController.swift */; };
 		A5F638FC1EA7724B000ACD3D /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5F638F21EA7724B000ACD3D /* SignIn.storyboard */; };
 		A5F638FD1EA7724B000ACD3D /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F638F31EA7724B000ACD3D /* SignInViewController.swift */; };
 		A5F638FE1EA7724B000ACD3D /* SignInViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F638F51EA7724B000ACD3D /* SignInViewControllerExtensions.swift */; };
@@ -151,6 +152,7 @@
 		A5595A531EA0BEFF00F4AFE5 /* RxMapBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxMapBox.swift; sourceTree = "<group>"; };
 		A571405F1EBB5A3B007F079E /* MaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskViewController.swift; sourceTree = "<group>"; };
 		A571DCA71EB09AA7003DBC2A /* MapSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSearchController.swift; sourceTree = "<group>"; };
+		A57352E81EC37D9300AAA648 /* DescribeMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescribeMapViewController.swift; sourceTree = "<group>"; };
 		A57480411EA8B4E70045AC03 /* CSpotController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSpotController.swift; sourceTree = "<group>"; };
 		A579C8541EB8913100397D04 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		A58347CC1E9E241600E16507 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -162,7 +164,7 @@
 		A5B0D1B61E9CD01D0014EEA3 /* MyMap.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyMap.storyboard; sourceTree = "<group>"; };
 		A5B0D1BB1E9D1AF20014EEA3 /* VueC1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VueC1.swift; sourceTree = "<group>"; };
 		A5B0D1BD1E9D1AF90014EEA3 /* VueC2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VueC2.swift; sourceTree = "<group>"; };
-		A5B0D1BF1E9D1B070014EEA3 /* Transition.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Transition.storyboard; sourceTree = "<group>"; };
+		A5B0D1BF1E9D1B070014EEA3 /* Description.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Description.storyboard; sourceTree = "<group>"; };
 		A5CACB941E978A9A0068D5B2 /* Capitaine spot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Capitaine spot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5CACB971E978A9A0068D5B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5CACB991E978A9A0068D5B2 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 		A5CEEA4F1E9CCD370057CA8A /* MyMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMap.swift; sourceTree = "<group>"; };
 		A5D47FC91EB0D8C6006C132B /* SearchNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNavigationController.swift; sourceTree = "<group>"; };
 		A5D47FCB1EB0E942006C132B /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		A5F62A011EC2FBE700A8E057 /* CSpotNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSpotNavigationController.swift; sourceTree = "<group>"; };
 		A5F638ED1EA76FF8000ACD3D /* AWSMobileHubHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSMobileHubHelper.framework; sourceTree = "<group>"; };
 		A5F638F21EA7724B000ACD3D /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		A5F638F31EA7724B000ACD3D /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -332,6 +335,7 @@
 		A54512D11E9BDFED000FDA2F /* BoiteAComposant */ = {
 			isa = PBXGroup;
 			children = (
+				A5F629FF1EC2F55200A8E057 /* EcranDescription2 */,
 				A5F638F11EA7724B000ACD3D /* EcranConnection */,
 				A52E2BA61EB1DC0F004F1682 /* EcranProfil */,
 				A5FC40701EAE60CA00886246 /* EcranRecherche */,
@@ -396,6 +400,7 @@
 				A5CACB9B1E978A9A0068D5B2 /* CSpot.storyboard */,
 				A57480411EA8B4E70045AC03 /* CSpotController.swift */,
 				A5CACB991E978A9A0068D5B2 /* MenuViewController.swift */,
+				A5F62A011EC2FBE700A8E057 /* CSpotNavigationController.swift */,
 			);
 			name = EcranPrincipal;
 			sourceTree = "<group>";
@@ -414,12 +419,6 @@
 		A5B62C151EA8FABA00694441 /* EcranDescription */ = {
 			isa = PBXGroup;
 			children = (
-				A5B0D1BB1E9D1AF20014EEA3 /* VueC1.swift */,
-				A5B0D1BD1E9D1AF90014EEA3 /* VueC2.swift */,
-				A537B3311EAA312D001A912A /* DescriptionNavigationController.swift */,
-				A5B0D1BF1E9D1B070014EEA3 /* Transition.storyboard */,
-				A54512D21E9BE004000FDA2F /* AppareilPhoto */,
-				A5CEEA4E1E9CCD220057CA8A /* MaMap */,
 			);
 			name = EcranDescription;
 			sourceTree = "<group>";
@@ -497,9 +496,31 @@
 				A58347CE1E9E537500E16507 /* GeolocationService.swift */,
 				A5595A531EA0BEFF00F4AFE5 /* RxMapBox.swift */,
 				A5CEEA4F1E9CCD370057CA8A /* MyMap.swift */,
+				A57352E81EC37D9300AAA648 /* DescribeMapViewController.swift */,
 				A5B0D1B61E9CD01D0014EEA3 /* MyMap.storyboard */,
 			);
 			name = MaMap;
+			sourceTree = "<group>";
+		};
+		A5F629FF1EC2F55200A8E057 /* EcranDescription2 */ = {
+			isa = PBXGroup;
+			children = (
+				A5B0D1BF1E9D1B070014EEA3 /* Description.storyboard */,
+				A537B3311EAA312D001A912A /* DescriptionNavigationController.swift */,
+				A5F62A001EC2F56C00A8E057 /* Description */,
+				A54512D21E9BE004000FDA2F /* AppareilPhoto */,
+				A5CEEA4E1E9CCD220057CA8A /* MaMap */,
+			);
+			name = EcranDescription2;
+			sourceTree = "<group>";
+		};
+		A5F62A001EC2F56C00A8E057 /* Description */ = {
+			isa = PBXGroup;
+			children = (
+				A5B0D1BB1E9D1AF20014EEA3 /* VueC1.swift */,
+				A5B0D1BD1E9D1AF90014EEA3 /* VueC2.swift */,
+			);
+			name = Description;
 			sourceTree = "<group>";
 		};
 		A5F638F01EA771A3000ACD3D /* AWS */ = {
@@ -651,7 +672,7 @@
 				A53C3E811EBA4BCC00E68529 /* marketing_url.txt in Resources */,
 				A5FC40741EAE617A00886246 /* Search.storyboard in Resources */,
 				A5CACB9D1E978A9A0068D5B2 /* CSpot.storyboard in Resources */,
-				A5B0D1C01E9D1B070014EEA3 /* Transition.storyboard in Resources */,
+				A5B0D1C01E9D1B070014EEA3 /* Description.storyboard in Resources */,
 				A53C3E851EBA4BCC00E68529 /* support_url.txt in Resources */,
 				A53C3E801EBA4BCC00E68529 /* keywords.txt in Resources */,
 			);
@@ -727,7 +748,6 @@
 			files = (
 				A59580521EB3452600FDED6D /* GeolocationService.swift in Sources */,
 				A54984811EA767810074755B /* AWSDescription.swift in Sources */,
-				A57480421EA8B4E70045AC03 /* CSpotController.swift in Sources */,
 				A54512D41E9BE017000FDA2F /* MyCamera.swift in Sources */,
 				A59832731EAA4B9B00B88033 /* AWSTable.swift in Sources */,
 				A523C8031EB9D2E7006D2919 /* CDHelper.swift in Sources */,
@@ -742,12 +762,14 @@
 				A59832751EAA58FC00B88033 /* AWSS3.swift in Sources */,
 				A52E2BA81EB1DC22004F1682 /* SpotViewController.swift in Sources */,
 				A5F638FF1EA7724B000ACD3D /* UserPoolForgotPasswordViewController.swift in Sources */,
+				A57352E91EC37D9300AAA648 /* DescribeMapViewController.swift in Sources */,
 				A516F04C1EB9EAC7001E10C6 /* AWSDescribe.swift in Sources */,
 				A5F638FD1EA7724B000ACD3D /* SignInViewController.swift in Sources */,
 				A5E23ACB1EB3918300E1176A /* VueC2.swift in Sources */,
 				A54D8EA31E9BCCF20081C0F5 /* NumberExtension.swift in Sources */,
 				A58347CD1E9E241600E16507 /* User.swift in Sources */,
 				A5CACB9A1E978A9A0068D5B2 /* MenuViewController.swift in Sources */,
+				A5F62A021EC2FBE700A8E057 /* CSpotNavigationController.swift in Sources */,
 				A579C8551EB8913100397D04 /* ErrorView.swift in Sources */,
 				A59F8CE71EBA20F70083289B /* CDCSpot.xcdatamodeld in Sources */,
 				A549847D1EA766B40074755B /* UISpot.swift in Sources */,

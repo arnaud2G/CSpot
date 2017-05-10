@@ -57,17 +57,6 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
         
         self.map.setCenter(User.current.location.value!, zoomLevel: 16, animated: true)
         
-        /*User.current.location
-            .asObservable()
-            .subscribe(onNext: {
-                description in
-                if let coordinate = description {
-                    self.map.setCenter(coordinate, zoomLevel: 16, animated: true)
-                } else if let coordinate = User.getLastCoo() {
-                    self.map.setCenter(coordinate, zoomLevel: 16, animated: true)
-                }
-            }).addDisposableTo(disposeBag)*/
-        
         placeLabels.append(UIPlacemarkButton(map: map))
         placeLabels.append(UIPlacemarkButton(map: map))
         placeLabels.append(UIPlacemarkButton(map: map))
@@ -81,7 +70,7 @@ class SpotLocationViewController:UIViewController, MGLMapViewDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        animateCircleAppear()
+        //animateCircleAppear()
     }
     
     private func animateCircleDisappear(withValidate validated:Bool) {

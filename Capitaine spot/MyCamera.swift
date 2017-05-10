@@ -28,12 +28,27 @@ class MyCamera:UIViewController, AVCapturePhotoCaptureDelegate {
     
     convenience init() {
         self.init(nibName: nil, bundle: nil)
-        
-        self.modalPresentationStyle = .overCurrentContext
+        displayCamera()
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        print("init")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        displayCamera()
+    }
+    
+    private func displayCamera() {
         
         session = AVCaptureSession()
         session!.sessionPreset = AVCaptureSessionPresetPhoto
-        
         let backCamera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         
         var error: NSError?
@@ -66,14 +81,6 @@ class MyCamera:UIViewController, AVCapturePhotoCaptureDelegate {
         displayCameraFunction()
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     private func displayCameraFunction() {
         
         // Image de fond
@@ -100,7 +107,7 @@ class MyCamera:UIViewController, AVCapturePhotoCaptureDelegate {
         btnBack.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         btnBack.rx.tap.subscribe(onNext:{
             [weak self] tap in
-            self?.dismiss(animated: true, completion: nil)
+            self?.navigationController?.popViewController(animated: true)
         }).addDisposableTo(disposeBag)
         
         // Bouton flash
@@ -197,12 +204,9 @@ class MyCamera:UIViewController, AVCapturePhotoCaptureDelegate {
         btnValidePic.setImage(#imageLiteral(resourceName: "ship").withRenderingMode(.alwaysTemplate), for: .normal)
         btnValidePic.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         btnValidePic.rx.tap.subscribe(onNext:{
-            tap in
-            Spot.newSpot.picture.value = self.image.value
-            let transitionStoryboard = UIStoryboard(name: "Transition", bundle: nil)
-            let vueC1 = transitionStoryboard.instantiateInitialViewController()
-            self.navigationController?.pushViewController(vueC1!, animated: false)
-            
+            [weak self] tap in
+            Spot.newSpot.picture.value = self!.image.value
+            User.current.cSpotScreen.value = .description
         }).addDisposableTo(disposeBag)
         
         image.asObservable().subscribe(onNext:{
@@ -244,7 +248,6 @@ class MyCamera:UIViewController, AVCapturePhotoCaptureDelegate {
         }).addDisposableTo(disposeBag)
     }
     
-    let imfView = UIImageView(image: #imageLiteral(resourceName: "restart").withRenderingMode(.alwaysTemplate))
     func takePic(sender:UIButton) {
         
         if image.value == nil {

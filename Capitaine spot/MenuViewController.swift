@@ -15,13 +15,11 @@ class MenuViewController: UIViewController, UIViewControllerTransitioningDelegat
     
     let disposeBag = DisposeBag()
     
-    
     @IBOutlet weak var lblT1: UILabel!
     @IBOutlet weak var lblT2: UILabel!
     @IBOutlet weak var lblT3: UILabel!
     
     @IBOutlet weak var btnLogout: UIButton!
-    @IBOutlet weak var vSpot: UIImageView!
     
     @IBOutlet weak var btnTop: BtnMedal!
     @IBOutlet weak var btnBottom: BtnMedal!
@@ -50,12 +48,6 @@ class MenuViewController: UIViewController, UIViewControllerTransitioningDelegat
                 }
             }).addDisposableTo(disposeBag)
         
-        Spot.newSpot.picture.asObservable()
-            .subscribe(onNext: {
-                description in
-                self.vSpot.image = description
-            }).addDisposableTo(disposeBag)
-        
         btnTop.layer.cornerRadius = btnTop.frame.height/2
         btnTop.clipsToBounds = true
         btnTop.unselectedStyle()
@@ -79,6 +71,7 @@ class MenuViewController: UIViewController, UIViewControllerTransitioningDelegat
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        User.current.cSpotScreen.value = .menu
         if User.current.connected.value {
             btnBottom.medalStyle(image: #imageLiteral(resourceName: "pirate"), text: "Utilise la longue vue pour décrire le spot !", delay: 1.5)
         } else {
@@ -95,9 +88,7 @@ class MenuViewController: UIViewController, UIViewControllerTransitioningDelegat
     
     @IBAction func btnBottomPressed(_ sender: Any) {
         if User.current.connected.value {
-            let myCamera = MyCamera()
-            myCamera.transitioningDelegate = self
-            present(myCamera, animated: true, completion: nil)
+            User.current.cSpotScreen.value = .camera
         } else {
             let loginStoryboard = UIStoryboard(name: "SignIn", bundle: nil)
             let loginController = loginStoryboard.instantiateInitialViewController()
@@ -124,7 +115,7 @@ class MenuViewController: UIViewController, UIViewControllerTransitioningDelegat
         }
     }
     
-    let transition = PopAnimator()
+    /*let transition = PopAnimator()
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.presenting = true
         return transition
@@ -133,7 +124,7 @@ class MenuViewController: UIViewController, UIViewControllerTransitioningDelegat
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.presenting = false
         return transition
-    }
+    }*/
 }
 
 

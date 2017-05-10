@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="C3b-YP-OxN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eSe-O9-gnB">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -111,7 +111,6 @@
         <!--Menu View Controller-->
         <scene sceneID="LqH-Zf-i8t">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mqZ-vu-YUo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="MenuViewController" definesPresentationContext="YES" modalPresentationStyle="overCurrentContext" id="C3b-YP-OxN" customClass="MenuViewController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LtF-Gi-4eF"/>
@@ -134,9 +133,6 @@
                                     <action selector="btnLogoutPressed:" destination="C3b-YP-OxN" eventType="touchUpInside" id="pes-BB-j86"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oe2-tf-1l2">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Capt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0e-aN-pRP">
                                 <rect key="frame" x="102.5" y="78.5" width="62" height="38.5"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="32"/>
@@ -198,7 +194,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="fpp-8Q-dma" secondAttribute="trailing" constant="10" id="1AD-9b-MfY"/>
-                            <constraint firstItem="oe2-tf-1l2" firstAttribute="leading" secondItem="2RP-0d-g4x" secondAttribute="leading" id="Ac2-hA-pJJ"/>
                             <constraint firstItem="0lH-Nu-pkK" firstAttribute="top" secondItem="6PX-XF-h7p" secondAttribute="bottom" id="Ckf-tX-0OC"/>
                             <constraint firstItem="tZj-6O-Q4l" firstAttribute="height" secondItem="6PX-XF-h7p" secondAttribute="height" id="Dap-bf-prP"/>
                             <constraint firstItem="tZj-6O-Q4l" firstAttribute="top" secondItem="0lH-Nu-pkK" secondAttribute="bottom" id="Ktp-qE-LCc"/>
@@ -211,20 +206,18 @@
                             <constraint firstItem="tZj-6O-Q4l" firstAttribute="centerX" secondItem="2RP-0d-g4x" secondAttribute="centerX" id="RmP-Ih-oMU"/>
                             <constraint firstItem="IpM-eX-siZ" firstAttribute="centerX" secondItem="2RP-0d-g4x" secondAttribute="centerX" id="Ttg-Oq-5nn"/>
                             <constraint firstItem="YX3-hc-Ptk" firstAttribute="centerX" secondItem="2RP-0d-g4x" secondAttribute="centerX" id="be7-N2-HoU"/>
-                            <constraint firstItem="oe2-tf-1l2" firstAttribute="top" secondItem="2RP-0d-g4x" secondAttribute="top" id="cTx-Rh-H2F"/>
                             <constraint firstItem="Wyn-kG-BYG" firstAttribute="top" secondItem="YX3-hc-Ptk" secondAttribute="bottom" id="fqT-cd-MFI"/>
                             <constraint firstItem="IpM-eX-siZ" firstAttribute="top" secondItem="tZj-6O-Q4l" secondAttribute="bottom" id="gLu-OM-YWf"/>
                             <constraint firstItem="YX3-hc-Ptk" firstAttribute="top" secondItem="IpM-eX-siZ" secondAttribute="bottom" id="iK7-Dh-bf0"/>
                             <constraint firstItem="CRf-qJ-WYt" firstAttribute="top" secondItem="LtF-Gi-4eF" secondAttribute="bottom" constant="50" id="kDv-vu-t3Y"/>
                             <constraint firstItem="IpM-eX-siZ" firstAttribute="height" secondItem="0lH-Nu-pkK" secondAttribute="height" id="l2V-Jl-svw"/>
-                            <constraint firstAttribute="trailing" secondItem="oe2-tf-1l2" secondAttribute="trailing" id="oTH-4G-1W5"/>
                             <constraint firstItem="6PX-XF-h7p" firstAttribute="centerX" secondItem="2RP-0d-g4x" secondAttribute="centerX" id="qKa-X2-Lqb"/>
-                            <constraint firstItem="Wyn-kG-BYG" firstAttribute="top" secondItem="oe2-tf-1l2" secondAttribute="bottom" id="rO3-fm-Ao5"/>
                             <constraint firstItem="6PX-XF-h7p" firstAttribute="top" secondItem="CRf-qJ-WYt" secondAttribute="bottom" id="sNj-OH-uW5"/>
                             <constraint firstItem="plT-Zv-1GJ" firstAttribute="leading" secondItem="CRf-qJ-WYt" secondAttribute="trailing" constant="10" id="uNr-LK-ofY"/>
                             <constraint firstItem="YX3-hc-Ptk" firstAttribute="height" secondItem="6PX-XF-h7p" secondAttribute="height" id="yCh-Dq-Z0y"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="tur-qM-MxJ"/>
                     <connections>
                         <outlet property="btnBottom" destination="IpM-eX-siZ" id="zgi-ly-8Eu"/>
                         <outlet property="btnLogout" destination="fpp-8Q-dma" id="Tzw-5x-xkT"/>
@@ -232,11 +225,27 @@
                         <outlet property="lblT1" destination="a0e-aN-pRP" id="kaW-zm-bqf"/>
                         <outlet property="lblT2" destination="CRf-qJ-WYt" id="Bij-PG-g6W"/>
                         <outlet property="lblT3" destination="plT-Zv-1GJ" id="C5P-uG-cg8"/>
-                        <outlet property="vSpot" destination="oe2-tf-1l2" id="1vw-J8-2jA"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mqZ-vu-YUo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="133.59999999999999" y="801.94902548725645"/>
+        </scene>
+        <!--Spot Navigation Controller-->
+        <scene sceneID="AJb-ij-Trs">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="eSe-O9-gnB" customClass="CSpotNavigationController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Brr-It-VrY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="C3b-YP-OxN" kind="relationship" relationship="rootViewController" id="fgY-o7-H2U"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DZC-YI-My3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-647" y="802"/>
         </scene>
     </scenes>
     <resources>
