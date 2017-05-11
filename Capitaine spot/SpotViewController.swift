@@ -32,13 +32,19 @@ import MapKit
     @IBOutlet weak var imgBack: UIImageView!
     @IBOutlet weak var vDescription: UIView!
     
-    var image:UIImage?
     var spot:AWSSpots!
     
     var animator:UIDynamicAnimator!
     
+    deinit {
+        print("deinit SpotViewController")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // On attribu le spot
+        spot = User.current.selectedSpot!
         
         // graphique
         vBack.backgroundColor = UIColor().secondary()
@@ -53,7 +59,18 @@ import MapKit
         
         // Info
         vDescription.backgroundColor = UIColor().secondaryPopUp()
-        imgBack.image = image
+        if let pictures = spot._pictureId, pictures.count > 0 {
+            guard let url = AWSS3.convertToPublicURLRepository(url: pictures[Int.random(lower: 0, upper: pictures.count - 1)]) else {return}
+            getImageFromUrl(url:url, completion: {
+                image in
+                DispatchQueue.main.async(execute: {
+                    () -> Void in
+                    if let image = image {
+                        self.imgBack.image = image
+                    }
+                })
+            })
+        }
         
         lblTitle.text = spot._name
         lblAdress.text = spot._adress.replacingOccurrences(of: ",", with: "\n")

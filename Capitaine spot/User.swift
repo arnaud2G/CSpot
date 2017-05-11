@@ -30,6 +30,8 @@ class User {
     
     var cSpotScreen:Variable<CSpotScreen> = Variable(.menu)
     
+    var selectedSpot:AWSSpots?
+    
     let disposeBag = DisposeBag()
     
     init() {

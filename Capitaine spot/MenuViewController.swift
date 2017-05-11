@@ -73,6 +73,7 @@ class MenuViewController: UIViewController, UIViewControllerTransitioningDelegat
         super.viewDidAppear(animated)
         User.current.cSpotScreen.value = .menu
         Spot.newSpot.reset()
+        Search.main.reset()
         if User.current.connected.value {
             btnBottom.medalStyle(image: #imageLiteral(resourceName: "pirate"), text: "Utilise la longue vue pour décrire le spot !", delay: 1.5)
         } else {
@@ -82,9 +83,7 @@ class MenuViewController: UIViewController, UIViewControllerTransitioningDelegat
     }
     
     @IBAction func btnTopPressed(_ sender: Any) {
-        let loginStoryboard = UIStoryboard(name: "Search", bundle: nil)
-        let loginController = loginStoryboard.instantiateInitialViewController()
-        present(loginController!, animated: false)
+        User.current.cSpotScreen.value = .search
     }
     
     @IBAction func btnBottomPressed(_ sender: Any) {

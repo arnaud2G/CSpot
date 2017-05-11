@@ -15,6 +15,15 @@ import MapboxGeocoder
 import MapKit
 import Mapbox
 
+class SearchViewController:UIViewController {
+    var transRect:CGRect!
+    var transBtn:UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+}
+
 class MapSearchController:SearchViewController {
     
     static let userTitle = "CSPot-user"
@@ -58,10 +67,6 @@ class MapSearchController:SearchViewController {
         print("deinit MapSearchController")
     }
     
-    func searchNC() -> SearchNavigationController {
-        return self.navigationController as! SearchNavigationController
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -99,7 +104,7 @@ class MapSearchController:SearchViewController {
         userAnnotation.heightAnchor.constraint(equalToConstant: 26).isActive = true
         userAnnotation.layer.cornerRadius = 13
         
-        searchNC().placeCoo.asObservable()
+        Search.main.placeCoo.asObservable()
             .subscribe(onNext: {
                 [weak self] coordonne in
                 if let coordonne = coordonne {
@@ -108,7 +113,7 @@ class MapSearchController:SearchViewController {
                 }
             }).addDisposableTo(disposeBag)
         
-        searchNC().result.asObservable()
+        Search.main.result.asObservable()
             .subscribe(onNext:{
                 [weak self] spots in
                 if spots.count == 0 {return}
@@ -129,11 +134,12 @@ class MapSearchController:SearchViewController {
     
     var isAppear = false
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        
+        User.current.cSpotScreen.value = .search
         
         if !isAppear {
             isAppear = true
-            searchNC().searchResult.asObservable()
+            Search.main.searchResult.asObservable()
                 .subscribe(onNext:{
                     [weak self] searching in
                     guard let searching = searching else {return}
@@ -141,7 +147,7 @@ class MapSearchController:SearchViewController {
                     self!.vIndicator.isHidden = !searching
                 }).addDisposableTo(disposeBag)
             
-            searchNC().reverse.asObservable()
+            Search.main.reverse.asObservable()
                 .subscribe(onNext:{
                     [weak self] tReverse in
                     if tReverse.count == 0 {
@@ -160,28 +166,26 @@ class MapSearchController:SearchViewController {
             mapCenter.asObservable()
                 .debounce(0.5, scheduler: MainScheduler.instance)
                 .subscribe(onNext:{
-                    [weak self] center in
+                    center in
                     if let center = center {
-                        self?.searchNC().forwardGeocoding(location: center)
+                        Search.main.forwardGeocoding(location: center)
                     }
                 }).addDisposableTo(disposeBag)
         }
     }
     
     @IBAction func btnBackPressed(_ sender: Any) {
-        searchNC().dismiss(animated: true, completion: {})
+        navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func btnChangePressed(_ sender: Any) {
-        searchNC().popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func vSpotPressed(_ sender: Any) {
-        let spotStoryboard = UIStoryboard(name: "Spot", bundle: nil)
-        let spotController = spotStoryboard.instantiateInitialViewController() as! SpotViewController
-        spotController.spot = selectedSpot
-        spotController.image = imgBack.image
-        (self.navigationController as! SearchNavigationController).pushViewController(spotController, animated: true)
+        guard let selectedSpot = selectedSpot else {return}
+        User.current.selectedSpot = selectedSpot
+        User.current.cSpotScreen.value = .spot
     }
 }
 
@@ -301,7 +305,7 @@ extension MapSearchController: UITextFieldDelegate {
             .subscribe(onNext: {
                 adress in
                 if let adress = adress {
-                    self.searchNC().forwardGeocoding(address: adress)
+                    Search.main.forwardGeocoding(address: adress)
                 }
             })
         textFieldDisposable.addDisposableTo(disposeBag)
@@ -312,14 +316,14 @@ extension MapSearchController: UITextFieldDelegate {
     }
     
     @IBAction func btnRecentrePressed(_ sender: Any) {
-        if searchNC().reverse.value.count > 0 {
+        if Search.main.reverse.value.count > 0 {
             textFieldDisposable.dispose()
-            searchNC().reverse.value = [MKPlacemark]()
+            Search.main.reverse.value = [MKPlacemark]()
         } else {
             tvAdress.endEditing(true)
             tvAdress.text = String()
-            searchNC().place.value = User.current.place.value
-            searchNC().placeCoo.value = User.current.location.value
+            Search.main.place.value = User.current.place.value
+            Search.main.placeCoo.value = User.current.location.value
         }
     }
 }
@@ -328,20 +332,20 @@ extension MapSearchController: UITextFieldDelegate {
 extension MapSearchController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchNC().reverse.value.count
+        return Search.main.reverse.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell") as! SearchCell
-        cell.place = searchNC().reverse.value[indexPath.row]
+        cell.place = Search.main.reverse.value[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        searchNC().place.value = searchNC().reverse.value[indexPath.row].addressDictionary!["City"] as? String
-        searchNC().placeCoo.value = searchNC().reverse.value[indexPath.row].coordinate
+        Search.main.place.value = Search.main.reverse.value[indexPath.row].addressDictionary!["City"] as? String
+        Search.main.placeCoo.value = Search.main.reverse.value[indexPath.row].coordinate
         tvAdress.endEditing(true)
-        searchNC().reverse.value = [MKPlacemark]()
+        Search.main.reverse.value = [MKPlacemark]()
     }
 }
 

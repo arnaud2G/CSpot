@@ -9,35 +9,6 @@
 import Foundation
 import UIKit
 
-enum CSPotMess: CustomStringConvertible {
-    
-    case Fail(NSError,Bool)
-    case Succeed(String,Bool)
-    
-    var description: String {
-        switch self {
-        case .Fail(let error, _):
-            if let mess = error.userInfo["NSLocalizedDescription"] as? String {
-                return mess
-            } else if let mess = error.userInfo["message"] as? String {
-                return mess
-            }
-            fatalError("Le cas suivant n'est pas traité : \(error.userInfo)")
-        case .Succeed(let message, _):
-            return message
-        }
-    }
-    
-    var toRoot: Bool {
-        switch self {
-        case .Fail(_, let bool):
-            return bool
-        case .Succeed(_, let bool):
-            return bool
-        }
-    }
-}
-
 class LoaddingViewController:UIViewController, CAAnimationDelegate {
     
     deinit {
@@ -152,6 +123,35 @@ class LoaddingViewController:UIViewController, CAAnimationDelegate {
             self.navigationController?.popToRootViewController(animated: true)
         } else {
             self.navigationController?.popViewController(animated: true)
+        }
+    }
+}
+
+enum CSPotMess: CustomStringConvertible {
+    
+    case Fail(NSError,Bool)
+    case Succeed(String,Bool)
+    
+    var description: String {
+        switch self {
+        case .Fail(let error, _):
+            if let mess = error.userInfo["NSLocalizedDescription"] as? String {
+                return mess
+            } else if let mess = error.userInfo["message"] as? String {
+                return mess
+            }
+            fatalError("Le cas suivant n'est pas traité : \(error.userInfo)")
+        case .Succeed(let message, _):
+            return message
+        }
+    }
+    
+    var toRoot: Bool {
+        switch self {
+        case .Fail(_, let bool):
+            return bool
+        case .Succeed(_, let bool):
+            return bool
         }
     }
 }

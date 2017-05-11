@@ -12,6 +12,8 @@ import AWSDynamoDB
 
 class AWSSpots: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
+    static let selected = AWSSpots()
+    
     var _name: String!
     var _place: String!
     var _adress: String!
@@ -36,6 +38,10 @@ class AWSSpots: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     class func rangeKeyAttribute() -> String {
         
         return "_place"
+    }
+    
+    func setSelected(selectedSpot:AWSSpots) {
+        
     }
     
     override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any] {

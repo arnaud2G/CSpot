@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VjE-xg-Xe7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VjE-xg-Xe7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -30,6 +30,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c7o-4U-Nr4">
                                 <rect key="frame" x="0.0" y="245.5" width="375" height="87.5"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="woodtexture" translatesAutoresizingMaskIntoConstraints="NO" id="s61-WG-OYs">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="87.5"/>
+                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="usP-QE-qzl">
                                         <rect key="frame" x="10" y="10" width="305" height="26.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
@@ -57,13 +60,17 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="GhJ-Bw-VkM" firstAttribute="leading" secondItem="c7o-4U-Nr4" secondAttribute="leading" constant="10" id="5ak-sk-pVX"/>
+                                    <constraint firstAttribute="trailing" secondItem="s61-WG-OYs" secondAttribute="trailing" id="MEf-6a-gpw"/>
                                     <constraint firstItem="GhJ-Bw-VkM" firstAttribute="top" secondItem="usP-QE-qzl" secondAttribute="bottom" constant="10" id="O5H-Tz-NGX"/>
+                                    <constraint firstAttribute="bottom" secondItem="s61-WG-OYs" secondAttribute="bottom" id="WdZ-AW-VCg"/>
                                     <constraint firstItem="mo2-Fk-wJl" firstAttribute="centerY" secondItem="c7o-4U-Nr4" secondAttribute="centerY" id="bzo-OL-7Fz"/>
+                                    <constraint firstItem="s61-WG-OYs" firstAttribute="top" secondItem="c7o-4U-Nr4" secondAttribute="top" id="ia7-rF-Pmw"/>
                                     <constraint firstItem="usP-QE-qzl" firstAttribute="leading" secondItem="c7o-4U-Nr4" secondAttribute="leading" constant="10" id="ieL-Gz-Xjf"/>
                                     <constraint firstItem="mo2-Fk-wJl" firstAttribute="leading" secondItem="GhJ-Bw-VkM" secondAttribute="trailing" constant="10" id="mE7-Ab-75u"/>
                                     <constraint firstItem="usP-QE-qzl" firstAttribute="top" secondItem="c7o-4U-Nr4" secondAttribute="top" constant="10" id="meO-e8-Hjw"/>
                                     <constraint firstAttribute="trailing" secondItem="mo2-Fk-wJl" secondAttribute="trailing" constant="10" id="naq-7h-1Nm"/>
                                     <constraint firstItem="mo2-Fk-wJl" firstAttribute="leading" secondItem="usP-QE-qzl" secondAttribute="trailing" constant="10" id="nhJ-ke-fO3"/>
+                                    <constraint firstItem="s61-WG-OYs" firstAttribute="leading" secondItem="c7o-4U-Nr4" secondAttribute="leading" id="wia-Sj-xqO"/>
                                     <constraint firstAttribute="bottom" secondItem="GhJ-Bw-VkM" secondAttribute="bottom" constant="20" id="zMM-8e-pcW"/>
                                 </constraints>
                             </view>
@@ -133,5 +140,6 @@
         <image name="back_test" width="1200" height="1600"/>
         <image name="delete" width="33" height="33"/>
         <image name="ship" width="33" height="33"/>
+        <image name="woodtexture" width="1400" height="980"/>
     </resources>
 </document>
