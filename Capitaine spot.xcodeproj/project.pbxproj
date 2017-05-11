@@ -241,6 +241,7 @@
 		A52C4D531EB22A72007550D5 /* Graphique */ = {
 			isa = PBXGroup;
 			children = (
+				A560244E1EC4FB8D004A7241 /* SpotView */,
 				A52C4D541EB22AA0007550D5 /* UIMedal.swift */,
 			);
 			name = Graphique;
@@ -409,6 +410,15 @@
 			name = EcranPrincipal;
 			sourceTree = "<group>";
 		};
+		A560244E1EC4FB8D004A7241 /* SpotView */ = {
+			isa = PBXGroup;
+			children = (
+				A5431D5F1EC4E392000DCC3D /* SpotView.swift */,
+				A560244C1EC4EB26004A7241 /* SpotView.xib */,
+			);
+			name = SpotView;
+			sourceTree = "<group>";
+		};
 		A59F8CF01EBA24BD0083289B /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -552,8 +562,6 @@
 				A5FC40711EAE615F00886246 /* ListSearchController.swift */,
 				A571DCA71EB09AA7003DBC2A /* MapSearchController.swift */,
 				A5FC40731EAE617A00886246 /* Search.storyboard */,
-				A560244C1EC4EB26004A7241 /* SpotView.xib */,
-				A5431D5F1EC4E392000DCC3D /* SpotView.swift */,
 			);
 			name = EcranRecherche;
 			sourceTree = "<group>";
