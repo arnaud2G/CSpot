@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 
 enum CSpotScreen {
-    case menu, camera, description, test
+    case menu, camera, description, location, test, loadding
 }
 
 class CSpotNavigationController: UINavigationController, UINavigationControllerDelegate {
@@ -34,17 +34,25 @@ class CSpotNavigationController: UINavigationController, UINavigationControllerD
                 [weak self] cSpotScreen in
                 switch User.current.cSpotScreen.value {
                 case .test:
-                    let descriptionMapStoryboard = UIStoryboard(name: "MyMap", bundle: nil)
-                    let descriptionMapVC = descriptionMapStoryboard.instantiateInitialViewController()
-                    self?.pushViewController(descriptionMapVC!, animated: true)
+                    let story = UIStoryboard(name: "Loadding", bundle: nil)
+                    let vc = story.instantiateInitialViewController()
+                    self?.pushViewController(vc!, animated: true)
+                case .loadding:
+                    let story = UIStoryboard(name: "Loadding", bundle: nil)
+                    let vc = story.instantiateInitialViewController()
+                    self?.pushViewController(vc!, animated: true)
                 case .menu:
                     self?.myCamera = MyCamera()
                 case .camera:
                     self?.pushViewController(self!.myCamera!, animated: true)
-                case .description:
+                case .location:
                     let myMapStoryboard = UIStoryboard(name: "MyMap", bundle: nil)
                     let myMapVC = myMapStoryboard.instantiateInitialViewController()
                     self?.pushViewController(myMapVC!, animated: true)
+                case .description:
+                    let descriptionStoryboard = UIStoryboard(name: "Description", bundle: nil)
+                    let descriptionVC = descriptionStoryboard.instantiateInitialViewController()
+                    self?.pushViewController(descriptionVC!, animated: true)
                 }
         }).addDisposableTo(disposeBag)
     }
@@ -70,12 +78,20 @@ class CSPostAnimator: NSObject, UIViewControllerAnimatedTransitioning, CAAnimati
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         self.transitionContext = transitionContext
+        if transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as? LoaddingViewController != nil {
+            animatePresentLoadding(using: transitionContext)
+            return
+        }
         if transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as? DescribeMapViewController != nil {
             animatePresentMap(using: transitionContext)
             return
         }
         if transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as? MenuViewController != nil {
             animateDismiss(using: transitionContext)
+            return
+        }
+        if transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as? DescriptionViewController != nil {
+            animatePresentDescription(using: transitionContext)
             return
         }
         if transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as? MenuViewController == nil {
@@ -147,22 +163,73 @@ class CSPostAnimator: NSObject, UIViewControllerAnimatedTransitioning, CAAnimati
         maskLayer.add(maskLayerAnimation, forKey: "path")
     }
     
+    func animatePresentLoadding(using transitionContext: UIViewControllerContextTransitioning) {
+        
+        // On ajoute la vue
+        let containerView = transitionContext.containerView
+        let loaddingViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as! LoaddingViewController
+        containerView.addSubview(loaddingViewController.view)
+        
+        // On ajoute l'effet
+        let circleMaskPathInitial = UIBezierPath(ovalIn: CGRect(x: 100, y: 100, width: 0, height: 0))
+        let circleMaskPathFinal = UIBezierPath(ovalIn: CGRect(x: 100 - 600, y: 100 - 600, width: 1200, height: 1200))
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = circleMaskPathFinal.cgPath
+        loaddingViewController.view.layer.mask = maskLayer
+        
+        // On défini l'animation
+        let maskLayerAnimation = CABasicAnimation(keyPath: "path")
+        maskLayerAnimation.fromValue = circleMaskPathInitial.cgPath
+        maskLayerAnimation.toValue = circleMaskPathFinal.cgPath
+        maskLayerAnimation.duration = self.transitionDuration(using: transitionContext)
+        maskLayerAnimation.delegate = self
+        maskLayer.add(maskLayerAnimation, forKey: "path")
+    }
+    
     func animatePresentMap(using transitionContext: UIViewControllerContextTransitioning) {
         
         // On ajoute la vue
         let containerView = transitionContext.containerView
-        let DescribeMapViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as! DescribeMapViewController
-        containerView.addSubview(DescribeMapViewController.view)
+        let describeMapViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as! DescribeMapViewController
+        containerView.addSubview(describeMapViewController.view)
         
         // On ajoute l'effet
         let lWidth = UIScreen.main.bounds.size.width/2
         let lHeight = UIScreen.main.bounds.size.height/2
         let rayon = sqrt((lWidth*lWidth)+(lHeight*lHeight))
-        let circleMaskPathInitial = UIBezierPath(ovalIn: CGRect(origin: DescribeMapViewController.mapView.center, size: CGSize.zero))
+        let circleMaskPathInitial = UIBezierPath(ovalIn: CGRect(origin: describeMapViewController.mapView.center, size: CGSize.zero))
         let circleMaskPathFinal = UIBezierPath(ovalIn: CGRect(x: lWidth - rayon, y: lHeight - rayon, width: 2*rayon, height: 2*rayon))
         let maskLayer = CAShapeLayer()
         maskLayer.path = circleMaskPathFinal.cgPath
-        DescribeMapViewController.view.layer.mask = maskLayer
+        describeMapViewController.view.layer.mask = maskLayer
+        
+        // On défini l'animation
+        let maskLayerAnimation = CASpringAnimation(keyPath: "path")
+        maskLayerAnimation.damping = 6
+        maskLayerAnimation.initialVelocity = 1
+        maskLayerAnimation.fromValue = circleMaskPathInitial.cgPath
+        maskLayerAnimation.toValue = circleMaskPathFinal.cgPath
+        maskLayerAnimation.duration = self.transitionDuration(using: transitionContext)
+        maskLayerAnimation.delegate = self
+        maskLayer.add(maskLayerAnimation, forKey: "path")
+    }
+    
+    func animatePresentDescription(using transitionContext: UIViewControllerContextTransitioning) {
+        
+        // On ajoute la vue
+        let containerView = transitionContext.containerView
+        let descriptionViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as! DescriptionViewController
+        containerView.addSubview(descriptionViewController.view)
+        
+        // On ajoute l'effet
+        let lWidth = UIScreen.main.bounds.size.width/2
+        let lHeight = UIScreen.main.bounds.size.height/2
+        let rayon = sqrt((lWidth*lWidth)+(lHeight*lHeight))
+        let circleMaskPathInitial = UIBezierPath(ovalIn: CGRect(origin: descriptionViewController.btnCheck.center, size: CGSize.zero))
+        let circleMaskPathFinal = UIBezierPath(ovalIn: CGRect(x: lWidth - rayon, y: lHeight - rayon, width: 2*rayon, height: 2*rayon))
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = circleMaskPathFinal.cgPath
+        descriptionViewController.view.layer.mask = maskLayer
         
         // On défini l'animation
         let maskLayerAnimation = CASpringAnimation(keyPath: "path")

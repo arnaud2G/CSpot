@@ -206,7 +206,7 @@ class MyCamera:UIViewController, AVCapturePhotoCaptureDelegate {
         btnValidePic.rx.tap.subscribe(onNext:{
             [weak self] tap in
             Spot.newSpot.picture.value = self!.image.value
-            User.current.cSpotScreen.value = .description
+            User.current.cSpotScreen.value = .location
         }).addDisposableTo(disposeBag)
         
         image.asObservable().subscribe(onNext:{

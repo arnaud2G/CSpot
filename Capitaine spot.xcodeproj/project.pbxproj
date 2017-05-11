@@ -10,10 +10,12 @@
 		90BD816A6D276756EECE5147 /* Pods_Capitaine_spot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21F2D51E9692729CDE7757C6 /* Pods_Capitaine_spot.framework */; };
 		A516F04C1EB9EAC7001E10C6 /* AWSDescribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A516F04B1EB9EAC7001E10C6 /* AWSDescribe.swift */; };
 		A523C8031EB9D2E7006D2919 /* CDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A523C8021EB9D2E7006D2919 /* CDHelper.swift */; };
-		A527CE4D1EB8E6E8002C7556 /* Waiting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A527CE4C1EB8E6E8002C7556 /* Waiting.storyboard */; };
+		A527CE4D1EB8E6E8002C7556 /* Loadding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A527CE4C1EB8E6E8002C7556 /* Loadding.storyboard */; };
 		A52C4D551EB22AA0007550D5 /* UIMedal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52C4D541EB22AA0007550D5 /* UIMedal.swift */; };
 		A52E2BA81EB1DC22004F1682 /* SpotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52E2BA71EB1DC22004F1682 /* SpotViewController.swift */; };
 		A52E2BAA1EB1E6EB004F1682 /* Spot.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A52E2BA91EB1E6EA004F1682 /* Spot.storyboard */; };
+		A52EB2C71EC39D1600C53A26 /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52EB2C61EC39D1600C53A26 /* DescriptionViewController.swift */; };
+		A52EB2C91EC4460B00C53A26 /* LoaddingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52EB2C81EC4460B00C53A26 /* LoaddingViewController.swift */; };
 		A537B3301EAA0E91001A912A /* WaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537B32F1EAA0E91001A912A /* WaitingViewController.swift */; };
 		A53B30671EA65617008AE7B8 /* AnimateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53B30661EA65617008AE7B8 /* AnimateExtension.swift */; };
 		A53C3E5B1EBA29B300E68529 /* CDDescribe+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C3E591EBA29B200E68529 /* CDDescribe+CoreDataProperties.swift */; };
@@ -57,7 +59,6 @@
 		A579C8551EB8913100397D04 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A579C8541EB8913100397D04 /* ErrorView.swift */; };
 		A58347CD1E9E241600E16507 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58347CC1E9E241600E16507 /* User.swift */; };
 		A59580521EB3452600FDED6D /* GeolocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58347CE1E9E537500E16507 /* GeolocationService.swift */; };
-		A59580531EB34C1500FDED6D /* DescriptionNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537B3311EAA312D001A912A /* DescriptionNavigationController.swift */; };
 		A59832731EAA4B9B00B88033 /* AWSTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59832721EAA4B9B00B88033 /* AWSTable.swift */; };
 		A59832751EAA58FC00B88033 /* AWSS3.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59832741EAA58FC00B88033 /* AWSS3.swift */; };
 		A59F8CE71EBA20F70083289B /* CDCSpot.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A59F8CE51EBA20F70083289B /* CDCSpot.xcdatamodeld */; };
@@ -69,8 +70,6 @@
 		A5CACB9F1E978A9A0068D5B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5CACB9E1E978A9A0068D5B2 /* Assets.xcassets */; };
 		A5CACBA21E978A9A0068D5B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5CACBA01E978A9A0068D5B2 /* LaunchScreen.storyboard */; };
 		A5E01EA01EA77B6F0087AEE0 /* AWSMobileHubHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F638ED1EA76FF8000ACD3D /* AWSMobileHubHelper.framework */; };
-		A5E23ACA1EB3918300E1176A /* VueC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B0D1BB1E9D1AF20014EEA3 /* VueC1.swift */; };
-		A5E23ACB1EB3918300E1176A /* VueC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B0D1BD1E9D1AF90014EEA3 /* VueC2.swift */; };
 		A5E23ACC1EB3919300E1176A /* RxMapBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5595A531EA0BEFF00F4AFE5 /* RxMapBox.swift */; };
 		A5E23ACE1EB3919F00E1176A /* SearchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D47FC91EB0D8C6006C132B /* SearchNavigationController.swift */; };
 		A5E23ACF1EB3919F00E1176A /* ListSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FC40711EAE615F00886246 /* ListSearchController.swift */; };
@@ -101,11 +100,13 @@
 		26D74DEE36D04B6E49815A16 /* Pods-Capitaine spot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capitaine spot.release.xcconfig"; path = "Pods/Target Support Files/Pods-Capitaine spot/Pods-Capitaine spot.release.xcconfig"; sourceTree = "<group>"; };
 		A516F04B1EB9EAC7001E10C6 /* AWSDescribe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSDescribe.swift; sourceTree = "<group>"; };
 		A523C8021EB9D2E7006D2919 /* CDHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDHelper.swift; sourceTree = "<group>"; };
-		A527CE4C1EB8E6E8002C7556 /* Waiting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Waiting.storyboard; sourceTree = "<group>"; };
+		A527CE4C1EB8E6E8002C7556 /* Loadding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Loadding.storyboard; sourceTree = "<group>"; };
 		A527CE4E1EB8F017002C7556 /* SignInManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInManager.swift; sourceTree = "<group>"; };
 		A52C4D541EB22AA0007550D5 /* UIMedal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIMedal.swift; sourceTree = "<group>"; };
 		A52E2BA71EB1DC22004F1682 /* SpotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotViewController.swift; sourceTree = "<group>"; };
 		A52E2BA91EB1E6EA004F1682 /* Spot.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Spot.storyboard; sourceTree = "<group>"; };
+		A52EB2C61EC39D1600C53A26 /* DescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
+		A52EB2C81EC4460B00C53A26 /* LoaddingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaddingViewController.swift; sourceTree = "<group>"; };
 		A537B32F1EAA0E91001A912A /* WaitingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingViewController.swift; sourceTree = "<group>"; };
 		A537B3311EAA312D001A912A /* DescriptionNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionNavigationController.swift; sourceTree = "<group>"; };
 		A53B30661EA65617008AE7B8 /* AnimateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimateExtension.swift; sourceTree = "<group>"; };
@@ -260,7 +261,8 @@
 		A537B32E1EAA0E6D001A912A /* EcranChargement */ = {
 			isa = PBXGroup;
 			children = (
-				A527CE4C1EB8E6E8002C7556 /* Waiting.storyboard */,
+				A527CE4C1EB8E6E8002C7556 /* Loadding.storyboard */,
+				A52EB2C81EC4460B00C53A26 /* LoaddingViewController.swift */,
 				A537B32F1EAA0E91001A912A /* WaitingViewController.swift */,
 				A579C8541EB8913100397D04 /* ErrorView.swift */,
 			);
@@ -505,6 +507,7 @@
 			isa = PBXGroup;
 			children = (
 				A5B0D1BF1E9D1B070014EEA3 /* Description.storyboard */,
+				A52EB2C61EC39D1600C53A26 /* DescriptionViewController.swift */,
 				A537B3311EAA312D001A912A /* DescriptionNavigationController.swift */,
 				A5F62A001EC2F56C00A8E057 /* Description */,
 				A54512D21E9BE004000FDA2F /* AppareilPhoto */,
@@ -650,7 +653,7 @@
 				A53C3E8E1EBA4BCC00E68529 /* notes.txt in Resources */,
 				A5CACBA21E978A9A0068D5B2 /* LaunchScreen.storyboard in Resources */,
 				A53C3E931EBA4BCC00E68529 /* README.txt in Resources */,
-				A527CE4D1EB8E6E8002C7556 /* Waiting.storyboard in Resources */,
+				A527CE4D1EB8E6E8002C7556 /* Loadding.storyboard in Resources */,
 				A53C3E8C1EBA4BCC00E68529 /* first_name.txt in Resources */,
 				A53C3E841EBA4BCC00E68529 /* release_notes.txt in Resources */,
 				A52E2BAA1EB1E6EB004F1682 /* Spot.storyboard in Resources */,
@@ -754,17 +757,16 @@
 				A5E23AD11EB3919F00E1176A /* TestViewController.swift in Sources */,
 				A54512D61E9BE0B6000FDA2F /* MyStyles.swift in Sources */,
 				A5F638FE1EA7724B000ACD3D /* SignInViewControllerExtensions.swift in Sources */,
-				A59580531EB34C1500FDED6D /* DescriptionNavigationController.swift in Sources */,
 				A53C3E5B1EBA29B300E68529 /* CDDescribe+CoreDataProperties.swift in Sources */,
 				A54D8EA11E9BC30B0081C0F5 /* ToolExtension.swift in Sources */,
 				A54984831EA767FB0074755B /* AWSConfig.swift in Sources */,
 				A59832751EAA58FC00B88033 /* AWSS3.swift in Sources */,
 				A52E2BA81EB1DC22004F1682 /* SpotViewController.swift in Sources */,
 				A5F638FF1EA7724B000ACD3D /* UserPoolForgotPasswordViewController.swift in Sources */,
+				A52EB2C71EC39D1600C53A26 /* DescriptionViewController.swift in Sources */,
 				A57352E91EC37D9300AAA648 /* DescribeMapViewController.swift in Sources */,
 				A516F04C1EB9EAC7001E10C6 /* AWSDescribe.swift in Sources */,
 				A5F638FD1EA7724B000ACD3D /* SignInViewController.swift in Sources */,
-				A5E23ACB1EB3918300E1176A /* VueC2.swift in Sources */,
 				A54D8EA31E9BCCF20081C0F5 /* NumberExtension.swift in Sources */,
 				A58347CD1E9E241600E16507 /* User.swift in Sources */,
 				A5CACB9A1E978A9A0068D5B2 /* MenuViewController.swift in Sources */,
@@ -772,13 +774,13 @@
 				A579C8551EB8913100397D04 /* ErrorView.swift in Sources */,
 				A59F8CE71EBA20F70083289B /* CDCSpot.xcdatamodeld in Sources */,
 				A549847D1EA766B40074755B /* UISpot.swift in Sources */,
+				A52EB2C91EC4460B00C53A26 /* LoaddingViewController.swift in Sources */,
 				A54512D01E9BD45F000FDA2F /* Spot.swift in Sources */,
 				A5E23ACE1EB3919F00E1176A /* SearchNavigationController.swift in Sources */,
 				A5F639041EA7724B000ACD3D /* UserPoolSignUpViewController.swift in Sources */,
 				A5F639031EA7724B000ACD3D /* UserPoolSignUpConfirmationViewController.swift in Sources */,
 				A57140601EBB5A3B007F079E /* MaskViewController.swift in Sources */,
 				A53B30671EA65617008AE7B8 /* AnimateExtension.swift in Sources */,
-				A5E23ACA1EB3918300E1176A /* VueC1.swift in Sources */,
 				A5E23AD01EB3919F00E1176A /* MapSearchController.swift in Sources */,
 				A5E23ACC1EB3919300E1176A /* RxMapBox.swift in Sources */,
 				A5CACB981E978A9A0068D5B2 /* AppDelegate.swift in Sources */,

@@ -59,7 +59,7 @@ extension RawRepresentable where RawValue == String, Self: NotificationName {
 }
 
 enum CSpotNotif: String, NotificationName {
-    case takePic, retakePic, validePic
+    case message
 }
 
 

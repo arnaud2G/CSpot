@@ -173,6 +173,7 @@ class DescribeMapViewController:UIViewController, MGLMapViewDelegate {
         Spot.newSpot.adress = self.spot.value!.stringAddress
         Spot.newSpot.place = self.spot.value!.addressDictionary!["city"] as! String
         Spot.newSpot.spotId.value = "\(self.spot.value!.name):\(Spot.newSpot.place)"
+        User.current.cSpotScreen.value = .description
     }
     
     private func displayLbl() {

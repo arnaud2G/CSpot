@@ -67,17 +67,6 @@ class VueC2: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        animator = UIDynamicAnimator(referenceView: view)
-        gravity = UIFieldBehavior.radialGravityField(position: self.view.center)
-        gravity.falloff = 0.1
-        gravity.strength = 1.7
-        self.animator.addBehavior(gravity)
-        
-        behavior.elasticity = 0.1
-        behavior.density = 1
-        behavior.allowsRotation = false
-        animator.addBehavior(behavior)
-        
         ellipseInTheGround
             .asObservable()
             .subscribe(onNext:{

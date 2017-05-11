@@ -6,13 +6,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--VueC2-->
+        <!--Description View Controller-->
         <scene sceneID="526-3d-0sH">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="6fs-rI-e3P" customClass="VueC2" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="6fs-rI-e3P" customClass="DescriptionViewController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nkN-nt-7Z0"/>
                         <viewControllerLayoutGuide type="bottom" id="cab-l0-AL3"/>
@@ -23,45 +24,73 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aIq-Cp-R9b">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <view alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9hj-5j-nad">
+                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ytL-mf-oMV">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4jl-ri-hli">
+                                <rect key="frame" x="16" y="30.5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="eEI-If-SPN"/>
+                                    <constraint firstAttribute="width" constant="40" id="wnv-T5-ZcR"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" image="skull"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bq9-2A-ri1">
+                                <rect key="frame" x="319" y="30.5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="0x5-6K-FqI"/>
+                                    <constraint firstAttribute="width" constant="40" id="NfA-zh-gqO"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" image="ship"/>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zzx-mc-NQo">
+                                <rect key="frame" x="66" y="30" width="243" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="sBa-4o-YFk"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="zzx-mc-NQo" firstAttribute="leading" secondItem="4jl-ri-hli" secondAttribute="trailing" constant="10" id="0qy-Ap-sGa"/>
+                            <constraint firstItem="ytL-mf-oMV" firstAttribute="bottom" secondItem="aIq-Cp-R9b" secondAttribute="bottom" id="2cO-8p-Pmc"/>
                             <constraint firstItem="aIq-Cp-R9b" firstAttribute="leading" secondItem="YzV-9V-4M1" secondAttribute="leading" id="3kY-o1-ZTz"/>
-                            <constraint firstAttribute="trailing" secondItem="9hj-5j-nad" secondAttribute="trailing" id="74I-Qe-0r6"/>
+                            <constraint firstItem="4jl-ri-hli" firstAttribute="leading" secondItem="YzV-9V-4M1" secondAttribute="leadingMargin" id="7Cx-60-W15"/>
                             <constraint firstAttribute="trailing" secondItem="aIq-Cp-R9b" secondAttribute="trailing" id="9yX-O0-oHh"/>
-                            <constraint firstItem="9hj-5j-nad" firstAttribute="top" secondItem="YzV-9V-4M1" secondAttribute="top" id="EcU-LF-1Bz"/>
-                            <constraint firstItem="cab-l0-AL3" firstAttribute="top" secondItem="9hj-5j-nad" secondAttribute="bottom" id="Pds-n8-xZr"/>
-                            <constraint firstItem="9hj-5j-nad" firstAttribute="leading" secondItem="YzV-9V-4M1" secondAttribute="leading" id="WZH-BP-azU"/>
+                            <constraint firstItem="ytL-mf-oMV" firstAttribute="top" secondItem="aIq-Cp-R9b" secondAttribute="top" id="QM5-cZ-bcl"/>
+                            <constraint firstItem="4jl-ri-hli" firstAttribute="centerY" secondItem="zzx-mc-NQo" secondAttribute="centerY" id="SDT-ml-ttV"/>
                             <constraint firstItem="aIq-Cp-R9b" firstAttribute="top" secondItem="YzV-9V-4M1" secondAttribute="top" id="Wg9-Ib-7Yv"/>
+                            <constraint firstItem="bq9-2A-ri1" firstAttribute="leading" secondItem="zzx-mc-NQo" secondAttribute="trailing" constant="10" id="d2j-eO-WFK"/>
                             <constraint firstItem="cab-l0-AL3" firstAttribute="top" secondItem="aIq-Cp-R9b" secondAttribute="bottom" id="egO-Jm-ulg"/>
+                            <constraint firstItem="zzx-mc-NQo" firstAttribute="top" secondItem="nkN-nt-7Z0" secondAttribute="bottom" constant="10" id="f7a-XV-bM1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bq9-2A-ri1" secondAttribute="trailing" id="jJC-h0-hEr"/>
+                            <constraint firstItem="ytL-mf-oMV" firstAttribute="leading" secondItem="aIq-Cp-R9b" secondAttribute="leading" id="tYL-SV-6ZV"/>
+                            <constraint firstItem="bq9-2A-ri1" firstAttribute="centerY" secondItem="zzx-mc-NQo" secondAttribute="centerY" id="vGc-gc-AaC"/>
+                            <constraint firstItem="ytL-mf-oMV" firstAttribute="trailing" secondItem="aIq-Cp-R9b" secondAttribute="trailing" id="vk6-rb-oir"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rQv-8H-BiB"/>
                     <connections>
-                        <outlet property="imgPic" destination="aIq-Cp-R9b" id="OX7-ja-xDh"/>
-                        <outlet property="vPic" destination="9hj-5j-nad" id="ywl-k4-uFq"/>
+                        <outlet property="btnCheck" destination="bq9-2A-ri1" id="ZUn-rW-ig9"/>
+                        <outlet property="btnUncheck" destination="4jl-ri-hli" id="CBS-eY-eI0"/>
+                        <outlet property="imgSpot" destination="aIq-Cp-R9b" id="E1B-UT-v3d"/>
+                        <outlet property="tfWhereAreU" destination="zzx-mc-NQo" id="tKy-lx-qvU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XpB-0z-Oj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2777" y="-699"/>
         </scene>
-        <!--Description Navigation Controller-->
-        <scene sceneID="INh-KT-y9E">
-            <objects>
-                <navigationController modalPresentationStyle="overFullScreen" navigationBarHidden="YES" id="pE9-xa-zEd" customClass="DescriptionNavigationController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Fn5-Ua-q27">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jqs-pn-ntq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3546" y="-698"/>
-        </scene>
     </scenes>
+    <resources>
+        <image name="ship" width="33" height="33"/>
+        <image name="skull" width="33" height="33"/>
+    </resources>
 </document>

@@ -72,6 +72,7 @@ class MenuViewController: UIViewController, UIViewControllerTransitioningDelegat
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         User.current.cSpotScreen.value = .menu
+        Spot.newSpot.reset()
         if User.current.connected.value {
             btnBottom.medalStyle(image: #imageLiteral(resourceName: "pirate"), text: "Utilise la longue vue pour décrire le spot !", delay: 1.5)
         } else {

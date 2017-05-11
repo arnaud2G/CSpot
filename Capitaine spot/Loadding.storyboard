@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ptE-2q-3Uh">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Loadding View Controller-->
+        <scene sceneID="aJF-aI-91P">
+            <objects>
+                <viewController storyboardIdentifier="LoaddingViewController" id="ptE-2q-3Uh" customClass="LoaddingViewController" customModule="Capitaine_spot" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PsL-ry-pcR"/>
+                        <viewControllerLayoutGuide type="bottom" id="cCj-pJ-GKg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VI6-wj-sba">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHN-HZ-gsI">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1b-TR-7QS">
+                                        <rect key="frame" x="163" y="321.5" width="49" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="N1b-TR-7QS" firstAttribute="centerX" secondItem="SHN-HZ-gsI" secondAttribute="centerX" id="1un-X9-B8g"/>
+                                    <constraint firstItem="N1b-TR-7QS" firstAttribute="centerY" secondItem="SHN-HZ-gsI" secondAttribute="centerY" id="bHk-Op-NEb"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.990596382" green="1" blue="0.64801960240000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="SHN-HZ-gsI" firstAttribute="top" secondItem="VI6-wj-sba" secondAttribute="top" id="GFz-ET-41a"/>
+                            <constraint firstItem="SHN-HZ-gsI" firstAttribute="leading" secondItem="VI6-wj-sba" secondAttribute="leading" id="h9X-tU-FeI"/>
+                            <constraint firstAttribute="trailing" secondItem="SHN-HZ-gsI" secondAttribute="trailing" id="klg-ND-nN1"/>
+                            <constraint firstItem="cCj-pJ-GKg" firstAttribute="top" secondItem="SHN-HZ-gsI" secondAttribute="bottom" id="qL1-9l-Iqg"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="lblWait" destination="N1b-TR-7QS" id="SUd-Tm-yDG"/>
+                        <outlet property="vTop" destination="SHN-HZ-gsI" id="rlh-TI-20S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d22-xC-wVf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-170" y="162"/>
+        </scene>
+    </scenes>
+</document>
