@@ -37,28 +37,23 @@ class UserPoolNewPasswordViewController: UIViewController {
     }
     
     
-    var popWait:WaitingViewController?
     @IBAction func onUpdatePassword(_ sender: AnyObject) {
         
-        popWait = WaitingViewController()
-        self.navigationController?.pushViewController(popWait!, animated: true)
+        let story = UIStoryboard(name: "Loadding", bundle: nil)
+        let vc = story.instantiateInitialViewController()
+        self.navigationController?.pushViewController(vc!, animated: true)
         
         guard let confirmationCodeValue = self.confirmationCode.text, !confirmationCodeValue.isEmpty else {
-            DispatchQueue.main.async(execute: {
-                self.popWait?.setMessageError(error: "Vous devez saisir un mot de passe")
-            })
+            NotificationCenter.default.post(name: CSpotNotif.message.name, object: CSPotMess.Succeed("Vous devez saisir un mot de passe",false))
             return
         }
         //confirm forgot password with input from ui.
         _ = self.user?.confirmForgotPassword(confirmationCodeValue, password: self.updatedPassword.text!).continueWith(block: {[weak self] (task: AWSTask) -> AnyObject? in
-            guard let strongSelf = self else { return nil }
-            DispatchQueue.main.async(execute: {
                 if let error = task.error as NSError? {
-                    strongSelf.popWait?.setError(error: error)
+                    NotificationCenter.default.post(name: CSpotNotif.message.name, object: CSPotMess.Fail(error,false))
                 } else {
-                    strongSelf.popWait?.setMessageError(error: "Le mot de passe a été correctement modifié", toRoot:true)
+                    NotificationCenter.default.post(name: CSpotNotif.message.name, object: CSPotMess.Succeed("Le mot de passe a été correctement modifié",true))
                 }
-            })
             return nil
         })
     }

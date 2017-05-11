@@ -20,6 +20,7 @@ import AWSMobileHubHelper
 extension SignInViewController {
     
     func handleCustomSignIn() {
+        
         // set the interactive auth delegate to self, since this view controller handles the login process for user pools
         AWSCognitoUserPoolsSignInProvider.sharedInstance().setInteractiveAuthDelegate(self)
         self.handleLoginWithSignInProvider(AWSCognitoUserPoolsSignInProvider.sharedInstance())
@@ -66,9 +67,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
     
     func didCompleteStepWithError(_ error: Error?) {
         if let error = error as NSError? {
-            DispatchQueue.main.async(execute: {
-                self.popWait?.setError(error: error)
-            })
+            NotificationCenter.default.post(name: CSpotNotif.message.name, object: CSPotMess.Fail(error,false))
         }
     }
 }
@@ -79,9 +78,7 @@ extension SignInViewController: AWSCognitoUserPoolsSignInHandler {
         // check if both username and password fields are provided
         guard let username = self.customUserIdField.text, !username.isEmpty,
             let password = self.customPasswordField.text, !password.isEmpty else {
-                DispatchQueue.main.async(execute: {
-                    self.popWait?.setMessageError(error: "Vous devez rentrer un surnom et un mot de passe valide pour vous connecter")
-                })
+                NotificationCenter.default.post(name: CSpotNotif.message.name, object: CSPotMess.Succeed("Vous devez rentrer un surnom et un mot de passe valide pour vous connecter",false))
                 return
         }
         // set the task completion result as an object of AWSCognitoIdentityPasswordAuthenticationDetails with username and password that the app user provides

@@ -45,39 +45,42 @@ class UserPoolSignUpConfirmationViewController : UIViewController {
     }
     
     
-    var popWait:WaitingViewController?
     @IBAction func onConfirm(_ sender: AnyObject) {
-        popWait = WaitingViewController()
-        self.navigationController?.pushViewController(popWait!, animated: true)
+        
+        let story = UIStoryboard(name: "Loadding", bundle: nil)
+        let vc = story.instantiateInitialViewController()
+        self.navigationController?.pushViewController(vc!, animated: true)
+        
         guard let confirmationCodeValue = self.confirmationCode.text, !confirmationCodeValue.isEmpty else {
             DispatchQueue.main.async(execute: {
-                self.popWait?.setMessageError(error: "Il manque le code de confirmation")
+                NotificationCenter.default.post(name: CSpotNotif.message.name, object: CSPotMess.Succeed("Il manque le code de confirmation",false))
             })
             return
         }
-        self.user?.confirmSignUp(self.confirmationCode.text!, forceAliasCreation: true).continueWith(block: {[weak self] (task: AWSTask) -> AnyObject? in
-            guard let strongSelf = self else { return nil }
-            DispatchQueue.main.async(execute: { 
-                if let error = task.error as NSError? {
-                    strongSelf.popWait?.setError(error: error)
-                } else {
-                    strongSelf.popWait?.setMessageError(error: "Votre compte a été bien été créé", toRoot:true)
-                }
-            })
+        self.user?.confirmSignUp(self.confirmationCode.text!, forceAliasCreation: true).continueWith(block: {
+            (task: AWSTask) -> AnyObject? in
+            if let error = task.error as NSError? {
+                NotificationCenter.default.post(name: CSpotNotif.message.name, object: CSPotMess.Fail(error,false))
+            } else {
+                NotificationCenter.default.post(name: CSpotNotif.message.name, object: CSPotMess.Succeed("Votre compte a été bien été créé",true))
+            }
             return nil
         })
     }
     
     @IBAction func onResendConfirmationCode(_ sender: AnyObject) {
-        popWait = WaitingViewController()
-        self.navigationController?.pushViewController(popWait!, animated: true)
-        self.user?.resendConfirmationCode().continueWith(block: {[weak self] (task: AWSTask<AWSCognitoIdentityUserResendConfirmationCodeResponse>) -> AnyObject? in
-            guard let strongSelf = self else { return nil }
+        
+        let story = UIStoryboard(name: "Loadding", bundle: nil)
+        let vc = story.instantiateInitialViewController()
+        self.navigationController?.pushViewController(vc!, animated: true)
+        
+        self.user?.resendConfirmationCode().continueWith(block: {
+            (task: AWSTask<AWSCognitoIdentityUserResendConfirmationCodeResponse>) -> AnyObject? in
             DispatchQueue.main.async(execute: {
                 if let error = task.error as NSError? {
-                    strongSelf.popWait?.setError(error: error)
+                    NotificationCenter.default.post(name: CSpotNotif.message.name, object: CSPotMess.Fail(error,false))
                 } else if let result = task.result as AWSCognitoIdentityUserResendConfirmationCodeResponse!, let codeDeliveryDetails = result.codeDeliveryDetails, let destination = codeDeliveryDetails.destination {
-                    strongSelf.popWait?.setMessageError(error: "Le code a été renvoyé à \(destination)")
+                    NotificationCenter.default.post(name: CSpotNotif.message.name, object: CSPotMess.Succeed("Le code a été renvoyé à \(destination)",false))
                 }
             })
             return nil

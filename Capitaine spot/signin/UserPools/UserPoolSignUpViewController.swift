@@ -48,17 +48,15 @@ class UserPoolSignUpViewController: UIViewController {
         }
     }
     
-    var popWait:WaitingViewController?
     @IBAction func onSignUp(_ sender: AnyObject) {
         
-        popWait = WaitingViewController()
-        self.navigationController?.pushViewController(popWait!, animated: true)
+        let story = UIStoryboard(name: "Loadding", bundle: nil)
+        let vc = story.instantiateInitialViewController()
+        self.navigationController?.pushViewController(vc!, animated: true)
         
         guard let userNameValue = self.userName.text, !userNameValue.isEmpty,
             let passwordValue = self.password.text, !passwordValue.isEmpty else {
-                DispatchQueue.main.async(execute: {
-                    self.popWait?.setMessageError(error: "Vous devez rentrer un surnom et un mot de passe pour créer un compte")
-                })
+                NotificationCenter.default.post(name: CSpotNotif.message.name, object: CSPotMess.Succeed("Vous devez rentrer un surnom et un mot de passe pour créer un compte",false))
             return
         }
         
@@ -76,7 +74,7 @@ class UserPoolSignUpViewController: UIViewController {
             guard let strongSelf = self else { return nil }
             DispatchQueue.main.async(execute: { 
                 if let error = task.error as NSError? {
-                    strongSelf.popWait?.setError(error: error)
+                    NotificationCenter.default.post(name: CSpotNotif.message.name, object: CSPotMess.Fail(error,false))
                     return
                 }
                 

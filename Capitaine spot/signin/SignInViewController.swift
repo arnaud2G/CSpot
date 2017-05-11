@@ -34,6 +34,10 @@ class SignInViewController: UIViewController {
     
     var passwordAuthenticationCompletion: AWSTaskCompletionSource<AnyObject>?
     
+    deinit {
+        print("deinit SignInViewController")
+    }
+    
     // MARK: - View lifecycle
     
     override func viewDidLoad() {
@@ -75,19 +79,19 @@ class SignInViewController: UIViewController {
     }
     
     // MARK: - Utility Methods
-    var popWait:WaitingViewController?
     func handleLoginWithSignInProvider(_ signInProvider: AWSSignInProvider) {
-        popWait = WaitingViewController()
-        self.navigationController?.pushViewController(popWait!, animated: true)
+        
+        let story = UIStoryboard(name: "Loadding", bundle: nil)
+        let vc = story.instantiateInitialViewController()
+        self.navigationController?.pushViewController(vc!, animated: true)
+        
         AWSIdentityManager.default().login(signInProvider: signInProvider, completionHandler: {
             (result: Any?, error: Error?) in
-            DispatchQueue.main.async(execute: {
-                if let error = error as NSError? {
-                    self.popWait?.setError(error: error)
-                } else {
-                    self.popWait?.circleDismiss()
-                }
-            })
+            if let error = error as NSError? {
+                NotificationCenter.default.post(name: CSpotNotif.message.name, object: CSPotMess.Fail(error,false))
+            } else {
+                NotificationCenter.default.post(name: CSpotNotif.message.name, object: CSPotMess.Succeed("Hoy hoy ! \nTu est bien connecté.",false))
+            }
         })
     }
     

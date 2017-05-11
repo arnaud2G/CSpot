@@ -24,16 +24,14 @@ class UserPoolForgotPasswordViewController: UIViewController {
     
     @IBOutlet weak var userName: UITextField!
     
-    var popWait:WaitingViewController?
     @IBAction func onForgotPassword(_ sender: AnyObject) {
         
-        popWait = WaitingViewController()
-        self.navigationController?.pushViewController(popWait!, animated: true)
+        let story = UIStoryboard(name: "Loadding", bundle: nil)
+        let vc = story.instantiateInitialViewController()
+        self.navigationController?.pushViewController(vc!, animated: true)
         
         guard let username = self.userName.text, !username.isEmpty else {
-            DispatchQueue.main.async(execute: {
-                self.popWait?.setMessageError(error: "Vous devez saisir un surnom")
-            })
+            NotificationCenter.default.post(name: CSpotNotif.message.name, object: CSPotMess.Succeed("Vous devez saisir un surnom",false))
             return
         }
         
@@ -42,7 +40,7 @@ class UserPoolForgotPasswordViewController: UIViewController {
             guard let strongSelf = self else {return nil}
             DispatchQueue.main.async(execute: {
                 if let error = task.error as NSError? {
-                    strongSelf.popWait?.setError(error: error)
+                    NotificationCenter.default.post(name: CSpotNotif.message.name, object: CSPotMess.Fail(error,false))
                 } else {
                     
                     let userPoolsStoryboard = UIStoryboard(name: "UserPools", bundle: nil)

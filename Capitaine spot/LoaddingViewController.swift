@@ -69,6 +69,10 @@ class LoaddingViewController:UIViewController, CAAnimationDelegate {
         // Message d'attente
         lblWait.text = message
         lblWait.textColor = .white
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         
         // Gestion des messages
         myNotif = NotificationCenter.default.addObserver(forName: CSpotNotif.message.name, object: nil, queue: OperationQueue.main, using: {
@@ -76,16 +80,6 @@ class LoaddingViewController:UIViewController, CAAnimationDelegate {
             guard let cSPotMess = note.object as? CSPotMess else {return}
             self?.recievedMessage(cSPotMess: cSPotMess)
         })
-        
-        /*let toto = CSPotMess.Fail("Cooooooolllll")
-        print(toto)
-        
-        switch toto {
-        case .Fail(let message):
-            print("Type fail")
-        case .Succeed(let message):
-            print("Type Succeed")
-        }*/
     }
     
     override func viewDidAppear(_ animated: Bool) {

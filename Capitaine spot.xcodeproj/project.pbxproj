@@ -16,7 +16,6 @@
 		A52E2BAA1EB1E6EB004F1682 /* Spot.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A52E2BA91EB1E6EA004F1682 /* Spot.storyboard */; };
 		A52EB2C71EC39D1600C53A26 /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52EB2C61EC39D1600C53A26 /* DescriptionViewController.swift */; };
 		A52EB2C91EC4460B00C53A26 /* LoaddingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52EB2C81EC4460B00C53A26 /* LoaddingViewController.swift */; };
-		A537B3301EAA0E91001A912A /* WaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537B32F1EAA0E91001A912A /* WaitingViewController.swift */; };
 		A53B30671EA65617008AE7B8 /* AnimateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53B30661EA65617008AE7B8 /* AnimateExtension.swift */; };
 		A53C3E5B1EBA29B300E68529 /* CDDescribe+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C3E591EBA29B200E68529 /* CDDescribe+CoreDataProperties.swift */; };
 		A53C3E5C1EBA29B300E68529 /* CDType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C3E5A1EBA29B200E68529 /* CDType+CoreDataProperties.swift */; };
@@ -341,7 +340,6 @@
 				A52E2BA61EB1DC0F004F1682 /* EcranProfil */,
 				A5FC40701EAE60CA00886246 /* EcranRecherche */,
 				A537B32E1EAA0E6D001A912A /* EcranChargement */,
-				A5B62C151EA8FABA00694441 /* EcranDescription */,
 				A556EEB21EA79C2E00391E06 /* EcranPrincipal */,
 			);
 			name = BoiteAComposant;
@@ -415,13 +413,6 @@
 				A59F8CE51EBA20F70083289B /* CDCSpot.xcdatamodeld */,
 			);
 			name = CoreData;
-			sourceTree = "<group>";
-		};
-		A5B62C151EA8FABA00694441 /* EcranDescription */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = EcranDescription;
 			sourceTree = "<group>";
 		};
 		A5CACB8B1E978A990068D5B2 = {
@@ -784,7 +775,6 @@
 				A5E23AD01EB3919F00E1176A /* MapSearchController.swift in Sources */,
 				A5E23ACC1EB3919300E1176A /* RxMapBox.swift in Sources */,
 				A5CACB981E978A9A0068D5B2 /* AppDelegate.swift in Sources */,
-				A537B3301EAA0E91001A912A /* WaitingViewController.swift in Sources */,
 				A549847F1EA766D50074755B /* AWSSpot.swift in Sources */,
 				A52C4D551EB22AA0007550D5 /* UIMedal.swift in Sources */,
 				A5F639011EA7724B000ACD3D /* UserPoolNewPasswordViewController.swift in Sources */,
