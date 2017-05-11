@@ -29,6 +29,18 @@ class CSpotNavigationController: UINavigationController, UINavigationControllerD
         super.viewDidLoad()
         self.delegate = self
         
+        let imgView = UIImageView(frame: CGRect(origin: CGPoint(x: UIScreen.main.bounds.size.width-50, y: UIScreen.main.bounds.size.height-50), size: CGSize(width: 100, height: 100)))
+        self.view.addSubview(imgView)
+        imgView.contentMode = .scaleAspectFit
+        imgView.image = #imageLiteral(resourceName: "spiderweb").withRenderingMode(.alwaysTemplate)
+        imgView.tintColor = UIColor().secondary()
+        
+        let imgView2 = UIImageView(frame: CGRect(origin: CGPoint(x: -50, y: UIScreen.main.bounds.size.height/2), size: CGSize(width: 100, height: 100)))
+        self.view.addSubview(imgView2)
+        imgView2.contentMode = .scaleAspectFit
+        imgView2.image = #imageLiteral(resourceName: "spiderweb").withRenderingMode(.alwaysTemplate)
+        imgView2.tintColor = UIColor().secondary()
+        
         User.current.cSpotScreen.asObservable()
             .distinctUntilChanged({
                 val1, val2 -> Bool in

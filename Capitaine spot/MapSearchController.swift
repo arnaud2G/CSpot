@@ -47,17 +47,7 @@ class MapSearchController:SearchViewController {
     @IBOutlet weak var vIndicator: UIActivityIndicatorView!
     
     // Vue selectionnée
-    @IBOutlet weak var imgBack: UIImageView!
-    @IBOutlet weak var lblTitle: UILabel!
-    
-    @IBOutlet weak var medal1: UIMedal!
-    @IBOutlet weak var medal2: UIMedal!
-    @IBOutlet weak var medal3: UIMedal!
-    @IBOutlet weak var medal4: UIMedal!
-    
-    
-    @IBOutlet weak var hSize1: NSLayoutConstraint!
-    @IBOutlet weak var hSize2: NSLayoutConstraint!
+    @IBOutlet weak var contentView: UIView!
     
     var selectedSpot:AWSSpots?
     
@@ -104,6 +94,8 @@ class MapSearchController:SearchViewController {
         userAnnotation.heightAnchor.constraint(equalToConstant: 26).isActive = true
         userAnnotation.layer.cornerRadius = 13
         
+        displayCell()
+        
         Search.main.placeCoo.asObservable()
             .subscribe(onNext: {
                 [weak self] coordonne in
@@ -122,11 +114,11 @@ class MapSearchController:SearchViewController {
                     let annotation = SpotAnnotation(spot: spot)
                     return annotation
                 })
-                self!.completeCell(spot:spots.first!)
+                let spotView = self?.contentView.viewWithTag(100) as! SpotView
+                self?.selectedSpot = spots.first!
+                spotView.completeCell(spot:spots.first!)
                 self?.vMap.addAnnotations(annotations)
             }).addDisposableTo(disposeBag)
-        
-        displayCell()
         
         transRect = btnMap.frame
         transBtn = btnMap
@@ -134,8 +126,6 @@ class MapSearchController:SearchViewController {
     
     var isAppear = false
     override func viewDidAppear(_ animated: Bool) {
-        
-        User.current.cSpotScreen.value = .search
         
         if !isAppear {
             isAppear = true
@@ -230,69 +220,24 @@ extension MapSearchController: MGLMapViewDelegate {
     
     func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {
         guard let annotation = annotation as? SpotAnnotation, let spot = annotation.spot else { return }
-        initCell()
-        completeCell(spot:spot)
-    }
-    
-    func initCell() {
-        imgBack.image = nil
-        medal1.image = nil
-        medal2.image = nil
-        medal3.image = nil
-        medal4.image = nil
-    }
-    
-    func completeCell(spot:AWSSpots) {
-        
         self.selectedSpot = spot
-        
-        if let userDistance = spot.userDistance, userDistance > 1000 {
-            let distanceInKMeters = userDistance/1000
-            lblTitle.text = "(\(distanceInKMeters)km) \(spot._name!)"
-        } else {
-            lblTitle.text = "(\(spot.userDistance!)m) \(spot._name!)"
-        }
-        
-        let descriptions = spot.userDescription.filter{$0.typeSpot.pic != nil}.sorted{$0.rVote > $1.rVote}
-        
-        medal1.image = descriptions.first!.typeSpot.pic!.withRenderingMode(.alwaysTemplate)
-        medal1.num = descriptions.first!.rVote
-        
-        if descriptions.count > 1 {
-            medal2.image = descriptions[1].typeSpot.pic!.withRenderingMode(.alwaysTemplate)
-            medal2.num = descriptions[1].rVote
-        }
-        
-        if descriptions.count > 2 {
-            medal3.image = descriptions[2].typeSpot.pic!.withRenderingMode(.alwaysTemplate)
-            medal3.num = descriptions[2].rVote
-        }
-        
-        if descriptions.count > 3 {
-            medal4.image = descriptions[3].typeSpot.pic!.withRenderingMode(.alwaysTemplate)
-            medal4.num = descriptions[3].rVote
-        }
-        
-        if let pictures = spot._pictureId, pictures.count > 0 {
-            guard let url = AWSS3.convertToPublicURLRepository(url: pictures[Int.random(lower: 0, upper: pictures.count - 1)]) else {return}
-            getImageFromUrl(url:url, completion: {
-                image in
-                DispatchQueue.main.async(execute: {
-                    () -> Void in
-                    if let image = image {
-                        self.imgBack.image = image
-                    }
-                })
-            })
-        }
+        let spotView = contentView.viewWithTag(100) as! SpotView
+        spotView.initCell()
+        spotView.completeCell(spot:spot)
     }
     
     func displayCell() {
         
-        medal1.unselectedStyle()
-        medal2.unselectedStyle()
-        medal3.unselectedStyle()
-        medal4.unselectedStyle()
+        if let customView = Bundle.main.loadNibNamed("SpotView", owner: self, options: nil)!.first as? SpotView {
+            
+            customView.translatesAutoresizingMaskIntoConstraints = false
+            customView.tag = 100
+            contentView.addSubview(customView)
+            contentView.centerXAnchor.constraint(equalTo: customView.centerXAnchor).isActive = true
+            contentView.centerYAnchor.constraint(equalTo: customView.centerYAnchor).isActive = true
+            contentView.trailingAnchor.constraint(equalTo: customView.trailingAnchor).isActive = true
+            contentView.topAnchor.constraint(equalTo: customView.topAnchor).isActive = true
+        }
     }
 }
 

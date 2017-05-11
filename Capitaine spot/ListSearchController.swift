@@ -45,7 +45,7 @@ class ListSearchController:SearchViewController, UITableViewDelegate, UITableVie
         tvAdress.delegate = self
         tvAdress.textAlignment = .left
         
-        tvResult.estimatedRowHeight = 100
+        tvResult.estimatedRowHeight = 120
         tvResult.rowHeight = UITableViewAutomaticDimension
         
         transRect = btnMap.frame
@@ -162,20 +162,6 @@ class ListSearchController:SearchViewController, UITableViewDelegate, UITableVie
 
 class SpotCell:UITableViewCell {
     
-    let size1:CGFloat = 100
-    let size2:CGFloat = 60
-    
-    @IBOutlet weak var imgBack: UIImageView!
-    @IBOutlet weak var lblTitle: UILabel!
-    
-    @IBOutlet weak var medal1: UIMedal!
-    @IBOutlet weak var medal2: UIMedal!
-    @IBOutlet weak var medal3: UIMedal!
-    @IBOutlet weak var medal4: UIMedal!
-    
-    @IBOutlet weak var hMedal1: NSLayoutConstraint!
-    @IBOutlet weak var hMedal2: NSLayoutConstraint!
-    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
@@ -187,67 +173,28 @@ class SpotCell:UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        hMedal1.constant = size1
-        hMedal2.constant = size2
+        self.backgroundColor = .clear
         
-        medal1.unselectedStyle()
-        medal2.unselectedStyle()
-        medal3.unselectedStyle()
-        medal4.unselectedStyle()
+        if let customView = Bundle.main.loadNibNamed("SpotView", owner: self, options: nil)!.first as? SpotView {
+            
+            customView.translatesAutoresizingMaskIntoConstraints = false
+            customView.tag = 100
+            contentView.addSubview(customView)
+            contentView.centerXAnchor.constraint(equalTo: customView.centerXAnchor).isActive = true
+            contentView.centerYAnchor.constraint(equalTo: customView.centerYAnchor).isActive = true
+            contentView.trailingAnchor.constraint(equalTo: customView.trailingAnchor).isActive = true
+            contentView.topAnchor.constraint(equalTo: customView.topAnchor, constant:-5).isActive = true
+        }
     }
     
     private func initCell() {
-        imgBack.image = nil
-        medal1.image = nil
-        medal2.image = nil
-        medal3.image = nil
-        medal4.image = nil
+        (contentView.viewWithTag(100) as! SpotView).initCell()
     }
     
     var spot:AWSSpots!{
         didSet {
-            
-            initCell()
-            
-            if let userDistance = self.spot.userDistance, userDistance > 1000 {
-                let distanceInKMeters = userDistance/1000
-                lblTitle.text = "(\(distanceInKMeters)km) \(self.spot._name!)"
-            } else {
-                lblTitle.text = "(\(self.spot.userDistance!)m) \(self.spot._name!)"
-            }
-            
-            let descriptions = self.spot.userDescription.filter{$0.typeSpot.pic != nil}.sorted{$0.rVote > $1.rVote}
-            
-            medal1.image = descriptions.first!.typeSpot.pic!.withRenderingMode(.alwaysTemplate)
-            medal1.num = descriptions.first!.rVote
-            
-            if descriptions.count > 1 {
-                medal2.image = descriptions[1].typeSpot.pic!.withRenderingMode(.alwaysTemplate)
-                medal2.num = descriptions[1].rVote
-            }
-            
-            if descriptions.count > 2 {
-                medal3.image = descriptions[2].typeSpot.pic!.withRenderingMode(.alwaysTemplate)
-                medal3.num = descriptions[2].rVote
-            }
-            
-            if descriptions.count > 3 {
-                medal4.image = descriptions[3].typeSpot.pic!.withRenderingMode(.alwaysTemplate)
-                medal4.num = descriptions[3].rVote
-            }
-            
-            if let pictures = self.spot._pictureId, pictures.count > 0 {
-                guard let url = AWSS3.convertToPublicURLRepository(url: pictures[Int.random(lower: 0, upper: pictures.count - 1)]) else {return}
-                getImageFromUrl(url:url, completion: {
-                    image in
-                    DispatchQueue.main.async(execute: {
-                        () -> Void in
-                        if let image = image {
-                            self.imgBack.image = image
-                        }
-                    })
-                })
-            }
+            (contentView.viewWithTag(100) as! SpotView).initCell()
+            (contentView.viewWithTag(100) as! SpotView).completeCell(spot: spot)
         }
     }
 }
@@ -267,6 +214,9 @@ class SearchCell:UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        self.backgroundColor = .clear
+        
+        lblName.textColor = UIColor().primary()
         lblName.setContentHuggingPriority(.infinity, for: .vertical)
     }
     

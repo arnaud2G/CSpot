@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" id="iN0-l3-epB" customClass="SpotView" customModule="Capitaine_spot" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="woodtexture" translatesAutoresizingMaskIntoConstraints="NO" id="4L3-5R-Wxs">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="110" id="wkK-Sa-q2k"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vpJ-EO-u1h" customClass="UIMedal" customModule="Capitaine_spot" customModuleProvider="target">
+                    <rect key="frame" x="20" y="5" width="100" height="100"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="vpJ-EO-u1h" secondAttribute="height" multiplier="1:1" id="4ym-Yd-a44"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jrw-2k-yoa">
+                    <rect key="frame" x="120" y="40" width="11.5" height="65"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aEq-NQ-Tcn">
+                    <rect key="frame" x="196.5" y="40" width="12" height="65"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="azN-yv-Liz">
+                    <rect key="frame" x="273.5" y="40" width="11.5" height="65"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2eJ-yB-91t" customClass="UIMedal" customModule="Capitaine_spot" customModuleProvider="target">
+                    <rect key="frame" x="131.5" y="40" width="65" height="65"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="2eJ-yB-91t" secondAttribute="height" multiplier="1:1" id="EFo-vX-g9n"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ekh-5R-DFy" customClass="UIMedal" customModule="Capitaine_spot" customModuleProvider="target">
+                    <rect key="frame" x="208.5" y="40" width="65" height="65"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p5V-5i-xL1" customClass="UIMedal" customModule="Capitaine_spot" customModuleProvider="target">
+                    <rect key="frame" x="285" y="40" width="65" height="65"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="p5V-5i-xL1" secondAttribute="height" multiplier="1:1" id="Glx-Gi-Wwf"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pL-R5-9xz">
+                    <rect key="frame" x="131" y="5" width="219" height="35"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstItem="ekh-5R-DFy" firstAttribute="leading" secondItem="aEq-NQ-Tcn" secondAttribute="trailing" id="22f-SA-O0n"/>
+                <constraint firstAttribute="trailing" secondItem="4L3-5R-Wxs" secondAttribute="trailing" id="2wI-QT-ThI"/>
+                <constraint firstItem="p5V-5i-xL1" firstAttribute="top" secondItem="2pL-R5-9xz" secondAttribute="bottom" id="3YP-hZ-zen"/>
+                <constraint firstItem="azN-yv-Liz" firstAttribute="width" secondItem="Jrw-2k-yoa" secondAttribute="width" id="6P1-4r-bVx"/>
+                <constraint firstItem="2eJ-yB-91t" firstAttribute="height" secondItem="Jrw-2k-yoa" secondAttribute="height" id="B35-cc-aqU"/>
+                <constraint firstItem="azN-yv-Liz" firstAttribute="bottom" secondItem="vpJ-EO-u1h" secondAttribute="bottom" id="BFn-q7-U4C"/>
+                <constraint firstItem="Jrw-2k-yoa" firstAttribute="leading" secondItem="vpJ-EO-u1h" secondAttribute="trailing" id="BVo-6R-rkF"/>
+                <constraint firstItem="p5V-5i-xL1" firstAttribute="trailing" secondItem="2pL-R5-9xz" secondAttribute="trailing" id="EOc-Js-p2J"/>
+                <constraint firstItem="ekh-5R-DFy" firstAttribute="bottom" secondItem="vpJ-EO-u1h" secondAttribute="bottom" id="HUP-Gs-bIM"/>
+                <constraint firstItem="Jrw-2k-yoa" firstAttribute="height" secondItem="vpJ-EO-u1h" secondAttribute="height" multiplier="0.65" id="HkC-zO-JVJ"/>
+                <constraint firstItem="ekh-5R-DFy" firstAttribute="height" secondItem="Jrw-2k-yoa" secondAttribute="height" id="Iva-0w-hxQ"/>
+                <constraint firstItem="aEq-NQ-Tcn" firstAttribute="height" secondItem="Jrw-2k-yoa" secondAttribute="height" id="NTW-tr-aIW"/>
+                <constraint firstItem="Jrw-2k-yoa" firstAttribute="bottom" secondItem="vpJ-EO-u1h" secondAttribute="bottom" id="OBG-yu-gEr"/>
+                <constraint firstItem="ekh-5R-DFy" firstAttribute="width" secondItem="2eJ-yB-91t" secondAttribute="width" id="P5x-F4-5hR"/>
+                <constraint firstItem="vpJ-EO-u1h" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="RaG-va-3nz"/>
+                <constraint firstItem="vpJ-EO-u1h" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Rge-Xj-zSF"/>
+                <constraint firstItem="4L3-5R-Wxs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="RkC-O6-fYG"/>
+                <constraint firstItem="2pL-R5-9xz" firstAttribute="top" secondItem="vpJ-EO-u1h" secondAttribute="top" id="UOr-YN-ufa"/>
+                <constraint firstItem="p5V-5i-xL1" firstAttribute="height" secondItem="Jrw-2k-yoa" secondAttribute="height" id="XX5-4y-JvH"/>
+                <constraint firstAttribute="trailing" secondItem="p5V-5i-xL1" secondAttribute="trailing" constant="25" id="ZgJ-Mr-x9e"/>
+                <constraint firstItem="aEq-NQ-Tcn" firstAttribute="leading" secondItem="2eJ-yB-91t" secondAttribute="trailing" id="dhS-D1-TMB"/>
+                <constraint firstItem="4L3-5R-Wxs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ds9-OO-f2Z"/>
+                <constraint firstItem="p5V-5i-xL1" firstAttribute="width" secondItem="2eJ-yB-91t" secondAttribute="width" id="flM-ya-8RB"/>
+                <constraint firstItem="aEq-NQ-Tcn" firstAttribute="bottom" secondItem="vpJ-EO-u1h" secondAttribute="bottom" id="hPt-mg-wIe"/>
+                <constraint firstItem="p5V-5i-xL1" firstAttribute="leading" secondItem="azN-yv-Liz" secondAttribute="trailing" id="htC-AW-AiB"/>
+                <constraint firstItem="azN-yv-Liz" firstAttribute="leading" secondItem="ekh-5R-DFy" secondAttribute="trailing" id="hyq-6n-xlp"/>
+                <constraint firstItem="ekh-5R-DFy" firstAttribute="width" secondItem="ekh-5R-DFy" secondAttribute="height" multiplier="1:1" id="ifj-Ro-CN1"/>
+                <constraint firstAttribute="bottom" secondItem="vpJ-EO-u1h" secondAttribute="bottom" constant="5" id="jdw-30-HIj"/>
+                <constraint firstItem="p5V-5i-xL1" firstAttribute="bottom" secondItem="vpJ-EO-u1h" secondAttribute="bottom" id="mCm-ki-Vhr"/>
+                <constraint firstItem="2eJ-yB-91t" firstAttribute="bottom" secondItem="vpJ-EO-u1h" secondAttribute="bottom" id="mQx-NQ-WaT"/>
+                <constraint firstAttribute="bottom" secondItem="4L3-5R-Wxs" secondAttribute="bottom" id="rlg-3i-3mw"/>
+                <constraint firstItem="aEq-NQ-Tcn" firstAttribute="width" secondItem="Jrw-2k-yoa" secondAttribute="width" id="tEJ-2m-cRX"/>
+                <constraint firstItem="2eJ-yB-91t" firstAttribute="leading" secondItem="2pL-R5-9xz" secondAttribute="leading" id="vC1-rN-L6v"/>
+                <constraint firstItem="2eJ-yB-91t" firstAttribute="leading" secondItem="Jrw-2k-yoa" secondAttribute="trailing" id="yiU-f5-Dqp"/>
+                <constraint firstItem="azN-yv-Liz" firstAttribute="height" secondItem="Jrw-2k-yoa" secondAttribute="height" id="ykm-xk-6R1"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imgBack" destination="4L3-5R-Wxs" id="2AD-sn-aTA"/>
+                <outlet property="lblTitle" destination="2pL-R5-9xz" id="iXZ-iV-18b"/>
+                <outlet property="medal1" destination="vpJ-EO-u1h" id="VFF-aP-D55"/>
+                <outlet property="medal2" destination="2eJ-yB-91t" id="pom-z4-U8b"/>
+                <outlet property="medal3" destination="ekh-5R-DFy" id="wBm-Av-Fo1"/>
+                <outlet property="medal4" destination="p5V-5i-xL1" id="cub-eN-Sdz"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="95"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="woodtexture" width="1400" height="980"/>
+    </resources>
+</document>

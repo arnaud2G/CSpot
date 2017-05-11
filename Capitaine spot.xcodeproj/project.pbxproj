@@ -46,6 +46,7 @@
 		A53C3E931EBA4BCC00E68529 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = A53C3E7A1EBA4BCC00E68529 /* README.txt */; };
 		A5431D551EC4BE37000DCC3D /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5431D541EC4BE37000DCC3D /* Search.swift */; };
 		A5431D571EC4CEEB000DCC3D /* CSpotAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5431D561EC4CEEB000DCC3D /* CSpotAnimator.swift */; };
+		A5431D601EC4E392000DCC3D /* SpotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5431D5F1EC4E392000DCC3D /* SpotView.swift */; };
 		A54512D01E9BD45F000FDA2F /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54512CF1E9BD45F000FDA2F /* Spot.swift */; };
 		A54512D41E9BE017000FDA2F /* MyCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54512D31E9BE017000FDA2F /* MyCamera.swift */; };
 		A54512D61E9BE0B6000FDA2F /* MyStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54512D51E9BE0B6000FDA2F /* MyStyles.swift */; };
@@ -55,6 +56,7 @@
 		A54984831EA767FB0074755B /* AWSConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54984821EA767FB0074755B /* AWSConfig.swift */; };
 		A54D8EA11E9BC30B0081C0F5 /* ToolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D8EA01E9BC30B0081C0F5 /* ToolExtension.swift */; };
 		A54D8EA31E9BCCF20081C0F5 /* NumberExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D8EA21E9BCCF20081C0F5 /* NumberExtension.swift */; };
+		A560244D1EC4EB26004A7241 /* SpotView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A560244C1EC4EB26004A7241 /* SpotView.xib */; };
 		A57140601EBB5A3B007F079E /* MaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A571405F1EBB5A3B007F079E /* MaskViewController.swift */; };
 		A57352E91EC37D9300AAA648 /* DescribeMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57352E81EC37D9300AAA648 /* DescribeMapViewController.swift */; };
 		A579C8551EB8913100397D04 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A579C8541EB8913100397D04 /* ErrorView.swift */; };
@@ -136,6 +138,7 @@
 		A53C3E7A1EBA4BCC00E68529 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		A5431D541EC4BE37000DCC3D /* Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		A5431D561EC4CEEB000DCC3D /* CSpotAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSpotAnimator.swift; sourceTree = "<group>"; };
+		A5431D5F1EC4E392000DCC3D /* SpotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotView.swift; sourceTree = "<group>"; };
 		A54512CF1E9BD45F000FDA2F /* Spot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
 		A54512D31E9BE017000FDA2F /* MyCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCamera.swift; sourceTree = "<group>"; };
 		A54512D51E9BE0B6000FDA2F /* MyStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStyles.swift; sourceTree = "<group>"; };
@@ -149,6 +152,7 @@
 		A54D8EA01E9BC30B0081C0F5 /* ToolExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolExtension.swift; sourceTree = "<group>"; };
 		A54D8EA21E9BCCF20081C0F5 /* NumberExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberExtension.swift; sourceTree = "<group>"; };
 		A5595A531EA0BEFF00F4AFE5 /* RxMapBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxMapBox.swift; sourceTree = "<group>"; };
+		A560244C1EC4EB26004A7241 /* SpotView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpotView.xib; sourceTree = "<group>"; };
 		A571405F1EBB5A3B007F079E /* MaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskViewController.swift; sourceTree = "<group>"; };
 		A571DCA71EB09AA7003DBC2A /* MapSearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSearchController.swift; sourceTree = "<group>"; };
 		A57352E81EC37D9300AAA648 /* DescribeMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescribeMapViewController.swift; sourceTree = "<group>"; };
@@ -170,7 +174,6 @@
 		A5CACBA31E978A9A0068D5B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5CACBAC1E978B1C0068D5B2 /* DynamicsBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicsBall.swift; sourceTree = "<group>"; };
 		A5CACBAE1E978B3C0068D5B2 /* DynamicsBall.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DynamicsBall.storyboard; sourceTree = "<group>"; };
-		A5D47FC91EB0D8C6006C132B /* SearchNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNavigationController.swift; sourceTree = "<group>"; };
 		A5F62A011EC2FBE700A8E057 /* CSpotNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSpotNavigationController.swift; sourceTree = "<group>"; };
 		A5F638ED1EA76FF8000ACD3D /* AWSMobileHubHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSMobileHubHelper.framework; sourceTree = "<group>"; };
 		A5F638F21EA7724B000ACD3D /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
@@ -546,10 +549,11 @@
 		A5FC40701EAE60CA00886246 /* EcranRecherche */ = {
 			isa = PBXGroup;
 			children = (
-				A5D47FC91EB0D8C6006C132B /* SearchNavigationController.swift */,
 				A5FC40711EAE615F00886246 /* ListSearchController.swift */,
 				A571DCA71EB09AA7003DBC2A /* MapSearchController.swift */,
 				A5FC40731EAE617A00886246 /* Search.storyboard */,
+				A560244C1EC4EB26004A7241 /* SpotView.xib */,
+				A5431D5F1EC4E392000DCC3D /* SpotView.swift */,
 			);
 			name = EcranRecherche;
 			sourceTree = "<group>";
@@ -591,6 +595,7 @@
 					A5CACB931E978A9A0068D5B2 = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = DA7865XRM2;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -653,6 +658,7 @@
 				A53C3E911EBA4BCC00E68529 /* secondary_first_sub_category.txt in Resources */,
 				A53C3E901EBA4BCC00E68529 /* secondary_category.txt in Resources */,
 				A53C3E811EBA4BCC00E68529 /* marketing_url.txt in Resources */,
+				A560244D1EC4EB26004A7241 /* SpotView.xib in Resources */,
 				A5FC40741EAE617A00886246 /* Search.storyboard in Resources */,
 				A5CACB9D1E978A9A0068D5B2 /* CSpot.storyboard in Resources */,
 				A5B0D1C01E9D1B070014EEA3 /* Description.storyboard in Resources */,
@@ -761,6 +767,7 @@
 				A5F639041EA7724B000ACD3D /* UserPoolSignUpViewController.swift in Sources */,
 				A5F639031EA7724B000ACD3D /* UserPoolSignUpConfirmationViewController.swift in Sources */,
 				A57140601EBB5A3B007F079E /* MaskViewController.swift in Sources */,
+				A5431D601EC4E392000DCC3D /* SpotView.swift in Sources */,
 				A53B30671EA65617008AE7B8 /* AnimateExtension.swift in Sources */,
 				A5E23AD01EB3919F00E1176A /* MapSearchController.swift in Sources */,
 				A5E23ACC1EB3919300E1176A /* RxMapBox.swift in Sources */,
@@ -893,6 +900,7 @@
 			baseConfigurationReference = 0C7DF1EE9E0485446262E3CE /* Pods-Capitaine spot.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Capitaine spot/Capitaine spot.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = DA7865XRM2;
@@ -905,6 +913,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.av.Capitaine-spot";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -914,6 +923,7 @@
 			baseConfigurationReference = 26D74DEE36D04B6E49815A16 /* Pods-Capitaine spot.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Capitaine spot/Capitaine spot.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = DA7865XRM2;
