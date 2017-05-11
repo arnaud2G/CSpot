@@ -88,7 +88,7 @@ import MapKit
         animator.addBehavior(behavior)
         
         let sum = CGFloat(spot.userDescription.map{$0.rVote/100}.reduce(0, +))
-        let totSize = 0.8*self.vDescription.frame.width*self.vDescription.frame.height
+        let totSize = 0.7*self.vDescription.frame.width*self.vDescription.frame.height
         let sizeByVote = sqrt(totSize/sum)
         
         let ellipses = spot.userDescription.map({
